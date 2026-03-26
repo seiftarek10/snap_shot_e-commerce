@@ -73,7 +73,7 @@ flutter:
         - asset: assets/fonts/Inter/Inter_Bold.ttf
           weight: 500
         - asset: assets/fonts/Inter/Inter_Black.ttf
-          weight: 700
+          weight: 900
 
 flutter_assets:
   assets_path: assets/

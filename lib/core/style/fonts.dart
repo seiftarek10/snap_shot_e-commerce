@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:snap_shot/core/style/colors.dart';
 
 class AppTextStyle {
   AppTextStyle._();
 
   static final AppTextStyle instance = AppTextStyle._();
+
+  TextStyle get text11W200grey => TextStyle(
+    fontSize: 11.h,
+    fontWeight: FontWeight.w200,
+    fontFamily: 'inter',
+    color: AppColors.instance.darkGrey,
+  );
 
   TextStyle get text16W200 => TextStyle(
     fontSize: 16.h,

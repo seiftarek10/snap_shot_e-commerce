@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snap_shot/core/style/colors.dart';
+import 'package:snap_shot/core/style/fonts.dart';
 
 class OnBoardignBottomSection extends StatelessWidget {
   const OnBoardignBottomSection({super.key});
@@ -11,7 +13,7 @@ class OnBoardignBottomSection extends StatelessWidget {
         Text(
           'Easy Shopping for all your needs just in hand trusted by millions of people in the world',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w300),
+          style: AppTextStyle.instance.text11W200grey,
         ),
         SizedBox(height: 15),
         ElevatedButton(
@@ -25,10 +27,8 @@ class OnBoardignBottomSection extends StatelessWidget {
           ),
           child: Text(
             'Next',
-            style: TextStyle(
-              fontSize: 40,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
+            style: AppTextStyle.instance.text16W400.copyWith(
+              color: AppColors.instance.white,
             ),
           ),
         ),
@@ -36,7 +36,7 @@ class OnBoardignBottomSection extends StatelessWidget {
         Text(
           'By Tapping Get Started and using the shooping app you are agreeing to our Terms of Service and Privacy Policy',
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 26, fontWeight: FontWeight.w300),
+          style: AppTextStyle.instance.text11W200grey,
         ),
       ],
     );
