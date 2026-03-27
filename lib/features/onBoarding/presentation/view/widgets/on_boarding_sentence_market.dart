@@ -7,11 +7,9 @@ class OnBoardingSentenceMarket extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-     text,
+      text,
       textAlign: TextAlign.center,
-      style: AppTextStyle.instance.text24W500.copyWith(
-        fontWeight: FontWeight.w900,
-      ),
+      style: AppTextStyle.instance.text22Bold,
     );
   }
 }

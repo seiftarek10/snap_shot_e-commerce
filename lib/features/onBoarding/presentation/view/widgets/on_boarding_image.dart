@@ -23,7 +23,10 @@ class OnBoardingImage extends StatelessWidget {
           child: SizedBox(
             height: 500,
             width: 500,
-            child: Image.asset(imagePath, fit: BoxFit.cover),
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Image.asset(imagePath, fit: BoxFit.cover),
+            ),
           ),
         ),
       ),

@@ -50,6 +50,12 @@ class AppTextStyle {
     fontFamily: 'inter',
   );
 
+  TextStyle get text22Bold => TextStyle(
+    fontSize: 22.h,
+    fontWeight: FontWeight.w900,
+    fontFamily: 'inter',
+  );
+
   TextStyle get text24W300 => TextStyle(
     fontSize: 24.h,
     fontWeight: FontWeight.w300,
