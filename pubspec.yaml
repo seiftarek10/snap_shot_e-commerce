@@ -73,10 +73,10 @@ flutter:
         - asset: assets/fonts/Inter/Inter_Bold.ttf
           weight: 500
         - asset: assets/fonts/Inter/Inter_Black.ttf
-          weight: 700
+          weight: 900
 
 flutter_assets:
   assets_path: assets/
-  output_path: lib/constants/
+  output_path: lib/core/constants/
   filename: assets.dart
   field_prefix: ''
