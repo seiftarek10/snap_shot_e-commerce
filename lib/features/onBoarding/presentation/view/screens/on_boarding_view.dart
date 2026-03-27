@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:snap_shot/core/constants/assets.dart';
+import 'package:snap_shot/features/onBoarding/data/Models/on_boarding_info.dart';
 import 'package:snap_shot/features/onBoarding/presentation/view/widgets/on_boarding_body.dart';
 
 class OnBoardingView extends StatefulWidget {
@@ -11,6 +13,21 @@ class OnBoardingView extends StatefulWidget {
 class _OnBoardingViewState extends State<OnBoardingView> {
   late int _currentIndex;
   late PageController _pageController;
+  final List<OnBoardingInfoModel> _onBoardingInfoList = [
+    OnBoardingInfoModel(
+      sentence: 'One best app for all your needs',
+      imagePath: Assets.imagesPngOnboardingimage1,
+    ),
+    OnBoardingInfoModel(
+      sentence: 'Get real-Time updates for all your Deliveries',
+      imagePath: Assets.imagesPngOnboardingimage2,
+    ),
+    OnBoardingInfoModel(
+      sentence: 'Follow And Get Update From Favorite Store',
+      imagePath: Assets.imagesPngOnboardingimage3,
+    ),
+  ];
+
   @override
   void initState() {
     super.initState();
@@ -52,18 +69,21 @@ class _OnBoardingViewState extends State<OnBoardingView> {
               onPressed: () {
                 nextPage();
               },
+              onBoardingInfoModel: _onBoardingInfoList[0],
             ),
             OnBoardingBody(
               currntIndex: _currentIndex,
               onPressed: () {
                 nextPage();
               },
+              onBoardingInfoModel: _onBoardingInfoList[1],
             ),
             OnBoardingBody(
               currntIndex: _currentIndex,
               onPressed: () {
                 nextPage();
               },
+              onBoardingInfoModel: _onBoardingInfoList[2],
             ),
           ],
         ),
