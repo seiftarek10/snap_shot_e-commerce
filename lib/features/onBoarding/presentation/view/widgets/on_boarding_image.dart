@@ -1,10 +1,9 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:snap_shot/constants/assets.dart';
 
 class OnBoardingImage extends StatelessWidget {
-  const OnBoardingImage({super.key});
-
+  const OnBoardingImage({super.key, required this.imagePath});
+  final String imagePath;
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
@@ -24,9 +23,9 @@ class OnBoardingImage extends StatelessWidget {
           child: SizedBox(
             height: 500,
             width: 500,
-            child: Image.asset(
-              Assets.imagesPngOnboardingimage1,
-              fit: BoxFit.cover,
+            child: AspectRatio(
+              aspectRatio: 1,
+              child: Image.asset(imagePath, fit: BoxFit.cover),
             ),
           ),
         ),
