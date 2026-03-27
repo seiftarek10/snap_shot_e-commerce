@@ -24,6 +24,13 @@ class AppTextStyle {
     fontWeight: FontWeight.w200,
     fontFamily: 'inter',
   );
+
+  TextStyle get textFieldStyle => TextStyle(
+    fontSize: 14.h,
+    fontWeight: FontWeight.w600,
+    color: AppColors.instance.darkGrey,
+    fontFamily: 'inter',
+  );
   TextStyle get text16W400 => TextStyle(
     fontSize: 16.h,
     fontWeight: FontWeight.w400,

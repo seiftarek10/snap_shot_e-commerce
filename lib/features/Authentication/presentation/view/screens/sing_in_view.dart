@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/widgets/app_text_filed.dart';
 import 'package:snap_shot/core/widgets/page_padding.dart';
-
 import 'package:snap_shot/features/Authentication/presentation/view/widgets/auth_page_title.dart';
 import 'package:snap_shot/features/Authentication/presentation/view/widgets/phone_or_email.dart';
 
@@ -20,6 +20,8 @@ class SingInView extends StatelessWidget {
               AuthPageTitle(title: "Welcome Back!"),
               AppSpace.instance.v8,
               PhoneOrEmailWidget(choise: (choise) {}),
+              AppSpace.instance.v16,
+              AppTextField(hintText: 'Email', onSaved: (value) {}),
             ],
           ),
         ),
