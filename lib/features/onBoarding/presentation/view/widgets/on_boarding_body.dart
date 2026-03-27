@@ -25,7 +25,7 @@ class OnBoardingBody extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            AppSpace.instance.topPageSpace,
+            AppSpace.instance.v50,
             OnBoardingImage(imagePath: onBoardingInfoModel.imagePath),
             AppSpace.instance.v4,
             OnBoardingSentenceMarket(text: onBoardingInfoModel.sentence),

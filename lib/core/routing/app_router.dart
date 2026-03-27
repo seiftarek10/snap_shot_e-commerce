@@ -10,7 +10,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const OnBoardingView();
+          return const SingInView();
         },
       ),
       GoRoute(
