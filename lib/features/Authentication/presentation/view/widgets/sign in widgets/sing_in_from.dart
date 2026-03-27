@@ -27,9 +27,8 @@ class SignInForm extends StatelessWidget {
             keyboardType: TextInputType.visiblePassword,
           ),
           AppSpace.instance.v12,
-          AppButton(buttonTitle: 'Sign In', onPressed: () {}),
-          AppSpace.instance.v8,
-          Center(
+          Align(
+            alignment: Alignment.centerRight,
             child: TextButton(
               style: TextButton.styleFrom(
                 overlayColor: AppColors.instance.darkGrey,
@@ -37,12 +36,13 @@ class SignInForm extends StatelessWidget {
               onPressed: () {},
               child: Text(
                 'Forgot Password?',
-                style: AppTextStyle.instance.text12W200.copyWith(
-                  color: AppColors.instance.black,
-                ),
+                style: AppTextStyle.instance.text12W500Black,
               ),
             ),
           ),
+          AppSpace.instance.v12,
+          AppButton(buttonTitle: 'Sign In', onPressed: () {}),
+          AppSpace.instance.v8,
         ],
       ),
     );
