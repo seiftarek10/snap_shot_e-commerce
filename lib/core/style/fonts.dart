@@ -14,9 +14,34 @@ class AppTextStyle {
     color: AppColors.instance.darkGrey,
   );
 
+  TextStyle get text12W200 => TextStyle(
+    fontSize: 12.h,
+    fontWeight: FontWeight.w200,
+    fontFamily: 'inter',
+  );
+
+    TextStyle get text12W500Black => TextStyle(
+    fontSize: 12.h,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'inter',
+    color: AppColors.instance.black,
+  );
+    TextStyle get text14W500Black => TextStyle(
+    fontSize: 15.h,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'inter',
+    color: AppColors.instance.black,
+  );
   TextStyle get text16W200 => TextStyle(
     fontSize: 16.h,
     fontWeight: FontWeight.w200,
+    fontFamily: 'inter',
+  );
+
+  TextStyle get textFieldStyle => TextStyle(
+    fontSize: 14.h,
+    fontWeight: FontWeight.w600,
+    color: AppColors.instance.darkGrey,
     fontFamily: 'inter',
   );
   TextStyle get text16W400 => TextStyle(
@@ -69,6 +94,11 @@ class AppTextStyle {
   TextStyle get text28W500 => TextStyle(
     fontSize: 28.h,
     fontWeight: FontWeight.w500,
+    fontFamily: 'inter',
+  );
+  TextStyle get text28Bold => TextStyle(
+    fontSize: 28.h,
+    fontWeight: FontWeight.w900,
     fontFamily: 'inter',
   );
   TextStyle get text28W300 => TextStyle(

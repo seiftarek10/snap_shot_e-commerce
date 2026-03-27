@@ -1,7 +1,9 @@
-class Routes{
+class Routes {
   Routes._();
 
   static Routes instance = Routes._();
 
- String onBoarding = "/onboarding";
+  final String onBoarding = "/onboarding";
+  final String signIn = "/signin";
+  final String signUp = "/signUp";
 }
