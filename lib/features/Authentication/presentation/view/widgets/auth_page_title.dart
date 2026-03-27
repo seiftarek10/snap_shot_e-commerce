@@ -8,6 +8,11 @@ class AuthPageTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(title, style: AppTextStyle.instance.text28Bold);
+    return Text(
+      title,
+      style: AppTextStyle.instance.text20W500.copyWith(
+        fontWeight: FontWeight.w800,
+      ),
+    );
   }
 }

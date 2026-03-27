@@ -8,8 +8,8 @@ import 'package:snap_shot/core/widgets/page_padding.dart';
 import 'package:snap_shot/features/Authentication/presentation/view/widgets/auth_page_title.dart';
 import 'package:snap_shot/features/Authentication/presentation/view/widgets/or_divider.dart';
 import 'package:snap_shot/features/Authentication/presentation/view/widgets/phone_or_email.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/widgets/sign%20in%20widgets/sing_in_from.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/widgets/sign%20in%20widgets/social_button.dart';
+import 'package:snap_shot/features/Authentication/presentation/view/widgets/sign_in_widgets/sing_in_from.dart';
+import 'package:snap_shot/features/Authentication/presentation/view/widgets/sign_in_widgets/social_button.dart';
 
 class SingInView extends StatelessWidget {
   const SingInView({super.key});

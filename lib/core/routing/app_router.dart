@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/screens/sing_in_view.dart';
+import 'package:snap_shot/features/Authentication/presentation/view/screens/sign_in_view.dart';
+import 'package:snap_shot/features/Authentication/presentation/view/screens/sign_up_view.dart';
 import 'package:snap_shot/features/onBoarding/presentation/view/screens/on_boarding_view.dart';
 
 class AppRouter {
@@ -10,7 +11,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const SingInView();
+          return const SignInView();
         },
       ),
       GoRoute(
@@ -20,8 +21,12 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: Routes.instance.singIn,
-        builder: (context, state) => const SingInView(),
+        path: Routes.instance.signIn,
+        builder: (context, state) => const SignInView(),
+      ),
+      GoRoute(
+        path: Routes.instance.signUp,
+        builder: (context, state) => const SignUpView(),
       ),
     ],
   );
