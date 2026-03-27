@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/core/widgets/app_button.dart';
 import 'package:snap_shot/features/onBoarding/presentation/view/widgets/on_boarding_dots.dart';
 
 class OnBoardignBottomSection extends StatelessWidget {
@@ -28,22 +27,11 @@ class OnBoardignBottomSection extends StatelessWidget {
         AppSpace.instance.v20,
         OnBoardingDots(currentIndex: currentIndex),
         AppSpace.instance.v20,
-        ElevatedButton(
+        AppButton(
+          buttonTitle: currentIndex == 2 ? 'Get Started' : 'Next',
           onPressed: onPressed,
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.black,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30),
-            ),
-            padding: EdgeInsets.symmetric(vertical: 15.h),
-          ),
-          child: Text(
-            currentIndex == 2 ? 'Get Started' : 'Next',
-            style: AppTextStyle.instance.text16W400.copyWith(
-              color: AppColors.instance.white,
-            ),
-          ),
         ),
+
         AppSpace.instance.v16,
         Text(
           'By Tapping Get Started and using the shooping app you are agreeing to our Terms of Service and Privacy Policy',

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/widgets/app_button.dart';
 import 'package:snap_shot/core/widgets/app_text_filed.dart';
 import 'package:snap_shot/core/widgets/page_padding.dart';
 import 'package:snap_shot/features/Authentication/presentation/view/widgets/auth_page_title.dart';
@@ -14,7 +15,7 @@ class SingInView extends StatelessWidget {
       body: SafeArea(
         child: PagePadding(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               AppSpace.instance.topPageSpace,
               AuthPageTitle(title: "Welcome Back!"),
@@ -33,6 +34,8 @@ class SingInView extends StatelessWidget {
                 onSaved: (value) {},
                 keyboardType: TextInputType.visiblePassword,
               ),
+              AppSpace.instance.v12,
+              AppButton(buttonTitle: 'Sign In', onPressed: () {}),
             ],
           ),
         ),
