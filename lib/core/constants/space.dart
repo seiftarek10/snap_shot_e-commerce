@@ -8,6 +8,7 @@ class AppSpace {
   SizedBox get topPageSpace => SizedBox(height: 20.h);
   SizedBox get v4 => SizedBox(height: 4.h);
   SizedBox get v8 => SizedBox(height: 8.h);
+  SizedBox get v12 => SizedBox(height: 12.h);
   SizedBox get v16 => SizedBox(height: 16.h);
   SizedBox get v20 => SizedBox(height: 20.h);
   SizedBox get v24 => SizedBox(height: 24.h);
