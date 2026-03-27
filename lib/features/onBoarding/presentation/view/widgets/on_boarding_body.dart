@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/widgets/page_padding.dart';
 import 'package:snap_shot/features/onBoarding/data/Models/on_boarding_info.dart';
 import 'package:snap_shot/features/onBoarding/presentation/view/widgets/on_boardign_bottom_section.dart';
 import 'package:snap_shot/features/onBoarding/presentation/view/widgets/on_boarding_image.dart';
@@ -20,8 +20,7 @@ class OnBoardingBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12.w),
+      child: PagePadding(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
