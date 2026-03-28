@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/core/widgets/app_button.dart';
@@ -33,7 +35,9 @@ class SignInForm extends StatelessWidget {
               style: TextButton.styleFrom(
                 overlayColor: AppColors.instance.darkGrey,
               ),
-              onPressed: () {},
+              onPressed: () {
+                context.push(Routes.instance.forgetPassword);
+              },
               child: Text(
                 'Forgot Password?',
                 style: AppTextStyle.instance.text12W500Black,
