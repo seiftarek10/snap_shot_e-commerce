@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/core/widgets/page_padding.dart';
+import 'package:snap_shot/shared/widgets/page_padding.dart';
 import 'package:snap_shot/features/authentication/presentation/view/widgets/auth_page_title.dart';
 import 'package:snap_shot/features/authentication/presentation/view/widgets/or_divider.dart';
 import 'package:snap_shot/features/authentication/presentation/view/widgets/phone_or_email.dart';

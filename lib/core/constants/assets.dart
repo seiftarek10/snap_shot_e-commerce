@@ -18,6 +18,18 @@ class Assets {
   /// assets/fonts/Inter/Inter_Regular.ttf
   static const String fontsInterInterRegular = "assets/fonts/Inter/Inter_Regular.ttf";
 
+  /// Assets for imagesPngCategory
+  /// assets/images/png/category.png
+  static const String imagesPngCategory = "assets/images/png/category.png";
+
+  /// Assets for imagesPngHeart
+  /// assets/images/png/heart.png
+  static const String imagesPngHeart = "assets/images/png/heart.png";
+
+  /// Assets for imagesPngHome
+  /// assets/images/png/home.png
+  static const String imagesPngHome = "assets/images/png/home.png";
+
   /// Assets for imagesPngLogo
   /// assets/images/png/Logo.png
   static const String imagesPngLogo = "assets/images/png/Logo.png";
@@ -34,6 +46,10 @@ class Assets {
   /// assets/images/png/onboardingimage3.png
   static const String imagesPngOnboardingimage3 = "assets/images/png/onboardingimage3.png";
 
+  /// Assets for imagesPngShoppingBag
+  /// assets/images/png/shopping_bag.png
+  static const String imagesPngShoppingBag = "assets/images/png/shopping_bag.png";
+
   /// Assets for imagesPngSplashAndroid11Ios
   /// assets/images/png/splash_android11_ios.png
   static const String imagesPngSplashAndroid11Ios = "assets/images/png/splash_android11_ios.png";
@@ -41,6 +57,10 @@ class Assets {
   /// Assets for imagesPngSplashAndroid12
   /// assets/images/png/splash_android_12.png
   static const String imagesPngSplashAndroid12 = "assets/images/png/splash_android_12.png";
+
+  /// Assets for imagesPngUser
+  /// assets/images/png/user.png
+  static const String imagesPngUser = "assets/images/png/user.png";
 
   /// Assets for imagesSvgMail
   /// assets/images/svg/mail.svg

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/widgets/app_button.dart';
-import 'package:snap_shot/core/widgets/arrow_back.dart';
-import 'package:snap_shot/core/widgets/page_padding.dart';
+import 'package:snap_shot/shared/widgets/app_button.dart';
+import 'package:snap_shot/shared/widgets/arrow_back.dart';
+import 'package:snap_shot/shared/widgets/page_padding.dart';
 import 'package:snap_shot/features/authentication/presentation/view/widgets/auth_page_title.dart';
 import 'package:snap_shot/features/authentication/presentation/view/widgets/forget_password/all_send_code_options.dart';
 

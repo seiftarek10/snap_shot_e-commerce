@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/widgets/page_padding.dart';
+import 'package:snap_shot/shared/widgets/page_padding.dart';
 import 'package:snap_shot/features/on_boarding/data/Models/on_boarding_info.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/widgets/on_boardign_bottom_section.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/widgets/on_boarding_image.dart';
