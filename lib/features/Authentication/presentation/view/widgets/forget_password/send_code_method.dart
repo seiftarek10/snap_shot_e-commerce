@@ -4,7 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/features/Authentication/data/Models/send_code_options_data_model.dart';
+import 'package:snap_shot/features/authentication/data/Models/send_code_options_data_model.dart';
 
 class SendCodeMethod extends StatelessWidget {
   const SendCodeMethod({
