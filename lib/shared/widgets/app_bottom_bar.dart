@@ -11,13 +11,20 @@ class AppBottomBar extends StatefulWidget {
 }
 
 class _AppBottomBarState extends State<AppBottomBar> {
-  final List<NavBarItem> _navBarItems = [
-    const NavBarItem(icon: Assets.imagesPngHome, isActive: true),
-    const NavBarItem(icon: Assets.imagesPngCategory, isActive: false),
-    const NavBarItem(icon: Assets.imagesPngHeart, isActive: false),
-    const NavBarItem(icon: Assets.imagesPngShoppingBag, isActive: false),
-    const NavBarItem(icon: Assets.imagesPngUser, isActive: false),
+  late int currentIndex;
+  final List<String> _icons = [
+    Assets.imagesPngHome,
+    Assets.imagesPngCategory,
+    Assets.imagesPngHeart,
+    Assets.imagesPngShoppingBag,
+    Assets.imagesPngUser,
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,8 +33,18 @@ class _AppBottomBarState extends State<AppBottomBar> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(
-          _navBarItems.length,
-          (index) => _navBarItems[index],
+          _icons.length,
+          (index) => GestureDetector(
+            onTap: () {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+            child: NavBarItem(
+              icon: _icons[index],
+              isActive: currentIndex == index,
+            ),
+          ),
         ),
       ),
     );
