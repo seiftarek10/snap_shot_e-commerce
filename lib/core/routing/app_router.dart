@@ -35,7 +35,7 @@ class AppRouter {
         builder: (context, state) => const ForgetPasswordView(),
       ),
       GoRoute(
-        path: Routes.instance.home,
+        path: Routes.instance.appShell,
         builder: (context, state) => const AppShell(),
       ),
     ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart';
 import 'package:snap_shot/shared/widgets/app_bottom_bar.dart';
 
 class AppShell extends StatefulWidget {
@@ -11,7 +12,7 @@ class AppShell extends StatefulWidget {
 class _AppShellState extends State<AppShell> {
   late int currentIndex;
   final List<Widget> _pages = [
-    Container(color: Colors.red, height: 300),
+    const HomeView(),
     Container(color: Colors.green, height: 300),
     Container(color: Colors.blue, height: 300),
     Container(color: Colors.yellow, height: 300),
@@ -35,9 +36,7 @@ class _AppShellState extends State<AppShell> {
       ),
 
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: IndexedStack(index: currentIndex, children: _pages),
-        ),
+        child: IndexedStack(index: currentIndex, children: _pages),
       ),
     );
   }

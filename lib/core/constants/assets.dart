@@ -69,5 +69,9 @@ class Assets {
   /// Assets for imagesSvgPhone
   /// assets/images/svg/phone.svg
   static const String imagesSvgPhone = "assets/images/svg/phone.svg";
+
+  /// Assets for imagesSvgSnapShopWord
+  /// assets/images/svg/SnapShopWord.svg
+  static const String imagesSvgSnapShopWord = "assets/images/svg/SnapShopWord.svg";
 }
 
