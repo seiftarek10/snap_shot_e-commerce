@@ -7,5 +7,6 @@ class Routes {
   final String signIn = "/signin";
   final String signUp = "/signUp";
   final String forgetPassword = "/forgetPassword";
+  final String home = "/home";
 }
 

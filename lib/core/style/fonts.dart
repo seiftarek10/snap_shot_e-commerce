@@ -8,132 +8,132 @@ class AppTextStyle {
   static final AppTextStyle instance = AppTextStyle._();
 
   TextStyle get text11W200grey => TextStyle(
-    fontSize: 11.h,
+    fontSize: 11.sp,
     fontWeight: FontWeight.w200,
     fontFamily: 'inter',
     color: AppColors.instance.darkGrey,
   );
 
   TextStyle get text12W200 => TextStyle(
-    fontSize: 12.h,
+    fontSize: 12.sp,
     fontWeight: FontWeight.w200,
     fontFamily: 'inter',
   );
-    TextStyle get text12W500 => TextStyle(
-    fontSize: 12.h,
+  TextStyle get text12W500 => TextStyle(
+    fontSize: 12.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
   );
 
-    TextStyle get text12W500Black => TextStyle(
-    fontSize: 12.h,
+  TextStyle get text12W500Black => TextStyle(
+    fontSize: 12.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
     color: AppColors.instance.black,
   );
-    TextStyle get text14W500Black => TextStyle(
-    fontSize: 15.h,
+  TextStyle get text14W500Black => TextStyle(
+    fontSize: 15.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
     color: AppColors.instance.black,
   );
-    TextStyle get text14WBoldBlack => TextStyle(
-    fontSize: 15.h,
+  TextStyle get text14WBoldBlack => TextStyle(
+    fontSize: 15.sp,
     fontWeight: FontWeight.bold,
     fontFamily: 'inter',
     color: AppColors.instance.black,
   );
   TextStyle get text16W200 => TextStyle(
-    fontSize: 16.h,
+    fontSize: 16.sp,
     fontWeight: FontWeight.w200,
     fontFamily: 'inter',
   );
 
   TextStyle get textFieldStyle => TextStyle(
-    fontSize: 14.h,
+    fontSize: 14.sp,
     fontWeight: FontWeight.w600,
     color: AppColors.instance.darkGrey,
     fontFamily: 'inter',
   );
   TextStyle get text16W400 => TextStyle(
-    fontSize: 16.h,
+    fontSize: 16.sp,
     fontWeight: FontWeight.w400,
     fontFamily: 'inter',
   );
   TextStyle get text18W200 => TextStyle(
-    fontSize: 18.h,
+    fontSize: 18.sp,
     fontWeight: FontWeight.w200,
     fontFamily: 'inter',
   );
   TextStyle get text18W300 => TextStyle(
-    fontSize: 18.h,
+    fontSize: 18.sp,
     fontWeight: FontWeight.w300,
     fontFamily: 'inter',
   );
   TextStyle get text18W500 => TextStyle(
-    fontSize: 18.h,
+    fontSize: 18.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
   );
   TextStyle get text20W300 => TextStyle(
-    fontSize: 20.h,
+    fontSize: 20.sp,
     fontWeight: FontWeight.w300,
     fontFamily: 'inter',
   );
   TextStyle get text20W500 => TextStyle(
-    fontSize: 20.h,
+    fontSize: 20.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
   );
 
   TextStyle get text22Bold => TextStyle(
-    fontSize: 22.h,
+    fontSize: 22.sp,
     fontWeight: FontWeight.w900,
     fontFamily: 'inter',
   );
 
   TextStyle get text24W300 => TextStyle(
-    fontSize: 24.h,
+    fontSize: 24.sp,
     fontWeight: FontWeight.w300,
     fontFamily: 'inter',
   );
   TextStyle get text24W500 => TextStyle(
-    fontSize: 24.h,
+    fontSize: 24.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
   );
   TextStyle get text28W500 => TextStyle(
-    fontSize: 28.h,
+    fontSize: 28.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
   );
   TextStyle get text28Bold => TextStyle(
-    fontSize: 28.h,
+    fontSize: 28.sp,
     fontWeight: FontWeight.w900,
     fontFamily: 'inter',
   );
   TextStyle get text28W300 => TextStyle(
-    fontSize: 28.h,
+    fontSize: 28.sp,
     fontWeight: FontWeight.w300,
     fontFamily: 'inter',
   );
   TextStyle get text34W500 => TextStyle(
-    fontSize: 34.h,
+    fontSize: 34.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
   );
   TextStyle get text34W700 => TextStyle(
-    fontSize: 34.h,
+    fontSize: 34.sp,
     fontWeight: FontWeight.w700,
     fontFamily: 'inter',
   );
   TextStyle get text50W500 => TextStyle(
-    fontSize: 50.h,
+    fontSize: 50.sp,
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
   );
   TextStyle get text50W700 => TextStyle(
-    fontSize: 50.h,
+    fontSize: 50.sp,
     fontWeight: FontWeight.w700,
     fontFamily: 'inter',
   );
