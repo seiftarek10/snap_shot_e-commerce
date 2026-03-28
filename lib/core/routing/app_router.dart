@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
+import 'package:snap_shot/features/Authentication/presentation/view/screens/forget_password_view.dart';
 import 'package:snap_shot/features/Authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/Authentication/presentation/view/screens/sign_up_view.dart';
 import 'package:snap_shot/features/onBoarding/presentation/view/screens/on_boarding_view.dart';
@@ -27,6 +28,10 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.signUp,
         builder: (context, state) => const SignUpView(),
+      ),
+      GoRoute(
+        path: Routes.instance.forgetPassword,
+        builder: (context, state) => const ForgetPasswordView(),
       ),
     ],
   );
