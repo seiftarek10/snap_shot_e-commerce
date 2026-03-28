@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
-import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart';
+import 'package:snap_shot/shared/widgets/app_shell.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
@@ -13,7 +13,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const HomeView();
+          return const AppShell();
         },
       ),
       GoRoute(
@@ -36,7 +36,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.home,
-        builder: (context, state) => const HomeView(),
+        builder: (context, state) => const AppShell(),
       ),
     ],
   );

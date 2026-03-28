@@ -4,8 +4,8 @@ import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/shared/widgets/nav_bar_item.dart';
 
 class AppBottomBar extends StatefulWidget {
-  const AppBottomBar({super.key});
-
+  const AppBottomBar({super.key, required this.onTap});
+  final ValueChanged<int> onTap;
   @override
   State<AppBottomBar> createState() => _AppBottomBarState();
 }
@@ -38,6 +38,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
             onTap: () {
               setState(() {
                 currentIndex = index;
+                widget.onTap(currentIndex);
               });
             },
             child: NavBarItem(
