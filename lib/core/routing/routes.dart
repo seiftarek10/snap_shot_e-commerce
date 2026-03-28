@@ -6,4 +6,6 @@ class Routes {
   final String onBoarding = "/onboarding";
   final String signIn = "/signin";
   final String signUp = "/signUp";
+  final String forgetPassword = "/forgetPassword";
 }
+
