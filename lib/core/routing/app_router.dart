@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/screens/forget_password_view.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/screens/sign_in_view.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/screens/sign_up_view.dart';
-import 'package:snap_shot/features/onBoarding/presentation/view/screens/on_boarding_view.dart';
+import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
+import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
+import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
+import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
