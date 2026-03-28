@@ -19,6 +19,11 @@ class AppTextStyle {
     fontWeight: FontWeight.w200,
     fontFamily: 'inter',
   );
+    TextStyle get text12W500 => TextStyle(
+    fontSize: 12.h,
+    fontWeight: FontWeight.w500,
+    fontFamily: 'inter',
+  );
 
     TextStyle get text12W500Black => TextStyle(
     fontSize: 12.h,
@@ -29,6 +34,12 @@ class AppTextStyle {
     TextStyle get text14W500Black => TextStyle(
     fontSize: 15.h,
     fontWeight: FontWeight.w500,
+    fontFamily: 'inter',
+    color: AppColors.instance.black,
+  );
+    TextStyle get text14WBoldBlack => TextStyle(
+    fontSize: 15.h,
+    fontWeight: FontWeight.bold,
     fontFamily: 'inter',
     color: AppColors.instance.black,
   );
