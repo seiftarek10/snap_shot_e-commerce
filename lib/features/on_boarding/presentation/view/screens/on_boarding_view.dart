@@ -39,7 +39,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
   void nextPage() {
     if (_currentIndex < 2) {
       _pageController.nextPage(
-        duration: Duration(milliseconds: 200),
+        duration: const Duration(milliseconds: 200),
         curve: Curves.easeInOut,
       );
     }

@@ -7,7 +7,7 @@ class OnBoardingImage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DottedBorder(
-      options: CircularDottedBorderOptions(
+      options: const CircularDottedBorderOptions(
         padding: EdgeInsets.all(8),
         color: Colors.grey,
         strokeWidth: 2.3,
@@ -15,7 +15,7 @@ class OnBoardingImage extends StatelessWidget {
       ),
       child: Center(
         child: Container(
-          padding: EdgeInsets.all(60),
+          padding: const EdgeInsets.all(60),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             color: Colors.grey[300],
