@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart';
-import 'package:snap_shot/shared/widgets/app_bottom_bar.dart';
+import 'package:snap_shot/core/widgets/app_bottom_bar.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});

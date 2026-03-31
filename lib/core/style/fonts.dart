@@ -51,7 +51,7 @@ class AppTextStyle {
 
   TextStyle get textFieldStyle => TextStyle(
     fontSize: 14.sp,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w500,
     color: AppColors.instance.darkGrey,
     fontFamily: 'inter',
   );

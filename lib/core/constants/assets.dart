@@ -62,6 +62,10 @@ class Assets {
   /// assets/images/png/user.png
   static const String imagesPngUser = "assets/images/png/user.png";
 
+  /// Assets for imagesSvgFilter
+  /// assets/images/svg/Filter.svg
+  static const String imagesSvgFilter = "assets/images/svg/Filter.svg";
+
   /// Assets for imagesSvgMail
   /// assets/images/svg/mail.svg
   static const String imagesSvgMail = "assets/images/svg/mail.svg";
@@ -69,6 +73,10 @@ class Assets {
   /// Assets for imagesSvgPhone
   /// assets/images/svg/phone.svg
   static const String imagesSvgPhone = "assets/images/svg/phone.svg";
+
+  /// Assets for imagesSvgSearch
+  /// assets/images/svg/search.svg
+  static const String imagesSvgSearch = "assets/images/svg/search.svg";
 
   /// Assets for imagesSvgSnapShopWord
   /// assets/images/svg/SnapShopWord.svg

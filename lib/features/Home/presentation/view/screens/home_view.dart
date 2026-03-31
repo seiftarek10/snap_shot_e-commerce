@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/shared/widgets/page_padding.dart';
+import 'package:snap_shot/core/widgets/page_padding.dart';
+import 'package:snap_shot/core/widgets/search_field.dart';
+import 'package:snap_shot/core/widgets/snap_shop_word.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
@@ -15,11 +14,8 @@ class HomeView extends StatelessWidget {
         child: Column(
           children: [
             AppSpace.instance.topPageSpace,
-            SvgPicture.asset(
-              Assets.imagesSvgSnapShopWord,
-              height: 24.h,
-              fit: BoxFit.fill,
-            ),
+            SnapShotWord(),
+            SearchField(),
           ],
         ),
       ),

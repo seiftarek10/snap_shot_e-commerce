@@ -8,28 +8,48 @@ class AppTextField extends StatefulWidget {
     super.key,
     required this.hintText,
     required this.onSaved,
-    this.isPasswordField, required this.keyboardType,
+    this.isPasswordField,
+    required this.keyboardType,
+    this.suffix,
+    this.onFocusChange,
+    this.prefix,
   });
   final String hintText;
   final void Function(String?) onSaved;
   final bool? isPasswordField;
   final TextInputType keyboardType;
-
+  final Widget? suffix, prefix;
+  final ValueChanged<bool>? onFocusChange;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
 
 class _AppTextFieldState extends State<AppTextField> {
   late bool isVisable;
+  late FocusNode _focusNode;
   @override
   void initState() {
     super.initState();
+    _focusNode = FocusNode();
+
+    _focusNode.addListener(() {
+      setState(() {});
+      widget.onFocusChange?.call(_focusNode.hasFocus);
+    });
+
     isVisable = false;
+  }
+
+  @override
+  dispose() {
+    _focusNode.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      focusNode: _focusNode,
       onSaved: widget.onSaved,
       cursorColor: AppColors.instance.black,
       cursorHeight: 20.h,
@@ -41,15 +61,14 @@ class _AppTextFieldState extends State<AppTextField> {
       obscureText: widget.isPasswordField == null
           ? false
           : widget.isPasswordField == true
-              ? !isVisable
-              : false,
+          ? !isVisable
+          : false,
       decoration: InputDecoration(
         hintText: widget.hintText,
         hintStyle: AppTextStyle.instance.textFieldStyle,
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
-        suffixIcon: widget.isPasswordField == null
-            ? null
-            : Padding(
+        suffixIcon: widget.isPasswordField != null
+            ? Padding(
                 padding: EdgeInsets.only(right: 12.w),
                 child: IconButton(
                   onPressed: () {
@@ -64,7 +83,9 @@ class _AppTextFieldState extends State<AppTextField> {
                     color: AppColors.instance.darkGrey,
                   ),
                 ),
-              ),
+              )
+            : widget.suffix,
+        prefixIcon: widget.prefix,
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
