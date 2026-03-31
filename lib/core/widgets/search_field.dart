@@ -5,10 +5,10 @@ import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/widgets/app_text_filed.dart';
+import 'package:snap_shot/core/widgets/filter_icon.dart';
 
 class SearchField extends StatefulWidget {
-  const SearchField({super.key, required this.onTapFilter});
-  final Function() onTapFilter;
+  const SearchField({super.key});
 
   @override
   State<SearchField> createState() => _SearchFieldState();
@@ -16,8 +16,6 @@ class SearchField extends StatefulWidget {
 
 class _SearchFieldState extends State<SearchField> {
   bool hasFocus = false;
-  bool filterTapped = false;
-
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -38,7 +36,7 @@ class _SearchFieldState extends State<SearchField> {
           ),
         ),
         AppSpace.instance.h16,
-        Expanded(child: _buildFilterIcon()),
+        const Expanded(child: FilterIcon()),
       ],
     );
   }
@@ -53,49 +51,6 @@ class _SearchFieldState extends State<SearchField> {
           BlendMode.srcIn,
         ),
         fit: BoxFit.fill,
-      ),
-    );
-  }
-
-  Widget _buildFilterIcon() {
-    return GestureDetector(
-      onTap: () {
-        setState(() {
-          filterTapped = !filterTapped;
-        });
-        widget.onTapFilter();
-      },
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: filterTapped
-            ? Transform.scale(
-                scale: 1.7,
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOutCubicEmphasized,
-                  padding: EdgeInsets.all(6.r),
-                  decoration: BoxDecoration(
-                    color: AppColors.instance.black,
-                    borderRadius: BorderRadius.circular(8.r),
-                  ),
-                  child: SvgPicture.asset(
-                    Assets.imagesSvgFilter,
-                    colorFilter: ColorFilter.mode(
-                      AppColors.instance.white,
-                      BlendMode.srcIn,
-                    ),
-                    fit: BoxFit.fill,
-                  ),
-                ),
-              )
-            : SvgPicture.asset(
-                Assets.imagesSvgFilter,
-                colorFilter: ColorFilter.mode(
-                  AppColors.instance.black,
-                  BlendMode.srcIn,
-                ),
-                fit: BoxFit.fill,
-              ),
       ),
     );
   }
