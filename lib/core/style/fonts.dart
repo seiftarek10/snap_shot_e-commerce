@@ -60,6 +60,12 @@ class AppTextStyle {
     fontWeight: FontWeight.w400,
     fontFamily: 'inter',
   );
+  TextStyle get text16W600 => TextStyle(
+    fontSize: 16.sp,
+    fontWeight: FontWeight.w600,
+    fontFamily: 'inter',
+    color: AppColors.instance.black
+  );
   TextStyle get text18W200 => TextStyle(
     fontSize: 18.sp,
     fontWeight: FontWeight.w200,

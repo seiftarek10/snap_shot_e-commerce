@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart';
 import 'package:snap_shot/core/widgets/app_bottom_bar.dart';
+import 'package:snap_shot/features/category/presentation/view/screens/category_view.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -13,7 +14,7 @@ class _AppShellState extends State<AppShell> {
   late int currentIndex;
   final List<Widget> _pages = [
     const HomeView(),
-    Container(color: Colors.green, height: 300),
+    const CategoryView(),
     Container(color: Colors.blue, height: 300),
     Container(color: Colors.yellow, height: 300),
     Container(color: Colors.purple, height: 300),
