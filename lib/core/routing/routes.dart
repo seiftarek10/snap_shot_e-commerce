@@ -8,5 +8,5 @@ class Routes {
   final String signUp = "/signUp";
   final String forgetPassword = "/forgetPassword";
   final String appShell = "/appShell";
+  final String productDetails = "/ProductDetails";
 }
-
