@@ -70,7 +70,7 @@ class ProductDetailsBottomSection extends StatelessWidget {
                         ],
                       ),
                     ),
-                    AppSpace.instance.h16,
+                    AppSpace.instance.h12,
                     Expanded(
                       flex: 3,
                       child: Row(
