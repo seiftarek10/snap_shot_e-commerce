@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:snap_shot/features/Home/presentation/view/widgets/category_item.dart';
+import 'package:snap_shot/features/Home/presentation/view/widgets/home_category_item.dart';
 
-class AllCategoriesList extends StatefulWidget {
-  const AllCategoriesList({super.key});
+class HomeAllCategoriesList extends StatefulWidget {
+  const HomeAllCategoriesList({super.key});
 
   @override
-  State<AllCategoriesList> createState() => _AllCategoriesListState();
+  State<HomeAllCategoriesList> createState() => _HomeAllCategoriesListState();
 }
 
-class _AllCategoriesListState extends State<AllCategoriesList> {
+class _HomeAllCategoriesListState extends State<HomeAllCategoriesList> {
   int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class _AllCategoriesListState extends State<AllCategoriesList> {
             },
             child: Padding(
               padding: EdgeInsetsGeometry.only(right: 12.w),
-              child: CategoryItem(
+              child: HomeCategoryItem(
                 isSelected: index == currentIndex,
                 title: 'title',
               ),

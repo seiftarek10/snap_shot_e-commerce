@@ -5,8 +5,8 @@ import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/features/Home/presentation/view/widgets/favorite_icon.dart';
 import 'package:snap_shot/features/Home/presentation/view/widgets/shopping_bag_icon.dart';
 
-class ProductItem extends StatelessWidget {
-  const ProductItem({super.key});
+class HomeProductItem extends StatelessWidget {
+  const HomeProductItem({super.key});
 
   @override
   Widget build(BuildContext context) {

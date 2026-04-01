@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
-class CategoryItem extends StatelessWidget {
-  const CategoryItem({
+class HomeCategoryItem extends StatelessWidget {
+  const HomeCategoryItem({
     super.key,
     required this.isSelected,
     required this.title,

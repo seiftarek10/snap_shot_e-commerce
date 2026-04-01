@@ -3,7 +3,7 @@ import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/widgets/page_padding.dart';
 import 'package:snap_shot/core/widgets/search_field.dart';
 import 'package:snap_shot/core/widgets/snap_shop_word.dart';
-import 'package:snap_shot/features/Home/presentation/view/widgets/all_categories_list.dart';
+import 'package:snap_shot/features/Home/presentation/view/widgets/home_all_categories_list.dart';
 import 'package:snap_shot/features/Home/presentation/view/widgets/home_products_list.dart';
 
 class HomeView extends StatefulWidget {
@@ -26,7 +26,7 @@ class _HomeViewState extends State<HomeView> {
           AppSpace.instance.v16,
           const SearchField(),
           AppSpace.instance.v16,
-          const AllCategoriesList(),
+          const HomeAllCategoriesList(),
           AppSpace.instance.v16,
           const Expanded(child: HomeProductsList()),
         ],
