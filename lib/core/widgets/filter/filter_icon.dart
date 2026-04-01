@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/style/colors.dart';
+import 'package:snap_shot/core/widgets/filter/filter_bottom_sheet_body.dart';
 
 class FilterIcon extends StatefulWidget {
   const FilterIcon({super.key});
@@ -22,13 +23,11 @@ class _FilterIconState extends State<FilterIcon> {
           isFilterActive = true;
         });
         showModalBottomSheet(
+          backgroundColor: Colors.transparent,
+          useSafeArea: false,
           context: context,
           builder: (context) {
-            return Container(
-              height: 200,
-              color: Colors.green,
-              child: const Center(child: Text('Filter options here')),
-            );
+            return const FilterBottomSheetBody();
           },
         ).then((value) {
           setState(() {
@@ -39,10 +38,7 @@ class _FilterIconState extends State<FilterIcon> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: isFilterActive
-            ? Transform.scale(
-                scale: 1.7,
-                child: activeFilterIcon(),
-              )
+            ? Transform.scale(scale: 1.7, child: activeFilterIcon())
             : _inActiveFilterIcon(),
       ),
     );
@@ -50,32 +46,29 @@ class _FilterIconState extends State<FilterIcon> {
 
   AnimatedContainer activeFilterIcon() {
     return AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOutCubicEmphasized,
-                padding: EdgeInsets.all(6.r),
-                decoration: BoxDecoration(
-                  color: AppColors.instance.black,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: SvgPicture.asset(
-                  Assets.imagesSvgFilter,
-                  colorFilter: ColorFilter.mode(
-                    AppColors.instance.white,
-                    BlendMode.srcIn,
-                  ),
-                  fit: BoxFit.fill,
-                ),
-              );
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOutCubicEmphasized,
+      padding: EdgeInsets.all(6.r),
+      decoration: BoxDecoration(
+        color: AppColors.instance.black,
+        borderRadius: BorderRadius.circular(8.r),
+      ),
+      child: SvgPicture.asset(
+        Assets.imagesSvgFilter,
+        colorFilter: ColorFilter.mode(
+          AppColors.instance.white,
+          BlendMode.srcIn,
+        ),
+        fit: BoxFit.fill,
+      ),
+    );
   }
 
   SvgPicture _inActiveFilterIcon() {
     return SvgPicture.asset(
-              Assets.imagesSvgFilter,
-              colorFilter: ColorFilter.mode(
-                AppColors.instance.black,
-                BlendMode.srcIn,
-              ),
-              fit: BoxFit.fill,
-            );
+      Assets.imagesSvgFilter,
+      colorFilter: ColorFilter.mode(AppColors.instance.black, BlendMode.srcIn),
+      fit: BoxFit.fill,
+    );
   }
 }
