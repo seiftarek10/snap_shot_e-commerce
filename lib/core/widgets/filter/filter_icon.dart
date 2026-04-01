@@ -26,6 +26,7 @@ class _FilterIconState extends State<FilterIcon> {
           backgroundColor: Colors.transparent,
           useSafeArea: false,
           context: context,
+          isScrollControlled: true,
           builder: (context) {
             return const FilterBottomSheetBody();
           },

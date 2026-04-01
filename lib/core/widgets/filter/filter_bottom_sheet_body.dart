@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/core/widgets/app_button.dart';
 import 'package:snap_shot/core/widgets/filter/filter_method.dart';
+import 'package:snap_shot/core/widgets/filter/price_range_slider.dart';
 
 class FilterBottomSheetBody extends StatelessWidget {
   const FilterBottomSheetBody({super.key});
@@ -44,13 +46,35 @@ class FilterBottomSheetBody extends StatelessWidget {
                 "2018",
                 "2017",
                 "2016",
+                "2020",
+                "2019",
+     
               ],
             ),
-            AppSpace.instance.v12,
+            AppSpace.instance.v16,
             const FilterMethod(
               filterMethod: "Rating",
               filterOptions: ["1", "2", "3", "4", "5"],
             ),
+            AppSpace.instance.v16,
+            const PriceRangeSlider(),
+            AppSpace.instance.v16,
+            Row(
+              children: [
+                Expanded(
+                  child: AppButton(
+                    buttonTitle: 'Clear',
+                    outlineButton: true,
+                    onPressed: () {},
+                  ),
+                ),
+                AppSpace.instance.h8,
+                Expanded(
+                  child: AppButton(buttonTitle: 'Apply', onPressed: () {}),
+                ),
+              ],
+            ),
+            AppSpace.instance.v16,
           ],
         ),
       ),
