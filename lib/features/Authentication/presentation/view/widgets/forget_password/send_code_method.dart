@@ -70,7 +70,7 @@ class SendCodeMethod extends StatelessWidget {
             children: [
               Text(
                 sendCodeMethodModel.method,
-                style: AppTextStyle.instance.text18W500.copyWith(
+                style: AppTextStyle.instance.text18W700.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
