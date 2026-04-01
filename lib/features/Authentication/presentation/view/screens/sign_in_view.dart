@@ -30,7 +30,7 @@ class SignInView extends StatelessWidget {
                 AppSpace.instance.v16,
                 const SignInForm(),
                 AppSpace.instance.v12,
-                OrDivider(),
+                const OrDivider(),
                 AppSpace.instance.v16,
                 SocialButton(
                   platForm: 'Facebook',
@@ -44,7 +44,7 @@ class SignInView extends StatelessWidget {
                   iconColor: AppColors.instance.green,
                 ),
                 AppSpace.instance.v24,
-                Center(
+                const Center(
                   child: NoAccount(),
                 ),
               ],

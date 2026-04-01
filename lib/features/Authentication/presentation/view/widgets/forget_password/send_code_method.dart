@@ -45,7 +45,7 @@ class SendCodeMethod extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(2),
+                padding: const EdgeInsets.all(2),
                 decoration: BoxDecoration(
                   color: isSelected ? AppColors.instance.black : null,
                   shape: BoxShape.circle,
