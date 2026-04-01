@@ -76,9 +76,9 @@ class AppTextStyle {
     fontWeight: FontWeight.w300,
     fontFamily: 'inter',
   );
-  TextStyle get text18W500 => TextStyle(
+  TextStyle get text18W700 => TextStyle(
     fontSize: 18.sp,
-    fontWeight: FontWeight.w500,
+    fontWeight: FontWeight.w700,
     fontFamily: 'inter',
   );
   TextStyle get text20W300 => TextStyle(

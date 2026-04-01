@@ -6,6 +6,7 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/forg
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
+import 'package:snap_shot/features/product_details/presentation/view/screens/product_details.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -13,7 +14,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const AppShell();
+          return const ProductDetailsView();
         },
       ),
       GoRoute(
@@ -37,6 +38,10 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.appShell,
         builder: (context, state) => const AppShell(),
+      ),
+      GoRoute(
+        path: Routes.instance.productDetails,
+        builder: (context, state) => const ProductDetailsView(),
       ),
     ],
   );

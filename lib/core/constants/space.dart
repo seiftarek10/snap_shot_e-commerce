@@ -17,6 +17,7 @@ class AppSpace {
   SizedBox get v50 => SizedBox(height: 50.h);
   SizedBox get h4 => SizedBox(width: 32.w);
   SizedBox get h8 => SizedBox(width: 8.w);
+  SizedBox get h12 => SizedBox(width: 12.w);
   SizedBox get h16 => SizedBox(width: 16.w);
   SizedBox get h32 => SizedBox(width: 32.w);
 }
