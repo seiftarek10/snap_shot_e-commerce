@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/assets.dart';
-import 'package:snap_shot/core/widgets/nav_bar_item.dart';
+import 'package:snap_shot/core/widgets/app_shell/nav_bar_item.dart';
 
 class AppBottomBar extends StatefulWidget {
   const AppBottomBar({super.key, required this.onTap});

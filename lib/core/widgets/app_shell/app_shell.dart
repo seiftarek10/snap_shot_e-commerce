@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart';
-import 'package:snap_shot/core/widgets/app_bottom_bar.dart';
+import 'package:snap_shot/core/widgets/app_shell/app_bottom_bar.dart';
+import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
 import 'package:snap_shot/features/category/presentation/view/screens/category_view.dart';
 
 class AppShell extends StatefulWidget {
@@ -16,7 +17,7 @@ class _AppShellState extends State<AppShell> {
     const HomeView(),
     const CategoryView(),
     Container(color: Colors.blue, height: 300),
-    Container(color: Colors.yellow, height: 300),
+    const CartView(),
     Container(color: Colors.purple, height: 300),
   ];
   @override
