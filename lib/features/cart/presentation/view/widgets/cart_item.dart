@@ -15,7 +15,7 @@ class CartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 170.h,
+      height: 160.h,
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
         color: AppColors.instance.white,

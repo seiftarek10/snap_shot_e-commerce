@@ -5,9 +5,7 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class CartItemData extends StatelessWidget {
-  const CartItemData({
-    super.key,
-  });
+  const CartItemData({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,41 +13,34 @@ class CartItemData extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: Align(
-            alignment: Alignment.bottomLeft,
-            child: Text(
-              "Essential Bag",
-              style: AppTextStyle.instance.text14WBoldBlack,
-            ),
+          flex: 4,
+          child: Text(
+            "Essential Bag",
+            style: AppTextStyle.instance.text14WBoldBlack,
           ),
         ),
         Expanded(
-          child: Padding(
-            padding: EdgeInsets.only(top: 10.h),
-            child: Row(
-              children: [
-                Text(
-                  "Rating",
-                  style: AppTextStyle.instance.text14W500Black
-                      .copyWith(color: AppColors.instance.grey),
+          flex: 3,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                "Rating",
+                style: AppTextStyle.instance.text14W500Black.copyWith(
+                  color: AppColors.instance.grey,
                 ),
-                Icon(
-                  Icons.star,
-                  color: AppColors.instance.blueGrey,
-                  size: 40,
-                ),
-              ],
-            ),
+              ),
+              Icon(Icons.star, color: AppColors.instance.blueGrey, size: 40),
+            ],
           ),
         ),
         AppSpace.instance.v12,
         Expanded(
+          flex: 3,
           child: Container(
             // margin:  EdgeInsets.(horizontal: 10.w),
             decoration: BoxDecoration(
-              color: AppColors.instance.lighterGrey.withValues(
-                alpha: 0.5,
-              ),
+              color: AppColors.instance.lighterGrey.withValues(alpha: 0.5),
               borderRadius: BorderRadius.circular(70.r),
             ),
             child: Row(
@@ -59,10 +50,7 @@ class CartItemData extends StatelessWidget {
                   onTap: () {},
                   child: Icon(Icons.add, size: 16.h),
                 ),
-                Text(
-                  "1",
-                  style: AppTextStyle.instance.text14W500Black,
-                ),
+                Text("1", style: AppTextStyle.instance.text14W500Black),
                 InkWell(
                   onTap: () {},
                   child: Icon(Icons.remove, size: 16.h),
@@ -72,12 +60,10 @@ class CartItemData extends StatelessWidget {
           ),
         ),
         Expanded(
+          flex: 3,
           child: Align(
             alignment: Alignment.bottomLeft,
-            child: Text(
-              r"$385.00",
-              style: AppTextStyle.instance.text18W700,
-            ),
+            child: Text(r"$385.00", style: AppTextStyle.instance.text18W700),
           ),
         ),
       ],
