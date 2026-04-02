@@ -62,6 +62,10 @@ class Assets {
   /// assets/images/png/user.png
   static const String imagesPngUser = "assets/images/png/user.png";
 
+  /// Assets for imagesSvgDelete
+  /// assets/images/svg/delete.svg
+  static const String imagesSvgDelete = "assets/images/svg/delete.svg";
+
   /// Assets for imagesSvgFilter
   /// assets/images/svg/Filter.svg
   static const String imagesSvgFilter = "assets/images/svg/Filter.svg";

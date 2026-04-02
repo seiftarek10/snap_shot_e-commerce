@@ -13,4 +13,5 @@ class AppColors {
   Color get blue => Colors.blue[700]!;
   Color get green => Colors.green[700]!;
   Color get blackOpacity => Colors.black.withValues(alpha: 0.05);
+  Color get blueGrey => Colors.blueGrey;
 }
