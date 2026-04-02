@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/widgets/app_button.dart';
-import 'package:snap_shot/core/widgets/app_text_filed.dart';
+import 'package:snap_shot/shared/widgets/app_button.dart';
+import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({

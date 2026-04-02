@@ -3,9 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/core/widgets/app_button.dart';
-import 'package:snap_shot/core/widgets/filter/filter_method.dart';
-import 'package:snap_shot/core/widgets/filter/price_range_slider.dart';
+import 'package:snap_shot/shared/widgets/app_button.dart';
+import 'package:snap_shot/shared/widgets/filter/filter_method.dart';
+import 'package:snap_shot/shared/widgets/filter/price_range_slider.dart';
 
 class FilterBottomSheetBody extends StatelessWidget {
   const FilterBottomSheetBody({super.key});

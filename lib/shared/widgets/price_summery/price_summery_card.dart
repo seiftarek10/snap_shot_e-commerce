@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/core/widgets/app_button.dart';
-import 'package:snap_shot/features/cart/presentation/view/widgets/price_summery_item.dart';
+import 'package:snap_shot/shared/widgets/price_summery/price_summery_item.dart';
 
 class PriceSummeryCard extends StatelessWidget {
   const PriceSummeryCard({super.key});
@@ -26,7 +25,6 @@ class PriceSummeryCard extends StatelessWidget {
           ],
         ),
         AppSpace.instance.v20,
-        AppButton(buttonTitle: "Checkout", onPressed: () {}),
       ],
     );
   }

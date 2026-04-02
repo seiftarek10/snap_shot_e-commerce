@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/widgets/page_padding.dart';
-import 'package:snap_shot/core/widgets/search_field.dart';
-import 'package:snap_shot/core/widgets/snap_shop_word.dart';
+
 import 'package:snap_shot/features/Home/presentation/view/widgets/home_all_categories_list.dart';
 import 'package:snap_shot/features/Home/presentation/view/widgets/home_products_list.dart';
+import 'package:snap_shot/shared/widgets/page_padding.dart';
+import 'package:snap_shot/shared/widgets/search_field.dart';
+import 'package:snap_shot/shared/widgets/snap_shop_word.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:snap_shot/shared/widgets/arrow_back.dart';
 import 'package:snap_shot/shared/widgets/page_title.dart';
 
-class ProductDetailsHeader extends StatelessWidget {
-  const ProductDetailsHeader({
+class CheckoutHeader extends StatelessWidget {
+  const CheckoutHeader({
     super.key,
   });
 
@@ -12,11 +12,7 @@ class ProductDetailsHeader extends StatelessWidget {
     return const Row(
       children: [
         ArrowBackWidget(),
-        Expanded(
-          child: Center(
-            child: PageTitle(pageTitle: 'Product Details'),
-          ),
-        ),
+        Expanded(child: Center(child: PageTitle(pageTitle: "Checkout")))
       ],
     );
   }
