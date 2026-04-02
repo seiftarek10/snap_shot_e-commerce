@@ -4,8 +4,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/core/widgets/app_text_filed.dart';
-import 'package:snap_shot/core/widgets/filter/filter_icon.dart';
+import 'package:snap_shot/shared/widgets/app_text_filed.dart';
+import 'package:snap_shot/shared/widgets/filter/filter_icon.dart';
 
 class SearchField extends StatefulWidget {
   const SearchField({super.key});

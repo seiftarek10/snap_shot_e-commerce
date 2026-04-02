@@ -4,8 +4,8 @@ import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/core/widgets/app_button.dart';
-import 'package:snap_shot/core/widgets/app_text_filed.dart';
+import 'package:snap_shot/shared/widgets/app_button.dart';
+import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
 class SignInForm extends StatelessWidget {
   const SignInForm({super.key});

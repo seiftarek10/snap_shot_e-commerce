@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/widgets/page_padding.dart';
-import 'package:snap_shot/core/widgets/page_title.dart';
+import 'package:snap_shot/shared/widgets/page_padding.dart';
+import 'package:snap_shot/shared/widgets/page_title.dart';
 import 'package:snap_shot/features/category/presentation/view/widgets/all_categories_list.dart';
 
 class CategoryView extends StatelessWidget {

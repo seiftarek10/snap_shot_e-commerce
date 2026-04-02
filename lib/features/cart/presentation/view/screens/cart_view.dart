@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/widgets/page_padding.dart';
-import 'package:snap_shot/core/widgets/page_title.dart';
+import 'package:snap_shot/shared/widgets/page_padding.dart';
+import 'package:snap_shot/shared/widgets/page_title.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/all_cart_items_list.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/price_summery_card.dart';
 

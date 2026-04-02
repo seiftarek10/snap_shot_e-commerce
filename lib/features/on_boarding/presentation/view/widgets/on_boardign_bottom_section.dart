@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/core/widgets/app_button.dart';
+import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/widgets/on_boarding_dots.dart';
 
 class OnBoardignBottomSection extends StatelessWidget {

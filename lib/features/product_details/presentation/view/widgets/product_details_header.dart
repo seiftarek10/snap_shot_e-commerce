@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:snap_shot/core/widgets/arrow_back.dart';
-import 'package:snap_shot/core/widgets/page_title.dart';
+import 'package:snap_shot/shared/widgets/arrow_back.dart';
+import 'package:snap_shot/shared/widgets/page_title.dart';
 
 class ProductDetailsHeader extends StatelessWidget {
   const ProductDetailsHeader({
