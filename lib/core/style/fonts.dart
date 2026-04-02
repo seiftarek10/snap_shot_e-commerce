@@ -91,6 +91,11 @@ class AppTextStyle {
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
   );
+    TextStyle get text20Bold => TextStyle(
+    fontSize: 20.sp,
+    fontWeight: FontWeight.bold,
+    fontFamily: 'inter',
+  );
 
   TextStyle get text22Bold => TextStyle(
     fontSize: 22.sp,
