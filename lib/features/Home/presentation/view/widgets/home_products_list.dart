@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:go_router/go_router.dart';
+import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/Home/presentation/view/widgets/home_product_item.dart';
 
 class HomeProductsList extends StatelessWidget {
@@ -15,7 +17,12 @@ class HomeProductsList extends StatelessWidget {
         childAspectRatio: 163 / 217,
       ),
       itemBuilder: (context, index) {
-        return const HomeProductItem();
+        return GestureDetector(
+          onTap: () {
+            context.push(Routes.instance.productDetails);
+          },
+          child: const HomeProductItem(),
+        );
       },
     );
   }

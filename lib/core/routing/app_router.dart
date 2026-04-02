@@ -14,7 +14,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const ProductDetailsView();
+          return const AppShell();
         },
       ),
       GoRoute(
