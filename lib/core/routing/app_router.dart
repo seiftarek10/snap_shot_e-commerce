@@ -15,7 +15,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const CheckoutView();
+          return const AppShell();
         },
       ),
       GoRoute(
@@ -45,7 +45,7 @@ class AppRouter {
         builder: (context, state) => const ProductDetailsView(),
       ),
       GoRoute(
-        path: Routes.instance.productDetails,
+        path: Routes.instance.checkout,
         builder: (context, state) => const CheckoutView(),
       ),
     ],
