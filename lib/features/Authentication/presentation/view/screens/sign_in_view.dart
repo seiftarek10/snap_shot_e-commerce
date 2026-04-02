@@ -3,13 +3,13 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 
-import 'package:snap_shot/core/widgets/page_padding.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/widgets/auth_page_title.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/widgets/or_divider.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/widgets/phone_or_email.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/widgets/sign_in_widgets/no_account.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/widgets/sign_in_widgets/sing_in_from.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/widgets/sign_in_widgets/social_button.dart';
+import 'package:snap_shot/shared/widgets/page_padding.dart';
+import 'package:snap_shot/features/authentication/presentation/view/widgets/auth_page_title.dart';
+import 'package:snap_shot/features/authentication/presentation/view/widgets/or_divider.dart';
+import 'package:snap_shot/features/authentication/presentation/view/widgets/phone_or_email.dart';
+import 'package:snap_shot/features/authentication/presentation/view/widgets/sign_in_widgets/no_account.dart';
+import 'package:snap_shot/features/authentication/presentation/view/widgets/sign_in_widgets/sing_in_from.dart';
+import 'package:snap_shot/features/authentication/presentation/view/widgets/sign_in_widgets/social_button.dart';
 
 class SignInView extends StatelessWidget {
   const SignInView({super.key});
@@ -30,7 +30,7 @@ class SignInView extends StatelessWidget {
                 AppSpace.instance.v16,
                 const SignInForm(),
                 AppSpace.instance.v12,
-                OrDivider(),
+                const OrDivider(),
                 AppSpace.instance.v16,
                 SocialButton(
                   platForm: 'Facebook',
@@ -44,7 +44,7 @@ class SignInView extends StatelessWidget {
                   iconColor: AppColors.instance.green,
                 ),
                 AppSpace.instance.v24,
-                Center(
+                const Center(
                   child: NoAccount(),
                 ),
               ],

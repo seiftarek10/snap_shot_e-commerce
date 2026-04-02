@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/screens/sign_in_view.dart';
-import 'package:snap_shot/features/Authentication/presentation/view/screens/sign_up_view.dart';
-import 'package:snap_shot/features/onBoarding/presentation/view/screens/on_boarding_view.dart';
+import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
+import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
+import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
+import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
+import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
+import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
+import 'package:snap_shot/features/product_details/presentation/view/screens/product_details.dart';
 
 class AppRouter {
   static final GoRouter router = GoRouter(
@@ -11,7 +15,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const SignInView();
+          return const AppShell();
         },
       ),
       GoRoute(
@@ -27,6 +31,22 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.signUp,
         builder: (context, state) => const SignUpView(),
+      ),
+      GoRoute(
+        path: Routes.instance.forgetPassword,
+        builder: (context, state) => const ForgetPasswordView(),
+      ),
+      GoRoute(
+        path: Routes.instance.appShell,
+        builder: (context, state) => const AppShell(),
+      ),
+      GoRoute(
+        path: Routes.instance.productDetails,
+        builder: (context, state) => const ProductDetailsView(),
+      ),
+      GoRoute(
+        path: Routes.instance.checkout,
+        builder: (context, state) => const CheckoutView(),
       ),
     ],
   );

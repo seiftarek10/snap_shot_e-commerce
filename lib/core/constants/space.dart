@@ -5,7 +5,7 @@ class AppSpace {
   AppSpace._();
   static final AppSpace instance = AppSpace._();
 
-  SizedBox get topPageSpace => SizedBox(height: 20.h);
+  SizedBox get topPageSpace => SizedBox(height: 15.h);
   SizedBox get v4 => SizedBox(height: 4.h);
   SizedBox get v8 => SizedBox(height: 8.h);
   SizedBox get v12 => SizedBox(height: 12.h);
@@ -17,6 +17,7 @@ class AppSpace {
   SizedBox get v50 => SizedBox(height: 50.h);
   SizedBox get h4 => SizedBox(width: 32.w);
   SizedBox get h8 => SizedBox(width: 8.w);
+  SizedBox get h12 => SizedBox(width: 12.w);
   SizedBox get h16 => SizedBox(width: 16.w);
   SizedBox get h32 => SizedBox(width: 32.w);
 }
