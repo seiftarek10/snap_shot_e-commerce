@@ -11,7 +11,7 @@ class AppBottomBar extends StatefulWidget {
 }
 
 class _AppBottomBarState extends State<AppBottomBar> {
-  late int currentIndex;
+  int currentIndex = 0;
   final List<String> _icons = [
     Assets.imagesPngHome,
     Assets.imagesPngCategory,
@@ -19,12 +19,6 @@ class _AppBottomBarState extends State<AppBottomBar> {
     Assets.imagesPngShoppingBag,
     Assets.imagesPngUser,
   ];
-
-  @override
-  void initState() {
-    super.initState();
-    currentIndex = 0;
-  }
 
   @override
   Widget build(BuildContext context) {

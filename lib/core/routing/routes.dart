@@ -10,4 +10,5 @@ class Routes {
   final String appShell = "/appShell";
   final String productDetails = "/ProductDetails";
   final String checkout = "/checkout";
+  final String orders = "/orders";
 }

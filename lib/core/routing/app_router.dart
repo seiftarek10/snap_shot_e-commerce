@@ -7,6 +7,7 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/sign
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
+import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/product_details.dart';
 
 class AppRouter {
@@ -47,6 +48,10 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.checkout,
         builder: (context, state) => const CheckoutView(),
+      ),
+        GoRoute(
+        path: Routes.instance.checkout,
+        builder: (context, state) => const OrdersView(),
       ),
     ],
   );
