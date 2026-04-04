@@ -7,14 +7,23 @@ import 'package:snap_shot/features/orders/presentation/view/widgets/order_state.
 
 class OrderItem extends StatelessWidget {
   const OrderItem({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.all(40),
       decoration: BoxDecoration(
-        border: Border.all(color: AppColors.instance.grey, width: 1),
+        border: Border.all(color: AppColors.instance.greyLight, width: 1),
         borderRadius: BorderRadius.circular(16.r),
+        gradient: LinearGradient(
+          colors: [
+            AppColors.instance.white,
+            AppColors.instance.white,
+            AppColors.instance.lighterGrey,
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+        ),
+        boxShadow: [BoxShadow(color: AppColors.instance.grey, blurRadius: 2)],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
