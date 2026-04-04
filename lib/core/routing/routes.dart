@@ -11,4 +11,5 @@ class Routes {
   final String productDetails = "/ProductDetails";
   final String checkout = "/checkout";
   final String orders = "/orders";
+  final String favorite = "/Favorite";
 }

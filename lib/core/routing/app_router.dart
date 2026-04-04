@@ -6,6 +6,7 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/forg
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
+import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/product_details.dart';
@@ -50,8 +51,12 @@ class AppRouter {
         builder: (context, state) => const CheckoutView(),
       ),
         GoRoute(
-        path: Routes.instance.checkout,
+        path: Routes.instance.orders,
         builder: (context, state) => const OrdersView(),
+      ),
+       GoRoute(
+        path: Routes.instance.favorite,
+        builder: (context, state) => const FavoriteView(),
       ),
     ],
   );
