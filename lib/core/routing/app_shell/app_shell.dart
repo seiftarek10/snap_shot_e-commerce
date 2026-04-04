@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart';
 import 'package:snap_shot/core/routing/app_shell/app_bottom_bar.dart';
 import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
-import 'package:snap_shot/features/category/presentation/view/screens/category_view.dart';
+import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key});
@@ -15,7 +15,7 @@ class _AppShellState extends State<AppShell> {
   late int currentIndex;
   final List<Widget> _pages = [
     const HomeView(),
-    const CategoryView(),
+    const OrdersView(),
     Container(color: Colors.blue, height: 300),
     const CartView(),
     Container(color: Colors.purple, height: 300),
