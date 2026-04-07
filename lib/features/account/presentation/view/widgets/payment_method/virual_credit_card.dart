@@ -1,12 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_credit_card/flutter_credit_card.dart';
 import 'package:snap_shot/core/style/colors.dart';
 
-class CreditCard extends StatelessWidget {
-  const CreditCard({
-    super.key,
-  });
+class VirtualCreditCard extends StatelessWidget {
+  const VirtualCreditCard({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +15,8 @@ class CreditCard extends StatelessWidget {
       cardBgColor: AppColors.instance.blueGrey,
       labelCardHolder: "Label",
       obscureCardCvv: false,
-      showBackView:
-          true, 
-      onCreditCardWidgetChange:
-          (
-            CreditCardBrand brand,
-          ) {}, 
+      showBackView: true,
+      onCreditCardWidgetChange: (CreditCardBrand brand) {},
     );
   }
 }

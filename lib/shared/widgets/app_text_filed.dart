@@ -13,6 +13,8 @@ class AppTextField extends StatefulWidget {
     this.suffix,
     this.onFocusChange,
     this.prefix,
+    this.foucsedBorderColor,
+    this.filedTextStyle,
   });
   final String hintText;
   final void Function(String?) onSaved;
@@ -20,6 +22,8 @@ class AppTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final Widget? suffix, prefix;
   final ValueChanged<bool>? onFocusChange;
+  final Color? foucsedBorderColor;
+  final TextStyle? filedTextStyle;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
@@ -54,7 +58,7 @@ class _AppTextFieldState extends State<AppTextField> {
       cursorColor: AppColors.instance.black,
       cursorHeight: 20.h,
       style: AppTextStyle.instance.text16W400.copyWith(
-        color: AppColors.instance.black,
+        color: widget.foucsedBorderColor ?? AppColors.instance.black,
         fontWeight: FontWeight.w900,
       ),
       keyboardType: widget.keyboardType,
@@ -65,7 +69,8 @@ class _AppTextFieldState extends State<AppTextField> {
           : false,
       decoration: InputDecoration(
         hintText: widget.hintText,
-        hintStyle: AppTextStyle.instance.textFieldStyle,
+        hintStyle:
+            widget.filedTextStyle ?? AppTextStyle.instance.textFieldStyle,
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         suffixIcon: widget.isPasswordField != null
             ? Padding(
@@ -89,7 +94,17 @@ class _AppTextFieldState extends State<AppTextField> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: AppColors.instance.black, width: 3.5),
+          borderSide: BorderSide(
+            color: widget.foucsedBorderColor ?? AppColors.instance.black,
+            width: 3.5,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(
+            color: widget.foucsedBorderColor != null
+                ? Colors.grey[200]!
+                : Colors.grey,
+          ),
         ),
       ),
     );
