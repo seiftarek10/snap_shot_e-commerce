@@ -18,7 +18,7 @@ class AllAccountItems extends StatelessWidget {
     ),
     AccountItemModel(
       icon: Assets.imagesSvgPaymentMethod,
-      routePath: '',
+      routePath: Routes.instance.accountPaymentMethod,
       subTitle: 'Add Your Credit or Debit Card',
       title: 'Paymen Method',
     ),
