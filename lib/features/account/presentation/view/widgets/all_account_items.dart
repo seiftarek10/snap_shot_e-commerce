@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/features/account/data/models/account_item_model.dart';
 import 'package:snap_shot/features/account/presentation/view/widgets/account_item.dart';
@@ -11,7 +12,7 @@ class AllAccountItems extends StatelessWidget {
   static final List<AccountItemModel> generalItems = [
     AccountItemModel(
       icon: Assets.imagesSvgAccountDetails,
-      routePath: '',
+      routePath: Routes.instance.accountDetails,
       subTitle: 'Edit Your Account Information',
       title: 'Account Details',
     ),
