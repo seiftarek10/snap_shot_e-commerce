@@ -28,7 +28,7 @@ class CreditCardInfo extends StatelessWidget {
           fit: BoxFit.cover,
         ),
         title: Text(title, style: AppTextStyle.instance.text14WBoldBlack),
-        subtitle: Text(expireDate, style: AppTextStyle.instance.text12W500),
+        subtitle: Text(expireDate, style: AppTextStyle.instance.text12W500.copyWith(color: Colors.white)),
         trailing: Container(
           padding: const EdgeInsets.all(4),
           decoration: BoxDecoration(
