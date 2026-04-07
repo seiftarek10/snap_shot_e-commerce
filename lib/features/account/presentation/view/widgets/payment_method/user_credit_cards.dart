@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:snap_shot/features/account/presentation/view/widgets/payment_method/credit_card_info.dart';
+import 'package:snap_shot/features/account/presentation/view/widgets/payment_method/credit_card_info_item.dart';
 
 class UserSavedCreditCards extends StatefulWidget {
   const UserSavedCreditCards({super.key});

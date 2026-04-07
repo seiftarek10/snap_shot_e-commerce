@@ -15,6 +15,7 @@ class AppTextField extends StatefulWidget {
     this.prefix,
     this.foucsedBorderColor,
     this.filedTextStyle,
+    this.borderRadius,
   });
   final String hintText;
   final void Function(String?) onSaved;
@@ -24,6 +25,7 @@ class AppTextField extends StatefulWidget {
   final ValueChanged<bool>? onFocusChange;
   final Color? foucsedBorderColor;
   final TextStyle? filedTextStyle;
+  final double? borderRadius;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
@@ -91,7 +93,9 @@ class _AppTextFieldState extends State<AppTextField> {
               )
             : widget.suffix,
         prefixIcon: widget.prefix,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 20),
+        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: BorderSide(
@@ -100,6 +104,7 @@ class _AppTextFieldState extends State<AppTextField> {
           ),
         ),
         enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 20),
           borderSide: BorderSide(
             color: widget.foucsedBorderColor != null
                 ? Colors.grey[200]!

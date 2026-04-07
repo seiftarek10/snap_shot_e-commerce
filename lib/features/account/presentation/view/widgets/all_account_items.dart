@@ -24,7 +24,7 @@ class AllAccountItems extends StatelessWidget {
     ),
     AccountItemModel(
       icon: Assets.imagesSvgDeliveryAddress,
-      routePath: '',
+      routePath: Routes.instance.addressDetails,
       subTitle: 'Edit Or Add New Address',
       title: 'Delivery Address',
     ),

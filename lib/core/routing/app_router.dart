@@ -5,6 +5,7 @@ import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_details_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_payment_method.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_view.dart';
+import 'package:snap_shot/features/account/presentation/view/screens/address_details_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
@@ -65,15 +66,18 @@ class AppRouter {
         path: Routes.instance.account,
         builder: (context, state) => const AccountView(),
       ),
-         GoRoute(
+      GoRoute(
         path: Routes.instance.accountDetails,
         builder: (context, state) => const AccountDetailsView(),
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.instance.accountPaymentMethod,
         builder: (context, state) => const AccountPaymentMethod(),
       ),
-       
+      GoRoute(
+        path: Routes.instance.addressDetails,
+        builder: (context, state) => const AddressDetailsView(),
+      ),
     ],
   );
 }
