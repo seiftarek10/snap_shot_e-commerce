@@ -73,6 +73,7 @@ class AppRouter {
         path: Routes.instance.accountPaymentMethod,
         builder: (context, state) => const AccountPaymentMethod(),
       ),
+       
     ],
   );
 }

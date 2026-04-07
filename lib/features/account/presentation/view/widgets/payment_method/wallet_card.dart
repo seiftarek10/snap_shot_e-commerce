@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/features/account/presentation/view/widgets/payment_method/add_new_card.dart';
-import 'package:snap_shot/features/account/presentation/view/widgets/payment_method/credit_card_info.dart';
+import 'package:snap_shot/features/account/presentation/view/widgets/payment_method/enabled_form.dart';
+import 'package:snap_shot/features/account/presentation/view/widgets/payment_method/user_credit_cards.dart';
 
-class WalletCard extends StatefulWidget {
+class WalletCard extends StatelessWidget {
   const WalletCard({super.key});
 
-  @override
-  State<WalletCard> createState() => _WalletCardState();
-}
-
-class _WalletCardState extends State<WalletCard> {
-  int currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,29 +26,15 @@ class _WalletCardState extends State<WalletCard> {
       ),
       child: Column(
         children: [
-          Column(
-            children: List.generate(2, (index) {
-              return Padding(
-                padding: EdgeInsets.symmetric(vertical: 8.h),
-                child: CreditCardInfo(
-                  onTap: () {
-                    setState(() {
-                      currentIndex = index;
-                    });
-                  },
-                  isSelected: currentIndex == index,
-                  title: 'Master Card - 7844',
-                  expireDate: '01/2025',
-                ),
-              );
-            }),
-          ),
+          const UserSavedCreditCards(),
           Divider(
             color: AppColors.instance.white,
             height: 25.h,
             thickness: 1.6,
           ),
-          const AddNewCard(),
+
+          AppSpace.instance.v12,
+          const ExpandableForm(),
         ],
       ),
     );
