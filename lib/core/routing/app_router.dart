@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
+import 'package:snap_shot/features/account/presentation/view/screens/account_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
@@ -50,13 +51,17 @@ class AppRouter {
         path: Routes.instance.checkout,
         builder: (context, state) => const CheckoutView(),
       ),
-        GoRoute(
+      GoRoute(
         path: Routes.instance.orders,
         builder: (context, state) => const OrdersView(),
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.instance.favorite,
         builder: (context, state) => const FavoriteView(),
+      ),
+      GoRoute(
+        path: Routes.instance.account,
+        builder: (context, state) => const AccountView(),
       ),
     ],
   );
