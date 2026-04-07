@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_details_view.dart';
+import 'package:snap_shot/features/account/presentation/view/screens/account_payment_method.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
@@ -67,6 +68,10 @@ class AppRouter {
          GoRoute(
         path: Routes.instance.accountDetails,
         builder: (context, state) => const AccountDetailsView(),
+      ),
+       GoRoute(
+        path: Routes.instance.accountPaymentMethod,
+        builder: (context, state) => const AccountPaymentMethod(),
       ),
     ],
   );

@@ -70,6 +70,10 @@ class Assets {
   /// assets/images/svg/account_details.svg
   static const String imagesSvgAccountDetails = "assets/images/svg/account_details.svg";
 
+  /// Assets for imagesSvgAddNewCardIcon
+  /// assets/images/svg/addNewCardIcon.svg
+  static const String imagesSvgAddNewCardIcon = "assets/images/svg/addNewCardIcon.svg";
+
   /// Assets for imagesSvgConfirmed
   /// assets/images/svg/Confirmed.svg
   static const String imagesSvgConfirmed = "assets/images/svg/Confirmed.svg";
@@ -97,6 +101,10 @@ class Assets {
   /// Assets for imagesSvgMail
   /// assets/images/svg/mail.svg
   static const String imagesSvgMail = "assets/images/svg/mail.svg";
+
+  /// Assets for imagesSvgMastercard
+  /// assets/images/svg/mastercard.svg
+  static const String imagesSvgMastercard = "assets/images/svg/mastercard.svg";
 
   /// Assets for imagesSvgNotifications
   /// assets/images/svg/notifications.svg

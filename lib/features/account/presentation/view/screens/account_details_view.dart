@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/features/account/presentation/view/widgets/account_details.dart/edit_form.dart';
+import 'package:snap_shot/features/account/presentation/view/widgets/account_details/edit_form.dart';
 import 'package:snap_shot/features/account/presentation/view/widgets/account_pages_header.dart';
 
 import 'package:snap_shot/shared/widgets/page_padding.dart';
