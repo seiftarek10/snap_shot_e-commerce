@@ -7,8 +7,8 @@ import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
-class EditAddressForm extends StatelessWidget {
-  const EditAddressForm({super.key});
+class AddAddressForm extends StatelessWidget {
+  const AddAddressForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +81,7 @@ class EditAddressForm extends StatelessWidget {
                     AppSpace.instance.h12,
                     Expanded(
                       child: AppButton(
-                        buttonTitle: 'Edit',
+                        buttonTitle: 'Add',
                         onPressed: () {},
                         // outlineButton: true,
                       ),
