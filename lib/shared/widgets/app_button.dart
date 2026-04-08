@@ -25,7 +25,7 @@ class AppButton extends StatelessWidget {
           color: outlineButton == true
               ? AppColors.instance.black
               : AppColors.instance.black,
-          width: 1.5
+          width: 1.5,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         padding: EdgeInsets.symmetric(vertical: 12.h),
