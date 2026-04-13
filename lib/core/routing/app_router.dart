@@ -4,6 +4,7 @@ import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_details_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_payment_method.dart';
+import 'package:snap_shot/features/account/presentation/view/screens/languages_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/address_details_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/notification_setting_view.dart';
@@ -82,6 +83,10 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.notificationSettings,
         builder: (context, state) => const NotificationSettingView(),
+      ),
+       GoRoute(
+        path: Routes.instance.languages,
+        builder: (context, state) => const LanguagesView(),
       ),
     ],
   );

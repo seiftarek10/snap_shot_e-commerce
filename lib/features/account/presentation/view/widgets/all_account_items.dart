@@ -38,7 +38,7 @@ class AllAccountItems extends StatelessWidget {
     ),
     AccountItemModel(
       icon: Assets.imagesSvgLanguage,
-      routePath: '',
+      routePath: Routes.instance.languages,
       subTitle: 'Change App Language',
       title: 'Languages',
     ),
