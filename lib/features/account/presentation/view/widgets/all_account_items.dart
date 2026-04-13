@@ -28,17 +28,11 @@ class AllAccountItems extends StatelessWidget {
       subTitle: 'Edit Or Add New Address',
       title: 'Delivery Address',
     ),
-    AccountItemModel(
-      icon: Assets.imagesSvgSecurityPassword,
-      routePath: '',
-      subTitle: 'Edit Your Password',
-      title: 'Security & Password',
-    ),
   ];
   static final List<AccountItemModel> settingsItem = [
     AccountItemModel(
       icon: Assets.imagesSvgNotifications,
-      routePath: '',
+      routePath: Routes.instance.notificationSettings,
       subTitle: 'Manage Your Notifications',
       title: 'Notification',
     ),

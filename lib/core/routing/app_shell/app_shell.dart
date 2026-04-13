@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart';
 import 'package:snap_shot/core/routing/app_shell/app_bottom_bar.dart';
-import 'package:snap_shot/features/account/presentation/view/screens/account_view.dart';
+import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
 import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
@@ -20,7 +20,7 @@ class _AppShellState extends State<AppShell> {
     const OrdersView(),
     const FavoriteView(),
     const CartView(),
-    const AccountView(),
+    const MyAccountView(),
   ];
   @override
   void initState() {

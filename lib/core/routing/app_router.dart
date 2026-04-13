@@ -4,8 +4,9 @@ import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_details_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_payment_method.dart';
-import 'package:snap_shot/features/account/presentation/view/screens/account_view.dart';
+import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/address_details_view.dart';
+import 'package:snap_shot/features/account/presentation/view/screens/notification_setting_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
@@ -64,7 +65,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.account,
-        builder: (context, state) => const AccountView(),
+        builder: (context, state) => const MyAccountView(),
       ),
       GoRoute(
         path: Routes.instance.accountDetails,
@@ -77,6 +78,10 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.addressDetails,
         builder: (context, state) => const AddressDetailsView(),
+      ),
+      GoRoute(
+        path: Routes.instance.notificationSettings,
+        builder: (context, state) => const NotificationSettingView(),
       ),
     ],
   );
