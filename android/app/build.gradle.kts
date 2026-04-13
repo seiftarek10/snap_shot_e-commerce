@@ -37,6 +37,42 @@ android {
             signingConfig = signingConfigs.getByName("debug")
         }
     }
+
+    flavorDimensions += "default"
+    productFlavors {
+        create("User") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Snap Shot")
+            applicationIdSuffix = ".user"
+        }
+        create("Owner") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Snap Shot (Owner)")
+            applicationIdSuffix = ".owner"
+        }
+         create("Delivery") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Snap Shot (Delivery)")
+            applicationIdSuffix = ".delivery"
+        }
+         create("Staff") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Snap Shot (Staff)")
+            applicationIdSuffix = ".staff"
+        }
+    }
 }
 
 flutter {
