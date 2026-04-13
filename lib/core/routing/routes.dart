@@ -16,4 +16,5 @@ class Routes {
   final String accountDetails = '/accountDetails';
   final String accountPaymentMethod = '/accountPaymentMethod';
   final String addressDetails = '/addressDetails';
+  final String notificationSettings = '/notificationSettings';
 }

@@ -6,8 +6,8 @@ import 'package:snap_shot/features/account/presentation/view/widgets/all_account
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 import 'package:snap_shot/shared/widgets/page_title.dart';
 
-class AccountView extends StatelessWidget {
-  const AccountView({super.key});
+class MyAccountView extends StatelessWidget {
+  const MyAccountView({super.key});
 
   @override
   Widget build(BuildContext context) {
