@@ -29,18 +29,22 @@ class _AppShellState extends State<AppShell> {
     switch (role) {
       case Role.user:
         return const [
-          HomeView(),
+          HomeView(role: Role.user),
           OrdersView(),
           FavoriteView(),
           CartView(),
           MyAccountView(),
         ];
       case Role.owner:
-        return const [HomeView(), HomeView(), HomeView()];
+        return const [
+          HomeView(role: Role.owner),
+          HomeView(role: Role.user),
+          Scaffold(),
+        ];
       case Role.staff:
-        return const [HomeView(), HomeView(), HomeView()];
+        return const [Scaffold(), Scaffold(), Scaffold()];
       default:
-        return const [HomeView(), HomeView(), HomeView()];
+        return const [Scaffold(), Scaffold(), Scaffold()];
     }
   }
 
