@@ -6,28 +6,40 @@
       "request": "launch",
       "type": "dart",
       "program": "lib/flavors/user/main_user.dart",
-      "args": ["--flavor", "user"]
+      "args": [
+        "--flavor",
+        "user"
+      ]
     },
     {
       "name": "Owner",
       "request": "launch",
       "type": "dart",
       "program": "lib/flavors/owner/main_owner.dart",
-      "args": ["--flavor", "owenr"]
+      "args": [
+        "--flavor",
+        "owner"
+      ]
     },
-     {
+    {
       "name": "Staff",
       "request": "launch",
       "type": "dart",
       "program": "lib/flavors/owner/main_staff.dart",
-      "args": ["--flavor", "staff"]
+      "args": [
+        "--flavor",
+        "staff"
+      ]
     },
-     {
+    {
       "name": "delivery",
       "request": "launch",
       "type": "dart",
       "program": "lib/flavors/owner/main_delivery.dart",
-      "args": ["--flavor", "delivery"]
+      "args": [
+        "--flavor",
+        "delivery"
+      ]
     }
   ]
 }

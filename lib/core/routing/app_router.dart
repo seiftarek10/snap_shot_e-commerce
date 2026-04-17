@@ -17,13 +17,19 @@ import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boar
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/product_details.dart';
 
+enum Role { user, owner, delivery, staff }
+
 class AppRouter {
-  static final GoRouter router = GoRouter(
+  AppRouter({required this.role});
+   final Role role;
+   late final GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const AppShell();
+          return  AppShell(
+            role: role,
+          );
         },
       ),
       GoRoute(
@@ -46,7 +52,9 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.appShell,
-        builder: (context, state) => const AppShell(),
+        builder: (context, state) =>  AppShell(
+          role: role,
+        ),
       ),
       GoRoute(
         path: Routes.instance.productDetails,
@@ -84,7 +92,7 @@ class AppRouter {
         path: Routes.instance.notificationSettings,
         builder: (context, state) => const NotificationSettingView(),
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.instance.languages,
         builder: (context, state) => const LanguagesView(),
       ),

@@ -1,24 +1,58 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/assets.dart';
+import 'package:snap_shot/core/routing/app_router.dart';
 import 'package:snap_shot/core/routing/app_shell/nav_bar_item.dart';
 
 class AppBottomBar extends StatefulWidget {
-  const AppBottomBar({super.key, required this.onTap});
+  const AppBottomBar({super.key, required this.onTap, required this.role});
   final ValueChanged<int> onTap;
+  final Role role;
   @override
   State<AppBottomBar> createState() => _AppBottomBarState();
 }
 
 class _AppBottomBarState extends State<AppBottomBar> {
-  int currentIndex = 0;
-  final List<String> _icons = [
-    Assets.imagesPngHome,
-    Assets.imagesPngCategory,
-    Assets.imagesPngHeart,
-    Assets.imagesPngShoppingBag,
-    Assets.imagesPngUser,
-  ];
+  late int currentIndex;
+  late final List<String> _icons;
+
+  List<String> _buildIcons(Role role) {
+    switch (role) {
+      case Role.user:
+        return const [
+          Assets.imagesPngHome,
+          Assets.imagesPngCategory,
+          Assets.imagesPngHeart,
+          Assets.imagesPngShoppingBag,
+          Assets.imagesPngUser,
+        ];
+      case Role.owner:
+        return const [
+          Assets.imagesPngHome,
+          Assets.imagesPngCategory,
+          Assets.imagesPngHeart,
+        ];
+      case Role.staff:
+        return const [
+          Assets.imagesPngHome,
+          Assets.imagesPngCategory,
+          Assets.imagesPngHeart,
+        ];
+      default:
+        return const [
+          Assets.imagesPngHome,
+          Assets.imagesPngCategory,
+          Assets.imagesPngHeart,
+        ];
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    currentIndex = 0;
+    _icons = _buildIcons(widget.role);
+  }
 
   @override
   Widget build(BuildContext context) {
