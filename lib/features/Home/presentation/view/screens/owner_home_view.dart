@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/owner_container_statistic.dart';
+import 'package:snap_shot/features/home/data/models/monthly_rate_model.dart';
+import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/bar_chart/bar_chart_graph.dart';
+import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/bar_chart/bar_chart_lables.dart';
+import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/owenr_statistic_section.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 import 'package:snap_shot/shared/widgets/page_title.dart';
 
@@ -17,22 +20,27 @@ class OwnerHomeView extends StatelessWidget {
               AppSpace.instance.topPageSpace,
               const PageTitle(pageTitle: 'Home Screen'),
               AppSpace.instance.v16,
-
-              Row(
-                children: [
-                  const Expanded(child: OwnerContainerStatistic()),
-                  AppSpace.instance.h12,
-                  const Expanded(child: OwnerContainerStatistic()),
-                ],
-              ),
+              const OwnerStatisticContainers(),
               AppSpace.instance.v12,
-              Row(
-                children: [
-                  const Expanded(child: OwnerContainerStatistic()),
-                  AppSpace.instance.h12,
-
-                  const Expanded(child: OwnerContainerStatistic()),
-                ],
+              const BarChartLables(),
+              AppSpace.instance.v12,
+              Expanded(
+                child: BarChartGraph(
+                  data: [
+                    MonthlyRate(month: 'jan', value: 10),
+                    MonthlyRate(month: 'fab', value: 30),
+                    MonthlyRate(month: 'mar', value: 70),
+                    MonthlyRate(month: 'apr', value: 40),
+                    MonthlyRate(month: 'may', value: 60),
+                    MonthlyRate(month: 'jun', value: 100),
+                    MonthlyRate(month: 'jul', value: 90),
+                    MonthlyRate(month: 'aug', value: 120),
+                    MonthlyRate(month: 'sep', value: 20),
+                    MonthlyRate(month: 'oct', value: 20),
+                    MonthlyRate(month: 'nov', value: 10),
+                    MonthlyRate(month: 'dec', value: 30),
+                  ],
+                ),
               ),
             ],
           ),
