@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
-class ProductDetailsBottomSectionItem extends StatelessWidget {
-  const ProductDetailsBottomSectionItem({
+class UserProductDetailsBottomSheetItem extends StatelessWidget {
+  const UserProductDetailsBottomSheetItem({
     super.key,
     required this.title,
     required this.subTitle,
@@ -26,13 +26,19 @@ class ProductDetailsBottomSectionItem extends StatelessWidget {
             ? Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  InkWell(onTap: () {}, child:  Icon(Icons.add,size: 20.h,)),
+                  InkWell(
+                    onTap: () {},
+                    child: Icon(Icons.add, size: 20.h),
+                  ),
                   Text(title, style: AppTextStyle.instance.text20W500),
-                  InkWell(onTap: () {}, child:  Icon(Icons.remove,size: 20.h,)),
+                  InkWell(
+                    onTap: () {},
+                    child: Icon(Icons.remove, size: 20.h),
+                  ),
                 ],
               )
             : Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Text(
@@ -42,7 +48,12 @@ class ProductDetailsBottomSectionItem extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Expanded(child: Text(subTitle, style: AppTextStyle.instance.text16W600)),
+                  Expanded(
+                    child: Text(
+                      subTitle,
+                      style: AppTextStyle.instance.text16W600,
+                    ),
+                  ),
                 ],
               ),
       ),

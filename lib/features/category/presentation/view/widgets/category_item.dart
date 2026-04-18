@@ -5,14 +5,14 @@ import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
-class CategoryItem extends StatelessWidget {
-  const CategoryItem({super.key, required this.onPressed});
+class OwnerCategoryItem extends StatelessWidget {
+  const OwnerCategoryItem({super.key, required this.onPressed});
   final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed:onPressed,
+      onPressed: onPressed,
 
       style: OutlinedButton.styleFrom(
         side: BorderSide(color: AppColors.instance.grey),

@@ -15,7 +15,7 @@ class AppTextField extends StatefulWidget {
     this.prefix,
     this.foucsedBorderColor,
     this.filedTextStyle,
-    this.borderRadius,
+    this.borderRadius, this.maxLines,
   });
   final String hintText;
   final void Function(String?) onSaved;
@@ -26,6 +26,7 @@ class AppTextField extends StatefulWidget {
   final Color? foucsedBorderColor;
   final TextStyle? filedTextStyle;
   final double? borderRadius;
+  final int? maxLines;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
@@ -64,6 +65,7 @@ class _AppTextFieldState extends State<AppTextField> {
         fontWeight: FontWeight.w900,
       ),
       keyboardType: widget.keyboardType,
+      maxLines: widget.maxLines,
       obscureText: widget.isPasswordField == null
           ? false
           : widget.isPasswordField == true
