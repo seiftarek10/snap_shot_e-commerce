@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/features/account/presentation/view/widgets/account_details/edit_form.dart';
-import 'package:snap_shot/features/account/presentation/view/widgets/account_pages_header.dart';
+import 'package:snap_shot/shared/widgets/page_header.dart';
 
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 
@@ -17,7 +17,7 @@ class AccountDetailsView extends StatelessWidget {
             child: Column(
               children: [
                 AppSpace.instance.topPageSpace,
-                const AccountPagesHeader(pageTitle: 'Account Details'),
+                const PageHeader(pageTitle: 'Account Details',arrowBack: true ),
                 AppSpace.instance.v20,
                 const AccountDetailsEditForm(),
               ],

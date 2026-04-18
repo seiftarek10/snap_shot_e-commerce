@@ -11,6 +11,7 @@ import 'package:snap_shot/features/account/presentation/view/screens/notificatio
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
+import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
@@ -21,15 +22,13 @@ enum Role { user, owner, delivery, staff }
 
 class AppRouter {
   AppRouter({required this.role});
-   final Role role;
-   late final GoRouter router = GoRouter(
+  final Role role;
+  late final GoRouter router = GoRouter(
     routes: <RouteBase>[
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return  AppShell(
-            role: role,
-          );
+          return AppShell(role: role);
         },
       ),
       GoRoute(
@@ -52,9 +51,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.appShell,
-        builder: (context, state) =>  AppShell(
-          role: role,
-        ),
+        builder: (context, state) => AppShell(role: role),
       ),
       GoRoute(
         path: Routes.instance.productDetails,
@@ -95,6 +92,10 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.languages,
         builder: (context, state) => const LanguagesView(),
+      ),
+      GoRoute(
+        path: Routes.instance.ownerCategoryProducts,
+        builder: (context, state) => const OwnerCategoryProductsView(),
       ),
     ],
   );

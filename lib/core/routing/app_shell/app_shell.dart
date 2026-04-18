@@ -4,6 +4,7 @@ import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart
 import 'package:snap_shot/core/routing/app_shell/app_bottom_bar.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
 import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
+import 'package:snap_shot/features/category/presentation/view/screens/owner_category_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
 
@@ -38,8 +39,8 @@ class _AppShellState extends State<AppShell> {
       case Role.owner:
         return const [
           HomeView(role: Role.owner),
+          OwnerCategoryView(),
           HomeView(role: Role.user),
-          Scaffold(),
         ];
       case Role.staff:
         return const [Scaffold(), Scaffold(), Scaffold()];

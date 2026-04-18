@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/shared/widgets/page_header.dart';
 
 import 'package:snap_shot/features/account/presentation/view/widgets/all_account_items.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
-import 'package:snap_shot/shared/widgets/page_title.dart';
 
 class MyAccountView extends StatelessWidget {
   const MyAccountView({super.key});
@@ -18,7 +18,7 @@ class MyAccountView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppSpace.instance.topPageSpace,
-            const PageTitle(pageTitle: 'My Account'),
+            const PageHeader( pageTitle: 'My Account',arrowBack: true ),
             AppSpace.instance.v12,
             const AllAccountItems(),
             AppSpace.instance.v16,

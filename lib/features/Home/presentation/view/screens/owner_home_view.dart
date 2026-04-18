@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/features/home/data/models/monthly_rate_model.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/bar_chart/bar_chart_graph.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/bar_chart/bar_chart_lables.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/owenr_statistic_section.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
-import 'package:snap_shot/shared/widgets/page_title.dart';
 
 class OwnerHomeView extends StatelessWidget {
   const OwnerHomeView({super.key});
@@ -18,7 +18,7 @@ class OwnerHomeView extends StatelessWidget {
           child: Column(
             children: [
               AppSpace.instance.topPageSpace,
-              const PageTitle(pageTitle: 'Home Screen'),
+              const PageHeader(pageTitle: 'Home Screen', arrowBack: false),
               AppSpace.instance.v16,
               const OwnerStatisticContainers(),
               AppSpace.instance.v12,

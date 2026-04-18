@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/features/favorites/presentation/view/widgets/favorite_item.dart';
-import 'package:snap_shot/shared/widgets/page_title.dart';
 
 class FavoriteView extends StatelessWidget {
   const FavoriteView({super.key});
@@ -16,7 +16,7 @@ class FavoriteView extends StatelessWidget {
           child: Column(
             children: [
               AppSpace.instance.topPageSpace,
-              const PageTitle(pageTitle: 'Favorite List'),
+              const PageHeader(pageTitle: 'Favorite List',arrowBack: false,),
               AppSpace.instance.v16,
             ],
           ),

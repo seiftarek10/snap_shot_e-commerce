@@ -3,5 +3,6 @@ import 'package:snap_shot/core/routing/app_router.dart';
 import 'package:snap_shot/snap_shot.dart';
 
 void main(List<String> args) {
-  runApp(const SnapShot(role: Role.owner));
+  final router = AppRouter(role: Role.owner);
+  runApp(SnapShot(router: router.router));
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/product_details_bottom_section.dart';
-import 'package:snap_shot/features/product_details/presentation/view/widgets/product_details_header.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/product_details_image.dart';
 
 class ProductDetailsView extends StatelessWidget {
@@ -17,7 +17,10 @@ class ProductDetailsView extends StatelessWidget {
             AppSpace.instance.topPageSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: const ProductDetailsHeader(),
+              child: const PageHeader(
+                pageTitle: 'Product Details',
+                arrowBack: true,
+              ),
             ),
             AppSpace.instance.v12,
             const Expanded(

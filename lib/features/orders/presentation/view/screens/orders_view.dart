@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/all_orders_list.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/current_history_orders.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
-import 'package:snap_shot/shared/widgets/page_title.dart';
 
 class OrdersView extends StatelessWidget {
   const OrdersView({super.key});
@@ -14,7 +14,7 @@ class OrdersView extends StatelessWidget {
       child: Column(
         children: [
           AppSpace.instance.topPageSpace,
-          const PageTitle(pageTitle: 'Orders'),
+          const PageHeader(pageTitle: 'Orders',arrowBack: false,),
           AppSpace.instance.v12,
           const CurrentHistoryOrders(),
           AppSpace.instance.v12,
