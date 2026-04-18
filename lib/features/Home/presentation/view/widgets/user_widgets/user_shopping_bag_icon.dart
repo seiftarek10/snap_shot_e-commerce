@@ -3,15 +3,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/style/colors.dart';
 
-class ShoppingBagIcon extends StatefulWidget {
-  const ShoppingBagIcon({super.key, required this.inCart});
+class UserShoppingBagIcon extends StatefulWidget {
+  const UserShoppingBagIcon({super.key, required this.inCart});
   final bool inCart;
 
   @override
-  State<ShoppingBagIcon> createState() => _ShoppingBagIconState();
+  State<UserShoppingBagIcon> createState() => _UserShoppingBagIconState();
 }
 
-class _ShoppingBagIconState extends State<ShoppingBagIcon> {
+class _UserShoppingBagIconState extends State<UserShoppingBagIcon> {
   late bool inCart;
   @override
   void initState() {

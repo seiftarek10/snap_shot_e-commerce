@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/features/Home/presentation/view/widgets/shopping_bag_icon.dart';
+import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/user_shopping_bag_icon.dart';
 import 'package:snap_shot/shared/widgets/favorite_icon.dart';
 
-class HomeProductItem extends StatelessWidget {
-  const HomeProductItem({super.key});
+class UserHomeProductItem extends StatelessWidget {
+  const UserHomeProductItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +36,7 @@ class HomeProductItem extends StatelessWidget {
                   ),
                 ],
               ),
-              const ShoppingBagIcon(inCart: true),
+              const UserShoppingBagIcon(inCart: true),
             ],
           ),
         ],
