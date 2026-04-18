@@ -21,7 +21,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
       case Role.user:
         return const [
           Assets.imagesPngHome,
-          Assets.imagesPngCategory,
+          Assets.imagesPngOrder,
           Assets.imagesPngHeart,
           Assets.imagesPngShoppingBag,
           Assets.imagesPngUser,
@@ -30,7 +30,7 @@ class _AppBottomBarState extends State<AppBottomBar> {
         return const [
           Assets.imagesPngHome,
           Assets.imagesPngCategory,
-          Assets.imagesPngHeart,
+          Assets.imagesPngOrder,
         ];
       case Role.staff:
         return const [

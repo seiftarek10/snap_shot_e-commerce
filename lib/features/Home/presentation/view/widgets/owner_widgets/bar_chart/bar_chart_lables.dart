@@ -11,12 +11,12 @@ class BarChartLables extends StatefulWidget {
 
 class _BarChartLablesState extends State<BarChartLables> {
   int currentIndex = 0;
-  List<String> labels = ['Users', 'Orders'];
+  List<String> labels = ['Users', 'Orders', 'Drinks'];
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: List.generate(2, (index) {
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: List.generate(labels.length, (index) {
         return TextButton(
           onPressed: () {
             setState(() {

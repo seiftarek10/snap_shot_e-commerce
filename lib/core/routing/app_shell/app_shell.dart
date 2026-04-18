@@ -31,7 +31,7 @@ class _AppShellState extends State<AppShell> {
       case Role.user:
         return const [
           HomeView(role: Role.user),
-          OrdersView(),
+          OrdersView(role: Role.user),
           FavoriteView(),
           CartView(),
           MyAccountView(),
@@ -40,7 +40,7 @@ class _AppShellState extends State<AppShell> {
         return const [
           HomeView(role: Role.owner),
           OwnerCategoryView(),
-          HomeView(role: Role.user),
+          OrdersView(role: Role.owner),
         ];
       case Role.staff:
         return const [Scaffold(), Scaffold(), Scaffold()];

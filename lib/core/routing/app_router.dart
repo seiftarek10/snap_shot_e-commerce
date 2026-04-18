@@ -63,7 +63,9 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.orders,
-        builder: (context, state) => const OrdersView(),
+        builder: (context, state) =>  OrdersView(
+          role: role,
+        ),
       ),
       GoRoute(
         path: Routes.instance.favorite,

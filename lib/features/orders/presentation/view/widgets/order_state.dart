@@ -4,7 +4,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
-// enum CurrentOrderState { confirmed, preparing, shipped }
 enum CurrentOrderState {
   confirmed(
     label: 'Confirmed',
