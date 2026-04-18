@@ -16,7 +16,7 @@ import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_v
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
-import 'package:snap_shot/features/product_details/presentation/view/screens/product_details.dart';
+import 'package:snap_shot/features/product_details/presentation/view/screens/product_details_view.dart';
 
 enum Role { user, owner, delivery, staff }
 
@@ -55,7 +55,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.productDetails,
-        builder: (context, state) => const ProductDetailsView(),
+        builder: (context, state) => ProductDetailsView(role: role),
       ),
       GoRoute(
         path: Routes.instance.checkout,

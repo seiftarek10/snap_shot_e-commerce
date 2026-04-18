@@ -3,11 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
-import 'package:snap_shot/features/product_details/presentation/view/widgets/bottom_section_item.dart';
-import 'package:snap_shot/features/product_details/presentation/view/widgets/product_price.dart';
+import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_bottom_section_item.dart';
+import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_product_price_text.dart';
 
-class ProductDetailsBottomSection extends StatelessWidget {
-  const ProductDetailsBottomSection({super.key});
+class UserProductDetailsBottomSheet extends StatelessWidget {
+  const UserProductDetailsBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class ProductDetailsBottomSection extends StatelessWidget {
           decoration: _buildContainerDecoration(),
           child: Column(
             children: [
-              const ProductPrice(),
+              const UserProductPriceText(),
               AppSpace.instance.v12,
               SizedBox(
                 height: 120.h,
@@ -34,11 +34,11 @@ class ProductDetailsBottomSection extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ProductDetailsBottomSectionItem(
+                          UserProductDetailsBottomSheetItem(
                             title: 'Size',
                             subTitle: "Large",
                           ),
-                          ProductDetailsBottomSectionItem(
+                          UserProductDetailsBottomSheetItem(
                             title: 'Size',
                             subTitle: "Large",
                           ),
@@ -53,7 +53,7 @@ class ProductDetailsBottomSection extends StatelessWidget {
                         children: [
                           Expanded(
                             flex: 4,
-                            child: ProductDetailsBottomSectionItem(
+                            child: UserProductDetailsBottomSheetItem(
                               title: '3',
                               subTitle: "",
                               isCounterItem: true,
@@ -62,7 +62,7 @@ class ProductDetailsBottomSection extends StatelessWidget {
                           Expanded(child: SizedBox()),
                           Expanded(
                             flex: 4,
-                            child: ProductDetailsBottomSectionItem(
+                            child: UserProductDetailsBottomSheetItem(
                               title: 'Brand',
                               subTitle: "lar",
                             ),

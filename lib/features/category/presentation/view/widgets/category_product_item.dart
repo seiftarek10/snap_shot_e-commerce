@@ -1,15 +1,10 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/assets.dart';
-import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
-class CategoryProductItem extends StatelessWidget {
-  const CategoryProductItem({
-    super.key,
-  });
+class OwnerCategoryProductItem extends StatelessWidget {
+  const OwnerCategoryProductItem({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -74,31 +69,13 @@ class CategoryProductItem extends StatelessWidget {
                 flex: 2,
                 child: Align(
                   alignment: Alignment.centerRight,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Icon(
-                          Icons.edit,
-                          size: 20.h,
-                          color: AppColors.instance.blueGrey,
-                        ),
-                      ),
-                      const Spacer(),
-                      Expanded(
-                        child: Icon(
-                          Icons.delete,
-                          size: 20.h,
-                          color: const Color.fromARGB(255, 158, 43, 35),
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: Icon(Icons.arrow_forward_ios_rounded, size: 20.h),
                 ),
               ),
             ],
           ),
         ),
-        const Divider(thickness: 2)
+        const Divider(thickness: 2),
       ],
     );
   }

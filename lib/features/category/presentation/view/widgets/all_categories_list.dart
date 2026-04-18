@@ -15,7 +15,7 @@ class AllCategoriesSliverList extends StatelessWidget {
       itemBuilder: (context, index) {
         return Padding(
           padding: EdgeInsets.symmetric(vertical: 8.h),
-          child: CategoryItem(
+          child: OwnerCategoryItem(
             onPressed: () {
               context.push(Routes.instance.ownerCategoryProducts);
             },
