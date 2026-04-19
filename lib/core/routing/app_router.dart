@@ -15,6 +15,7 @@ import 'package:snap_shot/features/category/presentation/view/screens/category_p
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
+import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/product_details_view.dart';
 
@@ -63,7 +64,7 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.orders,
-        builder: (context, state) => const OrdersView(),
+        builder: (context, state) => OrdersView(role: role),
       ),
       GoRoute(
         path: Routes.instance.favorite,
@@ -96,6 +97,10 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.ownerCategoryProducts,
         builder: (context, state) => const OwnerCategoryProductsView(),
+      ),
+      GoRoute(
+        path: Routes.instance.orderDetails,
+        builder: (context, state) => const OrderDetailsView(),
       ),
     ],
   );

@@ -19,4 +19,5 @@ class Routes {
   final String notificationSettings = '/notificationSettings';
   final String languages = '/languages';
   final String ownerCategoryProducts = '/ownerCategoryProducts';
+  final String orderDetails = '/orderDetails';
 }

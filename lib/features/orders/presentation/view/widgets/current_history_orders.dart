@@ -3,13 +3,14 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
-class CurrentHistoryOrders extends StatefulWidget {
-  const CurrentHistoryOrders({super.key});
+class OrderStatusIndicator extends StatefulWidget {
+  const OrderStatusIndicator({super.key, required this.lables});
+  final List<String> lables;
   @override
-  State<CurrentHistoryOrders> createState() => _PhoneOrEmailWidgetState();
+  State<OrderStatusIndicator> createState() => _PhoneOrEmailWidgetState();
 }
 
-class _PhoneOrEmailWidgetState extends State<CurrentHistoryOrders> {
+class _PhoneOrEmailWidgetState extends State<OrderStatusIndicator> {
   late int currentIndex;
   @override
   void initState() {
@@ -28,7 +29,7 @@ class _PhoneOrEmailWidgetState extends State<CurrentHistoryOrders> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: List.generate(
-          2,
+          widget.lables.length,
           (index) => Expanded(
             child: GestureDetector(
               onTap: () {
@@ -49,7 +50,7 @@ class _PhoneOrEmailWidgetState extends State<CurrentHistoryOrders> {
                 child: Padding(
                   padding: EdgeInsets.all(8.h),
                   child: Text(
-                    index == 0 ? 'Current' : 'History',
+                    widget.lables[index],
                     textAlign: TextAlign.center,
                     style: AppTextStyle.instance.text16W600.copyWith(
                       color: index == currentIndex
