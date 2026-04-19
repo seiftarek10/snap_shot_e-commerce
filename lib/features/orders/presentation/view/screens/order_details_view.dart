@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/features/orders/data/models/order_details_container_item_model.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/order_details_conteainer.dart';
+import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/order_details_product_image.dart';
+import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/product_info_container.dart';
+import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/user_info_container.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 
@@ -13,35 +17,24 @@ class OrderDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: PagePadding(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              AppSpace.instance.topPageSpace,
-              const PageHeader(pageTitle: 'Order Details', arrowBack: true),
-              AppSpace.instance.v12,
-              Text('User Info', style: AppTextStyle.instance.text20Bold),
-              AppSpace.instance.v8,
-              OrderDetailsContainer(
-                containerData: [
-                  OrderDetailsContainerItemModel(
-                    label: 'User',
-                    value: 'Seif Tariq',
-                    icon: Icons.person_outline_outlined,
-                  ),
-                  OrderDetailsContainerItemModel(
-                    label: 'Mobile',
-                    value: '01027870171',
-                    icon: Icons.phone_outlined,
-                  ),
-                  OrderDetailsContainerItemModel(
-                    label: 'Address',
-                    value: 'Cairo , Ard Elwaa El Tarriq Alabeed Agouza',
-                    icon: Icons.location_on_outlined,
-                  ),
-                ],
-              ),
-            ],
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          child: PagePadding(
+            child: Column(
+              children: [
+                AppSpace.instance.topPageSpace,
+                const PageHeader(pageTitle: 'Order Details', arrowBack: true),
+                AppSpace.instance.v12,
+                const OrderDetailsProductImage(
+                  productImage: Assets.imagesPngOnboardingimage2,
+                ),
+                AppSpace.instance.v12,
+                const UserInfoContainer(),
+                AppSpace.instance.v20,
+                const ProductInfoContainer(),
+                AppSpace.instance.v20,
+              ],
+            ),
           ),
         ),
       ),
