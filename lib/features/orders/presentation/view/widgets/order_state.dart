@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:snap_shot/core/constants/assets.dart';
+import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 enum CurrentOrderState {
@@ -38,8 +39,15 @@ class OrderState extends StatelessWidget {
 
   static const _stateIcons = {
     CurrentOrderState.confirmed: [Assets.imagesSvgConfirmed],
-    CurrentOrderState.preparing: [Assets.imagesSvgConfirmed, Assets.imagesSvgPreparing],
-    CurrentOrderState.shipped:   [Assets.imagesSvgConfirmed, Assets.imagesSvgPreparing, Assets.imagesSvgShipped],
+    CurrentOrderState.preparing: [
+      Assets.imagesSvgConfirmed,
+      Assets.imagesSvgPreparing,
+    ],
+    CurrentOrderState.shipped: [
+      Assets.imagesSvgConfirmed,
+      Assets.imagesSvgPreparing,
+      Assets.imagesSvgShipped,
+    ],
   };
 
   @override
@@ -47,8 +55,12 @@ class OrderState extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        _StatusBadge(state: currentState),
-        _StateIcons(icons: _stateIcons[currentState]!),
+        Expanded(child: _StatusBadge(state: currentState)),
+        AppSpace.instance.h16,
+        Expanded(
+          flex: 2,
+          child: _StateIcons(icons: _stateIcons[currentState]!),
+        ),
       ],
     );
   }
@@ -61,13 +73,14 @@ class _StatusBadge extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 8.h),
+      padding: EdgeInsets.symmetric(vertical: 8.h),
       decoration: BoxDecoration(
         color: state.backgroundColor,
         borderRadius: BorderRadius.circular(20.r),
       ),
       child: Text(
         state.label,
+        textAlign: TextAlign.center,
         style: AppTextStyle.instance.text12W500.copyWith(
           color: state.textColor,
           fontWeight: FontWeight.bold,
@@ -85,12 +98,7 @@ class _StateIcons extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: icons
-          .map(
-            (icon) => Padding(
-              padding: EdgeInsets.only(left: 8.w),
-              child: SvgPicture.asset(icon, height: 25.h),
-            ),
-          )
+          .map((icon) => Expanded(child: SvgPicture.asset(icon, height: 25.h)))
           .toList(),
     );
   }

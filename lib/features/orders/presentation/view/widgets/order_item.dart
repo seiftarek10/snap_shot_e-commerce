@@ -11,7 +11,7 @@ class OrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(40),
+      padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 15.w),
       decoration: _buildDecoration(),
       child: Row(
         children: [
@@ -30,7 +30,7 @@ class OrderItem extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const OrderState(currentState: CurrentOrderState.confirmed),
+                const OrderState(currentState: CurrentOrderState.shipped),
                 AppSpace.instance.v12,
                 Text(
                   "#Product Name",
