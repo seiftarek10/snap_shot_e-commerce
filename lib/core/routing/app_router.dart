@@ -29,7 +29,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return AppShell(role: role);
+          return const SignUpView();
         },
       ),
       GoRoute(

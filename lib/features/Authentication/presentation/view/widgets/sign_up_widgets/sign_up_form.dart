@@ -22,7 +22,7 @@ class SignUpForm extends StatelessWidget {
           ),
           AppSpace.instance.v8,
           AppTextField(
-            hintText: 'Email or Phone',
+            hintText: 'Email',
             onSaved: (value) {},
             keyboardType: TextInputType.text,
           ),
@@ -33,7 +33,21 @@ class SignUpForm extends StatelessWidget {
             keyboardType: TextInputType.text,
             isPasswordField: true,
           ),
+          AppSpace.instance.v8,
+           AppTextField(
+            hintText: 'Mobile',
+            onSaved: (value) {},
+            keyboardType: TextInputType.text,
+          ),
+           AppSpace.instance.v8,
+           AppTextField(
+            hintText: 'Address',
+            maxLines: 2,
+            onSaved: (value) {},
+            keyboardType: TextInputType.text,
+          ),
           AppSpace.instance.v16,
+
           AppButton(buttonTitle: 'Sign Up', onPressed: () {}),
         ],
       ),

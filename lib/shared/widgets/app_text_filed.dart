@@ -57,7 +57,8 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: _focusNode,
-      onSaved: widget.onSaved,
+      
+      onSaved:  widget.onSaved,
       cursorColor: AppColors.instance.black,
       cursorHeight: 20.h,
       style: AppTextStyle.instance.text16W400.copyWith(
@@ -65,7 +66,7 @@ class _AppTextFieldState extends State<AppTextField> {
         fontWeight: FontWeight.w900,
       ),
       keyboardType: widget.keyboardType,
-      maxLines: widget.maxLines,
+      maxLines: widget.isPasswordField==true?1: widget.maxLines,
       obscureText: widget.isPasswordField == null
           ? false
           : widget.isPasswordField == true
