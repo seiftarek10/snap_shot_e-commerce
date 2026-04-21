@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/features/orders/data/models/order_details_container_item_model.dart';
-import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/order_details_conteainer.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/order_details_product_image.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/product_info_container.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/user_info_container.dart';
