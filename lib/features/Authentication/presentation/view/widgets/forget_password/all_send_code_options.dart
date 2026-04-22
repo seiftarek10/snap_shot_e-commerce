@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/assets.dart';
-import 'package:snap_shot/features/authentication/data/Models/send_code_options_data_model.dart';
+import 'package:snap_shot/features/authentication/data/models/send_code_options_data_model.dart';
 import 'package:snap_shot/features/authentication/presentation/view/widgets/forget_password/send_code_method.dart';
 
 class AllSendCodeOptions extends StatefulWidget {
