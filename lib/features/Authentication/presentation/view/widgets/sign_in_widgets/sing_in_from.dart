@@ -4,6 +4,7 @@ import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/core/utils/validator.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
@@ -17,12 +18,18 @@ class SignInForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppTextField(
+               validator: (value) {
+                    return ValidationForm.validEmail(value);
+                  },
             hintText: 'Email',
             onSaved: (value) {},
             keyboardType: TextInputType.emailAddress,
           ),
           AppSpace.instance.v8,
           AppTextField(
+               validator: (value) {
+                    return ValidationForm.validPassword(value);
+                  },
             hintText: 'Password',
             isPasswordField: true,
             onSaved: (value) {},

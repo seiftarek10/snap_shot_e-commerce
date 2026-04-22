@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/core/utils/validator.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
@@ -31,6 +32,9 @@ class EditAddressForm extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 AppTextField(
+                     validator: (value) {
+                    return ValidationForm.nullOrEpmty(value);
+                  },
                   hintText: "Enter place name (e.g., Home, Work)",
                   onSaved: (place) {},
                   keyboardType: TextInputType.text,
@@ -43,6 +47,9 @@ class EditAddressForm extends StatelessWidget {
                 ),
                 AppSpace.instance.v20,
                 AppTextField(
+                     validator: (value) {
+                    return ValidationForm.nullOrEpmty(value);
+                  },
                   hintText: "Street, area or landmark",
                   onSaved: (place) {},
                   keyboardType: TextInputType.text,
@@ -55,6 +62,9 @@ class EditAddressForm extends StatelessWidget {
                 ),
                 AppSpace.instance.v20,
                 AppTextField(
+                     validator: (value) {
+                    return ValidationForm.nullOrEpmty(value);
+                  },
                   hintText:
                       "Additional details (apartment, floor, landmarks, notes)",
                   onSaved: (place) {},

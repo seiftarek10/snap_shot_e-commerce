@@ -10,12 +10,14 @@ class AppTextField extends StatefulWidget {
     required this.onSaved,
     this.isPasswordField,
     required this.keyboardType,
+    required this.validator,
     this.suffix,
     this.onFocusChange,
     this.prefix,
     this.foucsedBorderColor,
     this.filedTextStyle,
     this.borderRadius, this.maxLines,
+
   });
   final String hintText;
   final void Function(String?) onSaved;
@@ -27,6 +29,7 @@ class AppTextField extends StatefulWidget {
   final TextStyle? filedTextStyle;
   final double? borderRadius;
   final int? maxLines;
+  final String? Function(String?) validator;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
@@ -57,7 +60,7 @@ class _AppTextFieldState extends State<AppTextField> {
   Widget build(BuildContext context) {
     return TextFormField(
       focusNode: _focusNode,
-      
+      validator: widget.validator,
       onSaved:  widget.onSaved,
       cursorColor: AppColors.instance.black,
       cursorHeight: 20.h,
