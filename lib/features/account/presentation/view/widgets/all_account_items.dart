@@ -9,7 +9,10 @@ import 'package:snap_shot/features/account/presentation/view/widgets/account_ite
 
 class AllAccountItems extends StatelessWidget {
   const AllAccountItems({super.key});
-  static final List<AccountItemModel> generalItems = [
+   
+  @override
+  Widget build(BuildContext context) {
+    final List<AccountItemModel> generalItems = [
     AccountItemModel(
       icon: Assets.imagesSvgAccountDetails,
       routePath: Routes.instance.accountDetails,
@@ -29,7 +32,7 @@ class AllAccountItems extends StatelessWidget {
       title: 'Delivery Address',
     ),
   ];
-  static final List<AccountItemModel> settingsItem = [
+   final List<AccountItemModel> settingsItem = [
     AccountItemModel(
       icon: Assets.imagesSvgNotifications,
       routePath: Routes.instance.notificationSettings,
@@ -55,8 +58,6 @@ class AllAccountItems extends StatelessWidget {
       title: 'Contact Us',
     ),
   ];
-  @override
-  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

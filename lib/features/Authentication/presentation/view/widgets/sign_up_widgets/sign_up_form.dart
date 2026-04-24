@@ -11,10 +11,12 @@ import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({super.key});
-  static final GlobalKey<FormState> _key = GlobalKey();
-  static String? userName, password, email, mobile, address;
   @override
   Widget build(BuildContext context) {
+    GlobalKey<FormState> key = GlobalKey();
+
+   String? userName, password, email, mobile, address;
+
     return BlocListener<SignUpCubit, SignUpState>(
       listener: (context, state) {
         if (state is SignUpFailure) {
@@ -25,7 +27,7 @@ class SignUpForm extends StatelessWidget {
         }
       },
       child: Form(
-        key: _key,
+        key: key,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -93,8 +95,8 @@ class SignUpForm extends StatelessWidget {
                   isClicked: state is SignUpLoading,
                   buttonTitle: 'Sign Up',
                   onPressed: () {
-                    if (_key.currentState!.validate()) {
-                      _key.currentState!.save();
+                    if (key.currentState!.validate()) {
+                      key.currentState!.save();
                       context.read<SignUpCubit>().signUp(
                         signUpParam: SignUpParam(
                           email: email!,
