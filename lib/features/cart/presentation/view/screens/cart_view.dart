@@ -33,6 +33,7 @@ class CartView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 AppButton(
+                  isClicked: false,
                   buttonTitle: 'Checkout',
                   onPressed: () {
                     context.push(Routes.instance.checkout);

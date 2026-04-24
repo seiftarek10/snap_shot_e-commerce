@@ -76,7 +76,9 @@ class AddNewCardForm extends StatelessWidget {
             ],
           ),
           AppSpace.instance.v12,
-          AppButton(buttonTitle: 'Save Card', onPressed: () {}),
+          AppButton(
+            isClicked: false,
+            buttonTitle: 'Save Card', onPressed: () {}),
         ],
       ),
     );

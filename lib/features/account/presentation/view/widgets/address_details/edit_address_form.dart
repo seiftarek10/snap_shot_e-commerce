@@ -81,6 +81,7 @@ class EditAddressForm extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppButton(
+                        isClicked: false,
                         buttonTitle: 'Cancel',
                         onPressed: () {
                           context.pop();
@@ -91,6 +92,7 @@ class EditAddressForm extends StatelessWidget {
                     AppSpace.instance.h12,
                     Expanded(
                       child: AppButton(
+                        isClicked: false,
                         buttonTitle: 'Edit',
                         onPressed: () {},
                         // outlineButton: true,

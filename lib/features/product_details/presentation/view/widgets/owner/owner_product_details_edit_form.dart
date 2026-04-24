@@ -46,6 +46,7 @@ class OwnerProductDetailsEditForm extends StatelessWidget {
             children: [
               Expanded(
                 child: AppButton(
+                  isClicked: false,
                   buttonTitle: 'Delete',
                   onPressed: () {},
                   backgroundColor: const Color.fromARGB(255, 137, 23, 15),
@@ -54,6 +55,7 @@ class OwnerProductDetailsEditForm extends StatelessWidget {
               AppSpace.instance.h16,
               Expanded(
                 child: AppButton(
+                  isClicked: false,
                   buttonTitle: 'Save Changes',
                   onPressed: () {},
                 ),

@@ -9,12 +9,13 @@ class AppButton extends StatelessWidget {
     required this.buttonTitle,
     required this.onPressed,
     this.outlineButton,
-    this.backgroundColor,
+    this.backgroundColor, required this.isClicked,
   });
   final String buttonTitle;
   final void Function() onPressed;
   final bool? outlineButton;
   final Color? backgroundColor;
+  final bool isClicked;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -26,14 +27,20 @@ class AppButton extends StatelessWidget {
         side: BorderSide(
           color: outlineButton == true
               ? AppColors.instance.black
-              : backgroundColor?? AppColors.instance.black,
+              : backgroundColor ?? AppColors.instance.black,
           width: 1.5,
         ),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
         padding: EdgeInsets.symmetric(vertical: 12.h),
       ),
 
-      child: Text(
+      child: isClicked==true?SizedBox(
+        height: 20.h,
+        width: 20.w,
+        child: CircularProgressIndicator(
+          color: AppColors.instance.white,
+        ),
+      ) : Text(
         buttonTitle,
         style: AppTextStyle.instance.text16W400.copyWith(
           color: outlineButton == true

@@ -49,7 +49,8 @@ class AccountDetailsEditForm extends StatelessWidget {
             keyboardType: TextInputType.text,
           ),
           AppSpace.instance.v32,
-          AppButton(buttonTitle: ('Edit'), onPressed: () {}),
+          AppButton(buttonTitle: ('Edit'),
+          isClicked: false, onPressed: () {}),
         ],
       ),
     );

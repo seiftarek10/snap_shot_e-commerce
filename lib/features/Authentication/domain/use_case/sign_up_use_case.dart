@@ -6,7 +6,7 @@ import 'package:snap_shot/features/authentication/domain/use_case/params/sing_up
 class SignUpUseCase extends UseCase<void, SignUpParam> {
    final AuthRepo authRepo;
 
-  SignUpUseCase({required this.authRepo});
+  SignUpUseCase( this.authRepo);
 
   @override
   Future<Result<void>> call(SignUpParam param) async {

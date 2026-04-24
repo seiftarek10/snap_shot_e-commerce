@@ -16,8 +16,8 @@ class AppTextField extends StatefulWidget {
     this.prefix,
     this.foucsedBorderColor,
     this.filedTextStyle,
-    this.borderRadius, this.maxLines,
-
+    this.borderRadius,
+    this.maxLines,
   });
   final String hintText;
   final void Function(String?) onSaved;
@@ -61,7 +61,7 @@ class _AppTextFieldState extends State<AppTextField> {
     return TextFormField(
       focusNode: _focusNode,
       validator: widget.validator,
-      onSaved:  widget.onSaved,
+      onSaved: widget.onSaved,
       cursorColor: AppColors.instance.black,
       cursorHeight: 20.h,
       style: AppTextStyle.instance.text16W400.copyWith(
@@ -69,13 +69,17 @@ class _AppTextFieldState extends State<AppTextField> {
         fontWeight: FontWeight.w900,
       ),
       keyboardType: widget.keyboardType,
-      maxLines: widget.isPasswordField==true?1: widget.maxLines,
+      maxLines: widget.isPasswordField == true ? 1 : widget.maxLines,
       obscureText: widget.isPasswordField == null
           ? false
           : widget.isPasswordField == true
           ? !isVisable
           : false,
       decoration: InputDecoration(
+        errorStyle: AppTextStyle.instance.text11W200grey.copyWith(
+          color: const Color.fromARGB(255, 197, 27, 15),
+          fontWeight: FontWeight.w500,
+        ),
         hintText: widget.hintText,
         hintStyle:
             widget.filedTextStyle ?? AppTextStyle.instance.textFieldStyle,
@@ -89,7 +93,6 @@ class _AppTextFieldState extends State<AppTextField> {
                       isVisable = !isVisable;
                     });
                   },
-
                   icon: Icon(
                     isVisable == true ? Icons.visibility : Icons.visibility_off,
                     size: 16.h,

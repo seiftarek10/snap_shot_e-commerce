@@ -52,7 +52,9 @@ class SignInForm extends StatelessWidget {
             ),
           ),
           AppSpace.instance.v12,
-          AppButton(buttonTitle: 'Sign In', onPressed: () {}),
+          AppButton(
+            isClicked: false,
+            buttonTitle: 'Sign In', onPressed: () {}),
           AppSpace.instance.v8,
         ],
       ),

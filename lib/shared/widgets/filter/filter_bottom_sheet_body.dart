@@ -48,7 +48,6 @@ class FilterBottomSheetBody extends StatelessWidget {
                 "2016",
                 "2020",
                 "2019",
-     
               ],
             ),
             AppSpace.instance.v16,
@@ -63,6 +62,7 @@ class FilterBottomSheetBody extends StatelessWidget {
               children: [
                 Expanded(
                   child: AppButton(
+                    isClicked: false,
                     buttonTitle: 'Clear',
                     outlineButton: true,
                     onPressed: () {},
@@ -70,7 +70,11 @@ class FilterBottomSheetBody extends StatelessWidget {
                 ),
                 AppSpace.instance.h8,
                 Expanded(
-                  child: AppButton(buttonTitle: 'Apply', onPressed: () {}),
+                  child: AppButton(
+                    isClicked: false,
+                    buttonTitle: 'Apply',
+                    onPressed: () {},
+                  ),
                 ),
               ],
             ),

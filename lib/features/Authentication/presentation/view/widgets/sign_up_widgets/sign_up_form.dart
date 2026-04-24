@@ -1,68 +1,116 @@
+
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/core/utils/validator.dart';
+import 'package:snap_shot/features/authentication/domain/use_case/params/sing_up_param.dart';
+import 'package:snap_shot/features/authentication/presentation/view%20model/cubit/sign_up_cubit.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
 class SignUpForm extends StatelessWidget {
   const SignUpForm({super.key});
-
+  static final GlobalKey<FormState> _key = GlobalKey();
+  static String? userName, password, email, mobile, address;
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          AppTextField(
-            hintText: 'Username',
-            validator: (value) {
-              return ValidationForm.nullOrEpmty(value);
-            },
-            onSaved: (value) {},
-            keyboardType: TextInputType.text,
-          ),
-          AppSpace.instance.v8,
-          AppTextField(
-            hintText: 'Email',
-            validator: (value) {
-              return ValidationForm.validEmail(value);
-            },
-            onSaved: (value) {},
-            keyboardType: TextInputType.text,
-          ),
-          AppSpace.instance.v8,
-          AppTextField(
-            validator: (value) {
-              return ValidationForm.validPassword(value);
-            },
-            hintText: 'Password',
-            onSaved: (value) {},
-            keyboardType: TextInputType.text,
-            isPasswordField: true,
-          ),
-          AppSpace.instance.v8,
-          AppTextField(
-            hintText: 'Mobile',
-            validator: (value) {
-              return ValidationForm.validPhoneNumber(value);
-            },
-            onSaved: (value) {},
-            keyboardType: TextInputType.text,
-          ),
-          AppSpace.instance.v8,
-          AppTextField(
-            validator: (value) {
-              return ValidationForm.nullOrEpmty(value);
-            },
-            hintText: 'Address',
-            maxLines: 2,
-            onSaved: (value) {},
-            keyboardType: TextInputType.text,
-          ),
-          AppSpace.instance.v16,
+    return BlocListener<SignUpCubit, SignUpState>(
+      listener: (context, state) {
+        if (state is SignUpFailure) {
+          AppSnackBar.show(context, message: state.errMessaga, isError: true);
+        }
+        if (state is SignUpSuccess) {
+          AppSnackBar.show(context, message: 'Welcome');
+        }
+      },
+      child: Form(
+        key: _key,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            AppTextField(
+              hintText: 'Username',
+              validator: (value) {
+                return ValidationForm.nullOrEpmty(value);
+              },
+              onSaved: (user) {
+                userName = user;
+              },
+              keyboardType: TextInputType.text,
+            ),
+            AppSpace.instance.v8,
+            AppTextField(
+              hintText: 'Email',
+              validator: (value) {
+                return ValidationForm.validEmail(value);
+              },
+              onSaved: (value) {
+                email = value;
+              },
+              keyboardType: TextInputType.text,
+            ),
+            AppSpace.instance.v8,
+            AppTextField(
+              validator: (value) {
+                return ValidationForm.validPassword(value);
+              },
+              hintText: 'Password',
+              onSaved: (value) {
+                password = value;
+              },
+              keyboardType: TextInputType.text,
+              isPasswordField: true,
+            ),
+            AppSpace.instance.v8,
+            AppTextField(
+              hintText: 'Mobile',
+              validator: (value) {
+                return ValidationForm.validPhoneNumber(value);
+              },
+              onSaved: (value) {
+                mobile = value;
+              },
+              keyboardType: TextInputType.text,
+            ),
+            AppSpace.instance.v8,
+            AppTextField(
+              validator: (value) {
+                return ValidationForm.nullOrEpmty(value);
+              },
+              hintText: 'Address',
+              maxLines: 2,
+              onSaved: (value) {
+                address = value;
+              },
+              keyboardType: TextInputType.text,
+            ),
+            AppSpace.instance.v16,
 
-          AppButton(buttonTitle: 'Sign Up', onPressed: () {}),
-        ],
+            BlocBuilder<SignUpCubit, SignUpState>(
+              builder: (context, state) {
+                return AppButton(
+                  isClicked: state is SignUpLoading,
+                  buttonTitle: 'Sign Up',
+                  onPressed: () {
+                    if (_key.currentState!.validate()) {
+                      _key.currentState!.save();
+                      context.read<SignUpCubit>().signUp(
+                        signUpParam: SignUpParam(
+                          email: email!,
+                          password: password!,
+                          userName: userName!,
+                          mobile: mobile!,
+                          address: address!,
+                        ),
+                      );
+                    }
+                  },
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
