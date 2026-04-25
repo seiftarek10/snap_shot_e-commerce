@@ -4,6 +4,7 @@ import 'package:snap_shot/features/authentication/domain/use_case/params/verify_
 
 abstract class AuthRepo {
   Future<Result<String>> sendOtp({required String phoneNumber});
-  Future<Result< void>>verifyOtp({required VerifyOtpParam request});
+  Future<Result<void>> verifyOtp({required VerifyOtpParam request});
   Future<Result<void>> signUp({required SignUpParam request});
+  
 }

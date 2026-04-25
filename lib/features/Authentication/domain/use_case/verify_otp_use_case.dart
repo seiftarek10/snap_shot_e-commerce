@@ -7,6 +7,7 @@ class VerifyOtpUseCase extends UseCase<void, VerifyOtpParam> {
   final AuthRepo _authRepo;
 
   VerifyOtpUseCase(this._authRepo);
+  @override
   Future<Result<void>> call(VerifyOtpParam param) async {
     return await _authRepo.verifyOtp(request: param);
   }

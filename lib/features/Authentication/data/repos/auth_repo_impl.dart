@@ -3,6 +3,7 @@ import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/utils/fire_base_auth_errors.dart';
+import 'package:snap_shot/features/authentication/data/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/sing_up_param.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
@@ -15,9 +16,19 @@ class AuthRepoImpl extends AuthRepo {
   @override
   Future<Result<void>> signUp({required SignUpParam request}) async {
     try {
-      await _authRemoteDataSource.signUp(request: request);
-      // ignore: void_checks
-      return const Success('');
+      String? uid = await _authRemoteDataSource.signUp(request: request);
+      final UserModel userdata = UserModel(
+        uid: uid ?? '',
+        userName: request.userName,
+        email: request.email,
+        address: request.address,
+        mobile: request.mobile,
+      );
+      await _authRemoteDataSource.createUserData(
+        uid: uid ?? '',
+        userData: userdata,
+      );
+      return const Success(null);
     } on FirebaseAuthException catch (e) {
       return ErrorCase(FirebaseAuthErrors.handleException(e));
     }

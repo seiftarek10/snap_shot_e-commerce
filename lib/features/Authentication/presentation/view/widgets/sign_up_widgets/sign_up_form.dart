@@ -6,7 +6,7 @@ import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/core/utils/validator.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/sing_up_param.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/cubit/sign_up_cubit.dart';
+import 'package:snap_shot/features/authentication/presentation/view%20model/sign_up/sign_up_cubit.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
@@ -25,6 +25,7 @@ class SignUpForm extends StatelessWidget {
         }
         if (state is SignUpSuccess) {
           AppSnackBar.show(context, message: 'Welcome');
+          context.go(Routes.instance.appShell);
         }
       },
       child: Form(
@@ -96,19 +97,19 @@ class SignUpForm extends StatelessWidget {
                   isClicked: state is SignUpLoading,
                   buttonTitle: 'Sign Up',
                   onPressed: () {
-                    // if (key.currentState!.validate()) {
-                    // key.currentState!.save();
-                    // context.read<SignUpCubit>().signUp(
-                    //   signUpParam: SignUpParam(
-                    //     email: email!,
-                    //     password: password!,
-                    //     userName: userName!,
-                    //     mobile: mobile!,
-                    //     address: address!,
-                    //   ),
-                    // );
-                    // }
-                    context.push(Routes.instance.otpView);
+                    if (key.currentState!.validate()) {
+                      key.currentState!.save();
+                      context.read<SignUpCubit>().signUp(
+                        signUpParam: SignUpParam(
+                          email: email!,
+                          password: password!,
+                          userName: userName!,
+                          mobile: mobile!,
+                          address: address!,
+                        ),
+                      );
+                    }
+                    // context.push(Routes.instance.otpView);
                   },
                 );
               },

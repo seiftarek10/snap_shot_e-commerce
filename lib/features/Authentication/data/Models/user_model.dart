@@ -15,7 +15,7 @@ class UserModel {
     required this.address,
   });
 
-  tJson() {
+  toJson() {
     return {
       'uid':uid,
       'user_name': userName,

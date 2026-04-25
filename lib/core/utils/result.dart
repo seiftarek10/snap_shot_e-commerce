@@ -14,3 +14,5 @@ class ErrorCase<T> extends Result<T> {
   final Failure failure;
   ErrorCase(this.failure);
 }
+
+
