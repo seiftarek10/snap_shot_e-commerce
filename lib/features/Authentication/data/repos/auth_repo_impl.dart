@@ -1,9 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/utils/fire_base_auth_errors.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/sing_up_param.dart';
+import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
 
 class AuthRepoImpl extends AuthRepo {
   final AuthRemoteDataSource _authRemoteDataSource;
@@ -18,6 +20,32 @@ class AuthRepoImpl extends AuthRepo {
       return const Success('');
     } on FirebaseAuthException catch (e) {
       return ErrorCase(FirebaseAuthErrors.handleException(e));
+    }
+  }
+
+  @override
+  Future<Result<String>> sendOtp({required String phoneNumber}) async {
+    try {
+      final result = await _authRemoteDataSource.sendOtp(
+        phoneNumber: phoneNumber,
+      );
+      return Success(result);
+    } on FirebaseAuthException catch (e) {
+      return ErrorCase(FirebaseAuthErrors.handleException(e));
+    } on Exception catch (e) {
+      return ErrorCase(Failure(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<void>> verifyOtp({required VerifyOtpParam request}) async {
+    try {
+      await _authRemoteDataSource.verifyOtp(request: request);
+      return const Success(null);
+    } on FirebaseAuthException catch (e) {
+      return ErrorCase(FirebaseAuthErrors.handleException(e));
+    } on Exception catch (e) {
+      return ErrorCase(Failure(errMessage: e.toString()));
     }
   }
 }
