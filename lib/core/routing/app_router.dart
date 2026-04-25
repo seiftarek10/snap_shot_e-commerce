@@ -9,6 +9,7 @@ import 'package:snap_shot/features/account/presentation/view/screens/my_account_
 import 'package:snap_shot/features/account/presentation/view/screens/address_details_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/notification_setting_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
+import 'package:snap_shot/features/authentication/presentation/view/screens/otp_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
 import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
@@ -101,6 +102,10 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.orderDetails,
         builder: (context, state) => const OrderDetailsView(),
+      ),
+      GoRoute(
+        path: Routes.instance.otpView,
+        builder: (context, state) => const OtpView(),
       ),
     ],
   );

@@ -20,4 +20,5 @@ class Routes {
   final String languages = '/languages';
   final String ownerCategoryProducts = '/ownerCategoryProducts';
   final String orderDetails = '/orderDetails';
+  final String otpView = '/otpView';
 }

@@ -1,7 +1,8 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/core/utils/validator.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/sing_up_param.dart';
@@ -15,7 +16,7 @@ class SignUpForm extends StatelessWidget {
   Widget build(BuildContext context) {
     GlobalKey<FormState> key = GlobalKey();
 
-   String? userName, password, email, mobile, address;
+    String? userName, password, email, mobile, address;
 
     return BlocListener<SignUpCubit, SignUpState>(
       listener: (context, state) {
@@ -95,18 +96,19 @@ class SignUpForm extends StatelessWidget {
                   isClicked: state is SignUpLoading,
                   buttonTitle: 'Sign Up',
                   onPressed: () {
-                    if (key.currentState!.validate()) {
-                      key.currentState!.save();
-                      context.read<SignUpCubit>().signUp(
-                        signUpParam: SignUpParam(
-                          email: email!,
-                          password: password!,
-                          userName: userName!,
-                          mobile: mobile!,
-                          address: address!,
-                        ),
-                      );
-                    }
+                    // if (key.currentState!.validate()) {
+                    // key.currentState!.save();
+                    // context.read<SignUpCubit>().signUp(
+                    //   signUpParam: SignUpParam(
+                    //     email: email!,
+                    //     password: password!,
+                    //     userName: userName!,
+                    //     mobile: mobile!,
+                    //     address: address!,
+                    //   ),
+                    // );
+                    // }
+                    context.push(Routes.instance.otpView);
                   },
                 );
               },
