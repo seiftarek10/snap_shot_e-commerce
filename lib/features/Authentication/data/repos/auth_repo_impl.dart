@@ -1,11 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:snap_shot/core/entites/user_entity.dart';
 import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/utils/fire_base_auth_errors.dart';
 import 'package:snap_shot/features/authentication/data/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
-import 'package:snap_shot/features/authentication/domain/use_case/params/sing_up_param.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
 
 class AuthRepoImpl extends AuthRepo {
@@ -14,19 +14,13 @@ class AuthRepoImpl extends AuthRepo {
   AuthRepoImpl(this._authRemoteDataSource);
 
   @override
-  Future<Result<void>> signUp({required SignUpParam request}) async {
+  Future<Result<void>> signUp({required UserEntity userData}) async {
     try {
-      String? uid = await _authRemoteDataSource.signUp(request: request);
-      final UserModel userdata = UserModel(
-        uid: uid ?? '',
-        userName: request.userName,
-        email: request.email,
-        address: request.address,
-        mobile: request.mobile,
-      );
+      UserModel data = UserModel.fromEntity(userData);
+      String? uid = await _authRemoteDataSource.signUp(userData: data);
       await _authRemoteDataSource.createUserData(
         uid: uid ?? '',
-        userData: userdata,
+        userData: data,
       );
       return const Success(null);
     } on FirebaseAuthException catch (e) {

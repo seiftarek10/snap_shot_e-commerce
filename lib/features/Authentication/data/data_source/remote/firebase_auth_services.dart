@@ -4,7 +4,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:snap_shot/core/services/data_base/data_base_services_interfase.dart';
 import 'package:snap_shot/features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/models/user_model.dart';
-import 'package:snap_shot/features/authentication/domain/use_case/params/sing_up_param.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
 
 class FirebaseAuthServices implements AuthRemoteDataSource {
@@ -12,10 +11,10 @@ class FirebaseAuthServices implements AuthRemoteDataSource {
 
   FirebaseAuthServices(this._dataBaseServices);
   @override
-  Future<String?> signUp({required SignUpParam request}) async {
+  Future<String?> signUp({required UserModel userData}) async {
     final result = await FirebaseAuth.instance.createUserWithEmailAndPassword(
-      email: request.email,
-      password: request.password,
+      email: userData.email,
+      password: userData.password,
     );
     return result.user?.uid;
   }

@@ -7,7 +7,6 @@ import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/send_otp_use_case.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/sign_up_use_case.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/verify_otp_use_case.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/otp_manager/otp_manager_cubit.dart';
 import 'package:snap_shot/features/authentication/presentation/view%20model/sign_up/sign_up_cubit.dart';
 
 final getIt = GetIt.instance;
@@ -29,10 +28,8 @@ void setupGetIt() {
     () => VerifyOtpUseCase(getIt.get<AuthRepo>()),
   );
   getIt.registerFactory<SignUpCubit>(
-    () => SignUpCubit(getIt.get<SignUpUseCase>()),
-  );
-  getIt.registerFactory<OtpManagerCubit>(
-    () => OtpManagerCubit(
+    () => SignUpCubit(
+      getIt.get<SignUpUseCase>(),
       getIt.get<SendOtpUseCase>(),
       getIt.get<VerifyOtpUseCase>(),
     ),

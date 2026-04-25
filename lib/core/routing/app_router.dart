@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
@@ -8,6 +9,8 @@ import 'package:snap_shot/features/account/presentation/view/screens/languages_v
 import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/address_details_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/notification_setting_view.dart';
+import 'package:snap_shot/features/authentication/data/models/otp_args_model.dart';
+import 'package:snap_shot/features/authentication/presentation/view%20model/sign_up/sign_up_cubit.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/otp_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
@@ -105,7 +108,14 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.otpView,
-        builder: (context, state) => const OtpView(),
+        builder: (context, state) {
+          final data = state.extra as OtpArgsModel;
+
+          return BlocProvider.value(
+            value: context.read<SignUpCubit>(),
+            child: OtpView(otpArgs: data),
+          );
+        },
       ),
     ],
   );

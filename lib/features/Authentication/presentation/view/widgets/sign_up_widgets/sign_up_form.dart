@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/entites/user_entity.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/core/utils/validator.dart';
-import 'package:snap_shot/features/authentication/domain/use_case/params/sing_up_param.dart';
 import 'package:snap_shot/features/authentication/presentation/view%20model/sign_up/sign_up_cubit.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
@@ -27,6 +27,21 @@ class SignUpForm extends StatelessWidget {
           AppSnackBar.show(context, message: 'Welcome');
           context.go(Routes.instance.appShell);
         }
+        // if (state is SendOtpSuccess) {
+        //   AppSnackBar.show(context, message: 'Welcome');
+        //   final OtpArgsModel otpArgs = OtpArgsModel(
+        //     user: UserEntity(
+        //       email: email!,
+        //       password: password!,
+        //       userName: userName!,
+        //       mobile: mobile!,
+        //       address: address!,
+        //       uid: '',
+        //     ),
+        //     verificationId: state.verificationId,
+        //   );
+        //   context.push(Routes.instance.otpView, extra: otpArgs);
+        // }
       },
       child: Form(
         key: key,
@@ -73,7 +88,7 @@ class SignUpForm extends StatelessWidget {
                 return ValidationForm.validPhoneNumber(value);
               },
               onSaved: (value) {
-                mobile = value;
+                mobile = '+2$value';
               },
               keyboardType: TextInputType.text,
             ),
@@ -100,16 +115,17 @@ class SignUpForm extends StatelessWidget {
                     if (key.currentState!.validate()) {
                       key.currentState!.save();
                       context.read<SignUpCubit>().signUp(
-                        signUpParam: SignUpParam(
+                        userData: UserEntity(
                           email: email!,
                           password: password!,
                           userName: userName!,
                           mobile: mobile!,
                           address: address!,
+                          uid: '',
                         ),
                       );
+                      // context.read<SignUpCubit>().sendOtp(phoneNumber: mobile!);
                     }
-                    // context.push(Routes.instance.otpView);
                   },
                 );
               },
