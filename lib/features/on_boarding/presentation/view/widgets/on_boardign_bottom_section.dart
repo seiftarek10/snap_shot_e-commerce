@@ -28,6 +28,7 @@ class OnBoardignBottomSection extends StatelessWidget {
         OnBoardingDots(currentIndex: currentIndex),
         AppSpace.instance.v20,
         AppButton(
+          isClicked: false,
           buttonTitle: currentIndex == 2 ? 'Get Started' : 'Next',
           onPressed: onPressed,
         ),

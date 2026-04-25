@@ -37,7 +37,11 @@ class OrderState extends StatelessWidget {
   const OrderState({super.key, required this.currentState});
   final CurrentOrderState currentState;
 
-  static const _stateIcons = {
+  
+
+  @override
+  Widget build(BuildContext context) {
+     const stateIcons = {
     CurrentOrderState.confirmed: [Assets.imagesSvgConfirmed],
     CurrentOrderState.preparing: [
       Assets.imagesSvgConfirmed,
@@ -49,9 +53,6 @@ class OrderState extends StatelessWidget {
       Assets.imagesSvgShipped,
     ],
   };
-
-  @override
-  Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -59,7 +60,7 @@ class OrderState extends StatelessWidget {
         AppSpace.instance.h16,
         Expanded(
           flex: 2,
-          child: _StateIcons(icons: _stateIcons[currentState]!),
+          child: _StateIcons(icons: stateIcons[currentState]!),
         ),
       ],
     );

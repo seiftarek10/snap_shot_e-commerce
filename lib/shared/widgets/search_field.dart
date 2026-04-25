@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
+import 'package:snap_shot/core/utils/validator.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 import 'package:snap_shot/shared/widgets/filter/filter_icon.dart';
 
@@ -23,6 +24,9 @@ class _SearchFieldState extends State<SearchField> {
         Expanded(
           flex: 7,
           child: AppTextField(
+            validator: (value) {
+              return ValidationForm.nullOrEpmty(value);
+            },
             hintText: 'Search',
             onSaved: (value) {},
             onFocusChange: (value) {

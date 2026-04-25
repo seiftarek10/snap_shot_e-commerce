@@ -34,7 +34,9 @@ class CheckoutView extends StatelessWidget {
                 AppSpace.instance.v12,
                 const PriceSummeryCard(),
                 AppSpace.instance.v16,
-                AppButton(buttonTitle: "Place Order", onPressed: () {}),
+                AppButton(
+                  isClicked: false,
+                  buttonTitle: "Place Order", onPressed: () {}),
               ],
             ),
           ),

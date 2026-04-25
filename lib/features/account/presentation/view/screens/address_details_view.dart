@@ -26,6 +26,7 @@ class AddressDetailsView extends StatelessWidget {
                 const AllUserAddresses(),
                 AppSpace.instance.v40,
                 AppButton(
+                  isClicked: false,
                   buttonTitle: "Add New Address",
                   onPressed: () {
                     showDialog(

@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/core/utils/validator.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
@@ -31,6 +32,9 @@ class AddAddressForm extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 AppTextField(
+                  validator: (place) {
+                    return ValidationForm.nullOrEpmty(place);
+                  },
                   hintText: "Enter place name (e.g., Home, Work)",
                   onSaved: (place) {},
                   keyboardType: TextInputType.text,
@@ -43,6 +47,9 @@ class AddAddressForm extends StatelessWidget {
                 ),
                 AppSpace.instance.v20,
                 AppTextField(
+                  validator: (street) {
+                    return ValidationForm.nullOrEpmty(street);
+                  },
                   hintText: "Street, area or landmark",
                   onSaved: (place) {},
                   keyboardType: TextInputType.text,
@@ -57,6 +64,9 @@ class AddAddressForm extends StatelessWidget {
                 AppTextField(
                   hintText:
                       "Additional details (apartment, floor, landmarks, notes)",
+                  validator: (descri) {
+                    return ValidationForm.nullOrEpmty(descri);
+                  },
                   onSaved: (place) {},
                   keyboardType: TextInputType.text,
                   filedTextStyle: AppTextStyle.instance.textFieldStyle.copyWith(
@@ -71,6 +81,7 @@ class AddAddressForm extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppButton(
+                        isClicked: false,
                         buttonTitle: 'Cancel',
                         onPressed: () {
                           context.pop();
@@ -81,6 +92,7 @@ class AddAddressForm extends StatelessWidget {
                     AppSpace.instance.h12,
                     Expanded(
                       child: AppButton(
+                        isClicked: false,
                         buttonTitle: 'Add',
                         onPressed: () {},
                         // outlineButton: true,

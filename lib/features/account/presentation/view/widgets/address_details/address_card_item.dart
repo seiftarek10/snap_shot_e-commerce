@@ -70,6 +70,7 @@ class AddressCardItem extends StatelessWidget {
             ),
             AppSpace.instance.v24,
             AppButton(
+              isClicked: false,
               buttonTitle: 'Edit Address',
               onPressed: () {
                 showDialog(

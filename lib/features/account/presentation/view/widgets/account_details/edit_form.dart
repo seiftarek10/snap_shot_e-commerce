@@ -1,13 +1,11 @@
-
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/utils/validator.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
 class AccountDetailsEditForm extends StatelessWidget {
-  const AccountDetailsEditForm({
-    super.key,
-  });
+  const AccountDetailsEditForm({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +15,17 @@ class AccountDetailsEditForm extends StatelessWidget {
         children: [
           AppTextField(
             hintText: 'User Name',
+            validator: (userName) {
+              return ValidationForm.nullOrEpmty(userName);
+            },
             onSaved: (userName) {},
             keyboardType: TextInputType.text,
           ),
           AppSpace.instance.v12,
           AppTextField(
+            validator: (mobile) {
+              return ValidationForm.validPhoneNumber(mobile);
+            },
             hintText: 'Mobile Number',
             onSaved: (userName) {},
             keyboardType: TextInputType.number,
@@ -29,17 +33,24 @@ class AccountDetailsEditForm extends StatelessWidget {
           AppSpace.instance.v12,
           AppTextField(
             hintText: 'Email',
+            validator: (email) {
+              return ValidationForm.validEmail(email);
+            },
             onSaved: (userName) {},
             keyboardType: TextInputType.text,
           ),
           AppSpace.instance.v12,
           AppTextField(
             hintText: 'Password',
+            validator: (pass) {
+              return ValidationForm.validPassword(pass);
+            },
             onSaved: (userName) {},
             keyboardType: TextInputType.text,
           ),
           AppSpace.instance.v32,
-          AppButton(buttonTitle: ('Edit'), onPressed: (){}),
+          AppButton(buttonTitle: ('Edit'),
+          isClicked: false, onPressed: () {}),
         ],
       ),
     );

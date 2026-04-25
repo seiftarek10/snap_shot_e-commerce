@@ -79,6 +79,7 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                         children: [
                           Expanded(
                             child: AppButton(
+                              isClicked: false,
                               buttonTitle: 'Add To\n  Cart',
                               onPressed: () {},
                             ),
