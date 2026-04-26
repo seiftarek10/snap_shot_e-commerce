@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:snap_shot/core/services/data_base/data_base_services_interfase.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/data_base_services_interfase.dart';
 
-class FirebaseFirestoreService extends IDataBaseServices {
+class FirebaseFirestoreService extends IRemoteDataBaseServices {
   FirebaseFirestore ref = FirebaseFirestore.instance;
   @override
   Future<void> addData({
