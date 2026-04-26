@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:snap_shot/core/services/data_base/data_base_services_interfase.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/data_base_services_interfase.dart';
 import 'package:snap_shot/features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';

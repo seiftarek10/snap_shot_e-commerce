@@ -1,6 +1,6 @@
 import 'package:get_it/get_it.dart';
-import 'package:snap_shot/core/services/data_base/data_base_services_interfase.dart';
-import 'package:snap_shot/core/services/data_base/firebase_firestore_service.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/data_base_services_interfase.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/firebase_firestore_service.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/firebase_auth_services.dart';
 import 'package:snap_shot/features/authentication/data/repos/auth_repo_impl.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
