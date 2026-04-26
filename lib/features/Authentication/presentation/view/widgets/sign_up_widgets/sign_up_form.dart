@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -111,22 +113,26 @@ class SignUpForm extends StatelessWidget {
                 return AppButton(
                   isClicked: state is SignUpLoading,
                   buttonTitle: 'Sign Up',
-                  onPressed: () {
-                    if (key.currentState!.validate()) {
-                      key.currentState!.save();
-                      context.read<SignUpCubit>().signUp(
-                        userData: UserEntity(
-                          email: email!,
-                          password: password!,
-                          userName: userName!,
-                          mobile: mobile!,
-                          address: address!,
-                          uid: '',
-                        ),
-                      );
-                      // context.read<SignUpCubit>().sendOtp(phoneNumber: mobile!);
-                    }
-                  },
+                  onPressed: state is SignUpLoading
+                      ? () {
+                          log('Loading');
+                        }
+                      : () {
+                          if (key.currentState!.validate()) {
+                            key.currentState!.save();
+                            context.read<SignUpCubit>().signUp(
+                              userData: UserEntity(
+                                email: email!,
+                                password: password!,
+                                userName: userName!,
+                                mobile: mobile!,
+                                address: address!,
+                                uid: '',
+                              ),
+                            );
+                            // context.read<SignUpCubit>().sendOtp(phoneNumber: mobile!);
+                          }
+                        },
                 );
               },
             ),

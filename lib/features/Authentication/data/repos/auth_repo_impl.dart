@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:snap_shot/core/entites/user_entity.dart';
 import 'package:snap_shot/core/errors/failure.dart';
@@ -25,6 +27,9 @@ class AuthRepoImpl extends AuthRepo {
       return const Success(null);
     } on FirebaseAuthException catch (e) {
       return ErrorCase(FirebaseAuthErrors.handleException(e));
+    } on Exception catch (e) {
+      log(e.toString());
+      return ErrorCase(Failure(errMessage: e.toString()));
     }
   }
 
