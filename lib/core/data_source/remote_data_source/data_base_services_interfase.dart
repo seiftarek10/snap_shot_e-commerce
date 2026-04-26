@@ -1,9 +1,9 @@
-abstract class IDataBaseServices {
+abstract class IRemoteDataBaseServices {
   Future<void> addData({
     required Map<String, dynamic> data,
     required String path,
   });
-  Future<void>addDataWithId({
+  Future<void> addDataWithId({
     required Map<String, dynamic> data,
     required String path,
     required String id,

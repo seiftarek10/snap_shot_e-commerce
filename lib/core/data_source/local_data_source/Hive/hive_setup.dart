@@ -6,7 +6,7 @@ Future<void> userHiveSetup() async {
   await Hive.initFlutter();
   Hive.registerAdapter(UserEntityAdapter());
 
-  if (!Hive.isBoxOpen(HiveBoxesNames.userBox)) {
-    await Hive.openBox<UserEntity>(HiveBoxesNames.userBox);
+  if (!Hive.isBoxOpen(HiveBoxesNames.instance.userBox)) {
+    await Hive.openBox<UserEntity>(HiveBoxesNames.instance.userBox);
   }
 }

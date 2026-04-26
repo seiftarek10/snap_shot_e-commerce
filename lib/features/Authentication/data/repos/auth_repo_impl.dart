@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:snap_shot/core/entites/user_entity.dart';
 import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/utils/result.dart';
+import 'package:snap_shot/features/authentication/data/data_source/auth_local_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/utils/fire_base_auth_errors.dart';
 import 'package:snap_shot/features/authentication/data/models/user_model.dart';
@@ -12,8 +13,9 @@ import 'package:snap_shot/features/authentication/domain/use_case/params/verify_
 
 class AuthRepoImpl extends AuthRepo {
   final AuthRemoteDataSource _authRemoteDataSource;
+  final AuthLocalDataSource _authLocalDataSource;
 
-  AuthRepoImpl(this._authRemoteDataSource);
+  AuthRepoImpl(this._authRemoteDataSource, this._authLocalDataSource);
 
   @override
   Future<Result<void>> signUp({required UserEntity userData}) async {
@@ -24,6 +26,8 @@ class AuthRepoImpl extends AuthRepo {
         uid: uid ?? '',
         userData: data,
       );
+      data.uid = uid ?? '';
+      await _authLocalDataSource.saveUserData(userData: data.toUSerEntity());
       return const Success(null);
     } on FirebaseAuthException catch (e) {
       return ErrorCase(FirebaseAuthErrors.handleException(e));

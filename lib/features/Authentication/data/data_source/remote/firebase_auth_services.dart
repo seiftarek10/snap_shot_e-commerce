@@ -7,7 +7,7 @@ import 'package:snap_shot/features/authentication/data/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
 
 class FirebaseAuthServices implements AuthRemoteDataSource {
-  final IDataBaseServices _dataBaseServices;
+  final IRemoteDataBaseServices _dataBaseServices;
 
   FirebaseAuthServices(this._dataBaseServices);
   @override

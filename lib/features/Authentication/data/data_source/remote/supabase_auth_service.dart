@@ -5,7 +5,7 @@ import 'package:snap_shot/features/authentication/domain/use_case/params/verify_
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseAuthService extends AuthRemoteDataSource {
-  final IDataBaseServices _dataBaseServices;
+  final IRemoteDataBaseServices _dataBaseServices;
 
   SupabaseAuthService(this._dataBaseServices);
   @override

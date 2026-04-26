@@ -1,14 +1,14 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:snap_shot/core/data_source/local_data_source/local_data_base_interface.dart';
 
-class HiveServices<T> extends ILocalDataBase {
+class HiveServices<T> extends ILocalDataBaseServices<T> {
   final String boxName;
 
   HiveServices(this.boxName);
   @override
   Future<void> addData({required data}) async {
     Box<T> box = Hive.box<T>(boxName);
-    await box.addAll(data);
+    await box.addAll(data as Iterable<T>);
   }
 
   @override
@@ -18,18 +18,12 @@ class HiveServices<T> extends ILocalDataBase {
   }
 
   @override
-  Future<dynamic> getData({required String key}) async {
+  Future<T> getData({required String key}) async {
     Box<T> box = Hive.box<T>(boxName);
     if (box.containsKey(key)) {
-      return box.get(key);
+      return box.get(key) as T;
     }
-    return null;
-  }
-
-  @override
-  Future<void> addDataWithKey({required String key, required data}) async {
-    Box<T> box = Hive.box<T>(boxName);
-    await box.put(key, data);
+    return Future.error('Data not found for key: $key');
   }
 
   @override
@@ -39,8 +33,20 @@ class HiveServices<T> extends ILocalDataBase {
   }
 
   @override
-  Future<dynamic> getAllData() async {
+  Future<List<T>> getAllData() async {
     Box<T> box = Hive.box<T>(boxName);
     return box.values.toList();
+  }
+
+  @override
+  Future<void> addDataWithKey({
+    required String key,
+    required dynamic data,
+  }) async {
+    Box<T> box = Hive.box<T>(boxName);
+    if (box.containsKey(key)) {
+      await box.delete(key);
+    }
+    await box.put(key, data);
   }
 }
