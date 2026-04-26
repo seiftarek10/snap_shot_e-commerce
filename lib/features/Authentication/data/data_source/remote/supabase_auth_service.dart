@@ -38,4 +38,16 @@ class SupabaseAuthService extends AuthRemoteDataSource {
   Future<void> verifyOtp({required VerifyOtpParam request}) {
     throw UnimplementedError();
   }
+  
+  @override
+  Future<String?> signIn({required String email, required String password}) {
+    // TODO: implement signIn
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<UserModel> getUserData({required String uid}) {
+    // TODO: implement getUserData
+    throw UnimplementedError();
+  }
 }

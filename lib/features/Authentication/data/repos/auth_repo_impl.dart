@@ -9,6 +9,7 @@ import 'package:snap_shot/features/authentication/data/data_source/auth_remote_d
 import 'package:snap_shot/features/authentication/data/data_source/utils/fire_base_auth_errors.dart';
 import 'package:snap_shot/features/authentication/data/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
+import 'package:snap_shot/features/authentication/domain/use_case/params/sign_in_param.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
 
 class AuthRepoImpl extends AuthRepo {
@@ -59,6 +60,27 @@ class AuthRepoImpl extends AuthRepo {
     } on FirebaseAuthException catch (e) {
       return ErrorCase(FirebaseAuthErrors.handleException(e));
     } on Exception catch (e) {
+      return ErrorCase(Failure(errMessage: e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<void>> signIn({required SignInParam request}) async {
+    try {
+      final response = await _authRemoteDataSource.signIn(
+        email: request.email,
+        password: request.password,
+      );
+      UserModel userData = await _authRemoteDataSource.getUserData(
+        uid: response ?? '',
+      );
+      await _authLocalDataSource.saveUserData(
+        userData: userData.toUSerEntity(),
+      );
+      return const Success(null);
+    } on FirebaseAuthException catch (e) {
+      return ErrorCase(FirebaseAuthErrors.handleException(e));
+    } catch (e) {
       return ErrorCase(Failure(errMessage: e.toString()));
     }
   }
