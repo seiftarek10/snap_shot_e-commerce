@@ -81,7 +81,9 @@ class AuthRepoImpl extends AuthRepo {
     } on FirebaseAuthException catch (e) {
       return ErrorCase(FirebaseAuthErrors.handleException(e));
     } catch (e) {
-      return ErrorCase(Failure(errMessage: e.toString()));
+      return ErrorCase(
+        Failure(errMessage: 'Something went wrong, please try again later'),
+      );
     }
   }
 }

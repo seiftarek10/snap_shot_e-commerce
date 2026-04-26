@@ -1,7 +1,7 @@
 import 'package:snap_shot/core/entites/user_entity.dart';
 
 class UserModel {
-   String uid;
+  String uid;
   final String userName;
   final String email;
   final String password;
@@ -29,11 +29,11 @@ class UserModel {
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
     return UserModel(
-      userName: json['user_name'],
-      email: json['email'],
-      password: json['password'],
-      mobile: json['mobile'],
-      address: json['address'],
+      userName: json['user_name'] ?? '',
+      email: json['email'] ?? '',
+      password: json['password'] ?? '',
+      mobile: json['mobile'] ?? '',
+      address: json['address'] ?? '',
       uid: json['uid'],
     );
   }

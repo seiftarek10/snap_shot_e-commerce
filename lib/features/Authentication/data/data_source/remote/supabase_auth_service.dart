@@ -41,13 +41,11 @@ class SupabaseAuthService extends AuthRemoteDataSource {
   
   @override
   Future<String?> signIn({required String email, required String password}) {
-    // TODO: implement signIn
     throw UnimplementedError();
   }
   
   @override
   Future<UserModel> getUserData({required String uid}) {
-    // TODO: implement getUserData
     throw UnimplementedError();
   }
 }
