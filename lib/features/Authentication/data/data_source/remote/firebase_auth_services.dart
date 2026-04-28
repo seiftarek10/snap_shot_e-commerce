@@ -59,4 +59,22 @@ class FirebaseAuthServices implements AuthRemoteDataSource {
       id: uid,
     );
   }
+
+  @override
+  Future<String?> signIn({
+    required String email,
+    required String password,
+  }) async {
+    final result = await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+    return result.user?.uid;
+  }
+
+  @override
+  Future<UserModel> getUserData({required String uid}) async {
+    final resopnse = await _dataBaseServices.getItem(id: uid, path: 'users');
+    return UserModel.fromJson(resopnse);
+  }
 }

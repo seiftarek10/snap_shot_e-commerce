@@ -18,12 +18,12 @@ class HiveServices<T> extends ILocalDataBaseServices<T> {
   }
 
   @override
-  Future<T> getData({required String key}) async {
+  Future<T?> getData({required String key}) async {
     Box<T> box = Hive.box<T>(boxName);
     if (box.containsKey(key)) {
       return box.get(key) as T;
     }
-    return Future.error('Data not found for key: $key');
+    return null;
   }
 
   @override

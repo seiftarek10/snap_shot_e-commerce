@@ -7,10 +7,12 @@ class AuthLocaldataSourceImpl extends AuthLocalDataSource {
 
   AuthLocaldataSourceImpl(this._localDataBaseServices);
   @override
-  Future<void> saveUserData({required UserEntity userData}) async {
+  Future<void> saveUserData({ required UserEntity userData}) async {
     await _localDataBaseServices.addDataWithKey(
       key: userData.uid,
       data: userData,
     );
   }
+
+
 }
