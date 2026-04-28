@@ -2,7 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_boxes_names.dart';
 import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_services.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/data_base_services_interfase.dart';
-import 'package:snap_shot/core/data_source/remote_data_source/firebase_firestore_service.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/services/firebase_firestore_service.dart';
 import 'package:snap_shot/core/entites/user_entity.dart';
 import 'package:snap_shot/features/authentication/data/data_source/local/auth_local_data_source_impl.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/firebase_auth_services.dart';
