@@ -16,7 +16,7 @@ class SignInCubit extends BaseCubit<SignInState> {
     if (result is Success<void>) {
       safeEmit(SignInSuccess());
     }
-    if (result is ErrorCase<void>) {
+    if (result is AppFailure<void>) {
       safeEmit(SignInFailure(result.failure.errMessage));
     }
   }

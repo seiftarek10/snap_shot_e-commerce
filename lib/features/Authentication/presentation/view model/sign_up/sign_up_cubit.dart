@@ -15,7 +15,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
       _verifyOtpUseCase = verifyOtpUseCase,
       super(SignUpInitial());
   final SignUpUseCase _signUpUseCase;
-  
+
   final SendOtpUseCase _sendOtpUseCase;
   final VerifyOtpUseCase _verifyOtpUseCase;
 
@@ -24,18 +24,17 @@ class SignUpCubit extends BaseCubit<SignUpState> {
     final result = await _signUpUseCase.call(userData);
     if (result is Success) {
       safeEmit(SignUpSuccess());
-    } else if (result is ErrorCase) {
+    } else if (result is AppFailure) {
       safeEmit(SignUpFailure(errMessaga: result.failure.errMessage));
     }
   }
-
 
   Future<void> sendOtp({required String phoneNumber}) async {
     safeEmit(SignUpLoading());
     final result = await _sendOtpUseCase.call(phoneNumber);
     if (result is Success<String>) {
       safeEmit(SendOtpSuccess(verificationId: result.data));
-    } else if (result is ErrorCase<String>) {
+    } else if (result is AppFailure<String>) {
       safeEmit(SendOtpFailure(errMessaga: result.failure.errMessage));
     }
   }
@@ -49,7 +48,7 @@ class SignUpCubit extends BaseCubit<SignUpState> {
     );
     if (result is Success<void>) {
       safeEmit(VerifyOtpSuccess());
-    } else if (result is ErrorCase<void>) {
+    } else if (result is AppFailure<void>) {
       safeEmit(VerifyOtpFailure(errMessaga: result.failure.errMessage));
     }
   }

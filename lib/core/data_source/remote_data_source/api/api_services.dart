@@ -11,7 +11,7 @@ class ApiServices extends IRemoteDataBaseServices {
     required Map<String, dynamic> data,
     required String path,
   }) async {
-    await _dio.post('$_baseUrl$path', data: data);
+    await _dio.post('$_baseUrl/$path', data: data);
   }
 
   @override
@@ -20,17 +20,17 @@ class ApiServices extends IRemoteDataBaseServices {
     required String path,
     required String id,
   }) async {
-    await _dio.post('$_baseUrl$path/$id', data: data);
+    await _dio.post('$_baseUrl/$path/$id', data: data);
   }
 
   @override
   Future<void> delete({required String id, required String path}) async {
-    await _dio.delete('$_baseUrl$path/$id');
+    await _dio.delete('$_baseUrl/$path/$id');
   }
 
   @override
   Future<Map<String, dynamic>> getAll({required String path}) async {
-    final response = await _dio.get('$_baseUrl$path');
+    final response = await _dio.get('$_baseUrl/$path');
     return response.data;
   }
 
@@ -39,7 +39,7 @@ class ApiServices extends IRemoteDataBaseServices {
     required String id,
     required String path,
   }) async {
-    final response = await _dio.get('$_baseUrl$path/$id');
+    final response = await _dio.get('$_baseUrl/$path/$id');
     return response.data;
   }
 
@@ -49,6 +49,6 @@ class ApiServices extends IRemoteDataBaseServices {
     required String id,
     required String path,
   }) async {
-    await _dio.put('$_baseUrl$path/$id', data: data);
+    await _dio.put('$_baseUrl/$path/$id', data: data);
   }
 }

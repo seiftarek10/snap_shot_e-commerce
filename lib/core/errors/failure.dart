@@ -1,5 +1,7 @@
 class Failure {
   final String errMessage;
 
-  Failure({required this.errMessage});
+ const Failure(this.errMessage);
 }
+
+

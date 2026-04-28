@@ -33,7 +33,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const SignUpView();
+          return AppShell(role: role);
         },
       ),
       GoRoute(

@@ -10,9 +10,7 @@ class Success<T> extends Result<T> {
   const Success(this.data);
 }
 
-class ErrorCase<T> extends Result<T> {
+class AppFailure<T> extends Result<T> {
   final Failure failure;
-  ErrorCase(this.failure);
+  AppFailure(this.failure);
 }
-
-

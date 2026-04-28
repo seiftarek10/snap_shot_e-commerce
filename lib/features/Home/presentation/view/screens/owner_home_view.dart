@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
-import 'package:snap_shot/features/home/data/models/monthly_rate_model.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/bar_chart/bar_chart_graph.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/bar_chart/bar_chart_lables.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/owenr_statistic_section.dart';
