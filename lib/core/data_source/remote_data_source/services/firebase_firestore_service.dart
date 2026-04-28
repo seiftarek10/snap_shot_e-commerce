@@ -36,7 +36,7 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
   }
 
   @override
-  Future<Map<String, dynamic>> getItem({
+  Future<Map<String, dynamic>> getById({
     required String id,
     required String path,
   }) async {

@@ -14,7 +14,7 @@ abstract class IRemoteDataBaseServices {
     required String id,
     required String path,
   });
-  Future<Map<String, dynamic>> getItem({
+  Future<Map<String, dynamic>> getById({
     required String id,
     required String path,
   });
