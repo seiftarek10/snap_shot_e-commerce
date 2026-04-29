@@ -6,15 +6,13 @@ import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/user_home_product_item.dart';
 
 class UserHomeProductsList extends StatelessWidget {
-  const UserHomeProductsList({
-    super.key,
-    required this.products,
-  });
+  const UserHomeProductsList({super.key, required this.products});
   final List<ProductEntity> products;
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
+      physics: const BouncingScrollPhysics(),
       itemCount: products.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -32,7 +30,4 @@ class UserHomeProductsList extends StatelessWidget {
       },
     );
   }
-  }
-
- 
-
+}

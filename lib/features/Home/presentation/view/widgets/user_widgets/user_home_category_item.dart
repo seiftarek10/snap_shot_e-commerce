@@ -18,7 +18,7 @@ class UserHomeCategoryItem extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOutCubicEmphasized,
-      padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 8.h),
+      padding: EdgeInsets.symmetric(horizontal: 22.w),
       decoration: BoxDecoration(
         border: Border.all(
           color: isSelected
@@ -29,12 +29,14 @@ class UserHomeCategoryItem extends StatelessWidget {
         color: isSelected ? AppColors.instance.black : null,
         borderRadius: BorderRadius.circular(24.r),
       ),
-      child: Text(
-        title,
-        style: AppTextStyle.instance.text16W400.copyWith(
-          color: isSelected
-              ? AppColors.instance.white
-              : AppColors.instance.darkGrey,
+      child: Center(
+        child: Text(
+          title,
+          style: AppTextStyle.instance.text14WBoldBlack.copyWith(
+            color: isSelected
+                ? AppColors.instance.white
+                : AppColors.instance.darkGrey,
+          ),
         ),
       ),
     );
