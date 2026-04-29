@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -6,8 +7,10 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/shared/widgets/filter/filter_bottom_sheet_body.dart';
 
 class FilterIcon extends StatefulWidget {
-  const FilterIcon({super.key});
-
+  const FilterIcon({super.key, required this.onPressed, required this.prices, required this.rating});
+  final void Function() onPressed;
+  final void Function(RangeValues) prices;
+  final void Function(List<String>) rating;
   @override
   State<FilterIcon> createState() => _FilterIconState();
 }
@@ -28,7 +31,11 @@ class _FilterIconState extends State<FilterIcon> {
           context: context,
           isScrollControlled: true,
           builder: (context) {
-            return const FilterBottomSheetBody();
+            return FilterBottomSheetBody(
+              onPressed: widget.onPressed,
+              prices: widget.prices,
+              rating: widget.rating,
+            );
           },
         ).then((value) {
           setState(() {

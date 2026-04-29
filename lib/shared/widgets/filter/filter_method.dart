@@ -1,3 +1,4 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,13 +12,17 @@ class FilterMethod extends StatelessWidget {
     super.key,
     required this.filterMethod,
     required this.filterOptions,
+    required this.rating,
   });
 
   final String filterMethod;
   final List<String> filterOptions;
+  final ValueChanged<List<String>> rating;
 
   @override
   Widget build(BuildContext context) {
+    List<String> allRating = [];
+
     return Column(
       children: [
         Text(
@@ -33,7 +38,14 @@ class FilterMethod extends StatelessWidget {
           runSpacing: 10.h,
 
           children: List.generate(filterOptions.length, (index) {
-            return FilterItme(title: filterOptions[index]);
+            return FilterItme(
+              onTap: () {
+                allRating.add(filterOptions[index]);
+                rating(allRating);
+                log('###################################');
+              },
+              title: filterOptions[index],
+            );
           }),
         ),
       ],

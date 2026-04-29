@@ -9,8 +9,17 @@ import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 import 'package:snap_shot/shared/widgets/filter/filter_icon.dart';
 
 class SearchField extends StatefulWidget {
-  const SearchField({super.key, required this.onChanged});
+  const SearchField({
+    super.key,
+    required this.onChanged,
+    required this.onPressed,
+    required this.prices,
+    required this.rating,
+  });
   final void Function(String) onChanged;
+  final void Function() onPressed;
+  final void Function(RangeValues) prices;
+  final void Function(List<String>) rating;
 
   @override
   State<SearchField> createState() => _SearchFieldState();
@@ -42,7 +51,13 @@ class _SearchFieldState extends State<SearchField> {
           ),
         ),
         AppSpace.instance.h16,
-        const Expanded(child: FilterIcon()),
+        Expanded(
+          child: FilterIcon(
+            onPressed: widget.onPressed,
+            rating: widget.rating,
+            prices: widget.prices,
+          ),
+        ),
       ],
     );
   }

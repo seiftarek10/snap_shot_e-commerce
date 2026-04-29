@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:meta/meta.dart';
 import 'package:snap_shot/core/bloc/base_cubit.dart';
 import 'package:snap_shot/core/utils/result.dart';
@@ -21,6 +23,7 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
     if (response is Success<List<ProductEntity>>) {
       safeEmit(GetProductsSuccess(response.data));
       products = response.data;
+      fillterdProducts = response.data;
       final uniqueCategories = response.data
           .map((e) => e.category)
           .toSet()
@@ -59,5 +62,20 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
         .toList();
 
     safeEmit(GetProductsSuccess(searchResult));
+  }
+
+  void filterByRate({required List<String> allRates}) {
+    List<ProductEntity> filterdList = [];
+    for (var rate in allRates) {
+      log(fillterdProducts.length.toString());
+      List<ProductEntity> currentRateList = fillterdProducts
+          .where(
+            (product) => product.rate.toLowerCase().startsWith(rate.toString()),
+          )
+          .toList();
+
+      filterdList.addAll(currentRateList.toList());
+    }
+    safeEmit(GetProductsSuccess(filterdList));
   }
 }

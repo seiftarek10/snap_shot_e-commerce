@@ -17,6 +17,7 @@ class UserHomeView extends StatefulWidget {
 
 class _UserHomeViewState extends State<UserHomeView> {
   bool filterActive = false;
+  List<String> allRates = [];
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +29,19 @@ class _UserHomeViewState extends State<UserHomeView> {
           const SnapShotWord(),
           AppSpace.instance.v16,
           SearchField(
+            onPressed: () {
+              context.read<GetAllProductsCubit>().filterByRate(
+                allRates: allRates,
+              );
+            },
             onChanged: (searchKey) {
               context.read<GetAllProductsCubit>().searchByName(
                 searchKey: searchKey,
               );
+            },
+            prices: (rangePrice) {},
+            rating: (rating) {
+              allRates = rating;
             },
           ),
           AppSpace.instance.v16,

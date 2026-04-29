@@ -14,7 +14,37 @@ class UserHomeProductItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const FavoriteIcon(isFavorite: true),
+        Row(
+          children: [
+            Expanded(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(
+                      
+                      product.rate,
+                      textAlign: TextAlign.center,
+                      style: AppTextStyle.instance.text14W500Black,
+                    ),
+                  ),
+                  Expanded(
+                    child: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Icon(Icons.star, color: Colors.amber, size: 20.h),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: FavoriteIcon(isFavorite: true),
+              ),
+            ),
+          ],
+        ),
         Expanded(
           child: AspectRatio(
             aspectRatio: 1.1,
@@ -52,7 +82,5 @@ class UserHomeProductItem extends StatelessWidget {
         ),
       ],
     );
-  
-  
   }
 }

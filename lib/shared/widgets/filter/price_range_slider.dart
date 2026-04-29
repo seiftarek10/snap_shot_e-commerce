@@ -3,7 +3,8 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class PriceRangeSlider extends StatefulWidget {
-  const PriceRangeSlider({super.key});
+  const PriceRangeSlider({super.key, required this.values});
+  final ValueChanged<RangeValues> values;
 
   @override
   State<PriceRangeSlider> createState() => _PriceRangeSliderState();
@@ -52,6 +53,7 @@ class _PriceRangeSliderState extends State<PriceRangeSlider> {
           onChanged: (RangeValues values) {
             setState(() {
               _currentRange = values;
+              widget.values(values);
             });
           },
           activeColor: Colors.black, // color of the track
