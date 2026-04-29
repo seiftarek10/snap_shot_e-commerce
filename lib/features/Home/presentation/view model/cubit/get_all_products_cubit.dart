@@ -13,6 +13,7 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
   final GetAllProductsUseCase _getAllProductsUseCase;
   List<String> categories = [];
   List<ProductEntity> products = [];
+  List<ProductEntity> fillterdProducts = [];
 
   Future<void> getAllProducts() async {
     safeEmit(Loading());
@@ -34,12 +35,29 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
 
   void changeCategory({required String category}) {
     if (category.toLowerCase() == 'All'.toLowerCase()) {
-      safeEmit(GetProductsSuccess(products));
+      fillterdProducts = products;
+      safeEmit(GetProductsSuccess(fillterdProducts));
+
       return;
     }
-    List<ProductEntity> fillterdProducts = products
+    fillterdProducts = products
         .where((product) => product.category == category)
         .toList();
     safeEmit(GetProductsSuccess(fillterdProducts));
+  }
+
+  void searchByName({required String searchKey}) {
+    if (searchKey.isEmpty) {
+      safeEmit(GetProductsSuccess(fillterdProducts));
+      return;
+    }
+    List<ProductEntity> searchResult = fillterdProducts
+        .where(
+          (product) =>
+              product.name.toLowerCase().startsWith(searchKey.toLowerCase()),
+        )
+        .toList();
+
+    safeEmit(GetProductsSuccess(searchResult));
   }
 }

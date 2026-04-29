@@ -9,7 +9,8 @@ import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 import 'package:snap_shot/shared/widgets/filter/filter_icon.dart';
 
 class SearchField extends StatefulWidget {
-  const SearchField({super.key});
+  const SearchField({super.key, required this.onChanged});
+  final void Function(String) onChanged;
 
   @override
   State<SearchField> createState() => _SearchFieldState();
@@ -24,6 +25,7 @@ class _SearchFieldState extends State<SearchField> {
         Expanded(
           flex: 7,
           child: AppTextField(
+            onChanged: widget.onChanged,
             validator: (value) {
               return ValidationForm.nullOrEpmty(value);
             },
