@@ -1,14 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/data_base_services_interfase.dart';
+import 'package:dio/dio.dart';
 
-class FirebaseFirestoreService extends IRemoteDataBaseServices {
-  FirebaseFirestore ref = FirebaseFirestore.instance;
+class ApiServices extends IRemoteDataBaseServices {
+  final Dio _dio;
+
+  final String _baseUrl = 'https://dummyjson.com/';
+  ApiServices(this._dio);
   @override
   Future<void> addData({
     required Map<String, dynamic> data,
     required String path,
   }) async {
-    await ref.collection(path).doc().set(data);
+    await _dio.post('$_baseUrl/$path', data: data);
   }
 
   @override
@@ -17,31 +20,27 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String path,
     required String id,
   }) async {
-    await ref.collection(path).doc(id).set(data);
+    await _dio.post('$_baseUrl/$path/$id', data: data);
   }
 
   @override
   Future<void> delete({required String id, required String path}) async {
-    await ref.collection(path).doc(id).delete();
+    await _dio.delete('$_baseUrl/$path/$id');
   }
 
   @override
   Future<Map<String, dynamic>> getAll({required String path}) async {
-    final snapshot = await ref.collection(path).get();
-    final data = <String, dynamic>{};
-    for (var doc in snapshot.docs) {
-      data[doc.id] = doc.data();
-    }
-    return data;
+    final response = await _dio.get('$_baseUrl/$path');
+    return response.data;
   }
 
   @override
-  Future<Map<String, dynamic>> getItem({
+  Future<Map<String, dynamic>> getById({
     required String id,
     required String path,
   }) async {
-    final snapShot = await ref.collection(path).doc(id).get();
-    return snapShot.data() ?? {};
+    final response = await _dio.get('$_baseUrl/$path/$id');
+    return response.data;
   }
 
   @override
@@ -50,6 +49,6 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String id,
     required String path,
   }) async {
-    await ref.collection(path).doc(id).update(data);
+    await _dio.put('$_baseUrl/$path/$id', data: data);
   }
 }

@@ -1,7 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/features/home/data/models/monthly_rate_model.dart';
 
 class BarChartGraph extends StatelessWidget {
   final List<MonthlyRate> data;
@@ -75,4 +74,12 @@ Color getBarColor(int index, List<MonthlyRate> data) {
   if (current > previous) return AppColors.instance.green;
   if (current < previous) return Colors.red;
   return Colors.orange;
+}
+
+
+class MonthlyRate {
+  final String month;
+  final double value;
+
+  MonthlyRate({required this.month, required this.value});
 }

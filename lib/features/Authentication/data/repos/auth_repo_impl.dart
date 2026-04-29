@@ -6,7 +6,7 @@ import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/authentication/data/data_source/auth_local_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/auth_remote_data_source.dart';
-import 'package:snap_shot/features/authentication/data/data_source/utils/fire_base_auth_errors.dart';
+import 'package:snap_shot/features/authentication/data/data_source/remote/errors/fire_base_auth_errors.dart';
 import 'package:snap_shot/features/authentication/data/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/sign_in_param.dart';
@@ -31,10 +31,10 @@ class AuthRepoImpl extends AuthRepo {
       await _authLocalDataSource.saveUserData(userData: data.toUSerEntity());
       return const Success(null);
     } on FirebaseAuthException catch (e) {
-      return ErrorCase(FirebaseAuthErrors.handleException(e));
+      return AppFailure(FirebaseAuthErrors.handleException(e));
     } on Exception catch (e) {
       log(e.toString());
-      return ErrorCase(Failure(errMessage: e.toString()));
+      return AppFailure(Failure(e.toString()));
     }
   }
 
@@ -46,9 +46,9 @@ class AuthRepoImpl extends AuthRepo {
       );
       return Success(result);
     } on FirebaseAuthException catch (e) {
-      return ErrorCase(FirebaseAuthErrors.handleException(e));
+      return AppFailure(FirebaseAuthErrors.handleException(e));
     } on Exception catch (e) {
-      return ErrorCase(Failure(errMessage: e.toString()));
+      return AppFailure(Failure(e.toString()));
     }
   }
 
@@ -58,9 +58,9 @@ class AuthRepoImpl extends AuthRepo {
       await _authRemoteDataSource.verifyOtp(request: request);
       return const Success(null);
     } on FirebaseAuthException catch (e) {
-      return ErrorCase(FirebaseAuthErrors.handleException(e));
+      return AppFailure(FirebaseAuthErrors.handleException(e));
     } on Exception catch (e) {
-      return ErrorCase(Failure(errMessage: e.toString()));
+      return AppFailure(Failure(e.toString()));
     }
   }
 
@@ -79,10 +79,10 @@ class AuthRepoImpl extends AuthRepo {
       );
       return const Success(null);
     } on FirebaseAuthException catch (e) {
-      return ErrorCase(FirebaseAuthErrors.handleException(e));
+      return AppFailure(FirebaseAuthErrors.handleException(e));
     } catch (e) {
-      return ErrorCase(
-        Failure(errMessage: 'Something went wrong, please try again later'),
+      return AppFailure(
+        const Failure('Something went wrong, please try again later'),
       );
     }
   }
