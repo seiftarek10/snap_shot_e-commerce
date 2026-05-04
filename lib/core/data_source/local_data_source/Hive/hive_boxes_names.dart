@@ -1,5 +1,6 @@
- class HiveBoxesNames {
+class HiveBoxesNames {
   HiveBoxesNames._();
   static final HiveBoxesNames instance = HiveBoxesNames._();
-   final String userBox = 'user_box';
+  final String userBox = 'userBox';
+  final String productsBox = 'productsBox';
 }

@@ -19,7 +19,7 @@ class SignUpView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt.get<SignUpCubit>(),
+      create: (context) => sl.get<SignUpCubit>(),
 
       child: Scaffold(
         body: SafeArea(
