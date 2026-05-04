@@ -20,7 +20,7 @@ class SignInView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => getIt.get<SignInCubit>(),
+      create: (context) => sl.get<SignInCubit>(),
       child: Scaffold(
         body: SafeArea(
           child: SingleChildScrollView(

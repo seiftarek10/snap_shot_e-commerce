@@ -6,7 +6,7 @@ class HiveServices<T> extends ILocalDataBaseServices<T> {
 
   HiveServices(this.boxName);
   @override
-  Future<void> addData({required data}) async {
+  Future<void> addDataObject({required data}) async {
     Box<T> box = Hive.box<T>(boxName);
     await box.addAll(data as Iterable<T>);
   }
@@ -33,7 +33,7 @@ class HiveServices<T> extends ILocalDataBaseServices<T> {
   }
 
   @override
-  Future<List<T>> getAllData() async {
+  List<T> getAllData()  {
     Box<T> box = Hive.box<T>(boxName);
     return box.values.toList();
   }
@@ -48,5 +48,11 @@ class HiveServices<T> extends ILocalDataBaseServices<T> {
       await box.delete(key);
     }
     await box.put(key, data);
+  }
+
+  @override
+  Future<void> addAllData({required List<T> data}) async {
+    Box<T> box = Hive.box<T>(boxName);
+    await box.addAll(data);
   }
 }

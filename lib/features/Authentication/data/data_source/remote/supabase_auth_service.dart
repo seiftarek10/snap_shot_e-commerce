@@ -1,5 +1,5 @@
 import 'package:snap_shot/core/data_source/remote_data_source/data_base_services_interfase.dart';
-import 'package:snap_shot/features/authentication/data/data_source/auth_remote_data_source.dart';
+import 'package:snap_shot/features/authentication/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';

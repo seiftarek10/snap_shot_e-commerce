@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
       case Role.user:
         return BlocProvider(
           create: (context) =>
-              getIt.get<GetAllProductsCubit>()..getAllProducts(),
+              sl.get<GetAllProductsCubit>()..getAllProducts(),
           child: const UserHomeView(),
         );
       case Role.owner:
