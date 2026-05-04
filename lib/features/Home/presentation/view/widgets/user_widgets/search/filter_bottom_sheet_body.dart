@@ -5,8 +5,8 @@ import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
-import 'package:snap_shot/shared/widgets/filter/filter_method.dart';
-import 'package:snap_shot/shared/widgets/filter/price_range_slider.dart';
+import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/filter_method.dart';
+import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/price_range_slider.dart';
 
 class FilterBottomSheetBody extends StatelessWidget {
   const FilterBottomSheetBody({
@@ -14,10 +14,13 @@ class FilterBottomSheetBody extends StatelessWidget {
     required this.prices,
     required this.rating,
     required this.onPressed,
+    required this.maxValue,
+    required this.minValue,
   });
   final void Function(RangeValues) prices;
   final void Function(List<String>) rating;
   final void Function() onPressed;
+  final double maxValue, minValue;
 
   @override
   Widget build(BuildContext context) {
@@ -51,16 +54,22 @@ class FilterBottomSheetBody extends StatelessWidget {
               rating: rating,
             ),
             AppSpace.instance.v16,
-            PriceRangeSlider(values: prices),
+            PriceRangeSlider(
+              values: prices,
+              maxValue: maxValue,
+              minValue: minValue,
+            ),
             AppSpace.instance.v16,
             Row(
               children: [
                 Expanded(
                   child: AppButton(
                     isClicked: false,
-                    buttonTitle: 'Clear',
+                    buttonTitle: 'Cancel',
                     outlineButton: true,
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pop();
+                    },
                   ),
                 ),
                 AppSpace.instance.h8,

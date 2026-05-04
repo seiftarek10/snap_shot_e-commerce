@@ -1,11 +1,9 @@
-import 'dart:developer';
-
-import 'package:meta/meta.dart';
+import 'package:flutter/material.dart';
 import 'package:snap_shot/core/bloc/base_cubit.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/domain/use_case/get_all_products_use_case.dart';
-
+import 'dart:math';
 part 'get_all_products_state.dart';
 
 class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
@@ -24,16 +22,22 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
       safeEmit(GetProductsSuccess(response.data));
       products = response.data;
       fillterdProducts = response.data;
-      final uniqueCategories = response.data
-          .map((e) => e.category)
-          .toSet()
-          .toList();
-
-      categories = uniqueCategories;
+      getCategories();
     }
     if (response is AppFailure<List<ProductEntity>>) {
       safeEmit(GetProductsFailure(response.failure.errMessage));
     }
+  }
+
+  void getCategories() {
+    final uniqueCategories = products.map((e) => e.category).toSet().toList();
+    categories = uniqueCategories;
+  }
+
+  RangeValues getPricesRange() {
+    var prices = products.map((p) => double.parse(p.price)).toList();
+
+    return RangeValues(prices.reduce(min), prices.reduce(max));
   }
 
   void changeCategory({required String category}) {
@@ -64,18 +68,49 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
     safeEmit(GetProductsSuccess(searchResult));
   }
 
-  void filterByRate({required List<String> allRates}) {
-    List<ProductEntity> filterdList = [];
-    for (var rate in allRates) {
-      log(fillterdProducts.length.toString());
-      List<ProductEntity> currentRateList = fillterdProducts
-          .where(
-            (product) => product.rate.toLowerCase().startsWith(rate.toString()),
-          )
-          .toList();
-
-      filterdList.addAll(currentRateList.toList());
+  List<ProductEntity> filterByRate(
+    List<ProductEntity> filterdPricesList,
+    List<String> allRates,
+  ) {
+    if (allRates.isEmpty) {
+      return filterdPricesList;
     }
-    safeEmit(GetProductsSuccess(filterdList));
+    List<ProductEntity> finalList = filterdPricesList
+        .where(
+          (product) => allRates.any(
+            (rate) => product.rate.toLowerCase().startsWith(
+              rate.toLowerCase().toString(),
+            ),
+          ),
+        )
+        .toList();
+
+    return finalList;
+  }
+
+  List<ProductEntity> filterByPrice({required RangeValues currentRange}) {
+    RangeValues allRange = getPricesRange();
+    if (allRange.start == currentRange.start &&
+        allRange.end == currentRange.end) {
+      return products;
+    }
+
+    List<ProductEntity> filteredPricesList = fillterdProducts
+        .where(
+          (product) =>
+              double.parse(product.price) >= currentRange.start &&
+              double.parse(product.price) <= currentRange.end,
+        )
+        .toList();
+    return filteredPricesList;
+  }
+
+  void filter(RangeValues currentRange, List<String> allRates) {
+    List<ProductEntity> filterdPriceList = filterByPrice(
+      currentRange: currentRange,
+    );
+    List<ProductEntity> finalList = filterByRate(filterdPriceList, allRates);
+
+    safeEmit(GetProductsSuccess(finalList));
   }
 }

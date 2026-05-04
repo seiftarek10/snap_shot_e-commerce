@@ -1,16 +1,23 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/shared/widgets/filter/filter_bottom_sheet_body.dart';
+import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/filter_bottom_sheet_body.dart';
 
 class FilterIcon extends StatefulWidget {
-  const FilterIcon({super.key, required this.onPressed, required this.prices, required this.rating});
-  final void Function() onPressed;
+  const FilterIcon({
+    super.key,
+    required this.onApplyPressed,
+    required this.prices,
+    required this.rating,
+    required this.maxValue,
+    required this.minValue,
+  });
+  final void Function() onApplyPressed ;
   final void Function(RangeValues) prices;
   final void Function(List<String>) rating;
+  final double maxValue, minValue;
   @override
   State<FilterIcon> createState() => _FilterIconState();
 }
@@ -32,15 +39,18 @@ class _FilterIconState extends State<FilterIcon> {
           isScrollControlled: true,
           builder: (context) {
             return FilterBottomSheetBody(
-              onPressed: widget.onPressed,
+              onPressed: widget.onApplyPressed,
               prices: widget.prices,
               rating: widget.rating,
+              maxValue: widget.maxValue,
+              minValue: widget.minValue,
             );
           },
         ).then((value) {
           setState(() {
             isFilterActive = false;
           });
+          
         });
       },
       child: Padding(
