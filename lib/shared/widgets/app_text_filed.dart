@@ -18,6 +18,7 @@ class AppTextField extends StatefulWidget {
     this.filedTextStyle,
     this.borderRadius,
     this.maxLines,
+    this.onChanged
   });
   final String hintText;
   final void Function(String?) onSaved;
@@ -30,6 +31,7 @@ class AppTextField extends StatefulWidget {
   final double? borderRadius;
   final int? maxLines;
   final String? Function(String?) validator;
+  final void Function(String)? onChanged;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
@@ -59,6 +61,7 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: widget.onChanged,
       focusNode: _focusNode,
       validator: widget.validator,
       onSaved: widget.onSaved,

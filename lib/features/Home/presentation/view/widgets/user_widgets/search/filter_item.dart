@@ -4,8 +4,9 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class FilterItme extends StatefulWidget {
-  const FilterItme({super.key, required this.title});
+  const FilterItme({super.key, required this.title, required this.onTap});
   final String title;
+  final void Function() onTap;
 
   @override
   State<FilterItme> createState() => _FilterItmeState();
@@ -20,6 +21,7 @@ class _FilterItmeState extends State<FilterItme> {
         setState(() {
           isSelected = !isSelected;
         });
+        widget.onTap();
       },
       child: AnimatedScale(
         duration: const Duration(milliseconds: 200),

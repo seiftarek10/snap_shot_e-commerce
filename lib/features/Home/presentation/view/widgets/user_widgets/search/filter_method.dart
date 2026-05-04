@@ -1,23 +1,28 @@
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/shared/widgets/filter/filter_item.dart';
+import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/filter_item.dart';
 
 class FilterMethod extends StatelessWidget {
   const FilterMethod({
     super.key,
     required this.filterMethod,
     required this.filterOptions,
+    required this.rating,
   });
 
   final String filterMethod;
   final List<String> filterOptions;
+  final ValueChanged<List<String>> rating;
 
   @override
   Widget build(BuildContext context) {
+    List<String> allRating = [];
+
     return Column(
       children: [
         Text(
@@ -33,7 +38,24 @@ class FilterMethod extends StatelessWidget {
           runSpacing: 10.h,
 
           children: List.generate(filterOptions.length, (index) {
-            return FilterItme(title: filterOptions[index]);
+            return FilterItme(
+              onTap: () {
+                String value = filterOptions[index];
+                if (allRating.contains(value)) {
+                  allRating.remove(filterOptions[index]);
+                  rating(allRating);
+                } else {
+                  allRating.add(filterOptions[index]);
+                  rating(allRating);
+                }
+                log(allRating.length.toString());
+                log('###################');
+                for (var i in allRating) {
+                  log(i);
+                }
+              },
+              title: filterOptions[index],
+            );
           }),
         ),
       ],

@@ -1,19 +1,41 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class PriceRangeSlider extends StatefulWidget {
-  const PriceRangeSlider({super.key});
+  const PriceRangeSlider({
+    super.key,
+    required this.values,
+    required this.maxValue,
+    required this.minValue,
+  });
+
+  final ValueChanged<RangeValues> values;
+  final double maxValue, minValue;
 
   @override
   State<PriceRangeSlider> createState() => _PriceRangeSliderState();
 }
 
 class _PriceRangeSliderState extends State<PriceRangeSlider> {
-  RangeValues _currentRange = const RangeValues(10, 3000);
+  late RangeValues _currentRange;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentRange = RangeValues(widget.minValue, widget.maxValue);
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (widget.minValue >= widget.maxValue) {
+      log(widget.maxValue.toString());
+      log(widget.minValue.toString());
+      return const Center(child: Text("Invalid Price Range"));
+    }
+
     return Column(
       children: [
         Text(
@@ -39,22 +61,22 @@ class _PriceRangeSliderState extends State<PriceRangeSlider> {
             ],
           ),
         ),
-        // The RangeSlider
         RangeSlider(
           values: _currentRange,
-          min: 0,
-          max: 3000,
+          min: widget.minValue,
+          max: widget.maxValue,
           divisions: 100,
           labels: RangeLabels(
             '\$${_currentRange.start.toInt()}',
             '\$${_currentRange.end.toInt()}',
           ),
-          onChanged: (RangeValues values) {
+          onChanged: (RangeValues newValues) {
             setState(() {
-              _currentRange = values;
+              _currentRange = newValues;
+              widget.values(newValues);
             });
           },
-          activeColor: Colors.black, // color of the track
+          activeColor: Colors.black,
           inactiveColor: Colors.grey[300],
         ),
       ],

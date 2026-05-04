@@ -6,10 +6,23 @@ import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/utils/validator.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
-import 'package:snap_shot/shared/widgets/filter/filter_icon.dart';
+import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/filter_icon.dart';
 
 class SearchField extends StatefulWidget {
-  const SearchField({super.key});
+  const SearchField({
+    super.key,
+    required this.onChanged,
+    required this.onApplyPressed,
+    required this.prices,
+    required this.rating,
+    required this.maxValue,
+    required this.minValue,
+  });
+  final void Function(String) onChanged;
+  final void Function() onApplyPressed;
+  final void Function(RangeValues) prices;
+  final void Function(List<String>) rating;
+  final double maxValue, minValue;
 
   @override
   State<SearchField> createState() => _SearchFieldState();
@@ -24,6 +37,7 @@ class _SearchFieldState extends State<SearchField> {
         Expanded(
           flex: 7,
           child: AppTextField(
+            onChanged: widget.onChanged,
             validator: (value) {
               return ValidationForm.nullOrEpmty(value);
             },
@@ -40,7 +54,15 @@ class _SearchFieldState extends State<SearchField> {
           ),
         ),
         AppSpace.instance.h16,
-        const Expanded(child: FilterIcon()),
+        Expanded(
+          child: FilterIcon(
+            onApplyPressed: widget.onApplyPressed,
+            rating: widget.rating,
+            prices: widget.prices,
+            maxValue: widget.maxValue,
+            minValue: widget.minValue,
+          ),
+        ),
       ],
     );
   }
