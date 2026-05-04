@@ -1,11 +1,11 @@
-import 'package:snap_shot/core/data_source/remote_data_source/data_base_services_interfase.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/api/api_interface.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseAuthService extends AuthRemoteDataSource {
-  final IRemoteDataBaseServices _dataBaseServices;
+  final IApiServices _dataBaseServices;
 
   SupabaseAuthService(this._dataBaseServices);
   @override
@@ -38,12 +38,12 @@ class SupabaseAuthService extends AuthRemoteDataSource {
   Future<void> verifyOtp({required VerifyOtpParam request}) {
     throw UnimplementedError();
   }
-  
+
   @override
   Future<String?> signIn({required String email, required String password}) {
     throw UnimplementedError();
   }
-  
+
   @override
   Future<UserModel> getUserData({required String uid}) {
     throw UnimplementedError();

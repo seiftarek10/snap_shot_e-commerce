@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
+import 'package:snap_shot/features/home/presentation/view%20model/fav_cubit/favorites_cubit_cubit.dart';
+import 'package:snap_shot/features/home/presentation/view%20model/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/user_shopping_bag_icon.dart';
 import 'package:snap_shot/shared/widgets/favorite_icon.dart';
 
@@ -21,7 +24,6 @@ class UserHomeProductItem extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                      
                       product.rate,
                       textAlign: TextAlign.center,
                       style: AppTextStyle.instance.text14W500Black,
@@ -37,10 +39,21 @@ class UserHomeProductItem extends StatelessWidget {
               ),
             ),
 
-            const Expanded(
+            Expanded(
               child: Align(
                 alignment: Alignment.centerRight,
-                child: FavoriteIcon(isFavorite: true),
+                child: FavoriteIcon(
+                  isFavorite: product.isFav ?? false,
+                  onTap: () async {
+                    final favCubit = context.read<FavoritesCubit>();
+                    final productsCubit = context.read<GetAllProductsCubit>();
+                    await favCubit.toggleFavProduct(
+                      isFav: product.isFav ?? false,
+                      product: product,
+                    );
+                    await productsCubit.getAllProducts(loadingState: false);
+                  },
+                ),
               ),
             ),
           ],

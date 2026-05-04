@@ -1,11 +1,11 @@
-import 'package:snap_shot/core/data_source/remote_data_source/data_base_services_interfase.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/api/api_interface.dart';
 import 'package:dio/dio.dart';
 
-class ApiServices extends IRemoteDataBaseServices {
+class DioServices extends IApiServices {
   final Dio _dio;
 
   final String _baseUrl = 'https://dummyjson.com/';
-  ApiServices(this._dio);
+  DioServices(this._dio);
   @override
   Future<void> addData({
     required Map<String, dynamic> data,
