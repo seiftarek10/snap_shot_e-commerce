@@ -15,8 +15,10 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
   List<ProductEntity> products = [];
   List<ProductEntity> fillterdProducts = [];
 
-  Future<void> getAllProducts() async {
-    safeEmit(Loading());
+  Future<void> getAllProducts({bool? loadingState}) async {
+    if (loadingState == null) {
+      safeEmit(Loading());
+    }
     final response = await _getAllProductsUseCase.call(null);
     if (response is Success<List<ProductEntity>>) {
       safeEmit(GetProductsSuccess(response.data));
@@ -28,6 +30,8 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
       safeEmit(GetProductsFailure(response.failure.errMessage));
     }
   }
+
+  
 
   void getCategories() {
     final uniqueCategories = products.map((e) => e.category).toSet().toList();

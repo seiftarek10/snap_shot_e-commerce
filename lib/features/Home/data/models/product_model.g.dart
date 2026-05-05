@@ -1,36 +1,37 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'product_entity.dart';
+part of 'product_model.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ProductEntityAdapter extends TypeAdapter<ProductEntity> {
+class ProductModelAdapter extends TypeAdapter<ProductModel> {
   @override
   final int typeId = 1;
 
   @override
-  ProductEntity read(BinaryReader reader) {
+  ProductModel read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return ProductEntity(
-      id: fields[0] as String,
-      name: fields[1] as String,
-      price: fields[4] as String,
-      rate: fields[5] as String,
-      imageUrl: fields[6] as String,
-      category: fields[2] as String,
-      description: fields[3] as String,
+    return ProductModel(
+      id: fields[0] as String?,
+      name: fields[1] as String?,
+      category: fields[2] as String?,
+      description: fields[3] as String?,
+      price: fields[4] as String?,
+      imageUrl: fields[5] as String?,
+      rate: fields[6] as String?,
+      isFav: fields[7] as bool?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, ProductEntity obj) {
+  void write(BinaryWriter writer, ProductModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -42,9 +43,11 @@ class ProductEntityAdapter extends TypeAdapter<ProductEntity> {
       ..writeByte(4)
       ..write(obj.price)
       ..writeByte(5)
-      ..write(obj.rate)
+      ..write(obj.imageUrl)
       ..writeByte(6)
-      ..write(obj.imageUrl);
+      ..write(obj.rate)
+      ..writeByte(7)
+      ..write(obj.isFav);
   }
 
   @override
@@ -53,7 +56,7 @@ class ProductEntityAdapter extends TypeAdapter<ProductEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is ProductEntityAdapter &&
+      other is ProductModelAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

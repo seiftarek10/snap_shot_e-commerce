@@ -1,4 +1,4 @@
-abstract class IRemoteDataBaseServices {
+abstract class IApiServices {
   Future<void> addData({
     required Map<String, dynamic> data,
     required String path,

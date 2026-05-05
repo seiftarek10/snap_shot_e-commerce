@@ -1,6 +1,9 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/di/sl.dart';
+import 'package:snap_shot/features/home/presentation/view%20model/fav_cubit/favorites_cubit_cubit.dart';
+import 'package:snap_shot/features/home/presentation/view%20model/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/bloc_widgets/user_cetegories_list_builder.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/bloc_widgets/user_product_list_builder.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/search_builder.dart';
@@ -19,21 +22,28 @@ class _UserHomeViewState extends State<UserHomeView> {
 
   @override
   Widget build(BuildContext context) {
-    return PagePadding(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          AppSpace.instance.topPageSpace,
-          const SnapShotWord(),
-          AppSpace.instance.v16,
-          const UserHomeSearchBuilder(),
-          AppSpace.instance.v16,
-          const UserCetegoriesListBuilder(),
-          AppSpace.instance.v8,
-          const Expanded(child: UserHomeProductListBuilder()),
-        ],
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl.get<GetAllProductsCubit>()..getAllProducts(),
+        ),
+        BlocProvider(create: (context) => sl<FavoritesCubit>()),
+      ],
+      child: PagePadding(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            AppSpace.instance.topPageSpace,
+            const SnapShotWord(),
+            AppSpace.instance.v16,
+            const UserHomeSearchBuilder(),
+            AppSpace.instance.v16,
+            const UserCetegoriesListBuilder(),
+            AppSpace.instance.v8,
+            const Expanded(child: UserHomeProductListBuilder()),
+          ],
+        ),
       ),
     );
   }
 }
-

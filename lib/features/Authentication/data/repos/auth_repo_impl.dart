@@ -28,7 +28,7 @@ class AuthRepoImpl extends AuthRepo {
         userData: data,
       );
       data.uid = uid ?? '';
-      await _authLocalDataSource.saveUserData(userData: data.toUSerEntity());
+      await _authLocalDataSource.saveUserData(userData: data);
       return const Success(null);
     } on FirebaseAuthException catch (e) {
       return AppFailure(FirebaseAuthErrors.handleException(e));
@@ -74,9 +74,7 @@ class AuthRepoImpl extends AuthRepo {
       UserModel userData = await _authRemoteDataSource.getUserData(
         uid: response ?? '',
       );
-      await _authLocalDataSource.saveUserData(
-        userData: userData.toUSerEntity(),
-      );
+      await _authLocalDataSource.saveUserData(userData: userData);
       return const Success(null);
     } on FirebaseAuthException catch (e) {
       return AppFailure(FirebaseAuthErrors.handleException(e));

@@ -1,5 +1,5 @@
-import 'package:snap_shot/core/entites/user_entity.dart';
+import 'package:snap_shot/features/authentication/data/models/user_model.dart';
 
 abstract class AuthLocalDataSource{
-  Future<void> saveUserData({required UserEntity userData});
+  Future<void> saveUserData({required UserModel userData});
 }

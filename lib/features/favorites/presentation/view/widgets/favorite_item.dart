@@ -68,10 +68,10 @@ class FavoriteItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                const Expanded(
+                 Expanded(
                   child: Align(
                     alignment: Alignment.topRight,
-                    child: FavoriteIcon(isFavorite: true),
+                    child: FavoriteIcon(isFavorite: true,onTap: (){},),
                   ),
                 ),
               ],

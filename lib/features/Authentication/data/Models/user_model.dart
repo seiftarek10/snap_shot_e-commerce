@@ -1,11 +1,20 @@
+import 'package:hive/hive.dart';
 import 'package:snap_shot/core/entites/user_entity.dart';
+part 'user_model.g.dart';
 
+@HiveType(typeId: 0)
 class UserModel {
+  @HiveField(0)
   String uid;
+  @HiveField(1)
   final String userName;
+  @HiveField(2)
   final String email;
+  @HiveField(3)
   final String password;
+  @HiveField(4)
   final String mobile;
+  @HiveField(5)
   final String address;
 
   UserModel({
