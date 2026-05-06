@@ -25,7 +25,10 @@ class UserHomeProductsList extends StatelessWidget {
           onTap: () {
             context.push(Routes.instance.productDetails);
           },
-          child: UserHomeProductItem(product: products[index]),
+          child: UserHomeProductItem(
+            key: ValueKey(products[index].id),
+            product: products[index],
+          ),
         );
       },
     );

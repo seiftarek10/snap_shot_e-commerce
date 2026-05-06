@@ -25,13 +25,14 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       imageUrl: fields[5] as String?,
       rate: fields[6] as String?,
       isFav: fields[7] as bool?,
+      inCart: fields[8] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ProductModel obj) {
     writer
-      ..writeByte(8)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -47,7 +48,9 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       ..writeByte(6)
       ..write(obj.rate)
       ..writeByte(7)
-      ..write(obj.isFav);
+      ..write(obj.isFav)
+      ..writeByte(8)
+      ..write(obj.inCart);
   }
 
   @override

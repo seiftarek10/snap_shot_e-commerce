@@ -19,7 +19,9 @@ class ProductModel {
   @HiveField(6)
   final String? rate;
   @HiveField(7)
-   bool? isFav;
+  bool? isFav;
+  @HiveField(8)
+  bool? inCart;
 
   ProductModel({
     required this.id,
@@ -30,6 +32,7 @@ class ProductModel {
     required this.imageUrl,
     required this.rate,
     required this.isFav,
+    required this.inCart,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic>? json) {
@@ -42,6 +45,7 @@ class ProductModel {
       imageUrl: json?['thumbnail'].toString() ?? '',
       rate: json?['rating'].toString() ?? '',
       isFav: json?['isFav'] ?? false,
+      inCart: json?['inCart'] ?? false,
     );
   }
   factory ProductModel.fromEntity(ProductEntity product) {
@@ -54,6 +58,7 @@ class ProductModel {
       imageUrl: product.imageUrl,
       rate: product.rate,
       isFav: product.isFav ?? false,
+      inCart: product.inCart ?? false,
     );
   }
 
@@ -67,6 +72,7 @@ class ProductModel {
       'thumbnail': imageUrl,
       'rating': rate,
       'isFav': isFav ?? false,
+      'inCart': inCart ?? false,
     };
   }
 
@@ -80,6 +86,7 @@ class ProductModel {
       rate: rate ?? '',
       imageUrl: imageUrl ?? '',
       isFav: isFav ?? false,
+      inCart: inCart ?? false,
     );
   }
 }

@@ -1,6 +1,6 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_boxes_names.dart';
-import 'package:snap_shot/features/authentication/data/models/user_model.dart';
+import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/home/data/models/product_model.dart';
 
 Future<void> userHiveSetup() async {
@@ -13,5 +13,11 @@ Future<void> userHiveSetup() async {
   }
   if (!Hive.isBoxOpen(HiveBoxesNames.instance.productsBox)) {
     await Hive.openBox<ProductModel>(HiveBoxesNames.instance.productsBox);
+  }
+  if (!Hive.isBoxOpen(HiveBoxesNames.instance.favProductsBox)) {
+    await Hive.openBox<ProductModel>(HiveBoxesNames.instance.favProductsBox);
+  }
+  if (!Hive.isBoxOpen(HiveBoxesNames.instance.cartProdcutBox)) {
+    await Hive.openBox<ProductModel>(HiveBoxesNames.instance.cartProdcutBox);
   }
 }

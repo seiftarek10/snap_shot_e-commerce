@@ -1,4 +1,3 @@
-
 import 'package:meta/meta.dart';
 import 'package:snap_shot/core/bloc/base_cubit.dart';
 import 'package:snap_shot/core/utils/result.dart';
@@ -6,11 +5,13 @@ import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/domain/use_case/add_fav_product_use_case.dart';
 import 'package:snap_shot/features/home/domain/use_case/remove_fav_product_use_case.dart';
 
-part 'favorites_cubit_state.dart';
+part 'user_home_favorites_cubit_state.dart';
 
-class FavoritesCubit extends BaseCubit<FavoritesCubitState> {
-  FavoritesCubit(this._addFavProductUseCase, this._removeFavProductUseCase)
-    : super(FavoritesCubitInitial());
+class UserHomeFavoritesCubit extends BaseCubit<UserHomeFavoritesCubitState> {
+  UserHomeFavoritesCubit(
+    this._addFavProductUseCase,
+    this._removeFavProductUseCase,
+  ) : super(FavoritesCubitInitial());
   final AddFavProductUseCase _addFavProductUseCase;
   final RemoveFavProductUseCase _removeFavProductUseCase;
 

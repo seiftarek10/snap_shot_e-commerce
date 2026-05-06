@@ -9,7 +9,7 @@ import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/features/authentication/data/data_source/local/auth_local_data_source_impl.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/firebase_auth_services.dart';
-import 'package:snap_shot/features/authentication/data/models/user_model.dart';
+import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/authentication/data/repos/auth_repo_impl.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/send_otp_use_case.dart';
@@ -24,9 +24,12 @@ import 'package:snap_shot/features/home/data/models/product_model.dart';
 import 'package:snap_shot/features/home/data/repo/home_repo_impl.dart';
 import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
 import 'package:snap_shot/features/home/domain/use_case/add_fav_product_use_case.dart';
+import 'package:snap_shot/features/home/domain/use_case/add_to_cart_use_case.dart';
 import 'package:snap_shot/features/home/domain/use_case/get_all_products_use_case.dart';
 import 'package:snap_shot/features/home/domain/use_case/remove_fav_product_use_case.dart';
-import 'package:snap_shot/features/home/presentation/view%20model/fav_cubit/favorites_cubit_cubit.dart';
+import 'package:snap_shot/features/home/domain/use_case/remove_from_cart_use_case.dart';
+import 'package:snap_shot/features/home/presentation/view%20model/cart/user_home_cart_cubit.dart';
+import 'package:snap_shot/features/home/presentation/view%20model/fav_cubit/user_home_favorites_cubit_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view%20model/get_products_cubit/get_all_products_cubit.dart';
 
 final sl = GetIt.instance;
@@ -53,26 +56,41 @@ void _initAuthFeature() {
   // Data Sources & Repo
   sl.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
-      FirebaseAuthServices(sl<IApiServices>()),
+      FirebaseAuthServices(sl<IRemoteDataBaseServices>()),
       AuthLocaldataSourceImpl(sl<ILocalDataBaseServices<UserModel>>()),
     ),
   );
 
   // Use Cases
-  sl.registerLazySingleton(() => SignUpUseCase(sl()));
-  sl.registerLazySingleton(() => SendOtpUseCase(sl()));
-  sl.registerLazySingleton(() => VerifyOtpUseCase(sl()));
-  sl.registerLazySingleton(() => SignInUseCase(sl()));
+  sl.registerLazySingleton(() => SignUpUseCase(sl<AuthRepo>()));
+  sl.registerLazySingleton(() => SendOtpUseCase(sl<AuthRepo>()));
+  sl.registerLazySingleton(() => VerifyOtpUseCase(sl<AuthRepo>()));
+  sl.registerLazySingleton(() => SignInUseCase(sl<AuthRepo>()));
 
   // Cubits
-  sl.registerFactory(() => SignUpCubit(sl(), sl(), sl()));
-  sl.registerFactory(() => SignInCubit(sl()));
+  sl.registerFactory(
+    () => SignUpCubit(
+      sl<SignUpUseCase>(),
+      sl<SendOtpUseCase>(),
+      sl<VerifyOtpUseCase>(),
+    ),
+  );
+  sl.registerFactory(() => SignInCubit(sl<SignInUseCase>()));
 }
 
 void _initHomeFeature() {
   // Local Service
   sl.registerLazySingleton<ILocalDataBaseServices<ProductModel>>(
     () => HiveServices(HiveBoxesNames.instance.productsBox),
+    instanceName: HiveBoxesNames.instance.productsBox,
+  );
+  sl.registerLazySingleton<ILocalDataBaseServices<ProductModel>>(
+    () => HiveServices(HiveBoxesNames.instance.favProductsBox),
+    instanceName: HiveBoxesNames.instance.favProductsBox,
+  );
+  sl.registerLazySingleton<ILocalDataBaseServices<ProductModel>>(
+    () => HiveServices(HiveBoxesNames.instance.cartProdcutBox),
+    instanceName: HiveBoxesNames.instance.cartProdcutBox,
   );
 
   // Repo
@@ -82,21 +100,38 @@ void _initHomeFeature() {
         sl<IApiServices>(),
         sl<IRemoteDataBaseServices>(),
       ),
-      HomeLocalDataSourceImpl(sl<ILocalDataBaseServices<ProductModel>>()),
+      HomeLocalDataSourceImpl(
+        sl<ILocalDataBaseServices<ProductModel>>(
+          instanceName: HiveBoxesNames.instance.productsBox,
+        ),
+        sl<ILocalDataBaseServices<ProductModel>>(
+          instanceName: HiveBoxesNames.instance.favProductsBox,
+        ),
+        sl<ILocalDataBaseServices<ProductModel>>(
+          instanceName: HiveBoxesNames.instance.cartProdcutBox,
+        ),
+        sl<ILocalDataBaseServices<UserModel>>(),
+      ),
     ),
   );
 
   // Use Cases
-  sl.registerLazySingleton(() => GetAllProductsUseCase(sl()));
+  sl.registerLazySingleton(() => GetAllProductsUseCase(sl<HomeRepo>()));
   sl.registerLazySingleton(() => AddFavProductUseCase(sl<HomeRepo>()));
   sl.registerLazySingleton(() => RemoveFavProductUseCase(sl<HomeRepo>()));
+  sl.registerLazySingleton(() => AddToCartUseCase(sl<HomeRepo>()));
+  sl.registerLazySingleton(() => RemoveFromCartUseCase(sl<HomeRepo>()));
 
   // Cubits
-  sl.registerFactory(() => GetAllProductsCubit(sl()));
+  sl.registerFactory(() => GetAllProductsCubit(sl<GetAllProductsUseCase>()));
   sl.registerFactory(
-    () => FavoritesCubit(
+    () => UserHomeFavoritesCubit(
       sl<AddFavProductUseCase>(),
       sl<RemoveFavProductUseCase>(),
     ),
+  );
+  sl.registerFactory(
+    () =>
+        UserHomeCartCubit(sl<AddToCartUseCase>(), sl<RemoveFromCartUseCase>()),
   );
 }

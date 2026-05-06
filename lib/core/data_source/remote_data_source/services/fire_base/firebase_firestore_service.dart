@@ -98,7 +98,7 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
   }
 
   @override
-  Future<Map<String, dynamic>> getSubCollection({
+  Future<List<Map<String, dynamic>>> getSubCollection({
     required String collection,
     required String parentId,
     required String subCollection,
@@ -108,11 +108,11 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
         .doc(parentId)
         .collection(subCollection)
         .get();
-    final data = <String, dynamic>{};
-    for (var doc in result.docs) {
-      data[doc.id] = doc.data();
-    }
-    return data;
+    return result.docs.map((doc) {
+      final data = doc.data();
+      data['id'] = doc.id;
+      return data;
+    }).toList();
   }
 
   @override
