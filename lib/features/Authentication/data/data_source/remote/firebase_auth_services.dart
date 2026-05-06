@@ -1,13 +1,14 @@
 import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:snap_shot/core/data_source/remote_data_source/api/api_interface.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base/collection_path.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/auth_remote_data_source.dart';
-import 'package:snap_shot/features/authentication/data/models/user_model.dart';
+import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
 
 class FirebaseAuthServices implements AuthRemoteDataSource {
-  final IApiServices _dataBaseServices;
+  final IRemoteDataBaseServices _dataBaseServices;
 
   FirebaseAuthServices(this._dataBaseServices);
   @override
@@ -53,9 +54,9 @@ class FirebaseAuthServices implements AuthRemoteDataSource {
     required String uid,
     required UserModel userData,
   }) async {
-    await _dataBaseServices.addDataWithId(
+    await _dataBaseServices.addWithId(
       data: userData.toJson(),
-      path: 'users',
+      collection: CollectionPath.instance.users,
       id: uid,
     );
   }
@@ -74,7 +75,19 @@ class FirebaseAuthServices implements AuthRemoteDataSource {
 
   @override
   Future<UserModel> getUserData({required String uid}) async {
-    final resopnse = await _dataBaseServices.getById(id: uid, path: 'users');
+    final resopnse = await _dataBaseServices.getById(
+      id: uid,
+      collection: 'users',
+    );
     return UserModel.fromJson(resopnse);
+  }
+
+  @override
+  Future<void> deleteUser({required String id}) async {
+    await FirebaseAuth.instance.currentUser?.delete();
+    await _dataBaseServices.delete(
+      collection: CollectionPath.instance.users,
+      id: id,
+    );
   }
 }

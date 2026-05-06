@@ -4,8 +4,13 @@ import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/style/colors.dart';
 
 class UserShoppingBagIcon extends StatefulWidget {
-  const UserShoppingBagIcon({super.key, required this.inCart});
+  const UserShoppingBagIcon({
+    super.key,
+    required this.inCart,
+    required this.onTap,
+  });
   final bool inCart;
+  final void Function() onTap;
 
   @override
   State<UserShoppingBagIcon> createState() => _UserShoppingBagIconState();
@@ -26,6 +31,7 @@ class _UserShoppingBagIconState extends State<UserShoppingBagIcon> {
         setState(() {
           inCart = !inCart;
         });
+        widget.onTap();
       },
       child: Align(
         alignment: Alignment.topRight,
@@ -49,6 +55,7 @@ class _UserShoppingBagIconState extends State<UserShoppingBagIcon> {
                   Assets.imagesPngShoppingBag,
                   fit: BoxFit.fill,
                   height: 16.h,
+                  color: AppColors.instance.black,
                 ),
               ),
       ),

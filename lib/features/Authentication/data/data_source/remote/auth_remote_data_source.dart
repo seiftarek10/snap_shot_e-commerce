@@ -1,4 +1,4 @@
-import 'package:snap_shot/features/authentication/data/models/user_model.dart';
+import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
 
 abstract class AuthRemoteDataSource {
@@ -11,4 +11,5 @@ abstract class AuthRemoteDataSource {
     required String uid,
     required UserModel userData,
   });
+  Future<void> deleteUser({required String id});
 }

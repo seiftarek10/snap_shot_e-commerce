@@ -31,8 +31,6 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
     }
   }
 
-  
-
   void getCategories() {
     final uniqueCategories = products.map((e) => e.category).toSet().toList();
     categories = uniqueCategories;
@@ -51,6 +49,7 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
 
       return;
     }
+    fillterdProducts = [];
     fillterdProducts = products
         .where((product) => product.category == category)
         .toList();

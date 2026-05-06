@@ -21,7 +21,6 @@ class UserHomeProductListBuilder extends StatelessWidget {
               child: Text('Empty', style: AppTextStyle.instance.text50W700),
             );
           }
-
           return UserHomeProductsList(products: state.products);
         } else if (state is GetProductsFailure) {
           return AppErrorWidget(

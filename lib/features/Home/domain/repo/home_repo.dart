@@ -5,4 +5,6 @@ abstract class HomeRepo {
   Future<Result<List<ProductEntity>>> getAllProducts();
   Future<Result<void>> addFavoriteProduct({required ProductEntity product});
   Future<Result<void>> removeFavProduct({required String id});
+  Future<Result<void>> addToCart({required ProductEntity product});
+  Future<Result<void>> removeFromCart({required String id});
 }

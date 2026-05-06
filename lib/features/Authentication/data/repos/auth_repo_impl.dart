@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:snap_shot/core/entites/user_entity.dart';
 import 'package:snap_shot/core/errors/failure.dart';
@@ -7,7 +5,7 @@ import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/authentication/data/data_source/local/auth_local_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/errors/fire_base_auth_errors.dart';
-import 'package:snap_shot/features/authentication/data/models/user_model.dart';
+import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/sign_in_param.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
@@ -20,20 +18,30 @@ class AuthRepoImpl extends AuthRepo {
 
   @override
   Future<Result<void>> signUp({required UserEntity userData}) async {
+    String? userId;
     try {
       UserModel data = UserModel.fromEntity(userData);
-      String? uid = await _authRemoteDataSource.signUp(userData: data);
-      await _authRemoteDataSource.createUserData(
-        uid: uid ?? '',
-        userData: data,
-      );
-      data.uid = uid ?? '';
+
+      userId = await _authRemoteDataSource.signUp(userData: data);
+
+      if (userId == null) {
+        return AppFailure(const Failure('Failed to create account ID'));
+      }
+      data.uid = userId;
+
+      await _authRemoteDataSource.createUserData(uid: userId, userData: data);
+
       await _authLocalDataSource.saveUserData(userData: data);
+
       return const Success(null);
-    } on FirebaseAuthException catch (e) {
-      return AppFailure(FirebaseAuthErrors.handleException(e));
-    } on Exception catch (e) {
-      log(e.toString());
+    } catch (e) {
+      if (userId != null) {
+        await _authRemoteDataSource.deleteUser(id: userId);
+      }
+
+      if (e is FirebaseAuthException) {
+        return AppFailure(FirebaseAuthErrors.handleException(e));
+      }
       return AppFailure(Failure(e.toString()));
     }
   }
@@ -71,10 +79,11 @@ class AuthRepoImpl extends AuthRepo {
         email: request.email,
         password: request.password,
       );
-      UserModel userData = await _authRemoteDataSource.getUserData(
-        uid: response ?? '',
-      );
-      await _authLocalDataSource.saveUserData(userData: userData);
+      UserModel? userData = _authLocalDataSource.getUserData();
+      if (userData?.uid == null || userData == null) {
+        userData = await _authRemoteDataSource.getUserData(uid: response ?? '');
+        await _authLocalDataSource.saveUserData(userData: userData);
+      }
       return const Success(null);
     } on FirebaseAuthException catch (e) {
       return AppFailure(FirebaseAuthErrors.handleException(e));

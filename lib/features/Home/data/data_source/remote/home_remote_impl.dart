@@ -20,10 +20,15 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   }
 
   @override
-  Future<void> addFavProduct({required ProductModel product}) async {
-    final result = await _dataBaseServices.addWithId(
-      collection: CollectionPath.instance.favProducts,
-      id: product.id ?? '',
+  Future<void> addFavProduct({
+    required String uid,
+    required ProductModel product,
+  }) async {
+    final result = await _dataBaseServices.addToSubCollectionWithId(
+      collection: CollectionPath.instance.allFavProducts,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userFavProducts,
+      childId: product.id ?? '',
       data: product.toJson(),
     );
 
@@ -31,23 +36,68 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   }
 
   @override
-  Future<void> removeFavProduct({required String id}) async {
-    await _dataBaseServices.delete(
-      collection: CollectionPath.instance.favProducts,
-      id: id,
+  Future<void> removeFavProduct({
+    required String prodcutId,
+    required String uid,
+  }) async {
+    await _dataBaseServices.deleteFromSubCollection(
+      collection: CollectionPath.instance.allFavProducts,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userFavProducts,
+      childId: prodcutId,
     );
   }
 
   @override
-  Future<List<ProductModel>> getFavProducts() async {
-    final result = await _dataBaseServices.getAll(
-      collection: CollectionPath.instance.favProducts,
+  Future<List<ProductModel>> getFavProducts({required String uid}) async {
+    final data = await _dataBaseServices.getSubCollection(
+      collection: CollectionPath.instance.allFavProducts,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userFavProducts,
     );
-    List<ProductModel> products = result
+    List<ProductModel> products = data
         .map<ProductModel>((e) => ProductModel.fromJson(e))
         .toList();
     return products;
   }
-  
 
+  @override
+  Future<void> addToCart({
+    required ProductModel product,
+    required String uid,
+  }) async {
+    await _dataBaseServices.addToSubCollectionWithId(
+      collection: CollectionPath.instance.allCart,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userCart,
+      childId: product.id ?? '0',
+      data: product.toJson(),
+    );
+  }
+
+  @override
+  Future<void> removeFromCart({
+    required String prodyctid,
+    required String uid,
+  }) async {
+    await _dataBaseServices.deleteFromSubCollection(
+      collection: CollectionPath.instance.allCart,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userCart,
+      childId: prodyctid,
+    );
+  }
+
+  @override
+  Future<List<ProductModel>> getCartProducts({required String uid}) async {
+    final data = await _dataBaseServices.getSubCollection(
+      collection: CollectionPath.instance.allCart,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userCart,
+    );
+    List<ProductModel> products = data
+        .map<ProductModel>((e) => ProductModel.fromJson(e))
+        .toList();
+    return products;
+  }
 }

@@ -69,7 +69,7 @@ abstract class IRemoteDataBaseServices {
     required String childId,
   });
 
-  Future<Map<String, dynamic>> getSubCollection({
+  Future<List<Map<String, dynamic>>> getSubCollection({
     required String collection,
     required String parentId,
     required String subCollection,

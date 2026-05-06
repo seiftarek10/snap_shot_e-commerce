@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/di/sl.dart';
-import 'package:snap_shot/features/home/presentation/view%20model/fav_cubit/favorites_cubit_cubit.dart';
+import 'package:snap_shot/features/home/presentation/view%20model/cart/user_home_cart_cubit.dart';
+import 'package:snap_shot/features/home/presentation/view%20model/fav_cubit/user_home_favorites_cubit_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view%20model/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/bloc_widgets/user_cetegories_list_builder.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/bloc_widgets/user_product_list_builder.dart';
@@ -27,7 +28,8 @@ class _UserHomeViewState extends State<UserHomeView> {
         BlocProvider(
           create: (context) => sl.get<GetAllProductsCubit>()..getAllProducts(),
         ),
-        BlocProvider(create: (context) => sl<FavoritesCubit>()),
+        BlocProvider(create: (context) => sl<UserHomeFavoritesCubit>()),
+        BlocProvider(create: (context) => sl<UserHomeCartCubit>()),
       ],
       child: PagePadding(
         child: Column(
