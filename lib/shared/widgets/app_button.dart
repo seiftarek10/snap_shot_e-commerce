@@ -9,7 +9,8 @@ class AppButton extends StatelessWidget {
     required this.buttonTitle,
     required this.onPressed,
     this.outlineButton,
-    this.backgroundColor, required this.isClicked,
+    this.backgroundColor,
+    required this.isClicked,
   });
   final String buttonTitle;
   final void Function() onPressed;
@@ -34,21 +35,24 @@ class AppButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 12.h),
       ),
 
-      child: isClicked==true?SizedBox(
-        height: 20.h,
-        width: 20.w,
-        child: CircularProgressIndicator(
-          color: AppColors.instance.white,
-        ),
-      ) : Text(
-        buttonTitle,
-        style: AppTextStyle.instance.text16W400.copyWith(
-          color: outlineButton == true
-              ? AppColors.instance.black
-              : AppColors.instance.white,
-          fontWeight: FontWeight.w700,
-        ),
-      ),
+      child: isClicked == true
+          ? SizedBox(
+              height: 20.h,
+              width: 20.w,
+              child: CircularProgressIndicator(color: AppColors.instance.white),
+            )
+          : Center(
+              child: Text(
+                buttonTitle,
+                textAlign: TextAlign.center,
+                style: AppTextStyle.instance.text16W400.copyWith(
+                  color: outlineButton == true
+                      ? AppColors.instance.black
+                      : AppColors.instance.white,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+            ),
     );
   }
 }

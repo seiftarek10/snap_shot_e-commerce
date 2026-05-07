@@ -60,4 +60,9 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   UserModel? getUserData() {
     return _userBox.getAllData()?.first;
   }
+
+  @override
+  Future<void> clearProducsBox() async {
+    await _productsBox.clear();
+  }
 }

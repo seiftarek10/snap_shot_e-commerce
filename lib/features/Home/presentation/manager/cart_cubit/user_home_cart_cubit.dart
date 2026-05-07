@@ -18,11 +18,10 @@ class UserHomeCartCubit extends BaseCubit<UserHomeCartState> {
     required bool inCart,
     required ProductEntity product,
   }) async {
-    safeEmit(UserHomeCartLoading());
     if (inCart) {
-      _removeFromCart(product.id);
+     await _removeFromCart(product.id);
     } else {
-      _addToCart(product);
+      await _addToCart(product);
     }
   }
 

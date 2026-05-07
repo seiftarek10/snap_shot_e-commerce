@@ -18,6 +18,7 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/sign
 import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
+import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
@@ -60,7 +61,10 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.productDetails,
-        builder: (context, state) => ProductDetailsView(role: role),
+        builder: (context, state) {
+          final product = state.extra as ProductEntity;
+          return ProductDetailsView(role: role, productEntity: product);
+        },
       ),
       GoRoute(
         path: Routes.instance.checkout,

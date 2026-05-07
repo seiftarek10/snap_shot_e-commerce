@@ -23,7 +23,10 @@ class UserHomeProductsList extends StatelessWidget {
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () {
-            context.push(Routes.instance.productDetails);
+            context.push(
+              Routes.instance.productDetails,
+              extra: products[index],
+            );
           },
           child: UserHomeProductItem(
             key: ValueKey(products[index].id),

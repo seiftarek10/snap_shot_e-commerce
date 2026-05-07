@@ -8,6 +8,8 @@ class ProductEntity {
   final String imageUrl;
   final bool? isFav;
   final bool? inCart;
+  final String brand;
+  final String stock;
   ProductEntity({
     required this.id,
     required this.name,
@@ -18,6 +20,8 @@ class ProductEntity {
     required this.description,
     required this.isFav,
     required this.inCart,
+    required this.brand,
+    required this.stock,
   });
 
   ProductEntity copyWith({bool? isFav, bool? inCart}) {
@@ -31,6 +35,8 @@ class ProductEntity {
       category: category,
       description: description,
       inCart: inCart ?? this.inCart,
+      brand: brand,
+      stock: stock,
     );
   }
 }

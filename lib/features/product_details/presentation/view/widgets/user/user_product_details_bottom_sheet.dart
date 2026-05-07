@@ -2,12 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
+import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_bottom_sheet_counter_widget.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_bottom_section_item.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_product_price_text.dart';
 
 class UserProductDetailsBottomSheet extends StatelessWidget {
-  const UserProductDetailsBottomSheet({super.key});
+  const UserProductDetailsBottomSheet({
+    super.key,
+    required this.rate,
+    required this.stock,
+    required this.brand,
+    required this.price,
+    required this.inCart,
+  });
+  final String rate, stock, brand, price;
+  final bool inCart;
 
   @override
   Widget build(BuildContext context) {
@@ -22,30 +32,30 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
           decoration: _buildContainerDecoration(),
           child: Column(
             children: [
-              const UserProductPriceText(),
+              UserProductPriceText(price: price),
               AppSpace.instance.v12,
               SizedBox(
                 height: 120.h,
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 3,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           UserProductDetailsBottomSheetItem(
-                            title: 'Size',
-                            subTitle: "Large",
+                            title: 'rate',
+                            subTitle: rate,
                           ),
                           UserProductDetailsBottomSheetItem(
-                            title: 'Size',
-                            subTitle: "Large",
+                            title: 'stock',
+                            subTitle: stock,
                           ),
                         ],
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       flex: 4,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,18 +63,16 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                         children: [
                           Expanded(
                             flex: 4,
-                            child: UserProductDetailsBottomSheetItem(
-                              title: '3',
-                              subTitle: "",
-                              isCounterItem: true,
+                            child: UserBottomSheetCounterWidget(
+                              counterListner: (counter) {},
                             ),
                           ),
-                          Expanded(child: SizedBox()),
+                          const Expanded(child: SizedBox()),
                           Expanded(
                             flex: 4,
                             child: UserProductDetailsBottomSheetItem(
                               title: 'Brand',
-                              subTitle: "lar",
+                              subTitle: brand,
                             ),
                           ),
                         ],
@@ -80,7 +88,9 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                           Expanded(
                             child: AppButton(
                               isClicked: false,
-                              buttonTitle: 'Add To\n  Cart',
+                              backgroundColor: inCart ? Colors.red[900] : null,
+                              buttonTitle:
+                                  '${inCart ? 'Remove From\n' : 'Add To\n'}Cart',
                               onPressed: () {},
                             ),
                           ),

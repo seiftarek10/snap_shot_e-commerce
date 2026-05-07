@@ -77,12 +77,14 @@ class HomeRepoImpl implements HomeRepo {
       final productModel = ProductModel.fromEntity(product);
       productModel.isFav = true;
       UserModel? currentUser = _localDataSource.getUserData();
-      await _remoteDataSource.addFavProduct(
-        product: productModel,
-        uid: currentUser?.uid ?? '0',
-      );
-      await _localDataSource.clearFavIds();
-      return const Success(null);
+      String? uid = currentUser?.uid;
+      if (uid != null) {
+        await _remoteDataSource.addFavProduct(product: productModel, uid: uid);
+
+        await _localDataSource.clearFavIds();
+        return const Success(null);
+      }
+      return AppFailure(const Failure('user id not found'));
     } catch (e) {
       if (e is DioException) {
         return AppFailure(AppDioException.handle(e));
