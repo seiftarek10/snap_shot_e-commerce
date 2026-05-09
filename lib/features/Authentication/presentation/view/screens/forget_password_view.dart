@@ -26,8 +26,10 @@ class ForgetPasswordView extends StatelessWidget {
                 const AllSendCodeOptions(),
                 AppSpace.instance.v50,
                 AppButton(
-                  isClicked: false,
-                  buttonTitle: ('Next'), onPressed: () => {}),
+                  isLoading: false,
+                  buttonTitle: ('Next'),
+                  onPressed: () => {},
+                ),
               ],
             ),
           ),

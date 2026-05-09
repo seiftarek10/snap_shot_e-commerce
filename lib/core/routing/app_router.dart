@@ -9,8 +9,8 @@ import 'package:snap_shot/features/account/presentation/view/screens/languages_v
 import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/address_details_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/notification_setting_view.dart';
-import 'package:snap_shot/features/authentication/data/models/otp_args_model.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/sign_up/sign_up_cubit.dart';
+import 'package:snap_shot/features/authentication/presentation/model/otp_args_model.dart';
+import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/otp_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
@@ -18,10 +18,10 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/sign
 import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
+import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/product_details_view.dart';
 
 enum Role { user, owner, delivery, staff }
@@ -62,8 +62,24 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.productDetails,
         builder: (context, state) {
-          final product = state.extra as ProductEntity;
-          return ProductDetailsView(role: role, productEntity: product);
+          final extra = state.extra as ProductDetailsExtraModel;
+          if (role == Role.user) {
+            return MultiBlocProvider(
+              providers: [
+                BlocProvider.value(value: extra.getAllProductsCubit),
+                BlocProvider.value(value: extra.userHomeCartCubit),
+              ],
+              child: ProductDetailsView(
+                role: role,
+                productEntity: extra.productEntity,
+              ),
+            );
+          } else {
+            return ProductDetailsView(
+              role: role,
+              productEntity: extra.productEntity,
+            );
+          }
         },
       ),
       GoRoute(

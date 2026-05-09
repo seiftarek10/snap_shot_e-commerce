@@ -11,7 +11,7 @@ class UserHomeFavoritesCubit extends BaseCubit<UserHomeFavoritesCubitState> {
   UserHomeFavoritesCubit(
     this._addFavProductUseCase,
     this._removeFavProductUseCase,
-  ) : super(FavoritesCubitInitial());
+  ) : super(const FavoritesCubitInitial());
   final AddFavProductUseCase _addFavProductUseCase;
   final RemoveFavProductUseCase _removeFavProductUseCase;
 
@@ -29,7 +29,7 @@ class UserHomeFavoritesCubit extends BaseCubit<UserHomeFavoritesCubitState> {
   Future<void> _addFavProduct(ProductEntity product) async {
     final result = await _addFavProductUseCase.call(product);
     if (result is Success) {
-      safeEmit(AddFavoriteItemSuccess());
+      safeEmit(const AddFavoriteItemSuccess());
     }
     if (result is AppFailure) {
       safeEmit(AddFavoriteItemFailure(errMessage: result.failure.errMessage));
@@ -39,7 +39,7 @@ class UserHomeFavoritesCubit extends BaseCubit<UserHomeFavoritesCubitState> {
   Future<void> _removeFavProduct(String id) async {
     final result = await _removeFavProductUseCase.call(id);
     if (result is Success) {
-      safeEmit(RemoveFavoriteItemSuccess());
+      safeEmit(const RemoveFavoriteItemSuccess());
     }
     if (result is AppFailure) {
       safeEmit(

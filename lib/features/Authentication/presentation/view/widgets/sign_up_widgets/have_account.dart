@@ -21,7 +21,7 @@ class HaveAccount extends StatelessWidget {
                 text: 'Sign In',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    GoRouter.of(context).push(Routes.instance.signIn);
+                    GoRouter.of(context).go(Routes.instance.signIn);
                   },
                 style: AppTextStyle.instance.text12W500Black.copyWith(
                   color: AppColors.instance.blue,

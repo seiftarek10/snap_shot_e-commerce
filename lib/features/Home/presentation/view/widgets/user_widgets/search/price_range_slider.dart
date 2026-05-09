@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/style/colors.dart';
@@ -31,8 +30,7 @@ class _PriceRangeSliderState extends State<PriceRangeSlider> {
   @override
   Widget build(BuildContext context) {
     if (widget.minValue >= widget.maxValue) {
-      log(widget.maxValue.toString());
-      log(widget.minValue.toString());
+
       return const Center(child: Text("Invalid Price Range"));
     }
 

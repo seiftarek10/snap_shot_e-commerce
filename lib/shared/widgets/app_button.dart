@@ -10,13 +10,13 @@ class AppButton extends StatelessWidget {
     required this.onPressed,
     this.outlineButton,
     this.backgroundColor,
-    required this.isClicked,
+    required this.isLoading,
   });
   final String buttonTitle;
   final void Function() onPressed;
   final bool? outlineButton;
   final Color? backgroundColor;
-  final bool isClicked;
+  final bool isLoading;
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -35,7 +35,7 @@ class AppButton extends StatelessWidget {
         padding: EdgeInsets.symmetric(vertical: 12.h),
       ),
 
-      child: isClicked == true
+      child: isLoading == true
           ? SizedBox(
               height: 20.h,
               width: 20.w,

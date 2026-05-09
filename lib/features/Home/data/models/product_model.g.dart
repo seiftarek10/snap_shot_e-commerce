@@ -28,13 +28,14 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       inCart: fields[8] as bool?,
       brand: fields[9] as String,
       stock: fields[10] as String,
+      counter: fields[11] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ProductModel obj) {
     writer
-      ..writeByte(11)
+      ..writeByte(12)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -56,7 +57,9 @@ class ProductModelAdapter extends TypeAdapter<ProductModel> {
       ..writeByte(9)
       ..write(obj.brand)
       ..writeByte(10)
-      ..write(obj.stock);
+      ..write(obj.stock)
+      ..writeByte(11)
+      ..write(obj.counter);
   }
 
   @override

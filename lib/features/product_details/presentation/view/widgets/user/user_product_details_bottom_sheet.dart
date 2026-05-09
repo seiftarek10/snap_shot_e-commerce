@@ -1,24 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
+import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_bottom_sheet_counter_widget.dart';
-import 'package:snap_shot/shared/widgets/app_button.dart';
+import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_product_details_cart_button.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_bottom_section_item.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_product_price_text.dart';
 
 class UserProductDetailsBottomSheet extends StatelessWidget {
-  const UserProductDetailsBottomSheet({
-    super.key,
-    required this.rate,
-    required this.stock,
-    required this.brand,
-    required this.price,
-    required this.inCart,
-  });
-  final String rate, stock, brand, price;
-  final bool inCart;
-
+  const UserProductDetailsBottomSheet({super.key, required this.product});
+  final ProductEntity product;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -32,7 +25,7 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
           decoration: _buildContainerDecoration(),
           child: Column(
             children: [
-              UserProductPriceText(price: price),
+              UserProductPriceText(price: product.price),
               AppSpace.instance.v12,
               SizedBox(
                 height: 120.h,
@@ -46,11 +39,11 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                         children: [
                           UserProductDetailsBottomSheetItem(
                             title: 'rate',
-                            subTitle: rate,
+                            subTitle: product.rate,
                           ),
                           UserProductDetailsBottomSheetItem(
                             title: 'stock',
-                            subTitle: stock,
+                            subTitle: product.stock,
                           ),
                         ],
                       ),
@@ -64,7 +57,9 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                           Expanded(
                             flex: 4,
                             child: UserBottomSheetCounterWidget(
-                              counterListner: (counter) {},
+                              counterListner: (counter) {
+                                product.counter = counter;
+                              },
                             ),
                           ),
                           const Expanded(child: SizedBox()),
@@ -72,7 +67,7 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                             flex: 4,
                             child: UserProductDetailsBottomSheetItem(
                               title: 'Brand',
-                              subTitle: brand,
+                              subTitle: product.brand,
                             ),
                           ),
                         ],
@@ -81,20 +76,8 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                     AppSpace.instance.h12,
                     Expanded(
                       flex: 3,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: AppButton(
-                              isClicked: false,
-                              backgroundColor: inCart ? Colors.red[900] : null,
-                              buttonTitle:
-                                  '${inCart ? 'Remove From\n' : 'Add To\n'}Cart',
-                              onPressed: () {},
-                            ),
-                          ),
-                        ],
+                      child: UserProductDetailsCartButton(
+                        product: product,
                       ),
                     ),
                   ],

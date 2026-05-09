@@ -30,13 +30,7 @@ class UserProductDetailsView extends StatelessWidget {
               child: Stack(
                 children: [
                   UserProductDetailsImage(imageUrl: productEntity.imageUrl),
-                  UserProductDetailsBottomSheet(
-                    price: productEntity.price,
-                    rate: productEntity.rate,
-                    stock: productEntity.stock,
-                    brand: productEntity.brand,
-                    inCart: productEntity.inCart ?? false,
-                  ),
+                  UserProductDetailsBottomSheet(product: productEntity),
                 ],
               ),
             ),

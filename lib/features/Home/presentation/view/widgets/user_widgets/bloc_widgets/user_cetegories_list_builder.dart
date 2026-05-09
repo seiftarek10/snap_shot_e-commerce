@@ -17,7 +17,7 @@ class UserCetegoriesListBuilder extends StatelessWidget {
           );
         } else if (state is GetProductsFailure) {
           return const SizedBox.shrink();
-        } else if (state is Loading) {
+        } else if (state is GettingProducts) {
           return const UserCategoriesLoadingWidget();
         } else {
           return const SizedBox.shrink();

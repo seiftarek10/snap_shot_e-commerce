@@ -21,7 +21,7 @@ class NoAccount extends StatelessWidget {
                 text: 'Sign Up',
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
-                    GoRouter.of(context).push(Routes.instance.signUp);
+                    GoRouter.of(context).go(Routes.instance.signUp);
                   },
                 style: AppTextStyle.instance.text12W500Black.copyWith(
                   color: AppColors.instance.blue,

@@ -8,7 +8,11 @@ import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/circle_check_box.dart';
 
 class AddressCardItem extends StatelessWidget {
-  const AddressCardItem({super.key, required this.isSelected, required this.onTap});
+  const AddressCardItem({
+    super.key,
+    required this.isSelected,
+    required this.onTap,
+  });
   final bool isSelected;
   final void Function() onTap;
   @override
@@ -63,19 +67,17 @@ class AddressCardItem extends StatelessWidget {
                     ],
                   ),
                 ),
-                Expanded(
-                  child: AppCircularCheckBox(isSelected: isSelected),
-                ),
+                Expanded(child: AppCircularCheckBox(isSelected: isSelected)),
               ],
             ),
             AppSpace.instance.v24,
             AppButton(
-              isClicked: false,
+              isLoading: false,
               buttonTitle: 'Edit Address',
               onPressed: () {
                 showDialog(
                   context: context,
-      
+
                   builder: (context) {
                     return const EditAddressForm();
                   },

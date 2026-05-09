@@ -16,8 +16,8 @@ import 'package:snap_shot/features/authentication/domain/use_case/send_otp_use_c
 import 'package:snap_shot/features/authentication/domain/use_case/sign_up_use_case.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/sing_in_use_case.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/verify_otp_use_case.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/cubit/sign_in_cubit.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/sign_up/sign_up_cubit.dart';
+import 'package:snap_shot/features/authentication/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
+import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source_impl.dart';
 import 'package:snap_shot/features/home/data/data_source/remote/home_remote_impl.dart';
 import 'package:snap_shot/features/home/data/models/product_model.dart';

@@ -26,6 +26,8 @@ class ProductModel {
   final String brand;
   @HiveField(10)
   final String stock;
+  @HiveField(11)
+  final int? counter;
 
   ProductModel({
     required this.id,
@@ -39,6 +41,7 @@ class ProductModel {
     required this.inCart,
     required this.brand,
     required this.stock,
+    required this.counter,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic>? json) {
@@ -54,6 +57,7 @@ class ProductModel {
       inCart: json?['inCart'] ?? false,
       brand: json?['brand'] ?? '',
       stock: json?['stock'].toString() ?? '',
+      counter: json?['conter']??1
     );
   }
   factory ProductModel.fromEntity(ProductEntity product) {
@@ -69,6 +73,7 @@ class ProductModel {
       inCart: product.inCart ?? false,
       brand: product.brand,
       stock: product.stock,
+      counter: product.counter
     );
   }
 
@@ -85,6 +90,7 @@ class ProductModel {
       'inCart': inCart ?? false,
       'brand': brand,
       'stock': stock,
+      'counter' : counter??1
     };
   }
 
@@ -101,6 +107,7 @@ class ProductModel {
       inCart: inCart ?? false,
       brand: brand,
       stock: stock,
+      counter: counter??1
     );
   }
 }

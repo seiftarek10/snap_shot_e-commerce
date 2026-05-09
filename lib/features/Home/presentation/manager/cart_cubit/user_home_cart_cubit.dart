@@ -9,7 +9,7 @@ part 'user_home_cart_state.dart';
 
 class UserHomeCartCubit extends BaseCubit<UserHomeCartState> {
   UserHomeCartCubit(this._addToCartUseCase, this._removeFromCartUseCase)
-    : super(UserHomeCartInitial());
+    : super(const UserHomeCartInitial());
 
   final AddToCartUseCase _addToCartUseCase;
   final RemoveFromCartUseCase _removeFromCartUseCase;
@@ -18,8 +18,9 @@ class UserHomeCartCubit extends BaseCubit<UserHomeCartState> {
     required bool inCart,
     required ProductEntity product,
   }) async {
+    safeEmit(const UserHomeCartLoading());
     if (inCart) {
-     await _removeFromCart(product.id);
+      await _removeFromCart(product.id);
     } else {
       await _addToCart(product);
     }
@@ -27,7 +28,9 @@ class UserHomeCartCubit extends BaseCubit<UserHomeCartState> {
 
   Future<void> _addToCart(ProductEntity product) async {
     final result = await _addToCartUseCase.call(product);
-    if (result is Success) safeEmit(AddToCartSuccess());
+    if (result is Success) {
+      safeEmit(AddToCartSuccess(id: product.id));
+    }
     if (result is AppFailure) {
       safeEmit(AddToCartFailure(errMessage: result.failure.errMessage));
     }
@@ -35,7 +38,9 @@ class UserHomeCartCubit extends BaseCubit<UserHomeCartState> {
 
   Future<void> _removeFromCart(String id) async {
     final result = await _removeFromCartUseCase.call(id);
-    if (result is Success) safeEmit(RemoveFromCartSuccess());
+    if (result is Success) {
+      safeEmit(RemoveFromCartSuccess(id: id));
+    }
     if (result is AppFailure) {
       safeEmit(RemoveFromCartFailure(errMessage: result.failure.errMessage));
     }

@@ -7,7 +7,7 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/core/utils/validator.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/cubit/sign_in_cubit.dart';
+import 'package:snap_shot/features/authentication/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
@@ -25,7 +25,7 @@ class SignInForm extends StatelessWidget {
           AppSnackBar.show(context, message: state.errorMessage, isError: true);
         }
         if (state is SignInSuccess) {
-          context.push(Routes.instance.appShell);
+          context.go(Routes.instance.appShell);
         }
       },
       child: Form(
@@ -75,7 +75,7 @@ class SignInForm extends StatelessWidget {
             BlocBuilder<SignInCubit, SignInState>(
               builder: (context, state) {
                 return AppButton(
-                  isClicked: state is SignInLoading,
+                  isLoading: state is SignInLoading,
                   buttonTitle: 'Sign In',
                   onPressed: () async {
                     if (formKey.currentState!.validate()) {

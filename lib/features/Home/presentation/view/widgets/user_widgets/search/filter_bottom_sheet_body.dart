@@ -64,7 +64,7 @@ class FilterBottomSheetBody extends StatelessWidget {
               children: [
                 Expanded(
                   child: AppButton(
-                    isClicked: false,
+                    isLoading: false,
                     buttonTitle: 'Cancel',
                     outlineButton: true,
                     onPressed: () {
@@ -75,7 +75,7 @@ class FilterBottomSheetBody extends StatelessWidget {
                 AppSpace.instance.h8,
                 Expanded(
                   child: AppButton(
-                    isClicked: false,
+                    isLoading: false,
                     buttonTitle: 'Apply',
                     onPressed: () {
                       onPressed();

@@ -13,7 +13,7 @@ class UserHomeProductListBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetAllProductsCubit, GetAllProductsState>(
       builder: (context, state) {
-        if (state is Loading) {
+        if (state is GettingProducts) {
           return const UserHomeLoadingWidget();
         } else if (state is GetProductsSuccess) {
           if (state.products.isEmpty) {
