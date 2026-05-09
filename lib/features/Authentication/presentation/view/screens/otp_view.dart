@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
-import 'package:snap_shot/features/authentication/data/models/otp_args_model.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/sign_up/sign_up_cubit.dart';
+import 'package:snap_shot/features/authentication/presentation/model/otp_args_model.dart';
+import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'package:snap_shot/features/authentication/presentation/view/widgets/otp/otp_fields.dart';
 import 'package:snap_shot/features/authentication/presentation/view/widgets/otp/resend_counter.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
@@ -57,7 +57,7 @@ class OtpView extends StatelessWidget {
                           otp: smsCode,
                         );
                       },
-                      isClicked: state is SignUpLoading,
+                      isLoading: state is SignUpLoading,
                     );
                   },
                 ),

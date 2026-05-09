@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/features/home/presentation/view%20model/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/search_field.dart';
 
 class UserHomeSearchBuilder extends StatelessWidget {

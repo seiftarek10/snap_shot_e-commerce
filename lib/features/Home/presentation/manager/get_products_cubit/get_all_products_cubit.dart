@@ -8,7 +8,7 @@ part 'get_all_products_state.dart';
 
 class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
   GetAllProductsCubit(this._getAllProductsUseCase)
-    : super(GetAllProductsInitial());
+    : super(const GetAllProductsInitial());
 
   final GetAllProductsUseCase _getAllProductsUseCase;
   List<String> categories = [];
@@ -17,7 +17,7 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
 
   Future<void> getAllProducts({bool? loadingState}) async {
     if (loadingState == null) {
-      safeEmit(Loading());
+      safeEmit(const GettingProducts());
     }
     final response = await _getAllProductsUseCase.call(null);
     if (response is Success<List<ProductEntity>>) {

@@ -32,7 +32,7 @@ class EditAddressForm extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 AppTextField(
-                     validator: (value) {
+                  validator: (value) {
                     return ValidationForm.nullOrEpmty(value);
                   },
                   hintText: "Enter place name (e.g., Home, Work)",
@@ -47,7 +47,7 @@ class EditAddressForm extends StatelessWidget {
                 ),
                 AppSpace.instance.v20,
                 AppTextField(
-                     validator: (value) {
+                  validator: (value) {
                     return ValidationForm.nullOrEpmty(value);
                   },
                   hintText: "Street, area or landmark",
@@ -62,7 +62,7 @@ class EditAddressForm extends StatelessWidget {
                 ),
                 AppSpace.instance.v20,
                 AppTextField(
-                     validator: (value) {
+                  validator: (value) {
                     return ValidationForm.nullOrEpmty(value);
                   },
                   hintText:
@@ -81,7 +81,7 @@ class EditAddressForm extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppButton(
-                        isClicked: false,
+                        isLoading: false,
                         buttonTitle: 'Cancel',
                         onPressed: () {
                           context.pop();
@@ -92,7 +92,7 @@ class EditAddressForm extends StatelessWidget {
                     AppSpace.instance.h12,
                     Expanded(
                       child: AppButton(
-                        isClicked: false,
+                        isLoading: false,
                         buttonTitle: 'Edit',
                         onPressed: () {},
                         // outlineButton: true,

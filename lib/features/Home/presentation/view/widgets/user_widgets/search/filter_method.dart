@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -48,11 +47,7 @@ class FilterMethod extends StatelessWidget {
                   allRating.add(filterOptions[index]);
                   rating(allRating);
                 }
-                log(allRating.length.toString());
-                log('###################');
-                for (var i in allRating) {
-                  log(i);
-                }
+              
               },
               title: filterOptions[index],
             );

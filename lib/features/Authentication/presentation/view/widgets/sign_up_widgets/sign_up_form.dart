@@ -8,7 +8,7 @@ import 'package:snap_shot/core/entites/user_entity.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/core/utils/validator.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/sign_up/sign_up_cubit.dart';
+import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
 
@@ -111,7 +111,7 @@ class SignUpForm extends StatelessWidget {
             BlocBuilder<SignUpCubit, SignUpState>(
               builder: (context, state) {
                 return AppButton(
-                  isClicked: state is SignUpLoading,
+                  isLoading: state is SignUpLoading,
                   buttonTitle: 'Sign Up',
                   onPressed: state is SignUpLoading
                       ? () {

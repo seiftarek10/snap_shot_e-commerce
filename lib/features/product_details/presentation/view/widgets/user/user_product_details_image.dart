@@ -1,9 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:snap_shot/core/constants/assets.dart';
 
 class UserProductDetailsImage extends StatelessWidget {
-  const UserProductDetailsImage({super.key});
+  const UserProductDetailsImage({super.key, required this.imageUrl});
 
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -11,7 +12,7 @@ class UserProductDetailsImage extends StatelessWidget {
       child: FractionallySizedBox(
         heightFactor: 0.65,
         widthFactor: 1,
-        child: Image.asset(Assets.imagesPngOnboardingimage2, fit: BoxFit.fill),
+        child: CachedNetworkImage(imageUrl: imageUrl, fit: BoxFit.cover),
       ),
     );
   }

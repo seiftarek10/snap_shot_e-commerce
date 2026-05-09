@@ -21,12 +21,12 @@ class AddressDetailsView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 AppSpace.instance.topPageSpace,
-                const PageHeader(pageTitle: 'Address Details',arrowBack: true ),
+                const PageHeader(pageTitle: 'Address Details', arrowBack: true),
                 AppSpace.instance.v16,
                 const AllUserAddresses(),
                 AppSpace.instance.v40,
                 AppButton(
-                  isClicked: false,
+                  isLoading: false,
                   buttonTitle: "Add New Address",
                   onPressed: () {
                     showDialog(

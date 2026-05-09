@@ -16,8 +16,8 @@ import 'package:snap_shot/features/authentication/domain/use_case/send_otp_use_c
 import 'package:snap_shot/features/authentication/domain/use_case/sign_up_use_case.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/sing_in_use_case.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/verify_otp_use_case.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/cubit/sign_in_cubit.dart';
-import 'package:snap_shot/features/authentication/presentation/view%20model/sign_up/sign_up_cubit.dart';
+import 'package:snap_shot/features/authentication/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
+import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source_impl.dart';
 import 'package:snap_shot/features/home/data/data_source/remote/home_remote_impl.dart';
 import 'package:snap_shot/features/home/data/models/product_model.dart';
@@ -28,9 +28,9 @@ import 'package:snap_shot/features/home/domain/use_case/add_to_cart_use_case.dar
 import 'package:snap_shot/features/home/domain/use_case/get_all_products_use_case.dart';
 import 'package:snap_shot/features/home/domain/use_case/remove_fav_product_use_case.dart';
 import 'package:snap_shot/features/home/domain/use_case/remove_from_cart_use_case.dart';
-import 'package:snap_shot/features/home/presentation/view%20model/cart/user_home_cart_cubit.dart';
-import 'package:snap_shot/features/home/presentation/view%20model/fav_cubit/user_home_favorites_cubit_cubit.dart';
-import 'package:snap_shot/features/home/presentation/view%20model/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_home_cart_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/fav_cubit/user_home_favorites_cubit_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 
 final sl = GetIt.instance;
 

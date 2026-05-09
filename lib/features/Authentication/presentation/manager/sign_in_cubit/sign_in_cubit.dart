@@ -7,14 +7,14 @@ import 'package:snap_shot/features/authentication/domain/use_case/sing_in_use_ca
 part 'sign_in_state.dart';
 
 class SignInCubit extends BaseCubit<SignInState> {
-  SignInCubit(this._singInUseCase) : super(SignInInitial());
+  SignInCubit(this._singInUseCase) : super(const SignInInitial());
   final SignInUseCase _singInUseCase;
 
   Future<void> signIn({required String email, required String password}) async {
-    safeEmit(SignInLoading());
+    safeEmit(const SignInLoading());
     final result = await _singInUseCase.call(SignInParam(email, password));
     if (result is Success<void>) {
-      safeEmit(SignInSuccess());
+      safeEmit(const SignInSuccess());
     }
     if (result is AppFailure<void>) {
       safeEmit(SignInFailure(result.failure.errMessage));

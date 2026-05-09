@@ -16,9 +16,9 @@ class AddNewCardForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AppTextField(
-               validator: (value) {
-                    return ValidationForm.nullOrEpmty(value);
-                  },
+            validator: (value) {
+              return ValidationForm.nullOrEpmty(value);
+            },
             hintText: 'Card Number',
             keyboardType: TextInputType.text,
             foucsedBorderColor: AppColors.instance.white,
@@ -29,9 +29,9 @@ class AddNewCardForm extends StatelessWidget {
           ),
           AppSpace.instance.v12,
           AppTextField(
-               validator: (value) {
-                    return ValidationForm.nullOrEpmty(value);
-                  },
+            validator: (value) {
+              return ValidationForm.nullOrEpmty(value);
+            },
             hintText: 'Card Holder',
             keyboardType: TextInputType.text,
             foucsedBorderColor: AppColors.instance.white,
@@ -44,8 +44,8 @@ class AddNewCardForm extends StatelessWidget {
           Row(
             children: [
               Expanded(
-                
-                child: AppTextField(   validator: (value) {
+                child: AppTextField(
+                  validator: (value) {
                     return ValidationForm.nullOrEpmty(value);
                   },
 
@@ -61,7 +61,7 @@ class AddNewCardForm extends StatelessWidget {
               AppSpace.instance.h12,
               Expanded(
                 child: AppTextField(
-                     validator: (value) {
+                  validator: (value) {
                     return ValidationForm.nullOrEpmty(value);
                   },
                   hintText: 'CCV',
@@ -77,8 +77,10 @@ class AddNewCardForm extends StatelessWidget {
           ),
           AppSpace.instance.v12,
           AppButton(
-            isClicked: false,
-            buttonTitle: 'Save Card', onPressed: () {}),
+            isLoading: false,
+            buttonTitle: 'Save Card',
+            onPressed: () {},
+          ),
         ],
       ),
     );

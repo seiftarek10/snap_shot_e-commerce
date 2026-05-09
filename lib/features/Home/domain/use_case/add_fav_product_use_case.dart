@@ -6,7 +6,7 @@ import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
 class AddFavProductUseCase extends UseCase<void, ProductEntity> {
   final HomeRepo _homeRepo;
 
-  AddFavProductUseCase(this._homeRepo);
+  const AddFavProductUseCase(this._homeRepo);
   @override
   Future<Result<void>> call(ProductEntity param) async {
     return await _homeRepo.addFavoriteProduct(product: param);

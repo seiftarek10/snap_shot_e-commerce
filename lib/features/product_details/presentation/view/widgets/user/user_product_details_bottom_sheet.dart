@@ -1,14 +1,17 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/shared/widgets/app_button.dart';
+import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
+import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_bottom_sheet_counter_widget.dart';
+import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_product_details_cart_button.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_bottom_section_item.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_product_price_text.dart';
 
 class UserProductDetailsBottomSheet extends StatelessWidget {
-  const UserProductDetailsBottomSheet({super.key});
-
+  const UserProductDetailsBottomSheet({super.key, required this.product});
+  final ProductEntity product;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -22,30 +25,30 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
           decoration: _buildContainerDecoration(),
           child: Column(
             children: [
-              const UserProductPriceText(),
+              UserProductPriceText(price: product.price),
               AppSpace.instance.v12,
               SizedBox(
                 height: 120.h,
                 child: Row(
                   children: [
-                    const Expanded(
+                    Expanded(
                       flex: 3,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           UserProductDetailsBottomSheetItem(
-                            title: 'Size',
-                            subTitle: "Large",
+                            title: 'rate',
+                            subTitle: product.rate,
                           ),
                           UserProductDetailsBottomSheetItem(
-                            title: 'Size',
-                            subTitle: "Large",
+                            title: 'stock',
+                            subTitle: product.stock,
                           ),
                         ],
                       ),
                     ),
-                    const Expanded(
+                    Expanded(
                       flex: 4,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -53,18 +56,18 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                         children: [
                           Expanded(
                             flex: 4,
-                            child: UserProductDetailsBottomSheetItem(
-                              title: '3',
-                              subTitle: "",
-                              isCounterItem: true,
+                            child: UserBottomSheetCounterWidget(
+                              counterListner: (counter) {
+                                product.counter = counter;
+                              },
                             ),
                           ),
-                          Expanded(child: SizedBox()),
+                          const Expanded(child: SizedBox()),
                           Expanded(
                             flex: 4,
                             child: UserProductDetailsBottomSheetItem(
                               title: 'Brand',
-                              subTitle: "lar",
+                              subTitle: product.brand,
                             ),
                           ),
                         ],
@@ -73,18 +76,8 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                     AppSpace.instance.h12,
                     Expanded(
                       flex: 3,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            child: AppButton(
-                              isClicked: false,
-                              buttonTitle: 'Add To\n  Cart',
-                              onPressed: () {},
-                            ),
-                          ),
-                        ],
+                      child: UserProductDetailsCartButton(
+                        product: product,
                       ),
                     ),
                   ],

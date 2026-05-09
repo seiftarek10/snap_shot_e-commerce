@@ -22,6 +22,12 @@ class ProductModel {
   bool? isFav;
   @HiveField(8)
   bool? inCart;
+  @HiveField(9)
+  final String brand;
+  @HiveField(10)
+  final String stock;
+  @HiveField(11)
+  final int? counter;
 
   ProductModel({
     required this.id,
@@ -33,6 +39,9 @@ class ProductModel {
     required this.rate,
     required this.isFav,
     required this.inCart,
+    required this.brand,
+    required this.stock,
+    required this.counter,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic>? json) {
@@ -46,6 +55,9 @@ class ProductModel {
       rate: json?['rating'].toString() ?? '',
       isFav: json?['isFav'] ?? false,
       inCart: json?['inCart'] ?? false,
+      brand: json?['brand'] ?? '',
+      stock: json?['stock'].toString() ?? '',
+      counter: json?['conter']??1
     );
   }
   factory ProductModel.fromEntity(ProductEntity product) {
@@ -59,6 +71,9 @@ class ProductModel {
       rate: product.rate,
       isFav: product.isFav ?? false,
       inCart: product.inCart ?? false,
+      brand: product.brand,
+      stock: product.stock,
+      counter: product.counter
     );
   }
 
@@ -73,6 +88,9 @@ class ProductModel {
       'rating': rate,
       'isFav': isFav ?? false,
       'inCart': inCart ?? false,
+      'brand': brand,
+      'stock': stock,
+      'counter' : counter??1
     };
   }
 
@@ -87,6 +105,9 @@ class ProductModel {
       imageUrl: imageUrl ?? '',
       isFav: isFav ?? false,
       inCart: inCart ?? false,
+      brand: brand,
+      stock: stock,
+      counter: counter??1
     );
   }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/features/home/presentation/view%20model/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/loading_state_widgets/user_products_loading_list.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/user_products_list.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_error_widget.dart';
@@ -13,7 +13,7 @@ class UserHomeProductListBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<GetAllProductsCubit, GetAllProductsState>(
       builder: (context, state) {
-        if (state is Loading) {
+        if (state is GettingProducts) {
           return const UserHomeLoadingWidget();
         } else if (state is GetProductsSuccess) {
           if (state.products.isEmpty) {
