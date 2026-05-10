@@ -3,10 +3,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 
 class CartItemData extends StatelessWidget {
-  const CartItemData({super.key});
-
+  const CartItemData({super.key, required this.product});
+  final ProductEntity product;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -15,7 +16,7 @@ class CartItemData extends StatelessWidget {
         Expanded(
           flex: 4,
           child: Text(
-            "Essential Bag",
+            product.name,
             style: AppTextStyle.instance.text14WBoldBlack,
           ),
         ),
@@ -25,7 +26,7 @@ class CartItemData extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               Text(
-                "Rating",
+                product.rate,
                 style: AppTextStyle.instance.text14W500Black.copyWith(
                   color: AppColors.instance.grey,
                 ),
@@ -50,7 +51,10 @@ class CartItemData extends StatelessWidget {
                   onTap: () {},
                   child: Icon(Icons.add, size: 16.h),
                 ),
-                Text("1", style: AppTextStyle.instance.text14W500Black),
+                Text(
+                  product.counter.toString(),
+                  style: AppTextStyle.instance.text14W500Black,
+                ),
                 InkWell(
                   onTap: () {},
                   child: Icon(Icons.remove, size: 16.h),
@@ -63,7 +67,11 @@ class CartItemData extends StatelessWidget {
           flex: 3,
           child: Align(
             alignment: Alignment.bottomLeft,
-            child: Text(r"$385.00", style: AppTextStyle.instance.text18W700),
+            child: Text(
+              r"$ "
+              "${product.price}",
+              style: AppTextStyle.instance.text18W700,
+            ),
           ),
         ),
       ],

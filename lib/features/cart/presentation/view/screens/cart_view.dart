@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/routing/routes.dart';
+import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
@@ -13,37 +16,31 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PagePadding(
-      child: CustomScrollView(
-        physics: const BouncingScrollPhysics(),
-        slivers: [
-          SliverToBoxAdapter(
-            child: Column(
-              children: [
-                AppSpace.instance.topPageSpace,
-                const PageHeader(pageTitle: 'Cart', arrowBack: false),
-                AppSpace.instance.v12,
-              ],
+    return BlocProvider(
+      create: (context) => sl<GetCartProudctsCubit>()..getCartProudcts(),
+      child: PagePadding(
+        child: CustomScrollView(
+          physics: const BouncingScrollPhysics(),
+          slivers: [
+            SliverPadding(
+              padding: EdgeInsets.symmetric(vertical: 8.h),
+              sliver: const SliverToBoxAdapter(
+                child: PageHeader(pageTitle: 'Cart', arrowBack: false),
+              ),
             ),
-          ),
-          const AllCartItemSliverList(),
-          const SliverToBoxAdapter(child: PriceSummeryCard()),
-          SliverToBoxAdapter(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                AppButton(
-                  isLoading: false,
-                  buttonTitle: 'Checkout',
-                  onPressed: () {
-                    context.push(Routes.instance.checkout);
-                  },
-                ),
-                AppSpace.instance.v12,
-              ],
+            const AllCartItemSliverList(),
+            const SliverToBoxAdapter(child: PriceSummeryCard()),
+            SliverToBoxAdapter(
+              child: AppButton(
+                isLoading: false,
+                buttonTitle: 'Checkout',
+                onPressed: () {
+                  context.push(Routes.instance.checkout);
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

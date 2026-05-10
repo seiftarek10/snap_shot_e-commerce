@@ -18,6 +18,14 @@ import 'package:snap_shot/features/authentication/domain/use_case/sing_in_use_ca
 import 'package:snap_shot/features/authentication/domain/use_case/verify_otp_use_case.dart';
 import 'package:snap_shot/features/authentication/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
+import 'package:snap_shot/features/cart/data/data_source/local/cart_local_data_source.dart';
+import 'package:snap_shot/features/cart/data/data_source/local/cart_local_data_source_impl.dart';
+import 'package:snap_shot/features/cart/data/data_source/remote/cart_remote_data_source.dart';
+import 'package:snap_shot/features/cart/data/data_source/remote/cart_remote_data_source_impl.dart';
+import 'package:snap_shot/features/cart/data/repos/cart_repo_impl.dart';
+import 'package:snap_shot/features/cart/domain/repos/cart_repo.dart';
+import 'package:snap_shot/features/cart/domain/use_cases/get_cart_products_use_case.dart';
+import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
 import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source.dart';
 import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source_impl.dart';
 import 'package:snap_shot/features/favorites/data/data_source/remote/fav_remote_data_source.dart';
@@ -54,6 +62,7 @@ Future<void> setupGetIt() async {
   _initAuthFeature();
   _initHomeFeature();
   _initFavoritesFeature();
+  _initCartFeature();
 }
 
 void _initAuthFeature() {
@@ -178,4 +187,30 @@ void _initFavoritesFeature() {
       sl<RemoveFavProductUseCase>(),
     ),
   );
+}
+
+void _initCartFeature() {
+  //data source
+  sl.registerLazySingleton<CartRemoteDataSource>(
+    () => CartRemoteDataSourceImpl(sl<IRemoteDataBaseServices>()),
+  );
+  sl.registerLazySingleton<CartLocalDataSource>(
+    () => CartLocalDataSourceImpl(
+      sl<ILocalDataBaseServices<ProductModel>>(
+        instanceName: HiveBoxesNames.instance.cartProdcutBox,
+      ),
+      sl<ILocalDataBaseServices<UserModel>>(),
+    ),
+  );
+
+  // repos
+  sl.registerLazySingleton<CartRepo>(
+    () => CartRepoImpl(sl<CartRemoteDataSource>(), sl<CartLocalDataSource>()),
+  );
+
+  //use cases
+  sl.registerLazySingleton(() => GetCartProductsUseCase(sl<CartRepo>()));
+
+  // cubits
+  sl.registerFactory(() => GetCartProudctsCubit(sl<GetCartProductsUseCase>()));
 }
