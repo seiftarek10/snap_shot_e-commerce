@@ -1,7 +1,7 @@
 import 'package:hive_flutter/adapters.dart';
 import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_boxes_names.dart';
 import 'package:snap_shot/core/models/user_model.dart';
-import 'package:snap_shot/features/home/data/models/product_model.dart';
+import 'package:snap_shot/core/models/product_model.dart';
 
 Future<void> userHiveSetup() async {
   await Hive.initFlutter();

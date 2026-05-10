@@ -2,7 +2,7 @@ import 'package:snap_shot/core/data_source/remote_data_source/api/api_interface.
 import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base/collection_path.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/features/home/data/data_source/remote/home_remote_data_source.dart';
-import 'package:snap_shot/features/home/data/models/product_model.dart';
+import 'package:snap_shot/core/models/product_model.dart';
 
 class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
   final IApiServices _apiServices;

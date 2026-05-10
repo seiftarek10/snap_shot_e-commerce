@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_details_view.dart';
@@ -18,6 +19,7 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/sign
 import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
+import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
@@ -63,25 +65,33 @@ class AppRouter {
         path: Routes.instance.productDetails,
         builder: (context, state) {
           final extra = state.extra as ProductDetailsExtraModel;
-          if (role == Role.user) {
-            return MultiBlocProvider(
-              providers: [
-                BlocProvider.value(value: extra.getAllProductsCubit),
-                BlocProvider.value(value: extra.userHomeCartCubit),
-              ],
-              child: ProductDetailsView(
-                role: role,
-                productEntity: extra.productEntity,
-              ),
-            );
-          } else {
+          final view = ProductDetailsView(
+            role: role,
+            productEntity: extra.productEntity,
+            fromHomeScreen: extra.fromHomeScreen,
+          );
+          if (role != Role.user) {
             return ProductDetailsView(
               role: role,
               productEntity: extra.productEntity,
+              fromHomeScreen: extra.fromHomeScreen,
             );
           }
+          return extra.fromHomeScreen
+              ? MultiBlocProvider(
+                  providers: [
+                    BlocProvider.value(value: extra.getAllProductsCubit!),
+                    BlocProvider.value(value: extra.userHomeCartCubit!),
+                  ],
+                  child: view,
+                )
+              : BlocProvider(
+                  create: (context) => sl<UserCartManegerCubit>(),
+                  child: view,
+                );
         },
       ),
+
       GoRoute(
         path: Routes.instance.checkout,
         builder: (context, state) => const CheckoutView(),

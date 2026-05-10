@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
-import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_home_cart_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/user_home_product_item.dart';
 import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
@@ -25,8 +25,8 @@ class UserHomeProductsList extends StatelessWidget {
         childAspectRatio: 163 / 217,
       ),
       itemBuilder: (context, index) {
-        final getAllProductsCubit = context.read<GetAllProductsCubit>();
-        final userHomeCartCubit = context.read<UserHomeCartCubit>();
+        final getAllProductsCubit = context.read<UserHomeProudctsCubit>();
+        final userHomeCartCubit = context.read<UserCartManegerCubit>();
         return GestureDetector(
           onTap: () {
             context.push(
@@ -35,7 +35,9 @@ class UserHomeProductsList extends StatelessWidget {
                 productEntity: products[index],
                 getAllProductsCubit: getAllProductsCubit,
                 userHomeCartCubit: userHomeCartCubit,
+              fromHomeScreen: true
               ),
+              // extra: products[index],
             );
           },
           child: UserHomeProductItem(

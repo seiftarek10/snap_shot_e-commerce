@@ -5,10 +5,10 @@ import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/domain/use_case/add_to_cart_use_case.dart';
 import 'package:snap_shot/features/home/domain/use_case/remove_from_cart_use_case.dart';
 
-part 'user_home_cart_state.dart';
+part 'user_cart_manager_state.dart';
 
-class UserHomeCartCubit extends BaseCubit<UserHomeCartState> {
-  UserHomeCartCubit(this._addToCartUseCase, this._removeFromCartUseCase)
+class UserCartManegerCubit extends BaseCubit<UserCartManagerState> {
+  UserCartManegerCubit(this._addToCartUseCase, this._removeFromCartUseCase)
     : super(const UserHomeCartInitial());
 
   final AddToCartUseCase _addToCartUseCase;

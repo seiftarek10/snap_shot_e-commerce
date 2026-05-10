@@ -9,8 +9,10 @@ class ProductDetailsView extends StatelessWidget {
     super.key,
     required this.role,
     required this.productEntity,
+    required this.fromHomeScreen,
   });
   final ProductEntity productEntity;
+  final bool fromHomeScreen;
 
   //####### Todo Replace it and save it in cashe memory########//
   final Role role;
@@ -18,7 +20,10 @@ class ProductDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (role) {
       case Role.user:
-        return UserProductDetailsView(productEntity: productEntity);
+        return UserProductDetailsView(
+          productEntity: productEntity,
+          fromHomeScreen: fromHomeScreen,
+        );
       case Role.owner:
         return const OwnerProductDetailsView();
       case Role.staff:

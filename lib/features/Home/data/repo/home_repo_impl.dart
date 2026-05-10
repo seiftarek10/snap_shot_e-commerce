@@ -7,7 +7,7 @@ import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source.dart';
 import 'package:snap_shot/features/home/data/data_source/remote/home_remote_data_source.dart';
-import 'package:snap_shot/features/home/data/models/product_model.dart';
+import 'package:snap_shot/core/models/product_model.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
 

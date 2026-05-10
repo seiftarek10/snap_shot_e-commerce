@@ -1,7 +1,7 @@
 import 'package:snap_shot/core/data_source/local_data_source/local_data_base_interface.dart';
 import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source.dart';
-import 'package:snap_shot/features/home/data/models/product_model.dart';
+import 'package:snap_shot/core/models/product_model.dart';
 
 class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   final ILocalDataBaseServices<ProductModel> _productsBox;

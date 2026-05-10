@@ -1,5 +1,5 @@
 import 'package:snap_shot/core/models/user_model.dart';
-import 'package:snap_shot/features/home/data/models/product_model.dart';
+import 'package:snap_shot/core/models/product_model.dart';
 
 abstract class HomeLocalDataSource {
   //save

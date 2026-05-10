@@ -6,6 +6,11 @@ class AppLoadingWidget extends StatelessWidget {
   final Widget child;
   @override
   Widget build(BuildContext context) {
-    return Skeletonizer(child: child);
+    return Skeletonizer(
+      enabled: true,
+      enableSwitchAnimation: true,
+
+      child: child,
+    );
   }
 }
