@@ -4,7 +4,6 @@ import 'package:snap_shot/core/errors/dio_errors.dart';
 import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/errors/firesotre_error.dart';
 import 'package:snap_shot/core/utils/result.dart';
-import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source.dart';
 import 'package:snap_shot/features/home/data/data_source/remote/home_remote_data_source.dart';
 import 'package:snap_shot/core/models/product_model.dart';
@@ -20,8 +19,7 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Result<List<ProductEntity>>> getAllProducts() async {
     try {
-      final UserModel? currentUser = _localDataSource.getUserData();
-      final String? uid = currentUser?.uid;
+      final String? uid = _localDataSource.getUserId();
 
       Set<String?> favIds = {};
       Set<String?> cartIds = {};
@@ -76,8 +74,8 @@ class HomeRepoImpl implements HomeRepo {
     try {
       final productModel = ProductModel.fromEntity(product);
       productModel.isFav = true;
-      UserModel? currentUser = _localDataSource.getUserData();
-      String? uid = currentUser?.uid;
+      final String? uid = _localDataSource.getUserId();
+
       if (uid != null) {
         await _remoteDataSource.addFavProduct(product: productModel, uid: uid);
 
@@ -99,8 +97,8 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Result<void>> removeFavProduct({required String id}) async {
     try {
-      final UserModel? currentUser = _localDataSource.getUserData();
-      final String? uid = currentUser?.uid;
+      final String? uid = _localDataSource.getUserId();
+
       if (uid != null) {
         await _remoteDataSource.removeFavProduct(prodcutId: id, uid: uid);
         await _localDataSource.clearFavIds();
@@ -121,8 +119,7 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Result<void>> addToCart({required ProductEntity product}) async {
     try {
-      final UserModel? currentUser = _localDataSource.getUserData();
-      final String? uid = currentUser?.uid;
+      final String? uid = _localDataSource.getUserId();
       ProductModel productModel = ProductModel.fromEntity(product);
       if (uid != null) {
         await _remoteDataSource.addToCart(product: productModel, uid: uid);
@@ -145,8 +142,7 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Result<void>> removeFromCart({required String id}) async {
     try {
-      final UserModel? currentUser = _localDataSource.getUserData();
-      final String? uid = currentUser?.uid;
+      final String? uid = _localDataSource.getUserId();
       if (uid != null) {
         await _remoteDataSource.removeFromCart(prodyctid: id, uid: uid);
         await _localDataSource.clearCartProducts();

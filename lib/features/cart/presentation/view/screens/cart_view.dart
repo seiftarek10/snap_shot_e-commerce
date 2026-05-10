@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
@@ -16,8 +17,13 @@ class CartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<GetCartProudctsCubit>()..getCartProudcts(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => sl<GetCartProudctsCubit>()..getCartProudcts(),
+        ),
+        BlocProvider(create: (context) => sl<UserCartManegerCubit>()),
+      ],
       child: PagePadding(
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),

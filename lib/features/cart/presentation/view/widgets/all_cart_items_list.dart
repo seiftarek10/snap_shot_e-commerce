@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_item.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_loading_list.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
+import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_error_widget.dart';
 
 class AllCartItemSliverList extends StatelessWidget {
@@ -12,16 +14,28 @@ class AllCartItemSliverList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<GetCartProudctsCubit, GetCartProudctsState>(
-      builder: (context, state) {
-        if (state is CartProudctsLoadded) {
-          return _buildSuccessList(state.products);
-        } else if (state is FailedLoadCartProducts) {
-          return _buildErrorWidget(context, state.errMessage);
-        } else {
-          return _buildLoadingList();
+    return BlocListener<UserCartManegerCubit, UserCartManagerState>(
+      listener: (context, state) async {
+        if (state is RemoveFromCartSuccess) {
+          await context.read<GetCartProudctsCubit>().getCartProudcts();
+          if (!context.mounted) return;
+          AppSnackBar.show(context, message: 'Deleted');
+        }
+        if (state is RemoveFromCartFailure) {
+          AppSnackBar.show(context, message: state.errMessage);
         }
       },
+      child: BlocBuilder<GetCartProudctsCubit, GetCartProudctsState>(
+        builder: (context, state) {
+          if (state is CartProudctsLoadded) {
+            return _buildSuccessList(state.products);
+          } else if (state is FailedLoadCartProducts) {
+            return _buildErrorWidget(context, state.errMessage);
+          } else {
+            return _buildLoadingList();
+          }
+        },
+      ),
     );
   }
 
