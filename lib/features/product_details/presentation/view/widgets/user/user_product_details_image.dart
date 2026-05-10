@@ -12,7 +12,7 @@ class UserProductDetailsImage extends StatelessWidget {
       child: FractionallySizedBox(
         heightFactor: 0.65,
         widthFactor: 1,
-        child: CachedNetworkImage(imageUrl: imageUrl, fit: BoxFit.cover),
+        child: CachedNetworkImage(imageUrl: imageUrl, fit: BoxFit.fitWidth),
       ),
     );
   }

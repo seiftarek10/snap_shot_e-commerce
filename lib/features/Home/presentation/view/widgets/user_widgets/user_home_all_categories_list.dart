@@ -37,7 +37,7 @@ class _UserHomeAllCategoriesListState extends State<UserHomeAllCategoriesList> {
             onTap: () {
               setState(() {
                 currentIndex = isAllButton ? -1 : index - 1;
-                context.read<GetAllProductsCubit>().changeCategory(
+                context.read<UserHomeProudctsCubit>().changeCategory(
                   category: isAllButton ? 'All' : categoryName,
                 );
               });

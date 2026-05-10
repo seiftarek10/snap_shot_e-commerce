@@ -60,10 +60,8 @@ class _AppShellState extends State<AppShell> {
           });
         },
       ),
-
-      body: SafeArea(
-        child: IndexedStack(index: currentIndex, children: _pages),
-      ),
+      // Use a simple expression instead of IndexedStack
+      body: SafeArea(child: _pages[currentIndex]),
     );
   }
 }

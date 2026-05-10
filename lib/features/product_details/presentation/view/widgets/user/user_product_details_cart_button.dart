@@ -1,18 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
-import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_home_cart_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 
 class UserProductDetailsCartButton extends StatelessWidget {
-  const UserProductDetailsCartButton({super.key, required this.product});
+  const UserProductDetailsCartButton({
+    super.key,
+    required this.product,
+    required this.fromHomeScreen,
+  });
 
   final ProductEntity product;
+  final bool fromHomeScreen;
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserHomeCartCubit, UserHomeCartState>(
+    return BlocBuilder<UserCartManegerCubit, UserCartManagerState>(
       builder: (context, state) {
         bool inCart = product.inCart ?? false;
 
@@ -34,14 +39,18 @@ class UserProductDetailsCartButton extends StatelessWidget {
                 backgroundColor: inCart ? Colors.red[900] : null,
                 buttonTitle: '${inCart ? 'Remove From\n' : 'Add To\n'}Cart',
                 onPressed: () async {
-                  final getAllProductsCubit = context
-                      .read<GetAllProductsCubit>();
-                  final userHomeCartCubit = context.read<UserHomeCartCubit>();
+                  final userHomeCartCubit = context
+                      .read<UserCartManegerCubit>();
+                  final getAllProductsCubit = fromHomeScreen == true
+                      ? context.read<UserHomeProudctsCubit>()
+                      : null;
                   await userHomeCartCubit.toggleCartProdcut(
                     inCart: inCart,
                     product: product,
                   );
-                  await getAllProductsCubit.getAllProducts();
+                  if (fromHomeScreen) {
+                    await getAllProductsCubit!.getAllProducts();
+                  }
                 },
               ),
             ),

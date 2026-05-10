@@ -7,9 +7,14 @@ import 'package:snap_shot/features/product_details/presentation/view/widgets/use
 import 'package:snap_shot/shared/widgets/page_header.dart';
 
 class UserProductDetailsView extends StatelessWidget {
-  const UserProductDetailsView({super.key, required this.productEntity});
+  const UserProductDetailsView({
+    super.key,
+    required this.productEntity,
+    required this.fromHomeScreen,
+  });
 
   final ProductEntity productEntity;
+  final bool fromHomeScreen;
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +35,10 @@ class UserProductDetailsView extends StatelessWidget {
               child: Stack(
                 children: [
                   UserProductDetailsImage(imageUrl: productEntity.imageUrl),
-                  UserProductDetailsBottomSheet(product: productEntity),
+                  UserProductDetailsBottomSheet(
+                    product: productEntity,
+                    fromHomeScreen: fromHomeScreen,
+                  ),
                 ],
               ),
             ),

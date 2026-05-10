@@ -18,9 +18,17 @@ import 'package:snap_shot/features/authentication/domain/use_case/sing_in_use_ca
 import 'package:snap_shot/features/authentication/domain/use_case/verify_otp_use_case.dart';
 import 'package:snap_shot/features/authentication/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
+import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source.dart';
+import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source_impl.dart';
+import 'package:snap_shot/features/favorites/data/data_source/remote/fav_remote_data_source.dart';
+import 'package:snap_shot/features/favorites/data/data_source/remote/fav_remote_data_source_impl.dart';
+import 'package:snap_shot/features/favorites/data/repos/fav_repo_impl.dart';
+import 'package:snap_shot/features/favorites/domain/repos/favorites_repo.dart';
+import 'package:snap_shot/features/favorites/domain/use_case/get_all_fav_products_use_case.dart';
+import 'package:snap_shot/features/favorites/presentation/managers/get_fav_products/get_favorites_products_cubit.dart';
 import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source_impl.dart';
 import 'package:snap_shot/features/home/data/data_source/remote/home_remote_impl.dart';
-import 'package:snap_shot/features/home/data/models/product_model.dart';
+import 'package:snap_shot/core/models/product_model.dart';
 import 'package:snap_shot/features/home/data/repo/home_repo_impl.dart';
 import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
 import 'package:snap_shot/features/home/domain/use_case/add_fav_product_use_case.dart';
@@ -28,7 +36,7 @@ import 'package:snap_shot/features/home/domain/use_case/add_to_cart_use_case.dar
 import 'package:snap_shot/features/home/domain/use_case/get_all_products_use_case.dart';
 import 'package:snap_shot/features/home/domain/use_case/remove_fav_product_use_case.dart';
 import 'package:snap_shot/features/home/domain/use_case/remove_from_cart_use_case.dart';
-import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_home_cart_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/fav_cubit/user_home_favorites_cubit_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 
@@ -45,6 +53,7 @@ Future<void> setupGetIt() async {
   // Features
   _initAuthFeature();
   _initHomeFeature();
+  _initFavoritesFeature();
 }
 
 void _initAuthFeature() {
@@ -123,7 +132,7 @@ void _initHomeFeature() {
   sl.registerLazySingleton(() => RemoveFromCartUseCase(sl<HomeRepo>()));
 
   // Cubits
-  sl.registerFactory(() => GetAllProductsCubit(sl<GetAllProductsUseCase>()));
+  sl.registerFactory(() => UserHomeProudctsCubit(sl<GetAllProductsUseCase>()));
   sl.registerFactory(
     () => UserHomeFavoritesCubit(
       sl<AddFavProductUseCase>(),
@@ -131,7 +140,42 @@ void _initHomeFeature() {
     ),
   );
   sl.registerFactory(
-    () =>
-        UserHomeCartCubit(sl<AddToCartUseCase>(), sl<RemoveFromCartUseCase>()),
+    () => UserCartManegerCubit(
+      sl<AddToCartUseCase>(),
+      sl<RemoveFromCartUseCase>(),
+    ),
+  );
+}
+
+void _initFavoritesFeature() {
+  // data sources
+  sl.registerLazySingleton<FavProductsRemoteDataSource>(
+    () => FavProuctsRemoteDataSourceImpl(sl<IRemoteDataBaseServices>()),
+  );
+  sl.registerLazySingleton<FavProductsLocalDataSource>(
+    () => FavProudctsLocalDataSourceImpl(
+      sl<ILocalDataBaseServices<ProductModel>>(
+        instanceName: HiveBoxesNames.instance.favProductsBox,
+      ),
+      sl<ILocalDataBaseServices<UserModel>>(),
+    ),
+  );
+
+  //repos
+  sl.registerLazySingleton<FavoritesRepo>(
+    () => FavoritesRepoImpl(
+      sl<FavProductsLocalDataSource>(),
+      sl<FavProductsRemoteDataSource>(),
+    ),
+  );
+  //Use Cases
+  sl.registerLazySingleton(() => GetAllFavProductsUseCase(sl<FavoritesRepo>()));
+  //Cubits
+  sl.registerFactory(
+    () => FavoritesProductsCubit(
+      sl<GetAllFavProductsUseCase>(),
+      sl<AddFavProductUseCase>(),
+      sl<RemoveFavProductUseCase>(),
+    ),
   );
 }

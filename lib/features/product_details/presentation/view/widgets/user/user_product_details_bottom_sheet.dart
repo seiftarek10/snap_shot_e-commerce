@@ -10,8 +10,9 @@ import 'package:snap_shot/features/product_details/presentation/view/widgets/use
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_product_price_text.dart';
 
 class UserProductDetailsBottomSheet extends StatelessWidget {
-  const UserProductDetailsBottomSheet({super.key, required this.product});
+  const UserProductDetailsBottomSheet({super.key, required this.product, required this.fromHomeScreen});
   final ProductEntity product;
+  final bool fromHomeScreen;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -78,6 +79,7 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                       flex: 3,
                       child: UserProductDetailsCartButton(
                         product: product,
+                        fromHomeScreen: fromHomeScreen,
                       ),
                     ),
                   ],

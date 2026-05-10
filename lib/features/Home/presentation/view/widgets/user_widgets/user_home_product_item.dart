@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
-import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_home_cart_cubit.dart';
+import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/fav_cubit/user_home_favorites_cubit_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/user_shopping_bag_icon.dart';
@@ -46,7 +46,7 @@ class UserHomeProductItem extends StatelessWidget {
                 child: FavoriteIcon(
                   isFavorite: product.isFav ?? false,
                   onTap: () async {
-                    final productsCubit = context.read<GetAllProductsCubit>();
+                    final productsCubit = context.read<UserHomeProudctsCubit>();
 
                     final favCubit = context.read<UserHomeFavoritesCubit>();
                     await favCubit.toggleFavProduct(
@@ -95,9 +95,9 @@ class UserHomeProductItem extends StatelessWidget {
             UserShoppingBagIcon(
               inCart: product.inCart ?? false,
               onTap: () async {
-                final productsCubit = context.read<GetAllProductsCubit>();
+                final productsCubit = context.read<UserHomeProudctsCubit>();
 
-                final cartCubit = context.read<UserHomeCartCubit>();
+                final cartCubit = context.read<UserCartManegerCubit>();
                 await cartCubit.toggleCartProdcut(
                   inCart: product.inCart ?? false,
                   product: product,

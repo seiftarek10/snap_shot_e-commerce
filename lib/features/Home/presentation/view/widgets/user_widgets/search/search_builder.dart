@@ -11,10 +11,10 @@ class UserHomeSearchBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    GetAllProductsCubit productsCubit = context.read<GetAllProductsCubit>();
+    UserHomeProudctsCubit productsCubit = context.read<UserHomeProudctsCubit>();
     List<String>? allRates;
-    RangeValues? currentRange ;
-    return BlocBuilder<GetAllProductsCubit, GetAllProductsState>(
+    RangeValues? currentRange;
+    return BlocBuilder<UserHomeProudctsCubit, UserHomeProudctsState>(
       builder: (context, state) {
         if (state is GetProductsSuccess) {
           RangeValues range = productsCubit.getPricesRange();
@@ -22,10 +22,13 @@ class UserHomeSearchBuilder extends StatelessWidget {
             maxValue: range.end,
             minValue: range.start,
             onApplyPressed: () {
-              productsCubit.filter(currentRange??productsCubit.getPricesRange(), allRates??[]);
+              productsCubit.filter(
+                currentRange ?? productsCubit.getPricesRange(),
+                allRates ?? [],
+              );
             },
             onChanged: (searchKey) {
-              context.read<GetAllProductsCubit>().searchByName(
+              context.read<UserHomeProudctsCubit>().searchByName(
                 searchKey: searchKey,
               );
             },

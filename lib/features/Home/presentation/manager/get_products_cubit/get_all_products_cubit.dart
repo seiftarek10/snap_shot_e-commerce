@@ -6,8 +6,8 @@ import 'package:snap_shot/features/home/domain/use_case/get_all_products_use_cas
 import 'dart:math';
 part 'get_all_products_state.dart';
 
-class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
-  GetAllProductsCubit(this._getAllProductsUseCase)
+class UserHomeProudctsCubit extends BaseCubit<UserHomeProudctsState> {
+  UserHomeProudctsCubit(this._getAllProductsUseCase)
     : super(const GetAllProductsInitial());
 
   final GetAllProductsUseCase _getAllProductsUseCase;
@@ -17,7 +17,7 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
 
   Future<void> getAllProducts({bool? loadingState}) async {
     if (loadingState == null) {
-      safeEmit(const GettingProducts());
+      safeEmit(const GettingAllProducts());
     }
     final response = await _getAllProductsUseCase.call(null);
     if (response is Success<List<ProductEntity>>) {
