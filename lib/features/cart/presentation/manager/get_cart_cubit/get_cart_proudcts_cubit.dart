@@ -11,14 +11,37 @@ class GetCartProudctsCubit extends BaseCubit<GetCartProudctsState> {
     : super(const GetCartProudctsInitial());
 
   final GetCartProductsUseCase _getCartProductsUseCase;
-
+  List<ProductEntity> prodcuts = [];
+  double productsCost = 0.0;
+  double delivery = 0.0;
   Future<void> getCartProudcts() async {
     safeEmit(const GettingCartProudcts());
     final result = await _getCartProductsUseCase(null);
     if (result is Success<List<ProductEntity>>) {
       safeEmit(CartProudctsLoadded(result.data));
+      prodcuts = result.data;
+      getCosts();
     } else if (result is AppFailure<List<ProductEntity>>) {
       safeEmit(FailedLoadCartProducts(result.failure.errMessage));
+    }
+  }
+
+  void getCosts() {
+    productsCost = 0.0;
+    for (var e in prodcuts) {
+      productsCost +=
+          double.parse(e.price) * double.parse(e.counter.toString());
+    }
+    productsCost = double.parse(productsCost.toStringAsFixed(2));
+    delivery = double.parse((productsCost * 0.05).toStringAsFixed(2));
+  }
+
+  void updateCounter(String id, int counter) {
+    final index = prodcuts.indexWhere((e) => e.id == id);
+    if (index != -1) {
+      prodcuts[index] = prodcuts[index].copyWith(counter: counter);
+      safeEmit(CartProudctsLoadded(List.of(prodcuts)));
+      getCosts();
     }
   }
 }

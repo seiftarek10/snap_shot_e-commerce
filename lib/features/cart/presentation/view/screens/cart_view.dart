@@ -5,15 +5,16 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
+import 'package:snap_shot/features/cart/presentation/view/widgets/cart_view_price_section.dart';
 import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/all_cart_items_list.dart';
-import 'package:snap_shot/shared/widgets/price_summery/price_summery_card.dart';
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
+  
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class CartView extends StatelessWidget {
               ),
             ),
             const AllCartItemSliverList(),
-            const SliverToBoxAdapter(child: PriceSummeryCard()),
+            const SliverToBoxAdapter(child: CartViewPriceSection()),
             SliverToBoxAdapter(
               child: AppButton(
                 isLoading: false,

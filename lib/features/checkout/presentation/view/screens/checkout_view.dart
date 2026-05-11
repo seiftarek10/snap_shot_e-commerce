@@ -32,7 +32,11 @@ class CheckoutView extends StatelessWidget {
                 AppSpace.instance.v12,
                 const Divider(thickness: 2),
                 AppSpace.instance.v12,
-                const PriceSummeryCard(),
+                const PriceSummeryCard(
+                  deliveryCost: 10,
+                  totalCost: 100,
+                  productsCost: 90,
+                ),
                 AppSpace.instance.v16,
                 AppButton(
                   isLoading: false,

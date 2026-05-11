@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
@@ -10,9 +9,17 @@ import 'package:snap_shot/features/product_details/presentation/view/widgets/use
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_product_price_text.dart';
 
 class UserProductDetailsBottomSheet extends StatelessWidget {
-  const UserProductDetailsBottomSheet({super.key, required this.product, required this.fromHomeScreen});
+  UserProductDetailsBottomSheet({
+    super.key,
+    required this.product,
+    required this.fromHomeScreen,
+  });
+
   final ProductEntity product;
   final bool fromHomeScreen;
+
+  final ValueNotifier<int> _counterNotifier = ValueNotifier<int>(1);
+
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -20,7 +27,6 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
       child: FractionallySizedBox(
         heightFactor: 0.36,
         widthFactor: 1,
-
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
           decoration: _buildContainerDecoration(),
@@ -49,6 +55,7 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                         ],
                       ),
                     ),
+
                     Expanded(
                       flex: 4,
                       child: Column(
@@ -59,8 +66,9 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                             flex: 4,
                             child: UserBottomSheetCounterWidget(
                               counterListner: (counter) {
-                                product.counter = counter;
+                                _counterNotifier.value = counter;
                               },
+                              counter: product.counter??1,
                             ),
                           ),
                           const Expanded(child: SizedBox()),
@@ -75,11 +83,17 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                       ),
                     ),
                     AppSpace.instance.h12,
+
                     Expanded(
                       flex: 3,
-                      child: UserProductDetailsCartButton(
-                        product: product,
-                        fromHomeScreen: fromHomeScreen,
+                      child: ValueListenableBuilder<int>(
+                        valueListenable: _counterNotifier,
+                        builder: (context, currentCount, child) {
+                          return UserProductDetailsCartButton(
+                            product: product.copyWith(counter: currentCount),
+                            fromHomeScreen: fromHomeScreen,
+                          );
+                        },
                       ),
                     ),
                   ],
@@ -92,20 +106,21 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
     );
   }
 
-  BoxDecoration _buildContainerDecoration() {
-    return BoxDecoration(
-      boxShadow: [
-        BoxShadow(
-          color: AppColors.instance.lighterGrey,
-          offset: const Offset(0, -10),
-          blurRadius: 5,
-        ),
-      ],
-      color: AppColors.instance.white,
-      borderRadius: BorderRadius.only(
-        topLeft: Radius.circular(30.r),
-        topRight: Radius.circular(30.r),
+}
+
+BoxDecoration _buildContainerDecoration() {
+  return BoxDecoration(
+    boxShadow: [
+      BoxShadow(
+        color: AppColors.instance.lighterGrey,
+        offset: const Offset(0, -10),
+        blurRadius: 5,
       ),
-    );
-  }
+    ],
+    color: AppColors.instance.white,
+    borderRadius: BorderRadius.only(
+      topLeft: Radius.circular(30.r),
+      topRight: Radius.circular(30.r),
+    ),
+  );
 }
