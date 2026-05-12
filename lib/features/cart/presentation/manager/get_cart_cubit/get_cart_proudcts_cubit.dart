@@ -27,7 +27,6 @@ class GetCartProudctsCubit extends BaseCubit<GetCartProudctsState> {
   }
 
   void getCosts() {
-    productsCost = 0.0;
     for (var e in prodcuts) {
       productsCost +=
           double.parse(e.price) * double.parse(e.counter.toString());
@@ -44,4 +43,6 @@ class GetCartProudctsCubit extends BaseCubit<GetCartProudctsState> {
       getCosts();
     }
   }
+
+
 }

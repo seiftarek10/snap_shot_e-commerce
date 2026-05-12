@@ -13,7 +13,7 @@ class SupabaseAuthService extends AuthRemoteDataSource {
     required String uid,
     required UserModel userData,
   }) async {
-    await _dataBaseServices.addDataWithId(
+    await _dataBaseServices.postWithId(
       id: uid,
       data: userData.toJson(),
       path: 'users',
@@ -48,7 +48,7 @@ class SupabaseAuthService extends AuthRemoteDataSource {
   Future<UserModel> getUserData({required String uid}) {
     throw UnimplementedError();
   }
-  
+
   @override
   Future<void> deleteUser({required String id}) {
     throw UnimplementedError();
