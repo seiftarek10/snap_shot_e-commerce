@@ -3,19 +3,18 @@ import 'package:dio/dio.dart';
 
 class DioServices extends IApiServices {
   final Dio _dio;
-
   final String _baseUrl = 'https://dummyjson.com/';
   DioServices(this._dio);
   @override
-  Future<void> addData({
+  Future<void> post({
     required Map<String, dynamic> data,
-    required String path,
+    required String url,
   }) async {
-    await _dio.post('$_baseUrl/$path', data: data);
+    await _dio.post('$_baseUrl/$url', data: data);
   }
 
   @override
-  Future<void> addDataWithId({
+  Future<void> postWithId({
     required Map<String, dynamic> data,
     required String path,
     required String id,

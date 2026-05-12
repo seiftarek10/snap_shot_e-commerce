@@ -1,4 +1,3 @@
-import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/core/models/product_model.dart';
 
 abstract class HomeLocalDataSource {
@@ -11,7 +10,7 @@ abstract class HomeLocalDataSource {
   List<ProductModel> getProductsData();
   List<ProductModel> getFavProducts();
   List<ProductModel> getCartProducts();
-  UserModel? getUserData();
+  String? getUserId();
 
   //clear
   Future<void> clearFavIds();

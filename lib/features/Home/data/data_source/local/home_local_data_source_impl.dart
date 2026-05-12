@@ -57,8 +57,9 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   }
 
   @override
-  UserModel? getUserData() {
-    return _userBox.getAllData()?.first;
+  String? getUserId() {
+    final userDate = _userBox.getAllData()?.first;
+    return userDate?.uid;
   }
 
   @override

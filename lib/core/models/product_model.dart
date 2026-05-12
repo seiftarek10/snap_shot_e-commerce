@@ -57,7 +57,7 @@ class ProductModel {
       inCart: json?['inCart'] ?? false,
       brand: json?['brand'] ?? '',
       stock: json?['stock'].toString() ?? '',
-      counter: json?['conter']??1
+      counter: json?['counter'] ?? 1,
     );
   }
   factory ProductModel.fromEntity(ProductEntity product) {
@@ -73,7 +73,7 @@ class ProductModel {
       inCart: product.inCart ?? false,
       brand: product.brand,
       stock: product.stock,
-      counter: product.counter
+      counter: product.counter,
     );
   }
 
@@ -90,7 +90,7 @@ class ProductModel {
       'inCart': inCart ?? false,
       'brand': brand,
       'stock': stock,
-      'counter' : counter??1
+      'counter': counter ?? 1,
     };
   }
 
@@ -107,7 +107,7 @@ class ProductModel {
       inCart: inCart ?? false,
       brand: brand,
       stock: stock,
-      counter: counter??1
+      counter: counter ?? 1,
     );
   }
 }

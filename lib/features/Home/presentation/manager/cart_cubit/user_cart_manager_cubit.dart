@@ -20,13 +20,13 @@ class UserCartManegerCubit extends BaseCubit<UserCartManagerState> {
   }) async {
     safeEmit(const UserHomeCartLoading());
     if (inCart) {
-      await _removeFromCart(product.id);
+      await removeFromCart(product.id);
     } else {
-      await _addToCart(product);
+      await addToCart(product);
     }
   }
 
-  Future<void> _addToCart(ProductEntity product) async {
+  Future<void> addToCart(ProductEntity product) async {
     final result = await _addToCartUseCase.call(product);
     if (result is Success) {
       safeEmit(AddToCartSuccess(id: product.id));
@@ -36,7 +36,7 @@ class UserCartManegerCubit extends BaseCubit<UserCartManagerState> {
     }
   }
 
-  Future<void> _removeFromCart(String id) async {
+  Future<void> removeFromCart(String id) async {
     final result = await _removeFromCartUseCase.call(id);
     if (result is Success) {
       safeEmit(RemoveFromCartSuccess(id: id));

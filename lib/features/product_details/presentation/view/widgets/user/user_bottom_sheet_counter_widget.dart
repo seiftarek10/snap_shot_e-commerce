@@ -1,21 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/shared/widgets/counter_row.dart';
 
-class UserBottomSheetCounterWidget extends StatefulWidget {
-  const UserBottomSheetCounterWidget({super.key, required this.counterListner});
+class UserBottomSheetCounterWidget extends StatelessWidget {
+  const UserBottomSheetCounterWidget({super.key, required this.counterListner, required this.counter});
 
   final ValueChanged<int> counterListner;
+  final int counter;
 
-  @override
-  State<UserBottomSheetCounterWidget> createState() =>
-      _UserBottomSheetCounterWidgetState();
-}
-
-class _UserBottomSheetCounterWidgetState
-    extends State<UserBottomSheetCounterWidget> {
-  int counter = 1;
   @override
   Widget build(BuildContext context) {
     return IntrinsicHeight(
@@ -25,29 +18,9 @@ class _UserBottomSheetCounterWidgetState
           border: Border.all(color: AppColors.instance.greyLight, width: 3),
           borderRadius: BorderRadius.circular(10.r),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            InkWell(
-              onTap: () {
-                counter++;
-                widget.counterListner(counter);
-                setState(() {});
-              },
-              child: Icon(Icons.add, size: 20.h),
-            ),
-            Text(counter.toString(), style: AppTextStyle.instance.text20W500),
-            InkWell(
-              onTap: () {
-                if (counter > 1) {
-                  counter--;
-                  widget.counterListner(counter);
-                  setState(() {});
-                }
-              },
-              child: Icon(Icons.remove, size: 20.h),
-            ),
-          ],
+        child: CounterWithoutDecoration(
+          counter: counter,
+          counterListner: counterListner,
         ),
       ),
     );

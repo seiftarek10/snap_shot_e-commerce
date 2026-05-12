@@ -1,9 +1,6 @@
 abstract class IApiServices {
-  Future<void> addData({
-    required Map<String, dynamic> data,
-    required String path,
-  });
-  Future<void> addDataWithId({
+  Future<void> post({required Map<String, dynamic> data, required String url});
+  Future<void> postWithId({
     required Map<String, dynamic> data,
     required String path,
     required String id,

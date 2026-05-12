@@ -10,7 +10,7 @@ class ProductEntity {
   final bool? inCart;
   final String brand;
   final String stock;
-   int counter;
+  final int? counter;
   ProductEntity({
     required this.id,
     required this.name,
@@ -26,7 +26,7 @@ class ProductEntity {
     required this.counter,
   });
 
-  ProductEntity copyWith({bool? isFav, bool? inCart}) {
+  ProductEntity copyWith({bool? isFav, bool? inCart,int?counter}) {
     return ProductEntity(
       id: id,
       name: name,
@@ -39,7 +39,7 @@ class ProductEntity {
       inCart: inCart ?? this.inCart,
       brand: brand,
       stock: stock,
-      counter: counter,
+      counter: counter??1,
     );
   }
 }
