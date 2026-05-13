@@ -20,13 +20,16 @@ class GetCartProudctsCubit extends BaseCubit<GetCartProudctsState> {
     if (result is Success<List<ProductEntity>>) {
       safeEmit(CartProudctsLoadded(result.data));
       prodcuts = result.data;
-      getCosts();
+
+      getCosts(result.data);
     } else if (result is AppFailure<List<ProductEntity>>) {
       safeEmit(FailedLoadCartProducts(result.failure.errMessage));
     }
   }
 
-  void getCosts() {
+  void getCosts(List<ProductEntity> products) {
+    productsCost = 0.0;
+    delivery = 0.0;
     for (var e in prodcuts) {
       productsCost +=
           double.parse(e.price) * double.parse(e.counter.toString());
@@ -40,9 +43,7 @@ class GetCartProudctsCubit extends BaseCubit<GetCartProudctsState> {
     if (index != -1) {
       prodcuts[index] = prodcuts[index].copyWith(counter: counter);
       safeEmit(CartProudctsLoadded(List.of(prodcuts)));
-      getCosts();
+      getCosts(prodcuts);
     }
   }
-
-
 }

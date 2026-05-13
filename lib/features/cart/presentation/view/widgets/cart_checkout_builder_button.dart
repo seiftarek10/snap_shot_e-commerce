@@ -1,26 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
-import 'package:snap_shot/shared/widgets/price_summery/price_summery_card.dart';
+import 'package:snap_shot/shared/widgets/app_button.dart';
 
-class CartViewPriceSection extends StatelessWidget {
-  const CartViewPriceSection({super.key});
+class CartCheckoutButtonBuilder extends StatelessWidget {
+  const CartCheckoutButtonBuilder({super.key});
 
   @override
   Widget build(BuildContext context) {
-    GetCartProudctsCubit cartCubit = context.read<GetCartProudctsCubit>();
     return BlocBuilder<GetCartProudctsCubit, GetCartProudctsState>(
       builder: (context, state) {
         if (state is CartProudctsLoadded) {
           if (state.products.isEmpty) {
             return const SizedBox.shrink();
           }
-          return PriceSummeryCard(
-            productsCost: cartCubit.productsCost,
-            deliveryCost: cartCubit.delivery,
-            totalCost: double.parse(
-              (cartCubit.productsCost + cartCubit.delivery).toStringAsFixed(2),
-            ),
+          return AppButton(
+            isLoading: false,
+            buttonTitle: 'Checkout',
+            onPressed: () {
+              context.push(
+                Routes.instance.checkout,
+                extra: context.read<GetCartProudctsCubit>().prodcuts,
+              );
+            },
           );
         } else {
           return const SizedBox.shrink();

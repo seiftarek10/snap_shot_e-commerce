@@ -7,6 +7,7 @@ import 'package:snap_shot/features/cart/presentation/view/widgets/cart_item.dart
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_loading_list.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
+import 'package:snap_shot/shared/widgets/stete_widgets/app_empty_widget.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_error_widget.dart';
 
 class AllCartItemSliverList extends StatelessWidget {
@@ -28,6 +29,9 @@ class AllCartItemSliverList extends StatelessWidget {
       child: BlocBuilder<GetCartProudctsCubit, GetCartProudctsState>(
         builder: (context, state) {
           if (state is CartProudctsLoadded) {
+            if (state.products.isEmpty) {
+              return _buildEmptyList();
+            }
             return _buildSuccessList(state.products);
           } else if (state is FailedLoadCartProducts) {
             return _buildErrorWidget(context, state.errMessage);
@@ -48,6 +52,13 @@ class AllCartItemSliverList extends StatelessWidget {
           child: CartItem(product: products[index]),
         );
       },
+    );
+  }
+
+  SliverFillRemaining _buildEmptyList() {
+    return const SliverFillRemaining(
+      hasScrollBody: false,
+      child: Center(child: AppEmptyWidget()),
     );
   }
 
