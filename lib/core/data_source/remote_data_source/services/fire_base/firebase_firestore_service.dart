@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 
 class FirebaseFirestoreService extends IRemoteDataBaseServices {
@@ -192,5 +193,10 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required newValue,
   }) async {
     await ref.collection(collection).doc(id).update({fieldName: newValue});
+  }
+
+  @override
+  String? getUserId() {
+    return FirebaseAuth.instance.currentUser?.uid;
   }
 }

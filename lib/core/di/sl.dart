@@ -26,6 +26,15 @@ import 'package:snap_shot/features/cart/data/repos/cart_repo_impl.dart';
 import 'package:snap_shot/features/cart/domain/repos/cart_repo.dart';
 import 'package:snap_shot/features/cart/domain/use_cases/get_cart_products_use_case.dart';
 import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
+import 'package:snap_shot/features/checkout/data/data_source/local/checkout_local_data_source.dart';
+import 'package:snap_shot/features/checkout/data/data_source/local/checkout_local_data_source_impl.dart';
+import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
+import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source_impl.dart';
+import 'package:snap_shot/features/checkout/data/repos/checkout_repo_impl.dart';
+import 'package:snap_shot/features/checkout/domain/repos/checkout_repo.dart';
+import 'package:snap_shot/features/checkout/domain/use_case/get_user_data_use_case.dart';
+import 'package:snap_shot/features/checkout/domain/use_case/make_order_use_case.dart';
+import 'package:snap_shot/features/checkout/presentation/manager/checkout/checkout_cubit.dart';
 import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source.dart';
 import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source_impl.dart';
 import 'package:snap_shot/features/favorites/data/data_source/remote/fav_remote_data_source.dart';
@@ -63,6 +72,7 @@ Future<void> setupGetIt() async {
   _initHomeFeature();
   _initFavoritesFeature();
   _initCartFeature();
+  _initCheckoutFeature();
 }
 
 void _initAuthFeature() {
@@ -213,4 +223,26 @@ void _initCartFeature() {
 
   // cubits
   sl.registerFactory(() => GetCartProudctsCubit(sl<GetCartProductsUseCase>()));
+}
+
+void _initCheckoutFeature() {
+  //data source
+  sl.registerLazySingleton<CheckoutRemoteDataSource>(
+    () => CheckoutRemoteDataSourceImpl(sl<IRemoteDataBaseServices>()),
+  );
+
+  sl.registerLazySingleton<CheckoutLocalDataSource>(
+    () => CheckoutLocalDataSourceImpl(sl<ILocalDataBaseServices<UserModel>>()),
+  );
+  // repos
+  sl.registerLazySingleton<CheckoutRepo>(
+    () => CheckoutRepoImpl(sl<CheckoutRemoteDataSource>(),sl<CheckoutLocalDataSource>()),
+  );
+
+  //use cases
+  sl.registerLazySingleton(() => MakeOrderUseCase(sl<CheckoutRepo>()));
+  sl.registerLazySingleton(() => GetUserDataUseCase(sl<CheckoutRepo>()));
+
+  // cubits
+  sl.registerFactory(() => CheckoutCubit(sl<MakeOrderUseCase>(),sl<GetUserDataUseCase>()));
 }

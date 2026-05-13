@@ -19,6 +19,7 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/sign
 import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
+import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';
@@ -94,7 +95,10 @@ class AppRouter {
 
       GoRoute(
         path: Routes.instance.checkout,
-        builder: (context, state) => const CheckoutView(),
+        builder: (context, state) {
+          final products = state.extra as List<ProductEntity>;
+          return CheckoutView(products: products);
+        },
       ),
       GoRoute(
         path: Routes.instance.orders,

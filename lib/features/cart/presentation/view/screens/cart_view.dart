@@ -14,7 +14,6 @@ import 'package:snap_shot/features/cart/presentation/view/widgets/all_cart_items
 
 class CartView extends StatelessWidget {
   const CartView({super.key});
-  
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +37,19 @@ class CartView extends StatelessWidget {
             const AllCartItemSliverList(),
             const SliverToBoxAdapter(child: CartViewPriceSection()),
             SliverToBoxAdapter(
-              child: AppButton(
-                isLoading: false,
-                buttonTitle: 'Checkout',
-                onPressed: () {
-                  context.push(Routes.instance.checkout);
-                },
+              child: Builder(
+                builder: (context) {
+                  return AppButton(
+                    isLoading: false,
+                    buttonTitle: 'Checkout',
+                    onPressed: () {
+                      context.push(
+                        Routes.instance.checkout,
+                        extra: context.read<GetCartProudctsCubit>().prodcuts,
+                      );
+                    },
+                  );
+                }
               ),
             ),
           ],
