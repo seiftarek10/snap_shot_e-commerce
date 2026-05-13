@@ -9,6 +9,7 @@ import 'package:snap_shot/features/favorites/presentation/view/widgets/favorite_
 import 'package:snap_shot/features/favorites/presentation/view/widgets/favorites_loading.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
+import 'package:snap_shot/shared/widgets/stete_widgets/app_empty_widget.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_error_widget.dart';
 
 class FavProudctsList extends StatelessWidget {
@@ -28,6 +29,9 @@ class FavProudctsList extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is LoaddedFavProucts) {
+          if (state.products.isEmpty) {
+            return _buildEmptyList();
+          }
           return _buildSuccessList(state.products);
         } else if (state is GetFavProuctsFailure) {
           return _buildFailureWidget(context, state.errMessage);
@@ -61,6 +65,13 @@ class FavProudctsList extends StatelessWidget {
           child: FavoriteItem(product: products[index]),
         );
       },
+    );
+  }
+
+  SliverFillRemaining _buildEmptyList() {
+    return const SliverFillRemaining(
+      hasScrollBody: false,
+      child: Center(child: AppEmptyWidget()),
     );
   }
 
