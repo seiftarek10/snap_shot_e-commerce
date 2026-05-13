@@ -49,7 +49,7 @@ class UserModel {
 
   factory UserModel.fromEntity(UserEntity data) {
     return UserModel(
-      uid: data.uid,
+      uid: data.uid ?? '',
       userName: data.userName,
       email: data.email,
       password: data.password,

@@ -94,4 +94,6 @@ abstract class IRemoteDataBaseServices {
     required String field,
     required dynamic value,
   });
+
+  String? getUserId();
 }

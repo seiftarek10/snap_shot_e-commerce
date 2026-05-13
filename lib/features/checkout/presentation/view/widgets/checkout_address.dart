@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
@@ -6,10 +5,8 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class CheckoutAddressWidget extends StatelessWidget {
-  const CheckoutAddressWidget({
-    super.key,
-  });
-
+  const CheckoutAddressWidget({super.key, required this.address});
+  final String address;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,10 +15,7 @@ class CheckoutAddressWidget extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Address Details",
-              style: AppTextStyle.instance.text18W700,
-            ),
+            Text("Address Details", style: AppTextStyle.instance.text18W700),
             Text(
               "Change",
               style: AppTextStyle.instance.text18W700.copyWith(
@@ -37,7 +31,7 @@ class CheckoutAddressWidget extends StatelessWidget {
             AppSpace.instance.h12,
             Expanded(
               child: Text(
-                "Cairo Giza Giza Giza Giza Giza Giza Giza Giza",
+                address,
                 maxLines: 4,
                 overflow: TextOverflow.ellipsis,
                 style: AppTextStyle.instance.text14W500Black,

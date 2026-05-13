@@ -1,7 +1,5 @@
-import 'package:hive_flutter/adapters.dart';
-
-class UserEntity extends HiveObject {
-  String uid;
+class UserEntity {
+  final String? uid;
   final String userName;
   final String email;
   final String mobile;
@@ -16,4 +14,15 @@ class UserEntity extends HiveObject {
     required this.address,
     required this.password,
   });
+
+  UserEntity copyWith({String? uid}) {
+    return UserEntity(
+      uid: uid ?? this.uid,
+      userName: userName,
+      email: email,
+      mobile: mobile,
+      address: address,
+      password: password,
+    );
+  }
 }
