@@ -10,8 +10,8 @@ class ProductDetailsExtraModel {
 
   ProductDetailsExtraModel({
     required this.productEntity,
-     this.getAllProductsCubit,
-     this.userHomeCartCubit,
-    required this.fromHomeScreen
+    this.getAllProductsCubit,
+    this.userHomeCartCubit,
+    required this.fromHomeScreen,
   });
 }

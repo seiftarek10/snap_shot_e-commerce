@@ -121,7 +121,7 @@ class HomeRepoImpl implements HomeRepo {
     try {
       final String? uid = _localDataSource.getUserId();
       ProductModel productModel = ProductModel.fromEntity(product);
-      productModel.inCart=true;
+      productModel.inCart = true;
       if (uid != null) {
         await _remoteDataSource.addToCart(product: productModel, uid: uid);
         await _localDataSource.clearCartProducts();

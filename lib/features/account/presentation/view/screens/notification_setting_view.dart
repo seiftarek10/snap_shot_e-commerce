@@ -15,7 +15,7 @@ class NotificationSettingView extends StatelessWidget {
           child: Column(
             children: [
               AppSpace.instance.topPageSpace,
-              const PageHeader(pageTitle: 'Notifications',arrowBack: true ),
+              const PageHeader(pageTitle: 'Notifications', arrowBack: true),
               AppSpace.instance.v20,
               const NotificationsSwitcher(
                 label: 'App Notifications',

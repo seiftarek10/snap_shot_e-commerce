@@ -3,11 +3,17 @@ import 'package:snap_shot/core/data_source/remote_data_source/services/service_i
 import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
 import 'package:snap_shot/features/checkout/data/models/order_model.dart';
+import 'package:snap_shot/features/checkout/data/models/payment_intent_input_mode.dart';
+import 'package:snap_shot/features/checkout/data/services/payment/stripe_service.dart';
 
 class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
   final IRemoteDataBaseServices _remoteDataBaseServices;
+  final StripeService _stripeService;
 
-  CheckoutRemoteDataSourceImpl(this._remoteDataBaseServices);
+  CheckoutRemoteDataSourceImpl(
+    this._remoteDataBaseServices,
+    this._stripeService,
+  );
   @override
   Future<void> makeOrder({required OrderModel order}) async {
     await _remoteDataBaseServices.addToSubCollection(
@@ -35,5 +41,15 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
     } else {
       return null;
     }
+  }
+
+  @override
+  Future<void> makePayment({required String amount}) async {
+    await _stripeService.makePayment(
+      paymentIntentInputMode: PaymentIntentInputMode(
+        amount: amount,
+        currency: 'usd',
+      ),
+    );
   }
 }

@@ -68,7 +68,7 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                               counterListner: (counter) {
                                 _counterNotifier.value = counter;
                               },
-                              counter: product.counter??1,
+                              counter: product.counter ?? 1,
                             ),
                           ),
                           const Expanded(child: SizedBox()),
@@ -105,7 +105,6 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
       ),
     );
   }
-
 }
 
 BoxDecoration _buildContainerDecoration() {

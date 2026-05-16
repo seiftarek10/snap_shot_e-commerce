@@ -24,7 +24,7 @@ void main(List<String> args) async {
   if (stripeKey == null) {
     throw Exception('STRIPE_PUBLISH_KEY is missing in .env');
   }
-    Stripe.publishableKey = stripeKey;
-    await Stripe.instance.applySettings();
+  Stripe.publishableKey = stripeKey;
+  await Stripe.instance.applySettings();
   runApp(SnapShot(router: router.router));
 }

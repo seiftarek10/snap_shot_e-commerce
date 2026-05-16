@@ -16,6 +16,7 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/forg
 import 'package:snap_shot/features/authentication/presentation/view/screens/otp_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_in_view.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
+import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
 import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
@@ -139,6 +140,10 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.orderDetails,
         builder: (context, state) => const OrderDetailsView(),
+      ),
+       GoRoute(
+        path: Routes.instance.cartView,
+        builder: (context, state) => const CartView(),
       ),
       GoRoute(
         path: Routes.instance.otpView,

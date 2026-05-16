@@ -64,6 +64,4 @@ class FirestoreError {
         return Failure('Unexpected error [${e.code}]: ${e.message}');
     }
   }
-
-
 }

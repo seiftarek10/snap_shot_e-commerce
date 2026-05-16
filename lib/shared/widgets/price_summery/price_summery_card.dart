@@ -20,14 +20,14 @@ class PriceSummeryCard extends StatelessWidget {
           label: 'Cost',
           value:
               r'$ '
-              '$productsCost',
+              '${productsCost.toStringAsFixed(2)}',
         ),
         AppSpace.instance.v12,
         PriceSummeryItem(
           label: 'Delivery',
           value:
               r'$ '
-              '$deliveryCost',
+              '${deliveryCost.toStringAsFixed(2)}',
         ),
         AppSpace.instance.v20,
         Row(
@@ -39,7 +39,7 @@ class PriceSummeryCard extends StatelessWidget {
                 alignment: Alignment.centerRight,
                 child: Text(
                   r'$ '
-                  '$totalCost',
+                  '${totalCost.toStringAsFixed(2)}',
                   style: AppTextStyle.instance.text22Bold,
                 ),
               ),

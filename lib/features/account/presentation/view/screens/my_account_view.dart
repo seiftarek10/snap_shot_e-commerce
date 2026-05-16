@@ -18,7 +18,7 @@ class MyAccountView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             AppSpace.instance.topPageSpace,
-            const PageHeader( pageTitle: 'My Account',arrowBack: true ),
+            const PageHeader(pageTitle: 'My Account', arrowBack: true),
             AppSpace.instance.v12,
             const AllAccountItems(),
             AppSpace.instance.v16,

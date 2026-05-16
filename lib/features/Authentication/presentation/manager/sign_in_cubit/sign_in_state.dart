@@ -20,5 +20,4 @@ final class SignInSuccess extends SignInState {
 final class SignInFailure extends SignInState {
   const SignInFailure(this.errorMessage);
   final String errorMessage;
-
 }

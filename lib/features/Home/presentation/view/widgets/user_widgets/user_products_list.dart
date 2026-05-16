@@ -35,7 +35,7 @@ class UserHomeProductsList extends StatelessWidget {
                 productEntity: products[index],
                 getAllProductsCubit: getAllProductsCubit,
                 userHomeCartCubit: userHomeCartCubit,
-              fromHomeScreen: true
+                fromHomeScreen: true,
               ),
               // extra: products[index],
             );

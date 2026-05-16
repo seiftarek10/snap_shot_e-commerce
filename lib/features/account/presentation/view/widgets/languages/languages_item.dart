@@ -4,7 +4,11 @@ import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/shared/widgets/circle_check_box.dart';
 
 class LanguagesItem extends StatelessWidget {
-  const LanguagesItem({super.key, required this.isSelected, required this.language});
+  const LanguagesItem({
+    super.key,
+    required this.isSelected,
+    required this.language,
+  });
   final bool isSelected;
   final String language;
   @override

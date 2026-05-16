@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
@@ -47,7 +46,6 @@ class FilterMethod extends StatelessWidget {
                   allRating.add(filterOptions[index]);
                   rating(allRating);
                 }
-              
               },
               title: filterOptions[index],
             );

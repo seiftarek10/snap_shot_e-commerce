@@ -14,9 +14,9 @@ class FavProuctsRemoteDataSourceImpl implements FavProductsRemoteDataSource {
       parentId: uid,
       subCollection: CollectionPath.instance.userFavProducts,
     );
-     final List<ProductModel> products = result
+    final List<ProductModel> products = result
         .map((e) => ProductModel.fromJson(e))
         .toList();
-  return products;
+    return products;
   }
 }

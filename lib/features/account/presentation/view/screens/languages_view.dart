@@ -17,7 +17,7 @@ class LanguagesView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               AppSpace.instance.topPageSpace,
-              const PageHeader(pageTitle: 'Languages',arrowBack: true ),
+              const PageHeader(pageTitle: 'Languages', arrowBack: true),
               AppSpace.instance.v20,
               Text("Suggested", style: AppTextStyle.instance.text18W700),
               AppSpace.instance.v12,

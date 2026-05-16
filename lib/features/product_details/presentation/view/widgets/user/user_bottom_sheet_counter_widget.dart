@@ -4,7 +4,11 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/shared/widgets/counter_row.dart';
 
 class UserBottomSheetCounterWidget extends StatelessWidget {
-  const UserBottomSheetCounterWidget({super.key, required this.counterListner, required this.counter});
+  const UserBottomSheetCounterWidget({
+    super.key,
+    required this.counterListner,
+    required this.counter,
+  });
 
   final ValueChanged<int> counterListner;
   final int counter;

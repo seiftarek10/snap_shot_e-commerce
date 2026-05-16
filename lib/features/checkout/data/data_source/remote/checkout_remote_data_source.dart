@@ -4,5 +4,6 @@ import 'package:snap_shot/features/checkout/data/models/order_model.dart';
 abstract class CheckoutRemoteDataSource {
   String? getUserId();
   Future<UserModel?> getUserData();
+  Future<void> makePayment({required String amount});
   Future<void> makeOrder({required OrderModel order});
 }

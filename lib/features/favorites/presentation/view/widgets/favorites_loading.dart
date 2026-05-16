@@ -26,15 +26,12 @@ class FavoritesLoading extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  AspectRatio(
-                    aspectRatio: 0.4.h,
-                    child: const Bone(),
-                  ),
+                  AspectRatio(aspectRatio: 0.4.h, child: const Bone()),
                   AppSpace.instance.v12,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Bone.text(words: 2,fontSize: 15,), 
+                      const Bone.text(words: 2, fontSize: 15),
                       IconButton(onPressed: null, icon: Bone.icon(size: 30.h)),
                     ],
                   ),

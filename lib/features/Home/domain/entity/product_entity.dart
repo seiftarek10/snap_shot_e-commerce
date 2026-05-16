@@ -26,7 +26,7 @@ class ProductEntity {
     required this.counter,
   });
 
-  ProductEntity copyWith({bool? isFav, bool? inCart,int?counter}) {
+  ProductEntity copyWith({bool? isFav, bool? inCart, int? counter}) {
     return ProductEntity(
       id: id,
       name: name,
@@ -39,7 +39,7 @@ class ProductEntity {
       inCart: inCart ?? this.inCart,
       brand: brand,
       stock: stock,
-      counter: counter??1,
+      counter: counter ?? 1,
     );
   }
 }

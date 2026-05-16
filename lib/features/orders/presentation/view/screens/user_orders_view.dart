@@ -16,9 +16,7 @@ class UserOrdersView extends StatelessWidget {
           AppSpace.instance.topPageSpace,
           const PageHeader(pageTitle: 'Orders', arrowBack: false),
           AppSpace.instance.v12,
-          const OrderStatusIndicator(
-            lables: ['Current','History'],
-          ),
+          const OrderStatusIndicator(lables: ['Current', 'History']),
           AppSpace.instance.v12,
           const Expanded(child: AllOrdersList()),
         ],

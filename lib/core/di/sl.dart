@@ -31,9 +31,11 @@ import 'package:snap_shot/features/checkout/data/data_source/local/checkout_loca
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source_impl.dart';
 import 'package:snap_shot/features/checkout/data/repos/checkout_repo_impl.dart';
+import 'package:snap_shot/features/checkout/data/services/payment/stripe_service.dart';
 import 'package:snap_shot/features/checkout/domain/repos/checkout_repo.dart';
 import 'package:snap_shot/features/checkout/domain/use_case/get_user_data_use_case.dart';
 import 'package:snap_shot/features/checkout/domain/use_case/make_order_use_case.dart';
+import 'package:snap_shot/features/checkout/domain/use_case/make_payment_use_case.dart';
 import 'package:snap_shot/features/checkout/presentation/manager/checkout/checkout_cubit.dart';
 import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source.dart';
 import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source_impl.dart';
@@ -226,9 +228,14 @@ void _initCartFeature() {
 }
 
 void _initCheckoutFeature() {
+  // Services
+  sl.registerLazySingleton(() => StripeService(sl<Dio>()));
   //data source
   sl.registerLazySingleton<CheckoutRemoteDataSource>(
-    () => CheckoutRemoteDataSourceImpl(sl<IRemoteDataBaseServices>()),
+    () => CheckoutRemoteDataSourceImpl(
+      sl<IRemoteDataBaseServices>(),
+      sl<StripeService>(),
+    ),
   );
 
   sl.registerLazySingleton<CheckoutLocalDataSource>(
@@ -236,13 +243,23 @@ void _initCheckoutFeature() {
   );
   // repos
   sl.registerLazySingleton<CheckoutRepo>(
-    () => CheckoutRepoImpl(sl<CheckoutRemoteDataSource>(),sl<CheckoutLocalDataSource>()),
+    () => CheckoutRepoImpl(
+      sl<CheckoutRemoteDataSource>(),
+      sl<CheckoutLocalDataSource>(),
+    ),
   );
 
   //use cases
   sl.registerLazySingleton(() => MakeOrderUseCase(sl<CheckoutRepo>()));
   sl.registerLazySingleton(() => GetUserDataUseCase(sl<CheckoutRepo>()));
+  sl.registerLazySingleton(() => MakePaymentUseCase(sl<CheckoutRepo>()));
 
   // cubits
-  sl.registerFactory(() => CheckoutCubit(sl<MakeOrderUseCase>(),sl<GetUserDataUseCase>()));
+  sl.registerFactory(
+    () => CheckoutCubit(
+      sl<MakeOrderUseCase>(),
+      sl<GetUserDataUseCase>(),
+      sl<MakePaymentUseCase>(),
+    ),
+  );
 }

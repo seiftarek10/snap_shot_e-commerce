@@ -3,9 +3,7 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class OrDivider extends StatelessWidget {
-  const OrDivider({
-    super.key,
-  });
+  const OrDivider({super.key});
 
   @override
   Widget build(BuildContext context) {

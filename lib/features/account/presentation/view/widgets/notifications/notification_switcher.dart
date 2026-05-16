@@ -4,7 +4,11 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class NotificationsSwitcher extends StatefulWidget {
-  const NotificationsSwitcher({super.key, required this.isOn, required this.label});
+  const NotificationsSwitcher({
+    super.key,
+    required this.isOn,
+    required this.label,
+  });
 
   final bool isOn;
   final String label;
@@ -27,7 +31,7 @@ class _NotificationsSwitcherState extends State<NotificationsSwitcher> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text (widget. label, style: AppTextStyle.instance.text20Bold),
+        Text(widget.label, style: AppTextStyle.instance.text20Bold),
 
         Transform.scale(
           scale: 0.7.h,

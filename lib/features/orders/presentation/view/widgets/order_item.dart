@@ -11,7 +11,7 @@ class OrderItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding:  EdgeInsets.symmetric(vertical: 10.h,horizontal: 15.w),
+      padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
       decoration: _buildDecoration(),
       child: Row(
         children: [

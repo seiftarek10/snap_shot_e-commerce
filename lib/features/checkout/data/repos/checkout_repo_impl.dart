@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:snap_shot/core/entites/user_entity.dart';
 import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/errors/firesotre_error.dart';
@@ -6,6 +9,7 @@ import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/checkout/data/data_source/local/checkout_local_data_source.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
+import 'package:snap_shot/features/checkout/data/errors/stripe_errors.dart';
 import 'package:snap_shot/features/checkout/data/models/order_model.dart';
 import 'package:snap_shot/features/checkout/domain/entity/order_entity.dart';
 import 'package:snap_shot/features/checkout/domain/repos/checkout_repo.dart';
@@ -40,6 +44,21 @@ class CheckoutRepoImpl implements CheckoutRepo {
       if (e is FirebaseException) {
         return AppFailure(FirestoreError.handleFireStoreError(e));
       }
+      return AppFailure(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<void>> makePayment({required String amount}) async {
+    try {
+      await _remoteDataSource.makePayment(amount: amount);
+      return const Success(null);
+    } catch (e) {
+      if (e is StripeException) {
+        log(e.toString());
+        return AppFailure(StripeFailure.handleException(e));
+      }
+        log(e.toString());
       return AppFailure(Failure(e.toString()));
     }
   }
