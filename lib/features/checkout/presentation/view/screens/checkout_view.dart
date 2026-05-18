@@ -4,7 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/di/sl.dart';
-import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/features/checkout/presentation/manager/checkout/checkout_cubit.dart';
 import 'package:snap_shot/features/checkout/presentation/view/widgets/checkout_address_builder.dart';
@@ -23,12 +22,13 @@ class CheckoutView extends StatelessWidget {
       create: (context) => sl<CheckoutCubit>()
         ..getUserData()
         ..getCosts(products),
+
       child: BlocListener<CheckoutCubit, CheckoutState>(
         listener: (context, state) async {
           if (state is PaymentComplete) {
             await context.read<CheckoutCubit>().makeOrder(prodcuts: products);
             if (!context.mounted) return;
-            context.go(Routes.instance.cartView);
+            context.pop();
           } else if (state is PaymentFailed) {
             AppSnackBar.show(context, message: state.errMessage, isError: true);
           }

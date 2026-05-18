@@ -22,11 +22,13 @@ class CheckoutCubit extends BaseCubit<CheckoutState> {
   final MakePaymentUseCase _makePaymentUseCase;
 
   double productsCost = 0.0, deliveryCost = 0.0;
-
+  UserEntity? user;
   Future<void> makePayment() async {
     safeEmit(const RequestPaymentSheet());
     String amount = (productsCost + deliveryCost).toString();
-    final result = await _makePaymentUseCase.call(amount);
+    final result = await _makePaymentUseCase.call(
+      MakePaymentParam(amount: amount, customerId: user!.customerId),
+    );
     if (result is Success<void>) {
       safeEmit(const PaymentComplete());
     } else if (result is AppFailure<void>) {
@@ -60,10 +62,12 @@ class CheckoutCubit extends BaseCubit<CheckoutState> {
   }
 
   Future<Result<UserEntity>?> getUserData() async {
+    user = null;
     safeEmit(const GettingUserData());
     final userResult = await _getUserDataUseCase.call(null);
     if (userResult is Success<UserEntity>) {
       safeEmit(GetUserDataSuccess(userResult.data));
+      user = userResult.data;
       return Success(userResult.data);
     } else if (userResult is AppFailure<UserEntity>) {
       return AppFailure(Failure(userResult.failure.errMessage));

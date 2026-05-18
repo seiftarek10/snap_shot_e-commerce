@@ -13,6 +13,7 @@ import 'package:snap_shot/features/checkout/data/errors/stripe_errors.dart';
 import 'package:snap_shot/features/checkout/data/models/order_model.dart';
 import 'package:snap_shot/features/checkout/domain/entity/order_entity.dart';
 import 'package:snap_shot/features/checkout/domain/repos/checkout_repo.dart';
+import 'package:snap_shot/features/checkout/domain/use_case/make_payment_use_case.dart';
 
 class CheckoutRepoImpl implements CheckoutRepo {
   final CheckoutRemoteDataSource _remoteDataSource;
@@ -49,16 +50,21 @@ class CheckoutRepoImpl implements CheckoutRepo {
   }
 
   @override
-  Future<Result<void>> makePayment({required String amount}) async {
+  Future<Result<void>> makePayment({
+    required MakePaymentParam makePaymentParam,
+  }) async {
     try {
-      await _remoteDataSource.makePayment(amount: amount);
+      await _remoteDataSource.makePayment(
+        amount: makePaymentParam.amount,
+        customerId: makePaymentParam.customerId,
+      );
       return const Success(null);
     } catch (e) {
       if (e is StripeException) {
         log(e.toString());
         return AppFailure(StripeFailure.handleException(e));
       }
-        log(e.toString());
+      log(e.toString());
       return AppFailure(Failure(e.toString()));
     }
   }

@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -13,7 +12,7 @@ class StripeService {
   String? token = dotenv.env['STRIPE_SECRET_KEY'];
 
   Future<PaymentIntentResponseModel> _createPaymentIntent({
-    required PaymentIntentInputMode paymentIntentInputMode,
+    required PaymentIntentInputModel paymentIntentInputMode,
   }) async {
     final response = await _dio.post(
       stripePath,
@@ -36,6 +35,8 @@ class StripeService {
         paymentIntentClientSecret:
             initPaymentInputModel.paymentIntentClientSecret,
         merchantDisplayName: initPaymentInputModel.merchantDisplayName,
+        customerEphemeralKeySecret: initPaymentInputModel.ephemeralKey,
+        customerId: initPaymentInputModel.customerId,
       ),
     );
   }
@@ -45,16 +46,20 @@ class StripeService {
   }
 
   Future<void> makePayment({
-    required PaymentIntentInputMode paymentIntentInputMode,
+    required PaymentIntentInputModel paymentIntentInputModel,
   }) async {
     final data = await _createPaymentIntent(
-      paymentIntentInputMode: paymentIntentInputMode,
+      paymentIntentInputMode: paymentIntentInputModel,
     );
-
+    String ephemeralKey = await _createEhemeralKey(
+      customerId: paymentIntentInputModel.customerId,
+    );
     await _initPaymentSheet(
       initPaymentInputModel: InitPaymentInputModel(
         paymentIntentClientSecret: data.clientSecret!,
         merchantDisplayName: 'Seif Tariq',
+        ephemeralKey: ephemeralKey,
+        customerId: paymentIntentInputModel.customerId,
       ),
     );
 
@@ -76,7 +81,18 @@ class StripeService {
     return response.data["id"];
   }
 
-  // Future<String> _createEhemeralKey({required String customerId})async{
-  //   final response= Stripe.instance.create
-  // }
+  Future<String> _createEhemeralKey({required String customerId}) async {
+    final response = await _dio.post(
+      'https://api.stripe.com/v1/ephemeral_keys',
+      data: {'customer': customerId},
+      options: Options(
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Stripe-Version': '2026-04-22.dahlia',
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+    return response.data["secret"];
+  }
 }

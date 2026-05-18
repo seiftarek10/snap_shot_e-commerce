@@ -44,11 +44,12 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
   }
 
   @override
-  Future<void> makePayment({required String amount}) async {
+  Future<void> makePayment({required String amount,required String customerId}) async {
     await _stripeService.makePayment(
-      paymentIntentInputMode: PaymentIntentInputMode(
+      paymentIntentInputModel: PaymentIntentInputModel(
         amount: amount,
         currency: 'usd',
+        customerId: customerId
       ),
     );
   }
