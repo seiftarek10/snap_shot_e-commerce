@@ -31,7 +31,7 @@ import 'package:snap_shot/features/checkout/data/data_source/local/checkout_loca
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source_impl.dart';
 import 'package:snap_shot/features/checkout/data/repos/checkout_repo_impl.dart';
-import 'package:snap_shot/features/checkout/data/services/payment/stripe_service.dart';
+import 'package:snap_shot/core/utils/stripe_service.dart';
 import 'package:snap_shot/features/checkout/domain/repos/checkout_repo.dart';
 import 'package:snap_shot/features/checkout/domain/use_case/get_user_data_use_case.dart';
 import 'package:snap_shot/features/checkout/domain/use_case/make_order_use_case.dart';
@@ -82,12 +82,15 @@ void _initAuthFeature() {
   sl.registerLazySingleton<ILocalDataBaseServices<UserModel>>(
     () => HiveServices<UserModel>(HiveBoxesNames.instance.userBox),
   );
+  // stripe service
+   sl.registerLazySingleton(() => StripeService(sl<Dio>()));
 
   // Data Sources & Repo
   sl.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
       FirebaseAuthServices(sl<IRemoteDataBaseServices>()),
       AuthLocaldataSourceImpl(sl<ILocalDataBaseServices<UserModel>>()),
+      sl<StripeService>()
     ),
   );
 
@@ -228,8 +231,7 @@ void _initCartFeature() {
 }
 
 void _initCheckoutFeature() {
-  // Services
-  sl.registerLazySingleton(() => StripeService(sl<Dio>()));
+ 
   //data source
   sl.registerLazySingleton<CheckoutRemoteDataSource>(
     () => CheckoutRemoteDataSourceImpl(

@@ -13,6 +13,7 @@ Future<void> userHiveSetup() async {
   // await Hive.deleteBoxFromDisk(HiveBoxesNames.instance.productsBox);
   // await Hive.deleteBoxFromDisk(HiveBoxesNames.instance.favProductsBox);
   // await Hive.deleteBoxFromDisk(HiveBoxesNames.instance.cartProdcutBox);
+  // await Hive.deleteBoxFromDisk(HiveBoxesNames.instance.userBox);
   if (!Hive.isBoxOpen(HiveBoxesNames.instance.productsBox)) {
     await Hive.openBox<ProductModel>(HiveBoxesNames.instance.productsBox);
   }

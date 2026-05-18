@@ -4,7 +4,7 @@ import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
 import 'package:snap_shot/features/checkout/data/models/order_model.dart';
 import 'package:snap_shot/features/checkout/data/models/payment_intent_input_mode.dart';
-import 'package:snap_shot/features/checkout/data/services/payment/stripe_service.dart';
+import 'package:snap_shot/core/utils/stripe_service.dart';
 
 class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
   final IRemoteDataBaseServices _remoteDataBaseServices;

@@ -84,7 +84,8 @@ class FirebaseAuthServices implements AuthRemoteDataSource {
 
   @override
   Future<void> deleteUser({required String id}) async {
-    await FirebaseAuth.instance.currentUser?.delete();
+    User user = FirebaseAuth.instance.currentUser!;
+    await user.delete();
     await _dataBaseServices.delete(
       collection: CollectionPath.instance.users,
       id: id,

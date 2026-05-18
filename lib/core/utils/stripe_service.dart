@@ -1,3 +1,4 @@
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
@@ -32,7 +33,6 @@ class StripeService {
   }) async {
     await Stripe.instance.initPaymentSheet(
       paymentSheetParameters: SetupPaymentSheetParameters(
-        // Main params
         paymentIntentClientSecret:
             initPaymentInputModel.paymentIntentClientSecret,
         merchantDisplayName: initPaymentInputModel.merchantDisplayName,
@@ -60,4 +60,23 @@ class StripeService {
 
     await _presentPaymentSheet();
   }
+
+  Future<String> createCustomerId({required String userName}) async {
+    final response = await _dio.post(
+      'https://api.stripe.com/v1/customers',
+      data: {'name': userName},
+      options: Options(
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Authorization': 'Bearer $token',
+        },
+      ),
+    );
+
+    return response.data["id"];
+  }
+
+  // Future<String> _createEhemeralKey({required String customerId})async{
+  //   final response= Stripe.instance.create
+  // }
 }
