@@ -9,55 +9,55 @@ import 'package:snap_shot/features/account/presentation/view/widgets/account_ite
 
 class AllAccountItems extends StatelessWidget {
   const AllAccountItems({super.key});
-   
+
   @override
   Widget build(BuildContext context) {
     final List<AccountItemModel> generalItems = [
-    AccountItemModel(
-      icon: Assets.imagesSvgAccountDetails,
-      routePath: Routes.instance.accountDetails,
-      subTitle: 'Edit Your Account Information',
-      title: 'Account Details',
-    ),
-    AccountItemModel(
-      icon: Assets.imagesSvgPaymentMethod,
-      routePath: Routes.instance.accountPaymentMethod,
-      subTitle: 'Add Your Credit or Debit Card',
-      title: 'Paymen Method',
-    ),
-    AccountItemModel(
-      icon: Assets.imagesSvgDeliveryAddress,
-      routePath: Routes.instance.addressDetails,
-      subTitle: 'Edit Or Add New Address',
-      title: 'Delivery Address',
-    ),
-  ];
-   final List<AccountItemModel> settingsItem = [
-    AccountItemModel(
-      icon: Assets.imagesSvgNotifications,
-      routePath: Routes.instance.notificationSettings,
-      subTitle: 'Manage Your Notifications',
-      title: 'Notification',
-    ),
-    AccountItemModel(
-      icon: Assets.imagesSvgLanguage,
-      routePath: Routes.instance.languages,
-      subTitle: 'Change App Language',
-      title: 'Languages',
-    ),
-    AccountItemModel(
-      icon: Assets.imagesSvgPrivacyPolicy,
-      routePath: '',
-      subTitle: 'We respect and secure your data',
-      title: 'Privacy & Policy',
-    ),
-    AccountItemModel(
-      icon: Assets.imagesSvgContactUs,
-      routePath: '',
-      subTitle: 'We’re here to help anytime',
-      title: 'Contact Us',
-    ),
-  ];
+      AccountItemModel(
+        icon: Assets.imagesSvgAccountDetails,
+        routePath: Routes.instance.accountDetails,
+        subTitle: 'Edit Your Account Information',
+        title: 'Account Details',
+      ),
+      AccountItemModel(
+        icon: Assets.imagesSvgPaymentMethod,
+        routePath: Routes.instance.accountPaymentMethod,
+        subTitle: 'Add Your Credit or Debit Card',
+        title: 'Paymen Method',
+      ),
+      AccountItemModel(
+        icon: Assets.imagesSvgDeliveryAddress,
+        routePath: Routes.instance.addressDetails,
+        subTitle: 'Edit Or Add New Address',
+        title: 'Delivery Address',
+      ),
+    ];
+    final List<AccountItemModel> settingsItem = [
+      AccountItemModel(
+        icon: Assets.imagesSvgNotifications,
+        routePath: Routes.instance.notificationSettings,
+        subTitle: 'Manage Your Notifications',
+        title: 'Notification',
+      ),
+      AccountItemModel(
+        icon: Assets.imagesSvgLanguage,
+        routePath: Routes.instance.languages,
+        subTitle: 'Change App Language',
+        title: 'Languages',
+      ),
+      AccountItemModel(
+        icon: Assets.imagesSvgPrivacyPolicy,
+        routePath: '',
+        subTitle: 'We respect and secure your data',
+        title: 'Privacy & Policy',
+      ),
+      AccountItemModel(
+        icon: Assets.imagesSvgContactUs,
+        routePath: '',
+        subTitle: 'We’re here to help anytime',
+        title: 'Contact Us',
+      ),
+    ];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

@@ -16,10 +16,15 @@ class PriceSummeryItem extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Expanded(child: Text(label, style: AppTextStyle.instance.text18W300)),
-            Expanded(child: Align(
-              alignment: Alignment.centerRight,
-              child: Text(value, style: AppTextStyle.instance.text18W300))),
+            Expanded(
+              child: Text(label, style: AppTextStyle.instance.text18W300),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerRight,
+                child: Text(value, style: AppTextStyle.instance.text18W300),
+              ),
+            ),
           ],
         ),
         AppSpace.instance.v8,

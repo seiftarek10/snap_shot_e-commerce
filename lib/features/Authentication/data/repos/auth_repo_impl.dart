@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:snap_shot/core/entites/user_entity.dart';
 import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/utils/result.dart';
+import 'package:snap_shot/core/utils/stripe_service.dart';
 import 'package:snap_shot/features/authentication/data/data_source/local/auth_local_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/auth_remote_data_source.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/errors/fire_base_auth_errors.dart';
@@ -13,8 +14,13 @@ import 'package:snap_shot/features/authentication/domain/use_case/params/verify_
 class AuthRepoImpl extends AuthRepo {
   final AuthRemoteDataSource _authRemoteDataSource;
   final AuthLocalDataSource _authLocalDataSource;
+  final StripeService _stripeService;
 
-  AuthRepoImpl(this._authRemoteDataSource, this._authLocalDataSource);
+  AuthRepoImpl(
+    this._authRemoteDataSource,
+    this._authLocalDataSource,
+    this._stripeService,
+  );
 
   @override
   Future<Result<void>> signUp({required UserEntity userData}) async {
@@ -28,6 +34,10 @@ class AuthRepoImpl extends AuthRepo {
         return AppFailure(const Failure('Failed to create account ID'));
       }
       data.uid = userId;
+      String customerId = await _stripeService.createCustomerId(
+        userName: data.userName,
+      );
+      data.customerId = customerId;
 
       await _authRemoteDataSource.createUserData(uid: userId, userData: data);
 

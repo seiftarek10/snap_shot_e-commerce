@@ -20,7 +20,7 @@ class AccountPaymentMethod extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppSpace.instance.topPageSpace,
-                const PageHeader(pageTitle: 'Payment Method',arrowBack: true ),
+                const PageHeader(pageTitle: 'Payment Method', arrowBack: true),
                 AppSpace.instance.v12,
                 const VirtualCreditCard(),
                 AppSpace.instance.v12,

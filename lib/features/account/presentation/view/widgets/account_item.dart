@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
@@ -8,7 +7,7 @@ import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/features/account/data/models/account_item_model.dart';
 
 class MyAccountItem extends StatelessWidget {
-  const MyAccountItem({super.key,required this.accountItemModel});
+  const MyAccountItem({super.key, required this.accountItemModel});
 
   final AccountItemModel accountItemModel;
 
@@ -23,10 +22,7 @@ class MyAccountItem extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              child: SvgPicture.asset(
-                accountItemModel.icon,
-                fit: BoxFit.fill,
-              ),
+              child: SvgPicture.asset(accountItemModel.icon, fit: BoxFit.fill),
             ),
             AppSpace.instance.h16,
             Expanded(
@@ -36,7 +32,7 @@ class MyAccountItem extends StatelessWidget {
                 children: [
                   Expanded(
                     child: Text(
-                     accountItemModel.title ,
+                      accountItemModel.title,
                       style: AppTextStyle.instance.text14W500Black,
                     ),
                   ),

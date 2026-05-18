@@ -12,7 +12,7 @@ class CheckoutLocalDataSourceImpl implements CheckoutLocalDataSource {
   }
 
   @override
-  UserModel? getUserData()  {
+  UserModel? getUserData() {
     return _userbox.getAllData()?.first;
   }
 }

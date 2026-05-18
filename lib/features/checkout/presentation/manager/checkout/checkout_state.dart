@@ -35,3 +35,16 @@ final class FailedToGetUserData extends CheckoutState {
   const FailedToGetUserData(this.errMessage);
   final String errMessage;
 }
+
+final class RequestPaymentSheet extends CheckoutState {
+  const RequestPaymentSheet();
+}
+
+final class PaymentComplete extends CheckoutState {
+  const PaymentComplete();
+}
+
+final class PaymentFailed extends CheckoutState {
+  const PaymentFailed(this.errMessage);
+  final String errMessage;
+}

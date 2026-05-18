@@ -17,7 +17,7 @@ class AccountDetailsView extends StatelessWidget {
             child: Column(
               children: [
                 AppSpace.instance.topPageSpace,
-                const PageHeader(pageTitle: 'Account Details',arrowBack: true ),
+                const PageHeader(pageTitle: 'Account Details', arrowBack: true),
                 AppSpace.instance.v20,
                 const AccountDetailsEditForm(),
               ],

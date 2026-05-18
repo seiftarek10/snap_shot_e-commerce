@@ -31,7 +31,7 @@ class ProductInfoContainer extends StatelessWidget {
               value: r'$ 200',
               icon: Icons.money_rounded,
             ),
-              OrderDetailsContainerItemModel(
+            OrderDetailsContainerItemModel(
               label: 'Total Price',
               value: r'$ 1000',
               icon: Icons.paid_outlined,

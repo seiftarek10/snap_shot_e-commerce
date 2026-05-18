@@ -16,6 +16,8 @@ class UserModel {
   final String mobile;
   @HiveField(5)
   final String address;
+  @HiveField(6)
+  String? customerId;
 
   UserModel({
     required this.uid,
@@ -24,6 +26,7 @@ class UserModel {
     required this.password,
     required this.mobile,
     required this.address,
+    required this.customerId
   });
 
   toJson() {
@@ -33,6 +36,7 @@ class UserModel {
       'email': email,
       'mobile': mobile,
       'address': address,
+      'customerId':customerId
     };
   }
 
@@ -44,6 +48,7 @@ class UserModel {
       mobile: json['mobile'] ?? '',
       address: json['address'] ?? '',
       uid: json['uid'],
+      customerId: json['customerId']??''
     );
   }
 
@@ -55,6 +60,7 @@ class UserModel {
       password: data.password,
       mobile: data.mobile,
       address: data.address,
+      customerId: data.customerId
     );
   }
 
@@ -66,6 +72,7 @@ class UserModel {
       password: password,
       mobile: mobile,
       address: address,
+      customerId: customerId??''
     );
   }
 }

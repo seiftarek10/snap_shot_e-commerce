@@ -18,7 +18,7 @@ class AppTextField extends StatefulWidget {
     this.filedTextStyle,
     this.borderRadius,
     this.maxLines,
-    this.onChanged
+    this.onChanged,
   });
   final String hintText;
   final void Function(String?) onSaved;

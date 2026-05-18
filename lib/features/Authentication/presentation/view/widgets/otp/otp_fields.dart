@@ -6,7 +6,7 @@ import 'package:snap_shot/core/style/fonts.dart';
 
 class OtpFields extends StatelessWidget {
   const OtpFields({super.key, this.onSubmit});
- final void Function(String)? onSubmit;
+  final void Function(String)? onSubmit;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class OtpFields extends StatelessWidget {
       showFieldAsBox: false,
       fieldHeight: 50.h,
       fieldWidth: 40.w,
-      onSubmit: onSubmit
+      onSubmit: onSubmit,
     );
   }
 }

@@ -18,8 +18,10 @@ android {
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+  kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
     }
 
     defaultConfig {
@@ -33,11 +35,19 @@ android {
         versionName = flutter.versionName
     }
 
-    buildTypes {
-        release {
+ buildTypes {
+        getByName("release") {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+            
+            // Note the "is" at the beginning - this is required in Kotlin
+            isMinifyEnabled = true 
+            
+            setProguardFiles(listOf(
+                getDefaultProguardFile("proguard-android-optimize.txt"), 
+                "proguard-rules.pro"
+            ))
         }
     }
 

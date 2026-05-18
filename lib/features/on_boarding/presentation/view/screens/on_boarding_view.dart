@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/features/on_boarding/data/Models/on_boarding_info.dart';

@@ -9,10 +9,10 @@ class CheckoutPriceSummery extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CheckoutCubit checkoutCubit = context.read<CheckoutCubit>();
-    return  PriceSummeryCard(
+    return PriceSummeryCard(
       productsCost: checkoutCubit.productsCost,
       deliveryCost: checkoutCubit.deliveryCost,
-      totalCost: checkoutCubit.productsCost+checkoutCubit.deliveryCost,
+      totalCost: checkoutCubit.productsCost + checkoutCubit.deliveryCost,
     );
   }
 }

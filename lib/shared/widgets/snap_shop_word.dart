@@ -4,9 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 
 class SnapShotWord extends StatelessWidget {
-  const SnapShotWord({
-    super.key,
-  });
+  const SnapShotWord({super.key});
 
   @override
   Widget build(BuildContext context) {

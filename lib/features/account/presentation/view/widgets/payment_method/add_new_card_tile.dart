@@ -7,7 +7,11 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class AddNewCardTile extends StatelessWidget {
-  const AddNewCardTile({super.key, required this.isExpanded, required this.turns});
+  const AddNewCardTile({
+    super.key,
+    required this.isExpanded,
+    required this.turns,
+  });
 
   final bool isExpanded;
   final Animation<double> turns;

@@ -26,10 +26,11 @@ final class SendOtpFailure extends SignUpState {
 
   SendOtpFailure({required this.errMessaga});
 }
+
 final class VerifyOtpSuccess extends SignUpState {}
+
 final class VerifyOtpFailure extends SignUpState {
   final String errMessaga;
 
   VerifyOtpFailure({required this.errMessaga});
 }
-

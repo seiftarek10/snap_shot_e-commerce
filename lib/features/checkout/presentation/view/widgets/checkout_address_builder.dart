@@ -12,10 +12,10 @@ class CheckoutAddressBuilder extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CheckoutCubit, CheckoutState>(
       buildWhen: (previous, current) {
-    return current is GetUserDataSuccess || 
-           current is FailedToGetUserData || 
-           current is GettingUserData;
-  },
+        return current is GetUserDataSuccess ||
+            current is FailedToGetUserData ||
+            current is GettingUserData;
+      },
       builder: (context, state) {
         if (state is GetUserDataSuccess) {
           return CheckoutAddressWidget(address: state.user.address);

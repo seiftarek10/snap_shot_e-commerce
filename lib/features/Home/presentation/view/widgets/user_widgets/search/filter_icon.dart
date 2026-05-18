@@ -14,7 +14,7 @@ class FilterIcon extends StatefulWidget {
     required this.maxValue,
     required this.minValue,
   });
-  final void Function() onApplyPressed ;
+  final void Function() onApplyPressed;
   final void Function(RangeValues) prices;
   final void Function(List<String>) rating;
   final double maxValue, minValue;
@@ -50,7 +50,6 @@ class _FilterIconState extends State<FilterIcon> {
           setState(() {
             isFilterActive = false;
           });
-          
         });
       },
       child: Padding(

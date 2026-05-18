@@ -128,6 +128,7 @@ class SignUpForm extends StatelessWidget {
                                 mobile: mobile!,
                                 address: address!,
                                 uid: '',
+                                customerId: ''
                               ),
                             );
                             // context.read<SignUpCubit>().sendOtp(phoneNumber: mobile!);

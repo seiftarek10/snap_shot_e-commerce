@@ -64,7 +64,7 @@ class AppTextStyle {
     fontSize: 16.sp,
     fontWeight: FontWeight.w600,
     fontFamily: 'inter',
-    color: AppColors.instance.black
+    color: AppColors.instance.black,
   );
   TextStyle get text18W200 => TextStyle(
     fontSize: 18.sp,
@@ -91,7 +91,7 @@ class AppTextStyle {
     fontWeight: FontWeight.w500,
     fontFamily: 'inter',
   );
-    TextStyle get text20Bold => TextStyle(
+  TextStyle get text20Bold => TextStyle(
     fontSize: 20.sp,
     fontWeight: FontWeight.bold,
     fontFamily: 'inter',

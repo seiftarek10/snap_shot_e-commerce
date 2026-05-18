@@ -36,7 +36,6 @@ class CartItem extends StatelessWidget {
               clickDelete: () async {
                 final cartMangaer = context.read<UserCartManegerCubit>();
                 await cartMangaer.removeFromCart(product.id);
-
               },
             ),
           ),

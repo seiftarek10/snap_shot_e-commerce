@@ -76,7 +76,6 @@ Color getBarColor(int index, List<MonthlyRate> data) {
   return Colors.orange;
 }
 
-
 class MonthlyRate {
   final String month;
   final double value;

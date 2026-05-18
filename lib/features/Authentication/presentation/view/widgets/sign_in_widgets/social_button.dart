@@ -6,7 +6,12 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class SocialButton extends StatelessWidget {
-  const SocialButton({super.key, required this.platForm, required this.icon, required this.iconColor});
+  const SocialButton({
+    super.key,
+    required this.platForm,
+    required this.icon,
+    required this.iconColor,
+  });
 
   final String platForm;
   final FaIconData icon;

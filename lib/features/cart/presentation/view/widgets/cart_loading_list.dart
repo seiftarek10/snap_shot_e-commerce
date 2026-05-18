@@ -43,7 +43,8 @@ class CartLoadingList extends StatelessWidget {
                     children: [
                       Expanded(
                         flex: 2,
-                        child: Bone.multiText(lines: 2, fontSize: 20.h)),
+                        child: Bone.multiText(lines: 2, fontSize: 20.h),
+                      ),
                       Expanded(child: Bone.text(fontSize: 30.h)),
                       Expanded(child: Bone.text(words: 1, fontSize: 25.h)),
                     ],
