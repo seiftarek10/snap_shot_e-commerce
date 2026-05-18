@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
-import 'package:snap_shot/features/orders/presentation/view/widgets/all_orders_list.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/current_history_orders.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 
@@ -20,7 +19,7 @@ class OwnerOrdersView extends StatelessWidget {
             lables: ['Confirmed', 'Preparing', 'Shipped'],
           ),
           AppSpace.instance.v12,
-          const Expanded(child: AllOrdersList()),
+          // const Expanded(child: AllOrdersList()),
         ],
       ),
     );

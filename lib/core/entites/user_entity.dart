@@ -28,4 +28,6 @@ class UserEntity {
       customerId: customerId ?? this.customerId,
     );
   }
+
+
 }

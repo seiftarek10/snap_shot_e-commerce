@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/di/sl.dart';
+import 'package:snap_shot/features/orders/presentation/manager/cubit/get_all_orders_cubit.dart';
+import 'package:snap_shot/features/orders/presentation/view/widgets/all_user_orders_builder.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
-import 'package:snap_shot/features/orders/presentation/view/widgets/all_orders_list.dart';
-import 'package:snap_shot/features/orders/presentation/view/widgets/current_history_orders.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 
 class UserOrdersView extends StatelessWidget {
@@ -10,16 +12,17 @@ class UserOrdersView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return PagePadding(
-      child: Column(
-        children: [
-          AppSpace.instance.topPageSpace,
-          const PageHeader(pageTitle: 'Orders', arrowBack: false),
-          AppSpace.instance.v12,
-          const OrderStatusIndicator(lables: ['Current', 'History']),
-          AppSpace.instance.v12,
-          const Expanded(child: AllOrdersList()),
-        ],
+    return BlocProvider(
+      create: (context) => sl<GetAllOrdersCubit>()..getUserOrders(),
+      child: PagePadding(
+        child: Column(
+          children: [
+            AppSpace.instance.topPageSpace,
+            const PageHeader(pageTitle: 'Orders', arrowBack: false),
+            AppSpace.instance.v12,
+            const Expanded(child: AllUserOrdersBuilder()),
+          ],
+        ),
       ),
     );
   }

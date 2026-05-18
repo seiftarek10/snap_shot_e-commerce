@@ -7,6 +7,7 @@ import 'package:snap_shot/core/data_source/remote_data_source/api/dio_services.d
 import 'package:snap_shot/core/data_source/remote_data_source/api/api_interface.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base/firebase_firestore_service.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
+import 'package:snap_shot/core/models/order_model.dart';
 import 'package:snap_shot/features/authentication/data/data_source/local/auth_local_data_source_impl.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/firebase_auth_services.dart';
 import 'package:snap_shot/core/models/user_model.dart';
@@ -58,6 +59,14 @@ import 'package:snap_shot/features/home/domain/use_case/remove_from_cart_use_cas
 import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/fav_cubit/user_home_favorites_cubit_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/features/orders/data/data%20source/local/orders_local_data_sorce.dart';
+import 'package:snap_shot/features/orders/data/data%20source/local/orders_local_data_source_impl.dart';
+import 'package:snap_shot/features/orders/data/data%20source/remote/orders_remote_data_source.dart';
+import 'package:snap_shot/features/orders/data/data%20source/remote/orders_remote_data_source_impl.dart';
+import 'package:snap_shot/features/orders/data/repos/orders_repo_impl.dart';
+import 'package:snap_shot/features/orders/domain/repos/orders_repo.dart';
+import 'package:snap_shot/features/orders/domain/use_cases/get_user_orders_use_case.dart';
+import 'package:snap_shot/features/orders/presentation/manager/cubit/get_all_orders_cubit.dart';
 
 final sl = GetIt.instance;
 
@@ -75,6 +84,7 @@ Future<void> setupGetIt() async {
   _initFavoritesFeature();
   _initCartFeature();
   _initCheckoutFeature();
+  _initOrdersFeature();
 }
 
 void _initAuthFeature() {
@@ -83,14 +93,14 @@ void _initAuthFeature() {
     () => HiveServices<UserModel>(HiveBoxesNames.instance.userBox),
   );
   // stripe service
-   sl.registerLazySingleton(() => StripeService(sl<Dio>()));
+  sl.registerLazySingleton(() => StripeService(sl<Dio>()));
 
   // Data Sources & Repo
   sl.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
       FirebaseAuthServices(sl<IRemoteDataBaseServices>()),
       AuthLocaldataSourceImpl(sl<ILocalDataBaseServices<UserModel>>()),
-      sl<StripeService>()
+      sl<StripeService>(),
     ),
   );
 
@@ -231,7 +241,6 @@ void _initCartFeature() {
 }
 
 void _initCheckoutFeature() {
- 
   //data source
   sl.registerLazySingleton<CheckoutRemoteDataSource>(
     () => CheckoutRemoteDataSourceImpl(
@@ -264,4 +273,35 @@ void _initCheckoutFeature() {
       sl<MakePaymentUseCase>(),
     ),
   );
+}
+
+void _initOrdersFeature() {
+  //data source
+  sl.registerLazySingleton<OrdersRemoteDataSource>(
+    () => OrdersRemoteDataSourceImpl(sl<IRemoteDataBaseServices>()),
+  );
+
+  sl.registerLazySingleton<ILocalDataBaseServices<OrderModel>>(
+    () => HiveServices<OrderModel>(HiveBoxesNames.instance.ordersBox),
+  );
+
+  sl.registerLazySingleton<OrdersLocalDataSorce>(
+    () => OrdersLocalDataSourceImpl(
+      sl<ILocalDataBaseServices<OrderModel>>(),
+      sl<ILocalDataBaseServices<UserModel>>(),
+    ),
+  );
+  // repos
+  sl.registerLazySingleton<OrdersRepo>(
+    () => OrdersRepoImpl(
+      sl<OrdersRemoteDataSource>(),
+      sl<OrdersLocalDataSorce>(),
+    ),
+  );
+
+  //use cases
+  sl.registerLazySingleton(() => GetUserOrdersUseCase(sl<OrdersRepo>()));
+
+  // cubits
+  sl.registerFactory(() => GetAllOrdersCubit(sl<GetUserOrdersUseCase>()));
 }

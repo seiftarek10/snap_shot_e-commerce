@@ -5,4 +5,5 @@ class HiveBoxesNames {
   final String productsBox = 'productsBox';
   final String favProductsBox = 'favProductsBox';
   final String cartProdcutBox = 'cartBox';
+  final String ordersBox = 'ordersBox';
 }

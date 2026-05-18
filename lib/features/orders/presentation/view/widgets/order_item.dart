@@ -1,13 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/order_state.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key});
+  const OrderItem({super.key, required this.order});
+  final OrderEntity order;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -18,8 +21,8 @@ class OrderItem extends StatelessWidget {
           Expanded(
             child: AspectRatio(
               aspectRatio: 0.56,
-              child: Image.asset(
-                Assets.imagesPngOnboardingimage3,
+              child: CachedNetworkImage(
+                imageUrl: order.products.first.imageUrl,
                 fit: BoxFit.cover,
               ),
             ),
@@ -33,19 +36,20 @@ class OrderItem extends StatelessWidget {
                 const OrderState(currentState: CurrentOrderState.shipped),
                 AppSpace.instance.v12,
                 Text(
-                  "#Product Name",
+                  "${order.products[1].name}........}",
                   style: AppTextStyle.instance.text12W500.copyWith(
                     color: AppColors.instance.grey,
                   ),
                 ),
                 AppSpace.instance.v12,
                 Text(
-                  r"$ Product Price",
+                  r"$"
+                  "${order.productsCost}",
                   style: AppTextStyle.instance.text14WBoldBlack,
                 ),
                 AppSpace.instance.v12,
                 Text(
-                  "Order At 2025 : 4,30 PM",
+                  "Order At ${order.createdAt}",
                   style: AppTextStyle.instance.text12W500.copyWith(
                     color: AppColors.instance.grey,
                   ),

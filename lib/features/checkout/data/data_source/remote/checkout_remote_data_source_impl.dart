@@ -2,7 +2,7 @@ import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
-import 'package:snap_shot/features/checkout/data/models/order_model.dart';
+import 'package:snap_shot/core/models/order_model.dart';
 import 'package:snap_shot/features/checkout/data/models/payment_intent_input_mode.dart';
 import 'package:snap_shot/core/utils/stripe_service.dart';
 

@@ -39,4 +39,44 @@ class OrderEntity {
       status: status ?? this.status,
     );
   }
+
+  static List<OrderEntity> get mockLoadingList => List.generate(
+    5,
+    (index) => OrderEntity(
+      id: 'mock_id_$index',
+      createdAt: '2026-05-18',
+      productsCost: 0.0,
+      deliveryCost: 0.0,
+      status: 'pending',
+
+      userData: UserEntity(
+        uid: 'mock_user',
+        userName: 'Loading Customer Name',
+        email: 'loading_email@example.com',
+        mobile: '0202003030',
+        address: 'Cairo Egypt',
+        password: '',
+        customerId: '',
+      ),
+
+      products: List.generate(
+        5, 
+        (pIndex) => ProductEntity(
+          id: 'mock_prod_$pIndex',
+          name: 'Loading Product Title Placeholder',
+          price: '0.0',
+          rate: '',
+          imageUrl: '',
+          category: '',
+          description: '',
+          isFav: null,
+          inCart: null,
+          brand: '',
+          stock: '',
+          counter: null,
+          // Pass any other required fields for your specific ProductEntity constructor here
+        ),
+      ),
+    ),
+  );
 }
