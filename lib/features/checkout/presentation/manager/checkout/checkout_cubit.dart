@@ -79,6 +79,8 @@ class CheckoutCubit extends BaseCubit<CheckoutState> {
   ({double productsCost, double deliveryCost}) getCosts(
     List<ProductEntity> products,
   ) {
+    productsCost = 0.0;
+    deliveryCost = 0.0;
     for (var e in products) {
       productsCost +=
           double.parse(e.price) * double.parse(e.counter.toString());

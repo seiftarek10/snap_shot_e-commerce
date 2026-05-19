@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/di/sl.dart';
+import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/account_details_view.dart';
@@ -139,9 +140,14 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.orderDetails,
-        builder: (context, state) => const OrderDetailsView(),
+        builder: (context, state) {
+          final orderExtra = state.extra as OrderEntity;
+          return OrderDetailsView(
+            order: orderExtra,
+          );
+        },
       ),
-       GoRoute(
+      GoRoute(
         path: Routes.instance.cartView,
         builder: (context, state) => const CartView(),
       ),

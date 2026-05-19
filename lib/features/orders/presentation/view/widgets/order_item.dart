@@ -1,60 +1,85 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/features/orders/presentation/view/widgets/order_state.dart';
 
 class OrderItem extends StatelessWidget {
-  const OrderItem({super.key, required this.order});
+  const OrderItem({super.key, required this.order, required this.enabled});
   final OrderEntity order;
+  final bool enabled;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 110.h,
       padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 15.w),
       decoration: _buildDecoration(),
       child: Row(
         children: [
           Expanded(
+            flex: 4,
             child: AspectRatio(
               aspectRatio: 0.56,
-              child: CachedNetworkImage(
-                imageUrl: order.products.first.imageUrl,
-                fit: BoxFit.cover,
-              ),
+              child: enabled == false
+                  ? CachedNetworkImage(
+                      imageUrl: order.products.first.imageUrl,
+                      fit: BoxFit.fill,
+                    )
+                  : Image.asset(
+                      Assets.imagesPngOnboardingimage1,
+                      fit: BoxFit.fill,
+                    ),
             ),
           ),
           AppSpace.instance.h16,
           Expanded(
-            flex: 3,
+            flex: 10,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const OrderState(currentState: CurrentOrderState.shipped),
-                AppSpace.instance.v12,
-                Text(
-                  "${order.products[1].name}........}",
-                  style: AppTextStyle.instance.text12W500.copyWith(
-                    color: AppColors.instance.grey,
+                // const OrderState(currentState: CurrentOrderState.shipped),
+                Expanded(
+                  flex: 5,
+                  child: Text(
+                    order.products.map((e) => e.name).join(', '),
+                    style: AppTextStyle.instance.text16W400,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                AppSpace.instance.v12,
-                Text(
-                  r"$"
-                  "${order.productsCost}",
-                  style: AppTextStyle.instance.text14WBoldBlack,
+                Expanded(
+                  flex: 3,
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      r"$"
+                      "${order.productsCost}",
+                      textAlign: TextAlign.center,
+                      style: AppTextStyle.instance.text14WBoldBlack,
+                    ),
+                  ),
                 ),
-                AppSpace.instance.v12,
-                Text(
-                  "Order At ${order.createdAt}",
-                  style: AppTextStyle.instance.text12W500.copyWith(
-                    color: AppColors.instance.grey,
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    "Order At ${order.createdAt}",
+                    style: AppTextStyle.instance.text12W500.copyWith(
+                      color: AppColors.instance.grey,
+                    ),
                   ),
                 ),
               ],
+            ),
+          ),
+          Expanded(
+            child: Text(
+              "${order.products.length}",
+              style: AppTextStyle.instance.text18W700,
+              textAlign: TextAlign.end,
             ),
           ),
         ],

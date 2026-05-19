@@ -250,7 +250,10 @@ void _initCheckoutFeature() {
   );
 
   sl.registerLazySingleton<CheckoutLocalDataSource>(
-    () => CheckoutLocalDataSourceImpl(sl<ILocalDataBaseServices<UserModel>>()),
+    () => CheckoutLocalDataSourceImpl(
+      sl<ILocalDataBaseServices<UserModel>>(),
+      sl<ILocalDataBaseServices<OrderModel>>(),
+    ),
   );
   // repos
   sl.registerLazySingleton<CheckoutRepo>(

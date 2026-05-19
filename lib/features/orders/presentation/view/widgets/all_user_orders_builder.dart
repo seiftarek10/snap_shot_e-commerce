@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/features/orders/presentation/manager/cubit/get_all_orders_cubit.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/all_orders_list.dart';
+import 'package:snap_shot/shared/widgets/stete_widgets/app_empty_widget.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_error_widget.dart';
 
 class AllUserOrdersBuilder extends StatelessWidget {
@@ -13,6 +14,9 @@ class AllUserOrdersBuilder extends StatelessWidget {
     return BlocBuilder<GetAllOrdersCubit, GetAllOrdersState>(
       builder: (context, state) {
         if (state is UserOrdersLoadded) {
+          if (state.orders.isEmpty) {
+            return const AppEmptyWidget();
+          }
           return AllOrdersList(enableLoadingState: false, orders: state.orders);
         } else if (state is FailedToLoadOrders) {
           return AppErrorWidget(

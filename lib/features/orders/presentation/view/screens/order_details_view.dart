@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/order_details_product_image.dart';
+import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/product_info_container.dart';
+import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/products_list_in_order.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/user_info_container.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 
 class OrderDetailsView extends StatelessWidget {
-  const OrderDetailsView({super.key});
+  const OrderDetailsView({super.key, required this.order});
+
+  final OrderEntity order;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +24,15 @@ class OrderDetailsView extends StatelessWidget {
                 AppSpace.instance.topPageSpace,
                 const PageHeader(pageTitle: 'Order Details', arrowBack: true),
                 AppSpace.instance.v12,
-                const OrderDetailsProductImage(
-                  productImage: Assets.imagesPngOnboardingimage2,
-                ),
+                ProductsListInOrder(products: order.products),
                 AppSpace.instance.v12,
-                const UserInfoContainer(),
+                UserInfoContainer(user: order.userData!),
                 AppSpace.instance.v20,
-                const ProductInfoContainer(),
+                ProductInfoContainer(
+                  numberOfProducts: order.products.length.toString(),
+                  productsCost: order.productsCost.toString(),
+                  deliveryCost: order.deliveryCost.toString(),
+                ),
                 AppSpace.instance.v20,
               ],
             ),

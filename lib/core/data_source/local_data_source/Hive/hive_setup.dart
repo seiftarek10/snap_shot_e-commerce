@@ -9,10 +9,7 @@ Future<void> userHiveSetup() async {
   Hive.registerAdapter(UserModelAdapter());
   Hive.registerAdapter(ProductModelAdapter());
   Hive.registerAdapter(OrderModelAdapter());
-  // await Hive.deleteBoxFromDisk(HiveBoxesNames.instance.productsBox);
-  // await Hive.deleteBoxFromDisk(HiveBoxesNames.instance.favProductsBox);
-  // await Hive.deleteBoxFromDisk(HiveBoxesNames.instance.cartProdcutBox);
-  // await Hive.deleteBoxFromDisk(HiveBoxesNames.instance.userBox);
+ 
   if (!Hive.isBoxOpen(HiveBoxesNames.instance.userBox)) {
     await Hive.openBox<UserModel>(HiveBoxesNames.instance.userBox);
   }
