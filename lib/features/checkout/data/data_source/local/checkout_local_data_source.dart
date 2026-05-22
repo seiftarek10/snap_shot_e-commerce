@@ -4,4 +4,5 @@ abstract class CheckoutLocalDataSource {
   String? getUserid();
   UserModel? getUserData();
   Future<void> clearOrdersBox();
+  Future<void> clearCartBox();
 }

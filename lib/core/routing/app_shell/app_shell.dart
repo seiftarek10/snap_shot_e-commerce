@@ -9,8 +9,11 @@ import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
 
 class AppShell extends StatefulWidget {
-  const AppShell({super.key, required this.role});
+  const AppShell({super.key, required this.role, required this.pageIndex});
+
   final Role role;
+  final int pageIndex;
+
   @override
   State<AppShell> createState() => _AppShellState();
 }
@@ -22,8 +25,19 @@ class _AppShellState extends State<AppShell> {
   @override
   void initState() {
     super.initState();
-    currentIndex = 0;
+    currentIndex = widget.pageIndex;
     _pages = _buildPages(widget.role);
+  }
+
+  @override
+  void didUpdateWidget(covariant AppShell oldWidget) {
+    super.didUpdateWidget(oldWidget);
+   
+    if (oldWidget.pageIndex != widget.pageIndex) {
+      setState(() {
+        currentIndex = widget.pageIndex;
+      });
+    }
   }
 
   List<Widget> _buildPages(Role role) {
@@ -54,13 +68,13 @@ class _AppShellState extends State<AppShell> {
     return Scaffold(
       bottomNavigationBar: AppBottomBar(
         role: widget.role,
+        index: currentIndex,
         onTap: (index) {
           setState(() {
             currentIndex = index;
           });
         },
       ),
-      // Use a simple expression instead of IndexedStack
       body: SafeArea(child: _pages[currentIndex]),
     );
   }

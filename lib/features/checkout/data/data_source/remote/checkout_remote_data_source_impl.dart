@@ -44,13 +44,28 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
   }
 
   @override
-  Future<void> makePayment({required String amount,required String customerId}) async {
+  Future<void> makePayment({
+    required String amount,
+    required String customerId,
+  }) async {
     await _stripeService.makePayment(
       paymentIntentInputModel: PaymentIntentInputModel(
         amount: amount,
         currency: 'usd',
-        customerId: customerId
+        customerId: customerId,
       ),
     );
+  }
+
+  @override
+  Future<void> deleteProductsCart() async {
+    String? uid = getUserId();
+    if (uid != null) {
+      await _remoteDataBaseServices.deleteSubCollection(
+        collection: CollectionPath.instance.allCart,
+        id: uid,
+        subCollection: CollectionPath.instance.userCart,
+      );
+    }
   }
 }

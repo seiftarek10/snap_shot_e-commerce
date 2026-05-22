@@ -57,7 +57,7 @@ class OrderItem extends StatelessWidget {
                     alignment: Alignment.topLeft,
                     child: Text(
                       r"$"
-                      "${order.productsCost}",
+                      "${order.productsCost + order.deliveryCost}",
                       textAlign: TextAlign.center,
                       style: AppTextStyle.instance.text14WBoldBlack,
                     ),

@@ -8,20 +8,22 @@ class OrdersRemoteDataSourceImpl implements OrdersRemoteDataSource {
 
   OrdersRemoteDataSourceImpl(this._remoteDataBaseServices);
   @override
-  Future<List<OrderModel>> getUserOrders() async {
+  Stream<List<OrderModel>> getUserOrders() {
     String? uid = _remoteDataBaseServices.getUserId();
-    if (uid == null) {
-      return [];
-    }
-    final response = await _remoteDataBaseServices.getSubCollection(
-      collection: CollectionPath.instance.allOrders,
-      parentId: uid,
-      subCollection: CollectionPath.instance.userOrders,
-    );
 
-    List<OrderModel> orders = response
-        .map((e) => OrderModel.fromJson(e))
-        .toList();
-    return orders;
+    if (uid == null) {
+      return const Stream.empty();
+    }
+
+    final data = _remoteDataBaseServices
+        .getSubCollectionStream(
+          collection: CollectionPath.instance.allOrders,
+          id: uid,
+          subCollection: CollectionPath.instance.userOrders,
+        )
+        .map((list) {
+          return list.map((e) => OrderModel.fromJson(e)).toList();
+        });
+    return data;
   }
 }

@@ -62,7 +62,10 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.appShell,
-        builder: (context, state) => AppShell(role: role),
+        builder: (context, state) {
+          int? pageIndex = state.extra as int?;
+          return AppShell(role: role, pageIndex: pageIndex ?? 0);
+        },
       ),
       GoRoute(
         path: Routes.instance.productDetails,
@@ -142,9 +145,7 @@ class AppRouter {
         path: Routes.instance.orderDetails,
         builder: (context, state) {
           final orderExtra = state.extra as OrderEntity;
-          return OrderDetailsView(
-            order: orderExtra,
-          );
+          return OrderDetailsView(order: orderExtra);
         },
       ),
       GoRoute(

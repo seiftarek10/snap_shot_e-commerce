@@ -253,6 +253,9 @@ void _initCheckoutFeature() {
     () => CheckoutLocalDataSourceImpl(
       sl<ILocalDataBaseServices<UserModel>>(),
       sl<ILocalDataBaseServices<OrderModel>>(),
+      sl<ILocalDataBaseServices<ProductModel>>(
+        instanceName: HiveBoxesNames.instance.cartProdcutBox
+      ),
     ),
   );
   // repos

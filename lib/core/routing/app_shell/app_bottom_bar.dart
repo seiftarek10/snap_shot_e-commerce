@@ -5,9 +5,15 @@ import 'package:snap_shot/core/routing/app_router.dart';
 import 'package:snap_shot/core/routing/app_shell/nav_bar_item.dart';
 
 class AppBottomBar extends StatefulWidget {
-  const AppBottomBar({super.key, required this.onTap, required this.role});
+  const AppBottomBar({
+    super.key,
+    required this.onTap,
+    required this.role,
+    required this.index,
+  });
   final ValueChanged<int> onTap;
   final Role role;
+  final int index;
   @override
   State<AppBottomBar> createState() => _AppBottomBarState();
 }
@@ -50,8 +56,18 @@ class _AppBottomBarState extends State<AppBottomBar> {
   @override
   void initState() {
     super.initState();
-    currentIndex = 0;
+    currentIndex = widget.index;
     _icons = _buildIcons(widget.role);
+  }
+
+  @override
+  void didUpdateWidget(covariant AppBottomBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.index != widget.index) {
+      setState(() {
+        currentIndex = widget.index;
+      });
+    }
   }
 
   @override

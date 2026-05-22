@@ -26,7 +26,9 @@ class CheckoutRepoImpl implements CheckoutRepo {
       String? uid = _localDataSource.getUserid();
       uid ??= _remoteDataSource.getUserId();
       await _remoteDataSource.makeOrder(order: OrderModel.fromEntity(order));
+      await _remoteDataSource.deleteProductsCart();
       await _localDataSource.clearOrdersBox();
+      await _localDataSource.clearCartBox();
       return const Success(null);
     } catch (e) {
       if (e is FirebaseException) {
