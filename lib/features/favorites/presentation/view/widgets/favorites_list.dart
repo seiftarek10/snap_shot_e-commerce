@@ -75,11 +75,12 @@ class FavProudctsList extends StatelessWidget {
     );
   }
 
-  SliverToBoxAdapter _buildFailureWidget(
+  SliverFillRemaining _buildFailureWidget(
     BuildContext context,
     String errMessage,
   ) {
-    return SliverToBoxAdapter(
+    return SliverFillRemaining(
+      hasScrollBody: false,
       child: AppErrorWidget(
         errMessage: errMessage,
         onTap: () async {

@@ -14,7 +14,8 @@ final class MakeOrderLoading extends CheckoutState {
 }
 
 final class MakeOrderSuccess extends CheckoutState {
-  const MakeOrderSuccess();
+  // ignore: prefer_const_constructors_in_immutables
+  MakeOrderSuccess();
 }
 
 final class MakeOrderFailure extends CheckoutState {

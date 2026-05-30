@@ -108,6 +108,8 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
         .collection(collection)
         .doc(parentId)
         .collection(subCollection)
+        
+        
         .get();
     return result.docs.map((doc) {
       final data = doc.data();
@@ -115,7 +117,21 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
       return data;
     }).toList();
   }
-
+@override
+Stream<List<Map<String, dynamic>>> getSubCollectionStream({
+  required String collection,
+  required String id,
+  required String subCollection,
+}) {
+  return FirebaseFirestore.instance
+      .collection(collection)
+      .doc(id)
+      .collection(subCollection)
+      .snapshots()
+      .map(
+        (snapshot) => snapshot.docs.map((e) => e.data()).toList(),
+      );
+}
   @override
   Stream<Map<String, dynamic>> streamById({
     required String collection,
@@ -198,5 +214,23 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
   @override
   String? getUserId() {
     return FirebaseAuth.instance.currentUser?.uid;
+  }
+
+  @override
+  Future<void> deleteSubCollection({
+    required String collection,
+    required String id,
+    required String subCollection,
+  }) async {
+    final ordersRef = FirebaseFirestore.instance
+        .collection(collection)
+        .doc(id)
+        .collection(subCollection);
+
+    final snapshot = await ordersRef.get();
+
+    for (final doc in snapshot.docs) {
+      await doc.reference.delete();
+    }
   }
 }

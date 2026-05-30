@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/features/orders/data/models/order_details_container_item_model.dart';
+import 'package:snap_shot/features/orders/presentation/view/models/order_details_container_item_model.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/order_details_item.dart';
 
 class OrderDetailsContainer extends StatelessWidget {

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/app_router.dart';
+import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart';
 import 'package:snap_shot/core/routing/app_shell/app_bottom_bar.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
@@ -7,22 +9,26 @@ import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart
 import 'package:snap_shot/features/category/presentation/view/screens/owner_category_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
-
 class AppShell extends StatefulWidget {
-  const AppShell({super.key, required this.role});
+  const AppShell({
+    super.key,
+    required this.role,
+    required this.pageIndex,
+  });
+
   final Role role;
+  final int pageIndex;
+
   @override
   State<AppShell> createState() => _AppShellState();
 }
 
 class _AppShellState extends State<AppShell> {
-  late int currentIndex;
   late final List<Widget> _pages;
 
   @override
   void initState() {
     super.initState();
-    currentIndex = 0;
     _pages = _buildPages(widget.role);
   }
 
@@ -43,9 +49,12 @@ class _AppShellState extends State<AppShell> {
           OrdersView(role: Role.owner),
         ];
       case Role.staff:
-        return const [Scaffold(), Scaffold(), Scaffold()];
       default:
-        return const [Scaffold(), Scaffold(), Scaffold()];
+        return const [
+          Scaffold(),
+          Scaffold(),
+          Scaffold(),
+        ];
     }
   }
 
@@ -54,14 +63,17 @@ class _AppShellState extends State<AppShell> {
     return Scaffold(
       bottomNavigationBar: AppBottomBar(
         role: widget.role,
+        index: widget.pageIndex,
         onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
+          context.go(
+            Routes.instance.appShell,
+            extra: index,
+          );
         },
       ),
-      // Use a simple expression instead of IndexedStack
-      body: SafeArea(child: _pages[currentIndex]),
+      body: SafeArea(
+        child: _pages[widget.pageIndex],
+      ),
     );
   }
 }

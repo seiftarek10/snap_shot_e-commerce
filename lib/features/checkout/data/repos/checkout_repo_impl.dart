@@ -10,8 +10,8 @@ import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/checkout/data/data_source/local/checkout_local_data_source.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
 import 'package:snap_shot/features/checkout/data/errors/stripe_errors.dart';
-import 'package:snap_shot/features/checkout/data/models/order_model.dart';
-import 'package:snap_shot/features/checkout/domain/entity/order_entity.dart';
+import 'package:snap_shot/core/models/order_model.dart';
+import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/features/checkout/domain/repos/checkout_repo.dart';
 import 'package:snap_shot/features/checkout/domain/use_case/make_payment_use_case.dart';
 
@@ -26,6 +26,9 @@ class CheckoutRepoImpl implements CheckoutRepo {
       String? uid = _localDataSource.getUserid();
       uid ??= _remoteDataSource.getUserId();
       await _remoteDataSource.makeOrder(order: OrderModel.fromEntity(order));
+      await _remoteDataSource.deleteProductsCart();
+      await _localDataSource.clearOrdersBox();
+      await _localDataSource.clearCartBox();
       return const Success(null);
     } catch (e) {
       if (e is FirebaseException) {

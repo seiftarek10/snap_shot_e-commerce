@@ -23,6 +23,11 @@ abstract class IRemoteDataBaseServices {
   });
 
   Future<void> delete({required String collection, required String id});
+  Future<void> deleteSubCollection({
+    required String collection,
+    required String id,
+    required String subCollection,
+  });
 
   Future<Map<String, dynamic>> getById({
     required String collection,
@@ -30,6 +35,11 @@ abstract class IRemoteDataBaseServices {
   });
 
   Future<List<Map<String, dynamic>>> getAll({required String collection});
+  Stream<List<Map<String, dynamic>>> getSubCollectionStream({
+  required String collection,
+  required String id,
+  required String subCollection,
+});
 
   Stream<Map<String, dynamic>> streamById({
     required String collection,

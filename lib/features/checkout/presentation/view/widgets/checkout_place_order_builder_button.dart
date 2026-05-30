@@ -15,14 +15,23 @@ class PlaceOrderBuilderButton extends StatelessWidget {
       buildWhen: (previous, current) {
         return current is RequestPaymentSheet ||
             current is PaymentComplete ||
-            current is PaymentFailed;
+            current is PaymentFailed ||
+            current is MakeOrderLoading ||
+            current is MakeOrderFailure ||
+            current is MakeOrderSuccess;
       },
       builder: (context, state) {
         return AppButton(
-          isLoading: state is RequestPaymentSheet,
+          isLoading: state is RequestPaymentSheet || state is MakeOrderLoading,
           buttonTitle: "Place Order",
           onPressed: () async {
-            await context.read<CheckoutCubit>().makePayment();
+            final checkoutCubit = context.read<CheckoutCubit>();
+            checkoutCubit.currentPaymentIndex == 0
+                ? await checkoutCubit.makePayment()
+                : await checkoutCubit.makeOrder(
+                    prodcuts: products,
+                    isPaid: false,
+                  );
           },
         );
       },
