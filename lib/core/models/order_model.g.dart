@@ -24,13 +24,14 @@ class OrderModelAdapter extends TypeAdapter<OrderModel> {
       productsCost: fields[5] as double,
       deliveryCost: fields[6] as double,
       status: fields[7] as String,
+      isPaid: fields[8] as bool,
     );
   }
 
   @override
   void write(BinaryWriter writer, OrderModel obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(8)
       ..writeByte(1)
       ..write(obj.id)
       ..writeByte(2)
@@ -44,7 +45,9 @@ class OrderModelAdapter extends TypeAdapter<OrderModel> {
       ..writeByte(6)
       ..write(obj.deliveryCost)
       ..writeByte(7)
-      ..write(obj.status);
+      ..write(obj.status)
+      ..writeByte(8)
+      ..write(obj.isPaid);
   }
 
   @override

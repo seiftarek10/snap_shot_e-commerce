@@ -9,6 +9,7 @@ class OrderEntity {
   final double productsCost;
   final double deliveryCost;
   final String status;
+  final bool isPaid;
 
   OrderEntity({
     this.id,
@@ -18,6 +19,7 @@ class OrderEntity {
     required this.productsCost,
     required this.deliveryCost,
     this.status = 'pending',
+    required this.isPaid
   });
 
   OrderEntity copyWith({
@@ -28,6 +30,7 @@ class OrderEntity {
     double? productsCost,
     double? deliveryCost,
     String? status,
+    bool? isPaid
   }) {
     return OrderEntity(
       id: id ?? this.id,
@@ -37,6 +40,7 @@ class OrderEntity {
       productsCost: productsCost ?? this.productsCost,
       deliveryCost: deliveryCost ?? this.deliveryCost,
       status: status ?? this.status,
+      isPaid: isPaid??this.isPaid
     );
   }
 
@@ -48,7 +52,7 @@ class OrderEntity {
       productsCost: 0.0,
       deliveryCost: 0.0,
       status: 'pending',
-
+      isPaid: false,
       userData: UserEntity(
         uid: 'mock_user',
         userName: 'Loading Customer Name',
@@ -57,10 +61,11 @@ class OrderEntity {
         address: 'Cairo Egypt',
         password: '',
         customerId: '',
+        
       ),
 
       products: List.generate(
-        5, 
+        5,
         (pIndex) => ProductEntity(
           id: 'mock_prod_$pIndex',
           name: 'Loading Product Title Placeholder',

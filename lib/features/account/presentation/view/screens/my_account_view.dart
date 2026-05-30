@@ -6,6 +6,7 @@ import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_boxes_names.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 
 import 'package:snap_shot/features/account/presentation/view/widgets/all_account_items.dart';
@@ -43,7 +44,11 @@ class MyAccountView extends StatelessWidget {
                   if (!context.mounted) return;
                   context.go(Routes.instance.signIn);
                 } catch (e) {
-                  throw FirebaseAuthException(code: 'Failed To Logout');
+                   AppSnackBar.show(
+                    context,
+                    message: e.toString(),
+                    isError: true,
+                  );
                 }
               },
               child: Text(

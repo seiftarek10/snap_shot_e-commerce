@@ -32,6 +32,7 @@ class OrderDetailsView extends StatelessWidget {
                   numberOfProducts: order.products.length.toString(),
                   productsCost: order.productsCost.toString(),
                   deliveryCost: order.deliveryCost.toString(),
+                  isPaid: order.isPaid,
                 ),
                 AppSpace.instance.v20,
               ],

@@ -12,19 +12,17 @@ class OrdersRepoImpl implements OrdersRepo {
   final OrdersLocalDataSorce _localDataSorce;
 
   OrdersRepoImpl(this._remoteDataSource, this._localDataSorce);
-
   @override
   Stream<Result<List<OrderEntity>>> getUserOrders() async* {
     try {
-      final stream = _remoteDataSource.getUserOrders();
-      yield* stream.map((list) {
-        final List<OrderEntity> orders = list.map((e) => e.toEntity()).toList();
-        return Success(orders);
-      });
-    } catch (e) {
-      if (e is FirebaseException) {
-        yield AppFailure(FirestoreError.handleFireStoreError(e));
+      await for (final list in _remoteDataSource.getUserOrders()) {
+        final orders = list.map((e) => e.toEntity()).toList();
+
+        yield Success<List<OrderEntity>>(orders);
       }
+    } on FirebaseException catch (e) {
+      yield AppFailure(FirestoreError.handleFireStoreError(e));
+    } catch (e) {
       yield AppFailure(Failure(e.toString()));
     }
   }

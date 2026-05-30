@@ -36,26 +36,22 @@ class CheckoutCubit extends BaseCubit<CheckoutState> {
     }
   }
 
-  Future<void> makeOrder({required List<ProductEntity> prodcuts}) async {
+  Future<void> makeOrder({
+    required List<ProductEntity> prodcuts,
+    required bool isPaid,
+  }) async {
     safeEmit(const MakeOrderLoading());
-    final userResult = await getUserData();
-    if (userResult is! Success<UserEntity>) {
-      final failure = (userResult as AppFailure).failure;
-      safeEmit(FailedToGetUserData(failure.errMessage));
-      return;
-    }
     final costs = getCosts(prodcuts);
     OrderEntity order = OrderEntity(
-      userData: userResult.data,
+      userData: user,
       products: prodcuts,
       productsCost: costs.productsCost,
       deliveryCost: costs.deliveryCost,
+      isPaid: isPaid,
     );
-    final result = await _makeOrderUseCase.call(
-      order.copyWith(userData: userResult.data),
-    );
+    final result = await _makeOrderUseCase.call(order.copyWith(userData: user));
     if (result is Success<void>) {
-      safeEmit(const MakeOrderSuccess());
+      safeEmit( MakeOrderSuccess());
     } else if (result is AppFailure<void>) {
       safeEmit(MakeOrderFailure(result.failure.errMessage));
     }
@@ -88,5 +84,11 @@ class CheckoutCubit extends BaseCubit<CheckoutState> {
     productsCost = double.parse(productsCost.toStringAsFixed(2));
     deliveryCost = double.parse((productsCost * 0.05).toStringAsFixed(2));
     return (productsCost: productsCost, deliveryCost: deliveryCost);
+  }
+
+  int currentPaymentIndex = 0;
+  void updatePaymentMethodIndex(int? index) {
+    currentPaymentIndex = 0;
+    currentPaymentIndex = index ?? currentPaymentIndex;
   }
 }

@@ -4,23 +4,17 @@ import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/routing/app_router.dart';
 import 'package:snap_shot/core/routing/app_shell/nav_bar_item.dart';
 
-class AppBottomBar extends StatefulWidget {
+class AppBottomBar extends StatelessWidget {
   const AppBottomBar({
     super.key,
     required this.onTap,
     required this.role,
     required this.index,
   });
+
   final ValueChanged<int> onTap;
   final Role role;
   final int index;
-  @override
-  State<AppBottomBar> createState() => _AppBottomBarState();
-}
-
-class _AppBottomBarState extends State<AppBottomBar> {
-  late int currentIndex;
-  late final List<String> _icons;
 
   List<String> _buildIcons(Role role) {
     switch (role) {
@@ -39,11 +33,6 @@ class _AppBottomBarState extends State<AppBottomBar> {
           Assets.imagesPngOrder,
         ];
       case Role.staff:
-        return const [
-          Assets.imagesPngHome,
-          Assets.imagesPngCategory,
-          Assets.imagesPngHeart,
-        ];
       default:
         return const [
           Assets.imagesPngHome,
@@ -54,41 +43,20 @@ class _AppBottomBarState extends State<AppBottomBar> {
   }
 
   @override
-  void initState() {
-    super.initState();
-    currentIndex = widget.index;
-    _icons = _buildIcons(widget.role);
-  }
-
-  @override
-  void didUpdateWidget(covariant AppBottomBar oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.index != widget.index) {
-      setState(() {
-        currentIndex = widget.index;
-      });
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final icons = _buildIcons(role);
+
     return SizedBox(
       height: 70.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(
-          _icons.length,
-          (index) => GestureDetector(
+          icons.length,
+          (i) => GestureDetector(
             onTap: () {
-              setState(() {
-                currentIndex = index;
-                widget.onTap(currentIndex);
-              });
+              onTap(i); 
             },
-            child: NavBarItem(
-              icon: _icons[index],
-              isActive: currentIndex == index,
-            ),
+            child: NavBarItem(icon: icons[i], isActive: index == i),
           ),
         ),
       ),

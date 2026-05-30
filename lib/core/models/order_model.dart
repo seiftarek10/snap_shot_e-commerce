@@ -21,6 +21,8 @@ class OrderModel {
   final double deliveryCost;
   @HiveField(7)
   final String status;
+  @HiveField(8)
+  final bool isPaid;
 
   OrderModel({
     required this.id,
@@ -30,6 +32,7 @@ class OrderModel {
     required this.productsCost,
     required this.deliveryCost,
     required this.status,
+     required this.isPaid,
   });
 
   factory OrderModel.fromJson(Map<String, dynamic> json) {
@@ -45,6 +48,7 @@ class OrderModel {
       productsCost: json['productsCost'],
       deliveryCost: json['deliveryCost'],
       status: json['status'],
+      isPaid: json['isPaid']
     );
   }
 
@@ -57,6 +61,7 @@ class OrderModel {
       productsCost: order.productsCost,
       deliveryCost: order.deliveryCost,
       status: order.status,
+      isPaid: order.isPaid
     );
   }
 
@@ -69,6 +74,7 @@ class OrderModel {
       "productsCost": productsCost,
       "deliveryCost": deliveryCost,
       "status": status,
+      "isPaid":isPaid
     };
   }
 
@@ -81,6 +87,7 @@ class OrderModel {
       deliveryCost: deliveryCost,
       productsCost: productsCost,
       status: status,
+      isPaid: isPaid
     );
   }
 }
