@@ -5,7 +5,13 @@ import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class OwnerContainerStatistic extends StatelessWidget {
-  const OwnerContainerStatistic({super.key});
+  const OwnerContainerStatistic({
+    super.key,
+    required this.lable,
+    required this.value,
+  });
+
+  final String lable, value;
 
   @override
   Widget build(BuildContext context) {
@@ -27,23 +33,24 @@ class OwnerContainerStatistic extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
+            flex: 7,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Expanded(
                     child: Text(
-                      'View',
-                      style: AppTextStyle.instance.text16W400.copyWith(
-                        color: AppColors.instance.white,
+                      lable,
+                      style: AppTextStyle.instance.text14W500Black.copyWith(
+                        color: AppColors.instance.greyLight,
                       ),
                     ),
                   ),
                   AppSpace.instance.v8,
-
                   Expanded(
                     child: Text(
-                      'View',
+                      value,
                       style: AppTextStyle.instance.text18W700.copyWith(
                         color: AppColors.instance.white,
                       ),
@@ -55,26 +62,11 @@ class OwnerContainerStatistic extends StatelessWidget {
           ),
           Expanded(
             child: Align(
-              alignment: Alignment.centerRight,
-
-              child: Column(
-                children: [
-                  Expanded(
-                    child: Icon(
-                      Icons.arrow_outward,
-                      color: AppColors.instance.white,
-                    ),
-                  ),
-                  AppSpace.instance.v8,
-                  Expanded(
-                    child: Text(
-                      'View',
-                      style: AppTextStyle.instance.text16W400.copyWith(
-                        color: AppColors.instance.white,
-                      ),
-                    ),
-                  ),
-                ],
+              alignment: Alignment.topRight,
+              child: Icon(
+                Icons.arrow_outward,
+                color: AppColors.instance.white,
+                size: 16.h,
               ),
             ),
           ),

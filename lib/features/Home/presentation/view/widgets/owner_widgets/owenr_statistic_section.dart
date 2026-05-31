@@ -11,18 +11,38 @@ class OwnerStatisticContainers extends StatelessWidget {
       children: [
         Row(
           children: [
-            const Expanded(child: OwnerContainerStatistic()),
+            const Expanded(
+              child: OwnerContainerStatistic(
+                lable: 'Total Orders',
+                value: '1009',
+              ),
+            ),
             AppSpace.instance.h12,
-            const Expanded(child: OwnerContainerStatistic()),
+            const Expanded(
+              child: OwnerContainerStatistic(
+                lable: 'Total Users',
+                value: '1,000',
+              ),
+            ),
           ],
         ),
         AppSpace.instance.v12,
         Row(
           children: [
-            const Expanded(child: OwnerContainerStatistic()),
+            const Expanded(
+              child: OwnerContainerStatistic(
+                lable: 'Total Revenue',
+                value: '\$50,000',
+              ),
+            ),
             AppSpace.instance.h12,
 
-            const Expanded(child: OwnerContainerStatistic()),
+            const Expanded(
+              child: OwnerContainerStatistic(
+                lable: 'Total Products',
+                value: '500',
+              ),
+            ),
           ],
         ),
       ],
