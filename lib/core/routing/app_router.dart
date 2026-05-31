@@ -5,12 +5,7 @@ import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
-import 'package:snap_shot/features/account/presentation/view/screens/account_details_view.dart';
-import 'package:snap_shot/features/account/presentation/view/screens/account_payment_method.dart';
-import 'package:snap_shot/features/account/presentation/view/screens/languages_view.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
-import 'package:snap_shot/features/account/presentation/view/screens/address_details_view.dart';
-import 'package:snap_shot/features/account/presentation/view/screens/notification_setting_view.dart';
 import 'package:snap_shot/features/authentication/presentation/model/otp_args_model.dart';
 import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
 import 'package:snap_shot/features/authentication/presentation/view/screens/forget_password_view.dart';
@@ -118,26 +113,7 @@ class AppRouter {
         path: Routes.instance.account,
         builder: (context, state) => const MyAccountView(),
       ),
-      GoRoute(
-        path: Routes.instance.accountDetails,
-        builder: (context, state) => const AccountDetailsView(),
-      ),
-      GoRoute(
-        path: Routes.instance.accountPaymentMethod,
-        builder: (context, state) => const AccountPaymentMethod(),
-      ),
-      GoRoute(
-        path: Routes.instance.addressDetails,
-        builder: (context, state) => const AddressDetailsView(),
-      ),
-      GoRoute(
-        path: Routes.instance.notificationSettings,
-        builder: (context, state) => const NotificationSettingView(),
-      ),
-      GoRoute(
-        path: Routes.instance.languages,
-        builder: (context, state) => const LanguagesView(),
-      ),
+    
       GoRoute(
         path: Routes.instance.ownerCategoryProducts,
         builder: (context, state) => const OwnerCategoryProductsView(),
