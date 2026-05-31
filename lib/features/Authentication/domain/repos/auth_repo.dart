@@ -1,0 +1,11 @@
+import 'package:snap_shot/core/entites/user_entity.dart';
+import 'package:snap_shot/core/utils/result.dart';
+import 'package:snap_shot/features/authentication/domain/use_case/params/sign_in_param.dart';
+import 'package:snap_shot/features/authentication/domain/use_case/params/verify_otp_param.dart';
+
+abstract class AuthRepo {
+  Future<Result<String>> sendOtp({required String phoneNumber});
+  Future<Result<void>> verifyOtp({required VerifyOtpParam request});
+  Future<Result<void>> signUp({required UserEntity userData});
+  Future<Result<void>> signIn({required SignInParam request});
+}

@@ -1,19 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:snap_shot/core/constants/assets.dart';
 
 class CartItemImage extends StatelessWidget {
-  const CartItemImage({
-    super.key,
-  });
+  const CartItemImage({super.key, required this.imageUrl});
+
+  final String imageUrl;
 
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
       aspectRatio: 1 / 2,
-      child: Image.asset(
-        Assets.imagesPngOnboardingimage2,
-        fit: BoxFit.fill,
-      ),
+      child: CachedNetworkImage(imageUrl: imageUrl, fit: BoxFit.fill),
     );
   }
 }

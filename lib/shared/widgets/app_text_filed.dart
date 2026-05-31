@@ -10,9 +10,15 @@ class AppTextField extends StatefulWidget {
     required this.onSaved,
     this.isPasswordField,
     required this.keyboardType,
+    required this.validator,
     this.suffix,
     this.onFocusChange,
     this.prefix,
+    this.foucsedBorderColor,
+    this.filedTextStyle,
+    this.borderRadius,
+    this.maxLines,
+    this.onChanged,
   });
   final String hintText;
   final void Function(String?) onSaved;
@@ -20,6 +26,12 @@ class AppTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final Widget? suffix, prefix;
   final ValueChanged<bool>? onFocusChange;
+  final Color? foucsedBorderColor;
+  final TextStyle? filedTextStyle;
+  final double? borderRadius;
+  final int? maxLines;
+  final String? Function(String?) validator;
+  final void Function(String)? onChanged;
   @override
   State<AppTextField> createState() => _AppTextFieldState();
 }
@@ -49,23 +61,31 @@ class _AppTextFieldState extends State<AppTextField> {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: widget.onChanged,
       focusNode: _focusNode,
+      validator: widget.validator,
       onSaved: widget.onSaved,
       cursorColor: AppColors.instance.black,
       cursorHeight: 20.h,
       style: AppTextStyle.instance.text16W400.copyWith(
-        color: AppColors.instance.black,
+        color: widget.foucsedBorderColor ?? AppColors.instance.black,
         fontWeight: FontWeight.w900,
       ),
       keyboardType: widget.keyboardType,
+      maxLines: widget.isPasswordField == true ? 1 : widget.maxLines,
       obscureText: widget.isPasswordField == null
           ? false
           : widget.isPasswordField == true
           ? !isVisable
           : false,
       decoration: InputDecoration(
+        errorStyle: AppTextStyle.instance.text11W200grey.copyWith(
+          color: const Color.fromARGB(255, 197, 27, 15),
+          fontWeight: FontWeight.w500,
+        ),
         hintText: widget.hintText,
-        hintStyle: AppTextStyle.instance.textFieldStyle,
+        hintStyle:
+            widget.filedTextStyle ?? AppTextStyle.instance.textFieldStyle,
         contentPadding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 12.h),
         suffixIcon: widget.isPasswordField != null
             ? Padding(
@@ -76,7 +96,6 @@ class _AppTextFieldState extends State<AppTextField> {
                       isVisable = !isVisable;
                     });
                   },
-
                   icon: Icon(
                     isVisable == true ? Icons.visibility : Icons.visibility_off,
                     size: 16.h,
@@ -86,10 +105,23 @@ class _AppTextFieldState extends State<AppTextField> {
               )
             : widget.suffix,
         prefixIcon: widget.prefix,
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 20),
+        ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
-          borderSide: BorderSide(color: AppColors.instance.black, width: 3.5),
+          borderSide: BorderSide(
+            color: widget.foucsedBorderColor ?? AppColors.instance.black,
+            width: 3.5,
+          ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(widget.borderRadius ?? 20),
+          borderSide: BorderSide(
+            color: widget.foucsedBorderColor != null
+                ? Colors.grey[200]!
+                : Colors.grey,
+          ),
         ),
       ),
     );

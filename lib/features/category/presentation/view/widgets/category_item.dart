@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/assets.dart';
@@ -6,16 +5,15 @@ import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
-class CategoryItem extends StatelessWidget {
-  const CategoryItem({
-    super.key,
-  });
+class OwnerCategoryItem extends StatelessWidget {
+  const OwnerCategoryItem({super.key, required this.onPressed});
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      onPressed: () {},
-    
+      onPressed: onPressed,
+
       style: OutlinedButton.styleFrom(
         side: BorderSide(color: AppColors.instance.grey),
         shape: RoundedRectangleBorder(
@@ -39,13 +37,13 @@ class CategoryItem extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.max,
-    
+
               children: [
                 Text(
                   'Tables',
                   style: AppTextStyle.instance.text20W500.copyWith(
                     color: AppColors.instance.black,
-                    fontWeight: FontWeight.w600
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
                 AppSpace.instance.v4,
@@ -61,13 +59,10 @@ class CategoryItem extends StatelessWidget {
           Expanded(
             child: Align(
               alignment: AlignmentGeometry.bottomRight,
-              child: InkWell(
-                onTap: () {},
-                child: Icon(
-                  Icons.arrow_forward_ios_outlined,
-                  size: 20.h,
-                  color: AppColors.instance.black,
-                ),
+              child: Icon(
+                Icons.arrow_forward_ios_outlined,
+                size: 20.h,
+                color: AppColors.instance.black,
               ),
             ),
           ),

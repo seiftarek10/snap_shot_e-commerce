@@ -1,5 +1,8 @@
 plugins {
     id("com.android.application")
+    // START: FlutterFire Configuration
+    id("com.google.gms.google-services")
+    // END: FlutterFire Configuration
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
@@ -8,15 +11,17 @@ plugins {
 android {
     namespace = "com.example.snap_shot"
     compileSdk = flutter.compileSdkVersion
-    ndkVersion = "27.3.13750724"
+    ndkVersion = "28.2.13676358"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
 
-    kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+  kotlin {
+    compilerOptions {
+        jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11)
+    }
     }
 
     defaultConfig {
@@ -30,11 +35,55 @@ android {
         versionName = flutter.versionName
     }
 
-    buildTypes {
-        release {
+ buildTypes {
+        getByName("release") {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig = signingConfigs.getByName("debug")
+            
+            // Note the "is" at the beginning - this is required in Kotlin
+            isMinifyEnabled = true 
+            
+            setProguardFiles(listOf(
+                getDefaultProguardFile("proguard-android-optimize.txt"), 
+                "proguard-rules.pro"
+            ))
+        }
+    }
+
+    flavorDimensions += "default"
+    productFlavors {
+        create("User") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Snap Shot")
+            applicationIdSuffix = ".user"
+        }
+        create("Owner") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Snap Shot (Owner)")
+            applicationIdSuffix = ".owner"
+        }
+         create("Delivery") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Snap Shot (Delivery)")
+            applicationIdSuffix = ".delivery"
+        }
+         create("Staff") {
+            dimension = "default"
+            resValue(
+                type = "string",
+                name = "app_name",
+                value = "Snap Shot (Staff)")
+            applicationIdSuffix = ".staff"
         }
     }
 }

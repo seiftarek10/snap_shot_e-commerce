@@ -10,4 +10,16 @@ class Routes {
   final String appShell = "/appShell";
   final String productDetails = "/ProductDetails";
   final String checkout = "/checkout";
+  final String orders = "/orders";
+  final String favorite = "/Favorite";
+  final String account = "/account";
+  final String cartView = '/cartView';
+  final String accountDetails = '/accountDetails';
+  final String accountPaymentMethod = '/accountPaymentMethod';
+  final String addressDetails = '/addressDetails';
+  final String notificationSettings = '/notificationSettings';
+  final String languages = '/languages';
+  final String ownerCategoryProducts = '/ownerCategoryProducts';
+  final String orderDetails = '/orderDetails';
+  final String otpView = '/otpView';
 }
