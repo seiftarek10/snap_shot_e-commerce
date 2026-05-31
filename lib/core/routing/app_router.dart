@@ -23,6 +23,7 @@ import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_v
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
+import 'package:snap_shot/features/initial_screen_manager/presentation/init_screen.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
@@ -39,7 +40,7 @@ class AppRouter {
       GoRoute(
         path: '/',
         builder: (BuildContext context, GoRouterState state) {
-          return const SignUpView();
+          return InitScreen(role: role);
         },
       ),
       GoRoute(

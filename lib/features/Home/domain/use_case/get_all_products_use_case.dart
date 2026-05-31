@@ -3,7 +3,7 @@ import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
 
-class GetAllProductsUseCase extends UseCase<List<ProductEntity>, void> {
+class GetAllProductsUseCase extends FutureUseCase<List<ProductEntity>, void> {
   final HomeRepo _homeRepo;
 
   GetAllProductsUseCase(this._homeRepo);

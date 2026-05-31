@@ -2,7 +2,7 @@ import 'package:snap_shot/core/use_case/general_use_case.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/checkout/domain/repos/checkout_repo.dart';
 
-class MakePaymentUseCase extends UseCase<void, MakePaymentParam> {
+class MakePaymentUseCase extends FutureUseCase<void, MakePaymentParam> {
   final CheckoutRepo _checkoutRepo;
 
   MakePaymentUseCase(this._checkoutRepo);

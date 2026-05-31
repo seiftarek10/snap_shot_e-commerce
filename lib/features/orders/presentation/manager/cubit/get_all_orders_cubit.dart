@@ -19,11 +19,17 @@ class GetAllOrdersCubit extends BaseCubit<GetAllOrdersState> {
     await _ordersSub?.cancel();
     _ordersSub = _ordersUseCase.call(null).listen((result) {
       if (result is Success<List<OrderEntity>>) {
-        safeEmit(UserOrdersLoadded(result.data));
+        List<OrderEntity> sortedOrders = sortOrdersByDate(result.data);
+        safeEmit(UserOrdersLoadded(sortedOrders));
       } else if (result is AppFailure<List<OrderEntity>>) {
         safeEmit(FailedToLoadOrders(result.failure.errMessage));
       }
     });
+  }
+
+  List<OrderEntity> sortOrdersByDate(List<OrderEntity> orders) {
+    orders.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+    return orders;
   }
 
   @override

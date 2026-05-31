@@ -35,6 +35,9 @@ class HiveServices<T> extends ILocalDataBaseServices<T> {
   @override
   List<T> getAllData() {
     Box<T> box = Hive.box<T>(boxName);
+    if(box.values.isEmpty){
+      return [];
+    }
     return box.values.toList();
   }
 

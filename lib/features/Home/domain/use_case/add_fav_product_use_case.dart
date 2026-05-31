@@ -3,7 +3,7 @@ import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
 
-class AddFavProductUseCase extends UseCase<void, ProductEntity> {
+class AddFavProductUseCase extends FutureUseCase<void, ProductEntity> {
   final HomeRepo _homeRepo;
 
   const AddFavProductUseCase(this._homeRepo);

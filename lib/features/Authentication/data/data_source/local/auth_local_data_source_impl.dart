@@ -3,12 +3,13 @@ import 'package:snap_shot/features/authentication/data/data_source/local/auth_lo
 import 'package:snap_shot/core/models/user_model.dart';
 
 class AuthLocaldataSourceImpl extends AuthLocalDataSource {
-  final ILocalDataBaseServices<UserModel> _localDataBaseServices;
+  final ILocalDataBaseServices<UserModel> _userBox;
+  final ILocalDataBaseServices<bool> _firstTimeBox;
 
-  AuthLocaldataSourceImpl(this._localDataBaseServices);
+  AuthLocaldataSourceImpl(this._userBox, this._firstTimeBox);
   @override
   Future<void> saveUserData({required UserModel userData}) async {
-    await _localDataBaseServices.addDataWithKey(
+    await _userBox.addDataWithKey(
       key: userData.uid,
       data: userData,
     );
@@ -16,6 +17,16 @@ class AuthLocaldataSourceImpl extends AuthLocalDataSource {
 
   @override
   UserModel? getUserData() {
-    return _localDataBaseServices.getAllData()?.first;
+    final userData = _userBox.getAllData();
+    if (userData.isEmpty) {
+      return null;
+    }
+
+    return userData.first;
+  }
+
+  @override
+  Future<void> setFirstTime() async {
+    await _firstTimeBox.addDataWithKey(key: 'FirstTime', data: false);
   }
 }

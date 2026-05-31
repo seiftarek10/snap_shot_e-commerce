@@ -42,6 +42,7 @@ class AuthRepoImpl extends AuthRepo {
       await _authRemoteDataSource.createUserData(uid: userId, userData: data);
 
       await _authLocalDataSource.saveUserData(userData: data);
+      await _authLocalDataSource.setFirstTime();
 
       return const Success(null);
     } catch (e) {
@@ -90,17 +91,18 @@ class AuthRepoImpl extends AuthRepo {
         password: request.password,
       );
       UserModel? userData = _authLocalDataSource.getUserData();
-      if (userData?.uid == null || userData == null) {
+      if (userData?.uid == null ||
+          userData == null ||
+          userData.uid != response) {
         userData = await _authRemoteDataSource.getUserData(uid: response ?? '');
         await _authLocalDataSource.saveUserData(userData: userData);
+        await _authLocalDataSource.setFirstTime();
       }
       return const Success(null);
     } on FirebaseAuthException catch (e) {
       return AppFailure(FirebaseAuthErrors.handleException(e));
     } catch (e) {
-      return AppFailure(
-        const Failure('Something went wrong, please try again later'),
-      );
+      return AppFailure(Failure(e.toString()));
     }
   }
 }

@@ -12,12 +12,20 @@ class CheckoutLocalDataSourceImpl implements CheckoutLocalDataSource {
   CheckoutLocalDataSourceImpl(this._userbox, this._orderBox, this._cartBox);
   @override
   String? getUserid() {
-    return _userbox.getAllData()?.first.uid;
+    final userData = _userbox.getAllData();
+    if (userData.isEmpty) {
+      return null;
+    }
+    return userData.first.uid;
   }
 
   @override
   UserModel? getUserData() {
-    return _userbox.getAllData()?.first;
+    final userData = _userbox.getAllData();
+    if (userData.isEmpty) {
+      return null;
+    }
+    return userData.first;
   }
 
   @override

@@ -59,6 +59,13 @@ import 'package:snap_shot/features/home/domain/use_case/remove_from_cart_use_cas
 import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/fav_cubit/user_home_favorites_cubit_cubit.dart';
 import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/features/initial_screen_manager/data/data_source/init_local_data_source.dart';
+import 'package:snap_shot/features/initial_screen_manager/data/data_source/init_local_data_source_impl.dart';
+import 'package:snap_shot/features/initial_screen_manager/data/repo/init_repo_impl.dart';
+import 'package:snap_shot/features/initial_screen_manager/domain/repo/init_app_repo.dart';
+import 'package:snap_shot/features/initial_screen_manager/domain/use_cases/is_first_time_use_case.dart';
+import 'package:snap_shot/features/initial_screen_manager/domain/use_cases/is_logged_in_use_case.dart';
+import 'package:snap_shot/features/initial_screen_manager/presentation/manager/cubit/init_app_cubit.dart';
 import 'package:snap_shot/features/orders/data/data%20source/local/orders_local_data_sorce.dart';
 import 'package:snap_shot/features/orders/data/data%20source/local/orders_local_data_source_impl.dart';
 import 'package:snap_shot/features/orders/data/data%20source/remote/orders_remote_data_source.dart';
@@ -79,6 +86,7 @@ Future<void> setupGetIt() async {
   );
 
   // Features
+  _initAppFeature();
   _initAuthFeature();
   _initHomeFeature();
   _initFavoritesFeature();
@@ -92,6 +100,9 @@ void _initAuthFeature() {
   sl.registerLazySingleton<ILocalDataBaseServices<UserModel>>(
     () => HiveServices<UserModel>(HiveBoxesNames.instance.userBox),
   );
+  sl.registerLazySingleton<ILocalDataBaseServices<bool>>(
+    () => HiveServices<bool>(HiveBoxesNames.instance.firstTimeBox),
+  );
   // stripe service
   sl.registerLazySingleton(() => StripeService(sl<Dio>()));
 
@@ -99,7 +110,10 @@ void _initAuthFeature() {
   sl.registerLazySingleton<AuthRepo>(
     () => AuthRepoImpl(
       FirebaseAuthServices(sl<IRemoteDataBaseServices>()),
-      AuthLocaldataSourceImpl(sl<ILocalDataBaseServices<UserModel>>()),
+      AuthLocaldataSourceImpl(
+        sl<ILocalDataBaseServices<UserModel>>(),
+        sl<ILocalDataBaseServices<bool>>(),
+      ),
       sl<StripeService>(),
     ),
   );
@@ -254,7 +268,7 @@ void _initCheckoutFeature() {
       sl<ILocalDataBaseServices<UserModel>>(),
       sl<ILocalDataBaseServices<OrderModel>>(),
       sl<ILocalDataBaseServices<ProductModel>>(
-        instanceName: HiveBoxesNames.instance.cartProdcutBox
+        instanceName: HiveBoxesNames.instance.cartProdcutBox,
       ),
     ),
   );
@@ -299,10 +313,7 @@ void _initOrdersFeature() {
   );
   // repos
   sl.registerLazySingleton<OrdersRepo>(
-    () => OrdersRepoImpl(
-      sl<OrdersRemoteDataSource>(),
-      sl<OrdersLocalDataSorce>(),
-    ),
+    () => OrdersRepoImpl(sl<OrdersRemoteDataSource>()),
   );
 
   //use cases
@@ -310,4 +321,27 @@ void _initOrdersFeature() {
 
   // cubits
   sl.registerFactory(() => GetAllOrdersCubit(sl<GetUserOrdersUseCase>()));
+}
+
+void _initAppFeature() {
+  //data source
+  sl.registerLazySingleton<InitAppLocalDataSource>(
+    () => InitAppLocalDataSourceImpl(
+      sl<ILocalDataBaseServices<UserModel>>(),
+      sl<ILocalDataBaseServices<bool>>(),
+    ),
+  );
+
+  // repos
+  sl.registerLazySingleton<InitAppRepo>(
+    () => InitAppRepoImpl(sl<InitAppLocalDataSource>()),
+  );
+  //use cases
+  sl.registerLazySingleton(() => IsFirstTimeUseCase(sl<InitAppRepo>()));
+  sl.registerLazySingleton(() => IsLoggedInUseCase(sl<InitAppRepo>()));
+
+  // cubits
+  sl.registerFactory(
+    () => InitAppCubit(sl<IsFirstTimeUseCase>(), sl<IsLoggedInUseCase>()),
+  );
 }

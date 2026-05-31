@@ -3,15 +3,13 @@ import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/errors/firesotre_error.dart';
 import 'package:snap_shot/core/utils/result.dart';
-import 'package:snap_shot/features/orders/data/data%20source/local/orders_local_data_sorce.dart';
 import 'package:snap_shot/features/orders/data/data%20source/remote/orders_remote_data_source.dart';
 import 'package:snap_shot/features/orders/domain/repos/orders_repo.dart';
 
 class OrdersRepoImpl implements OrdersRepo {
   final OrdersRemoteDataSource _remoteDataSource;
-  final OrdersLocalDataSorce _localDataSorce;
 
-  OrdersRepoImpl(this._remoteDataSource, this._localDataSorce);
+  OrdersRepoImpl(this._remoteDataSource);
   @override
   Stream<Result<List<OrderEntity>>> getUserOrders() async* {
     try {

@@ -3,7 +3,8 @@ import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/favorites/domain/repos/favorites_repo.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 
-class GetAllFavProductsUseCase extends UseCase<List<ProductEntity>, void> {
+class GetAllFavProductsUseCase
+    extends FutureUseCase<List<ProductEntity>, void> {
   const GetAllFavProductsUseCase(this._favoritesRepo);
   final FavoritesRepo _favoritesRepo;
 

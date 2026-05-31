@@ -15,11 +15,15 @@ class OrdersLocalDataSourceImpl implements OrdersLocalDataSorce {
 
   @override
   List<OrderModel> getUserOrders() {
-    return _ordersBox.getAllData() ?? [];
+    return _ordersBox.getAllData() ;
   }
 
   @override
   String? getUid() {
-    return _userBox.getAllData()?.first.uid;
+    final userData = _userBox.getAllData();
+    if (userData.isEmpty) {
+      return null;
+    }
+    return userData.first.uid;
   }
 }

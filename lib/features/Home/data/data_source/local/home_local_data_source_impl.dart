@@ -23,7 +23,7 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
 
   @override
   List<ProductModel> getProductsData() {
-    return _productsBox.getAllData() ?? [];
+    return _productsBox.getAllData();
   }
 
   @override
@@ -38,7 +38,7 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
 
   @override
   List<ProductModel> getFavProducts() {
-    return _favIdsBox.getAllData() ?? [];
+    return _favIdsBox.getAllData() ;
   }
 
   @override
@@ -53,13 +53,16 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
 
   @override
   List<ProductModel> getCartProducts() {
-    return _cartBox.getAllData() ?? [];
+    return _cartBox.getAllData() ;
   }
 
   @override
   String? getUserId() {
-    final userDate = _userBox.getAllData()?.first;
-    return userDate?.uid;
+    final userDate = _userBox.getAllData();
+    if (userDate.isEmpty) {
+      return null;
+    }
+    return userDate.first.uid;
   }
 
   @override

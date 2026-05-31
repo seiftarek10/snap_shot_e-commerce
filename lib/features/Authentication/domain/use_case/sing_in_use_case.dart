@@ -3,7 +3,7 @@ import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/params/sign_in_param.dart';
 
-class SignInUseCase extends UseCase<void, SignInParam> {
+class SignInUseCase extends FutureUseCase<void, SignInParam> {
   final AuthRepo _authRepo;
 
   SignInUseCase(this._authRepo);

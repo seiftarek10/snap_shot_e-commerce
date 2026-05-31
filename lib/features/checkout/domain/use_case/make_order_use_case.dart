@@ -3,7 +3,7 @@ import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/features/checkout/domain/repos/checkout_repo.dart';
 
-class MakeOrderUseCase extends UseCase<void, OrderEntity> {
+class MakeOrderUseCase extends FutureUseCase<void, OrderEntity> {
   final CheckoutRepo _checkoutRepo;
 
   const MakeOrderUseCase(this._checkoutRepo);

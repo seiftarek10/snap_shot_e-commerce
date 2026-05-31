@@ -3,7 +3,7 @@ import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
 
-class AddToCartUseCase extends UseCase<void, ProductEntity> {
+class AddToCartUseCase extends FutureUseCase<void, ProductEntity> {
   final HomeRepo _homeRepo;
 
   AddToCartUseCase(this._homeRepo);

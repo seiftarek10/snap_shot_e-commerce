@@ -10,7 +10,7 @@ class FavProudctsLocalDataSourceImpl implements FavProductsLocalDataSource {
 
   @override
   List<ProductModel> getFavProducts() {
-    return _products.getAllData() ?? [];
+    return _products.getAllData();
   }
 
   @override
@@ -20,10 +20,10 @@ class FavProudctsLocalDataSourceImpl implements FavProductsLocalDataSource {
 
   @override
   String? getUserId() {
-    UserModel? userData = _userId.getAllData()?.first;
-    if (userData == null) {
+    final userData = _userId.getAllData();
+    if (userData.isEmpty) {
       return null;
     }
-    return userData.uid;
+    return userData.first.uid;
   }
 }

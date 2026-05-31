@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/assets.dart';
+import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/on_boarding/data/Models/on_boarding_info.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/widgets/on_boarding_body.dart';
 
@@ -80,7 +82,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
             OnBoardingBody(
               currntIndex: _currentIndex,
               onPressed: () {
-                nextPage();
+                context.go(Routes.instance.signUp);
               },
               onBoardingInfoModel: _onBoardingInfoList[2],
             ),

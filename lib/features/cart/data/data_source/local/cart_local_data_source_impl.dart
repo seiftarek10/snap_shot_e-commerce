@@ -10,7 +10,7 @@ class CartLocalDataSourceImpl implements CartLocalDataSource {
   CartLocalDataSourceImpl(this._cartProuct, this._user);
   @override
   List<ProductModel> getLoaclCartProducts() {
-    return _cartProuct.getAllData() ?? [];
+    return _cartProuct.getAllData();
   }
 
   @override
@@ -22,6 +22,9 @@ class CartLocalDataSourceImpl implements CartLocalDataSource {
   @override
   String? getUid() {
     final userData = _user.getAllData();
-    return userData?.first.uid;
+    if (userData.isEmpty) {
+      return null;
+    }
+    return userData.first.uid;
   }
 }
