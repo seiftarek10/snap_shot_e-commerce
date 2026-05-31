@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 import 'package:snap_shot/core/entites/user_entity.dart';
 part 'user_model.g.dart';
 
@@ -18,6 +19,8 @@ class UserModel {
   final String address;
   @HiveField(6)
   String? customerId;
+  @HiveField(7)
+  final String createdAt;
 
   UserModel({
     required this.uid,
@@ -26,7 +29,8 @@ class UserModel {
     required this.password,
     required this.mobile,
     required this.address,
-    required this.customerId
+    required this.customerId,
+    required this.createdAt,
   });
 
   toJson() {
@@ -36,7 +40,8 @@ class UserModel {
       'email': email,
       'mobile': mobile,
       'address': address,
-      'customerId':customerId
+      'customerId': customerId,
+      "createdAt": DateFormat('yyyy-MM-dd HH:mm:ss').format(DateTime.now()),
     };
   }
 
@@ -48,7 +53,8 @@ class UserModel {
       mobile: json['mobile'] ?? '',
       address: json['address'] ?? '',
       uid: json['uid'],
-      customerId: json['customerId']??''
+      customerId: json['customerId'] ?? '',
+      createdAt: json['createdAt'] ?? '',
     );
   }
 
@@ -60,7 +66,8 @@ class UserModel {
       password: data.password,
       mobile: data.mobile,
       address: data.address,
-      customerId: data.customerId
+      customerId: data.customerId,
+      createdAt: data.createdAt??'',
     );
   }
 
@@ -72,7 +79,8 @@ class UserModel {
       password: password,
       mobile: mobile,
       address: address,
-      customerId: customerId??''
+      customerId: customerId ?? '',
+      createdAt: createdAt,
     );
   }
 }

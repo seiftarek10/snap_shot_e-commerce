@@ -61,6 +61,7 @@ class OrderEntity {
         address: 'Cairo Egypt',
         password: '',
         customerId: '',
+        createdAt: '',
         
       ),
 

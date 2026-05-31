@@ -4,6 +4,7 @@ class UserEntity {
   final String email;
   final String mobile;
   final String address;
+  final String? createdAt;
   final String password;
   final String customerId;
 
@@ -15,6 +16,7 @@ class UserEntity {
     required this.address,
     required this.password,
     required this.customerId,
+    this.createdAt,
   });
 
   UserEntity copyWith({String? uid, String? customerId}) {
@@ -26,8 +28,7 @@ class UserEntity {
       address: address,
       password: password,
       customerId: customerId ?? this.customerId,
+      createdAt: createdAt,
     );
   }
-
-
 }
