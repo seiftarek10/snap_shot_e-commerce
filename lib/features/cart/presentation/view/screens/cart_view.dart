@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/di/sl.dart';
-import 'package:snap_shot/core/shared_manager/cart_cubit/user_cart_manager_cubit.dart';
+import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_checkout_builder_button.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_view_price_section.dart';

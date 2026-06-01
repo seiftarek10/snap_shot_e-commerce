@@ -19,4 +19,33 @@ class FavProuctsRemoteDataSourceImpl implements FavProductsRemoteDataSource {
         .toList();
     return products;
   }
+
+  @override
+  Future<void> addFavProduct({
+    required String uid,
+    required ProductModel product,
+  }) async {
+    final result = await _iRemoteDataBaseServices.addToSubCollectionWithId(
+      collection: CollectionPath.instance.allFavProducts,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userFavProducts,
+      childId: product.id ?? '',
+      data: product.toJson(),
+    );
+
+    return result;
+  }
+
+  @override
+  Future<void> removeFavProduct({
+    required String prodcutId,
+    required String uid,
+  }) async {
+    await _iRemoteDataBaseServices.deleteFromSubCollection(
+      collection: CollectionPath.instance.allFavProducts,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userFavProducts,
+      childId: prodcutId,
+    );
+  }
 }

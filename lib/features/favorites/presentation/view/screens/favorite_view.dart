@@ -12,7 +12,8 @@ class FavoriteView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<FavoritesProductsCubit>()..getFavProudcts(),
+      create: (context) =>
+          sl<FavoritesProductsCubit>()..getFavProudcts(loadingState: true),
       child: CustomScrollView(
         physics: const BouncingScrollPhysics(),
         slivers: [

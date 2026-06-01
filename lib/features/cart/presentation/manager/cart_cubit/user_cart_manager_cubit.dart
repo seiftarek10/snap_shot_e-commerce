@@ -1,9 +1,9 @@
 import 'package:meta/meta.dart';
 import 'package:snap_shot/core/bloc/base_cubit.dart';
 import 'package:snap_shot/core/utils/result.dart';
+import 'package:snap_shot/features/cart/domain/use_cases/add_to_cart_use_case.dart';
+import 'package:snap_shot/features/cart/domain/use_cases/remove_from_cart_use_case.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
-import 'package:snap_shot/features/home/domain/use_case/add_to_cart_use_case.dart';
-import 'package:snap_shot/features/home/domain/use_case/remove_from_cart_use_case.dart';
 
 part 'user_cart_manager_state.dart';
 

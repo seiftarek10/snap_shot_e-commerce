@@ -11,7 +11,7 @@ class UserHomeProductListBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserHomeProudctsCubit, UserHomeProudctsState>(
+    return BlocBuilder<GetAllProductsCubit, GetAllProductsState>(
       builder: (context, state) {
         if (state is GettingAllProducts) {
           return const UserHomeLoadingWidget();
@@ -26,7 +26,7 @@ class UserHomeProductListBuilder extends StatelessWidget {
           return AppErrorWidget(
             errMessage: state.errMessage,
             onTap: () async {
-              context.read<UserHomeProudctsCubit>().getAllProducts();
+              context.read<GetAllProductsCubit>().getAllProducts();
             },
           );
         } else {

@@ -8,8 +8,7 @@ import 'package:snap_shot/core/data_source/remote_data_source/api/api_interface.
 import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base/firebase_firestore_service.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/core/models/order_model.dart';
-import 'package:snap_shot/core/shared_manager/cart_cubit/user_cart_manager_cubit.dart';
-import 'package:snap_shot/features/Home/presentation/manager/user_home_fav_cubit/user_home_favorites_cubit_cubit.dart';
+import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/authentication/data/data_source/local/auth_local_data_source_impl.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/firebase_auth_services.dart';
 import 'package:snap_shot/core/models/user_model.dart';
@@ -27,7 +26,9 @@ import 'package:snap_shot/features/cart/data/data_source/remote/cart_remote_data
 import 'package:snap_shot/features/cart/data/data_source/remote/cart_remote_data_source_impl.dart';
 import 'package:snap_shot/features/cart/data/repos/cart_repo_impl.dart';
 import 'package:snap_shot/features/cart/domain/repos/cart_repo.dart';
+import 'package:snap_shot/features/cart/domain/use_cases/add_to_cart_use_case.dart';
 import 'package:snap_shot/features/cart/domain/use_cases/get_cart_products_use_case.dart';
+import 'package:snap_shot/features/cart/domain/use_cases/remove_from_cart_use_case.dart';
 import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
 import 'package:snap_shot/features/checkout/data/data_source/local/checkout_local_data_source.dart';
 import 'package:snap_shot/features/checkout/data/data_source/local/checkout_local_data_source_impl.dart';
@@ -46,18 +47,16 @@ import 'package:snap_shot/features/favorites/data/data_source/remote/fav_remote_
 import 'package:snap_shot/features/favorites/data/data_source/remote/fav_remote_data_source_impl.dart';
 import 'package:snap_shot/features/favorites/data/repos/fav_repo_impl.dart';
 import 'package:snap_shot/features/favorites/domain/repos/favorites_repo.dart';
+import 'package:snap_shot/features/favorites/domain/use_case/add_fav_product_use_case.dart';
 import 'package:snap_shot/features/favorites/domain/use_case/get_all_fav_products_use_case.dart';
+import 'package:snap_shot/features/favorites/domain/use_case/remove_fav_product_use_case.dart';
 import 'package:snap_shot/features/favorites/presentation/managers/get_fav_products/get_favorites_products_cubit.dart';
 import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source_impl.dart';
 import 'package:snap_shot/features/home/data/data_source/remote/home_remote_impl.dart';
 import 'package:snap_shot/core/models/product_model.dart';
 import 'package:snap_shot/features/home/data/repo/home_repo_impl.dart';
 import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
-import 'package:snap_shot/features/home/domain/use_case/add_fav_product_use_case.dart';
-import 'package:snap_shot/features/home/domain/use_case/add_to_cart_use_case.dart';
 import 'package:snap_shot/features/home/domain/use_case/get_all_products_use_case.dart';
-import 'package:snap_shot/features/home/domain/use_case/remove_fav_product_use_case.dart';
-import 'package:snap_shot/features/home/domain/use_case/remove_from_cart_use_case.dart';
 import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/initial_screen_manager/data/data_source/init_local_data_source.dart';
 import 'package:snap_shot/features/initial_screen_manager/data/data_source/init_local_data_source_impl.dart';
@@ -161,12 +160,7 @@ void _initHomeFeature() {
         sl<ILocalDataBaseServices<ProductModel>>(
           instanceName: HiveBoxesNames.instance.productsBox,
         ),
-        sl<ILocalDataBaseServices<ProductModel>>(
-          instanceName: HiveBoxesNames.instance.favProductsBox,
-        ),
-        sl<ILocalDataBaseServices<ProductModel>>(
-          instanceName: HiveBoxesNames.instance.cartProdcutBox,
-        ),
+
         sl<ILocalDataBaseServices<UserModel>>(),
       ),
     ),
@@ -174,19 +168,18 @@ void _initHomeFeature() {
 
   // Use Cases
   sl.registerLazySingleton(() => GetAllProductsUseCase(sl<HomeRepo>()));
-  sl.registerLazySingleton(() => AddFavProductUseCase(sl<HomeRepo>()));
-  sl.registerLazySingleton(() => RemoveFavProductUseCase(sl<HomeRepo>()));
-  sl.registerLazySingleton(() => AddToCartUseCase(sl<HomeRepo>()));
-  sl.registerLazySingleton(() => RemoveFromCartUseCase(sl<HomeRepo>()));
+  sl.registerLazySingleton(() => AddFavProductUseCase(sl<FavoritesRepo>()));
+  sl.registerLazySingleton(() => RemoveFavProductUseCase(sl<FavoritesRepo>()));
+  sl.registerLazySingleton(() => AddToCartUseCase(sl<CartRepo>()));
+  sl.registerLazySingleton(() => RemoveFromCartUseCase(sl<CartRepo>()));
 
   // Cubits
-  sl.registerFactory(() => UserHomeProudctsCubit(sl<GetAllProductsUseCase>()));
   sl.registerFactory(
-    () => UserHomeFavoritesCubit(
-      sl<AddFavProductUseCase>(),
-      sl<RemoveFavProductUseCase>(),
+    () => GetAllProductsCubit(
+      sl<GetAllProductsUseCase>(),
     ),
   );
+
   sl.registerFactory(
     () => UserCartManegerCubit(
       sl<AddToCartUseCase>(),
@@ -205,6 +198,10 @@ void _initFavoritesFeature() {
       sl<ILocalDataBaseServices<ProductModel>>(
         instanceName: HiveBoxesNames.instance.favProductsBox,
       ),
+      sl<ILocalDataBaseServices<ProductModel>>(
+        instanceName: HiveBoxesNames.instance.productsBox,
+      ),
+
       sl<ILocalDataBaseServices<UserModel>>(),
     ),
   );
@@ -238,6 +235,10 @@ void _initCartFeature() {
       sl<ILocalDataBaseServices<ProductModel>>(
         instanceName: HiveBoxesNames.instance.cartProdcutBox,
       ),
+      sl<ILocalDataBaseServices<ProductModel>>(
+        instanceName: HiveBoxesNames.instance.productsBox,
+      ),
+
       sl<ILocalDataBaseServices<UserModel>>(),
     ),
   );

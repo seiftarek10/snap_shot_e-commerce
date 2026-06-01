@@ -14,18 +14,20 @@ class GetCartProudctsCubit extends BaseCubit<GetCartProudctsState> {
   List<ProductEntity> prodcuts = [];
   double productsCost = 0.0;
   double delivery = 0.0;
-  Future<void> getCartProudcts() async {
+  Future<List<ProductEntity>> getCartProudcts() async {
     prodcuts = [];
     safeEmit(const GettingCartProudcts());
     final result = await _getCartProductsUseCase(null);
     if (result is Success<List<ProductEntity>>) {
       safeEmit(CartProudctsLoadded(result.data));
       prodcuts = result.data;
-
       getCosts(result.data);
+      return result.data;
     } else if (result is AppFailure<List<ProductEntity>>) {
       safeEmit(FailedLoadCartProducts(result.failure.errMessage));
+      return [];
     }
+    return [];
   }
 
   void getCosts(List<ProductEntity> products) {

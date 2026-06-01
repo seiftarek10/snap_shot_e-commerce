@@ -2,9 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:snap_shot/core/shared_manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/features/Home/presentation/manager/user_home_fav_cubit/user_home_favorites_cubit_cubit.dart';
+import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
+import 'package:snap_shot/features/favorites/presentation/managers/get_fav_products/get_favorites_products_cubit.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/user_shopping_bag_icon.dart';
@@ -44,11 +44,12 @@ class UserHomeProductItem extends StatelessWidget {
               child: Align(
                 alignment: Alignment.centerRight,
                 child: FavoriteIcon(
+                  key: ValueKey('fav_${product.id}_${product.isFav}'),
                   isFavorite: product.isFav ?? false,
                   onTap: () async {
-                    final productsCubit = context.read<UserHomeProudctsCubit>();
+                    final productsCubit = context.read<GetAllProductsCubit>();
 
-                    final favCubit = context.read<UserHomeFavoritesCubit>();
+                    final favCubit = context.read<FavoritesProductsCubit>();
                     await favCubit.toggleFavProduct(
                       isFav: product.isFav ?? false,
                       product: product,
@@ -95,7 +96,7 @@ class UserHomeProductItem extends StatelessWidget {
             UserShoppingBagIcon(
               inCart: product.inCart ?? false,
               onTap: () async {
-                final productsCubit = context.read<UserHomeProudctsCubit>();
+                final productsCubit = context.read<GetAllProductsCubit>();
 
                 final cartCubit = context.read<UserCartManegerCubit>();
                 await cartCubit.toggleCartProdcut(

@@ -20,7 +20,9 @@ class FavProudctsList extends StatelessWidget {
     return BlocConsumer<FavoritesProductsCubit, GetFavoritesProductsState>(
       listener: (context, state) async {
         if (state is AddedToFavProducts || state is RemovedFromFavProducts) {
-          await context.read<FavoritesProductsCubit>().getFavProudcts();
+          await context.read<FavoritesProductsCubit>().getFavProudcts(
+            loadingState: false,
+          );
         } else if (state is FailedAddToFav) {
           AppSnackBar.show(context, message: state.errMessage);
         } else if (state is FailedRemoveFromFav) {
@@ -84,7 +86,9 @@ class FavProudctsList extends StatelessWidget {
       child: AppErrorWidget(
         errMessage: errMessage,
         onTap: () async {
-          await context.read<FavoritesProductsCubit>().getFavProudcts();
+          await context.read<FavoritesProductsCubit>().getFavProudcts(
+            loadingState: true,
+          );
         },
       ),
     );

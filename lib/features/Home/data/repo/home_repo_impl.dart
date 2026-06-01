@@ -19,28 +19,6 @@ class HomeRepoImpl implements HomeRepo {
   @override
   Future<Result<List<ProductEntity>>> getAllProducts() async {
     try {
-      final String? uid = _localDataSource.getUserId();
-
-      Set<String?> favIds = {};
-      Set<String?> cartIds = {};
-
-      if (uid != null) {
-        List<ProductModel> favs = _localDataSource.getFavProducts();
-        List<ProductModel> cart = _localDataSource.getCartProducts();
-
-        if (favs.isEmpty) {
-          favs = await _remoteDataSource.getFavProducts(uid: uid);
-          await _localDataSource.addFavProducts(products: favs);
-        }
-        if (cart.isEmpty) {
-          cart = await _remoteDataSource.getCartProducts(uid: uid);
-          await _localDataSource.addToCart(products: cart);
-        }
-
-        favIds = favs.map((e) => e.id).toSet();
-        cartIds = cart.map((e) => e.id).toSet();
-      }
-
       List<ProductModel> rawProducts = _localDataSource.getProductsData();
 
       if (rawProducts.isEmpty) {
@@ -48,11 +26,8 @@ class HomeRepoImpl implements HomeRepo {
         await _localDataSource.saveProductsData(rawProducts);
       }
 
-      final products = rawProducts.map((product) {
-        return product.toEntity().copyWith(
-          isFav: favIds.contains(product.id),
-          inCart: cartIds.contains(product.id),
-        );
+      List<ProductEntity> products = rawProducts.map((product) {
+        return product.toEntity();
       }).toList();
 
       return Success(products);
@@ -62,100 +37,6 @@ class HomeRepoImpl implements HomeRepo {
       }
       if (e is DioException) {
         return AppFailure(AppDioException.handle(e));
-      }
-      return AppFailure(Failure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Result<void>> addFavoriteProduct({
-    required ProductEntity product,
-  }) async {
-    try {
-      final productModel = ProductModel.fromEntity(product);
-      productModel.isFav = true;
-      final String? uid = _localDataSource.getUserId();
-
-      if (uid != null) {
-        await _remoteDataSource.addFavProduct(product: productModel, uid: uid);
-
-        await _localDataSource.clearFavIds();
-        return const Success(null);
-      }
-      return AppFailure(const Failure('user id not found'));
-    } catch (e) {
-      if (e is DioException) {
-        return AppFailure(AppDioException.handle(e));
-      }
-      if (e is FirebaseException) {
-        return AppFailure(FirestoreError.handleFireStoreError(e));
-      }
-      return AppFailure(Failure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Result<void>> removeFavProduct({required String id}) async {
-    try {
-      final String? uid = _localDataSource.getUserId();
-
-      if (uid != null) {
-        await _remoteDataSource.removeFavProduct(prodcutId: id, uid: uid);
-        await _localDataSource.clearFavIds();
-        return const Success(null);
-      }
-      return AppFailure(const Failure('user id not found'));
-    } catch (e) {
-      if (e is DioException) {
-        return AppFailure(AppDioException.handle(e));
-      }
-      if (e is FirebaseException) {
-        return AppFailure(FirestoreError.handleFireStoreError(e));
-      }
-      return AppFailure(Failure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Result<void>> addToCart({required ProductEntity product}) async {
-    try {
-      final String? uid = _localDataSource.getUserId();
-      ProductModel productModel = ProductModel.fromEntity(product);
-      productModel.inCart = true;
-      if (uid != null) {
-        await _remoteDataSource.addToCart(product: productModel, uid: uid);
-        await _localDataSource.clearCartProducts();
-        return const Success(null);
-      }
-
-      return AppFailure(const Failure('user id not found'));
-    } catch (e) {
-      if (e is DioException) {
-        return AppFailure(AppDioException.handle(e));
-      }
-      if (e is FirebaseException) {
-        return AppFailure(FirestoreError.handleFireStoreError(e));
-      }
-      return AppFailure(Failure(e.toString()));
-    }
-  }
-
-  @override
-  Future<Result<void>> removeFromCart({required String id}) async {
-    try {
-      final String? uid = _localDataSource.getUserId();
-      if (uid != null) {
-        await _remoteDataSource.removeFromCart(prodyctid: id, uid: uid);
-        await _localDataSource.clearCartProducts();
-        return const Success(null);
-      }
-      return AppFailure(const Failure('user id not found'));
-    } catch (e) {
-      if (e is DioException) {
-        return AppFailure(AppDioException.handle(e));
-      }
-      if (e is FirebaseException) {
-        return AppFailure(FirestoreError.handleFireStoreError(e));
       }
       return AppFailure(Failure(e.toString()));
     }

@@ -9,10 +9,7 @@ class AuthLocaldataSourceImpl extends AuthLocalDataSource {
   AuthLocaldataSourceImpl(this._userBox, this._firstTimeBox);
   @override
   Future<void> saveUserData({required UserModel userData}) async {
-    await _userBox.addDataWithKey(
-      key: userData.uid,
-      data: userData,
-    );
+    await _userBox.addDataWithKey(key: userData.uid, data: userData);
   }
 
   @override

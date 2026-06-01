@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:dio/dio.dart';
+import 'package:snap_shot/core/errors/dio_errors.dart';
 import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/errors/firesotre_error.dart';
 import 'package:snap_shot/core/models/product_model.dart';
@@ -31,6 +33,60 @@ class FavoritesRepoImpl implements FavoritesRepo {
           .toList();
       return Success(products);
     } catch (e) {
+      if (e is FirebaseException) {
+        return AppFailure(FirestoreError.handleFireStoreError(e));
+      }
+      return AppFailure(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<void>> addFavoriteProduct({
+    required ProductEntity product,
+  }) async {
+    try {
+      final productModel = ProductModel.fromEntity(product);
+      productModel.isFav = true;
+      final String? uid = _localDataSource.getUserId();
+
+      if (uid != null) {
+        await _remoteDataSource.addFavProduct(product: productModel, uid: uid);
+
+        await _localDataSource.addFavProduct(product: productModel);
+        await _localDataSource.updateFavProduct(
+          productId: productModel.id!,
+          isFav: true,
+        );
+        return const Success(null);
+      }
+      return AppFailure(const Failure('user id not found'));
+    } catch (e) {
+      if (e is DioException) {
+        return AppFailure(AppDioException.handle(e));
+      }
+      if (e is FirebaseException) {
+        return AppFailure(FirestoreError.handleFireStoreError(e));
+      }
+      return AppFailure(Failure(e.toString()));
+    }
+  }
+
+  @override
+  Future<Result<void>> removeFavProduct({required String id}) async {
+    try {
+      final String? uid = _localDataSource.getUserId();
+
+      if (uid != null) {
+        await _remoteDataSource.removeFavProduct(prodcutId: id, uid: uid);
+        await _localDataSource.removeFavProduct(id: id);
+        await _localDataSource.updateFavProduct(productId: id, isFav: false);
+        return const Success(null);
+      }
+      return AppFailure(const Failure('user id not found'));
+    } catch (e) {
+      if (e is DioException) {
+        return AppFailure(AppDioException.handle(e));
+      }
       if (e is FirebaseException) {
         return AppFailure(FirestoreError.handleFireStoreError(e));
       }

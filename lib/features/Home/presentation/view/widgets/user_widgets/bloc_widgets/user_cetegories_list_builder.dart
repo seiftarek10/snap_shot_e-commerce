@@ -9,11 +9,11 @@ class UserCetegoriesListBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserHomeProudctsCubit, UserHomeProudctsState>(
-      builder: (BuildContext context, UserHomeProudctsState state) {
+    return BlocBuilder<GetAllProductsCubit, GetAllProductsState>(
+      builder: (BuildContext context, GetAllProductsState state) {
         if (state is GetProductsSuccess) {
           return UserHomeAllCategoriesList(
-            categories: context.read<UserHomeProudctsCubit>().categories,
+            categories: context.read<GetAllProductsCubit>().categories,
           );
         } else if (state is GetProductsFailure) {
           return const SizedBox.shrink();

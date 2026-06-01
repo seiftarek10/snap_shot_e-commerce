@@ -1,16 +1,19 @@
+import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/bloc/base_cubit.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/home/domain/use_case/get_all_products_use_case.dart';
-import 'dart:math';
+
 part 'get_all_products_state.dart';
 
-class UserHomeProudctsCubit extends BaseCubit<UserHomeProudctsState> {
-  UserHomeProudctsCubit(this._getAllProductsUseCase)
+class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
+  GetAllProductsCubit(this._getAllProductsUseCase)
     : super(const GetAllProductsInitial());
 
   final GetAllProductsUseCase _getAllProductsUseCase;
+
   List<String> categories = [];
   List<ProductEntity> products = [];
   List<ProductEntity> fillterdProducts = [];
@@ -20,12 +23,14 @@ class UserHomeProudctsCubit extends BaseCubit<UserHomeProudctsState> {
       safeEmit(const GettingAllProducts());
     }
     final response = await _getAllProductsUseCase.call(null);
+
     if (response is Success<List<ProductEntity>>) {
       safeEmit(GetProductsSuccess(response.data));
       products = response.data;
       fillterdProducts = response.data;
       getCategories();
     }
+
     if (response is AppFailure<List<ProductEntity>>) {
       safeEmit(GetProductsFailure(response.failure.errMessage));
     }
@@ -37,8 +42,8 @@ class UserHomeProudctsCubit extends BaseCubit<UserHomeProudctsState> {
   }
 
   RangeValues getPricesRange() {
+    if (products.isEmpty) return const RangeValues(0, 0);
     var prices = products.map((p) => double.parse(p.price)).toList();
-
     return RangeValues(prices.reduce(min), prices.reduce(max));
   }
 
@@ -46,12 +51,13 @@ class UserHomeProudctsCubit extends BaseCubit<UserHomeProudctsState> {
     if (category.toLowerCase() == 'All'.toLowerCase()) {
       fillterdProducts = products;
       safeEmit(GetProductsSuccess(fillterdProducts));
-
       return;
     }
-    fillterdProducts = [];
+
     fillterdProducts = products
-        .where((product) => product.category == category)
+        .where(
+          (product) => product.category.toLowerCase() == category.toLowerCase(),
+        )
         .toList();
     safeEmit(GetProductsSuccess(fillterdProducts));
   }
@@ -61,6 +67,7 @@ class UserHomeProudctsCubit extends BaseCubit<UserHomeProudctsState> {
       safeEmit(GetProductsSuccess(fillterdProducts));
       return;
     }
+
     List<ProductEntity> searchResult = fillterdProducts
         .where(
           (product) =>
@@ -78,6 +85,7 @@ class UserHomeProudctsCubit extends BaseCubit<UserHomeProudctsState> {
     if (allRates.isEmpty) {
       return filterdPricesList;
     }
+
     List<ProductEntity> finalList = filterdPricesList
         .where(
           (product) => allRates.any(

@@ -19,34 +19,6 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     return products;
   }
 
-  @override
-  Future<void> addFavProduct({
-    required String uid,
-    required ProductModel product,
-  }) async {
-    final result = await _dataBaseServices.addToSubCollectionWithId(
-      collection: CollectionPath.instance.allFavProducts,
-      parentId: uid,
-      subCollection: CollectionPath.instance.userFavProducts,
-      childId: product.id ?? '',
-      data: product.toJson(),
-    );
-
-    return result;
-  }
-
-  @override
-  Future<void> removeFavProduct({
-    required String prodcutId,
-    required String uid,
-  }) async {
-    await _dataBaseServices.deleteFromSubCollection(
-      collection: CollectionPath.instance.allFavProducts,
-      parentId: uid,
-      subCollection: CollectionPath.instance.userFavProducts,
-      childId: prodcutId,
-    );
-  }
 
   @override
   Future<List<ProductModel>> getFavProducts({required String uid}) async {
@@ -61,32 +33,6 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
     return products;
   }
 
-  @override
-  Future<void> addToCart({
-    required ProductModel product,
-    required String uid,
-  }) async {
-    await _dataBaseServices.addToSubCollectionWithId(
-      collection: CollectionPath.instance.allCart,
-      parentId: uid,
-      subCollection: CollectionPath.instance.userCart,
-      childId: product.id ?? '0',
-      data: product.toJson(),
-    );
-  }
-
-  @override
-  Future<void> removeFromCart({
-    required String prodyctid,
-    required String uid,
-  }) async {
-    await _dataBaseServices.deleteFromSubCollection(
-      collection: CollectionPath.instance.allCart,
-      parentId: uid,
-      subCollection: CollectionPath.instance.userCart,
-      childId: prodyctid,
-    );
-  }
 
   @override
   Future<List<ProductModel>> getCartProducts({required String uid}) async {
@@ -100,4 +46,6 @@ class HomeRemoteDataSourceImpl extends HomeRemoteDataSource {
         .toList();
     return products;
   }
+  
+ 
 }

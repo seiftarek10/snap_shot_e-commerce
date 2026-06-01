@@ -5,7 +5,7 @@ import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
-import 'package:snap_shot/core/shared_manager/cart_cubit/user_cart_manager_cubit.dart';
+import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
 import 'package:snap_shot/features/authentication/presentation/model/otp_args_model.dart';
 import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
