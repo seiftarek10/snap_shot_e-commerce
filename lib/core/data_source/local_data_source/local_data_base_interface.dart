@@ -6,4 +6,6 @@ abstract class ILocalDataBaseServices<T> {
   Future<void> delete({required String key});
   List<T> getAllData();
   Future<T?> getData({required String key});
+  bool isEmpty();
+  bool containsKey({required String key});
 }

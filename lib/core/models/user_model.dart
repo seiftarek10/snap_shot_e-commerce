@@ -35,7 +35,7 @@ class UserModel {
 
   toJson() {
     return {
-      'uid': uid,
+      'id': uid,
       'user_name': userName,
       'email': email,
       'mobile': mobile,
@@ -52,7 +52,7 @@ class UserModel {
       password: json['password'] ?? '',
       mobile: json['mobile'] ?? '',
       address: json['address'] ?? '',
-      uid: json['uid'],
+      uid: json['id'],
       customerId: json['customerId'] ?? '',
       createdAt: json['createdAt'] ?? '',
     );
@@ -67,7 +67,7 @@ class UserModel {
       mobile: data.mobile,
       address: data.address,
       customerId: data.customerId,
-      createdAt: data.createdAt??'',
+      createdAt: data.createdAt ?? '',
     );
   }
 

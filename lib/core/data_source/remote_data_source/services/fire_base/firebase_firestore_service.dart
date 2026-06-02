@@ -108,8 +108,6 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
         .collection(collection)
         .doc(parentId)
         .collection(subCollection)
-        
-        
         .get();
     return result.docs.map((doc) {
       final data = doc.data();
@@ -117,21 +115,21 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
       return data;
     }).toList();
   }
-@override
-Stream<List<Map<String, dynamic>>> getSubCollectionStream({
-  required String collection,
-  required String id,
-  required String subCollection,
-}) {
-  return FirebaseFirestore.instance
-      .collection(collection)
-      .doc(id)
-      .collection(subCollection)
-      .snapshots()
-      .map(
-        (snapshot) => snapshot.docs.map((e) => e.data()).toList(),
-      );
-}
+
+  @override
+  Stream<List<Map<String, dynamic>>> getSubCollectionStream({
+    required String collection,
+    required String id,
+    required String subCollection,
+  }) {
+    return FirebaseFirestore.instance
+        .collection(collection)
+        .doc(id)
+        .collection(subCollection)
+        .snapshots()
+        .map((snapshot) => snapshot.docs.map((e) => e.data()).toList());
+  }
+
   @override
   Stream<Map<String, dynamic>> streamById({
     required String collection,
@@ -232,5 +230,26 @@ Stream<List<Map<String, dynamic>>> getSubCollectionStream({
     for (final doc in snapshot.docs) {
       await doc.reference.delete();
     }
+  }
+
+  @override
+  Future<List<Map<String, dynamic>>> getAllWithPagination({
+    required String collection,
+    required int limit,
+    required String? lastId,
+  }) async {
+    Query query = ref.collection(collection).orderBy(FieldPath.documentId).limit(limit);
+
+    if (lastId != null) {
+      query = query.startAfter([lastId]);
+    }
+
+    final snapshot = await query.get();
+
+  return snapshot.docs.map((doc) {
+      final data = doc.data() as Map<String, dynamic>;
+      data['id'] = doc.id;
+      return data;
+    }).toList();
   }
 }
