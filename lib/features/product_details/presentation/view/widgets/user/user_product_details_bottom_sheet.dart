@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_bottom_sheet_counter_widget.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_product_details_cart_button.dart';
 import 'package:snap_shot/features/product_details/presentation/view/widgets/user/user_bottom_section_item.dart';

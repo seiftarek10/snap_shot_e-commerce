@@ -1,5 +1,5 @@
 import 'package:snap_shot/core/entites/user_entity.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 
 class OrderEntity {
   final String? id;

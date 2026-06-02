@@ -4,11 +4,11 @@ import 'package:snap_shot/core/errors/dio_errors.dart';
 import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/errors/firesotre_error.dart';
 import 'package:snap_shot/core/models/product_model.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source.dart';
 import 'package:snap_shot/features/favorites/data/data_source/remote/fav_remote_data_source.dart';
 import 'package:snap_shot/features/favorites/domain/repos/favorites_repo.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 
 class FavoritesRepoImpl implements FavoritesRepo {
   const FavoritesRepoImpl(this._localDataSource, this._remoteDataSource);

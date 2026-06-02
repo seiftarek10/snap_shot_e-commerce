@@ -1,10 +1,10 @@
 import 'package:meta/meta.dart';
 import 'package:snap_shot/core/bloc/base_cubit.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/favorites/domain/use_case/add_fav_product_use_case.dart';
 import 'package:snap_shot/features/favorites/domain/use_case/get_all_fav_products_use_case.dart';
 import 'package:snap_shot/features/favorites/domain/use_case/remove_fav_product_use_case.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 
 part 'get_favorites_products_state.dart';
 

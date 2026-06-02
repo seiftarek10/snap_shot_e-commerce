@@ -5,12 +5,12 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/routing/routes.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/features/checkout/presentation/manager/checkout/checkout_cubit.dart';
 import 'package:snap_shot/features/checkout/presentation/view/widgets/checkout_address_builder.dart';
 import 'package:snap_shot/features/checkout/presentation/view/widgets/checkout_place_order_builder_button.dart';
 import 'package:snap_shot/features/checkout/presentation/view/widgets/checkout_price_summery.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/features/checkout/presentation/view/widgets/checkout_payment_method.dart';
 

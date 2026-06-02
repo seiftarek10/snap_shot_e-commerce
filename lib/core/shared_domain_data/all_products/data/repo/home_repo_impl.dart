@@ -3,18 +3,18 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:snap_shot/core/errors/dio_errors.dart';
 import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/errors/firesotre_error.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/data/data_source/local/home_local_data_source.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/data/data_source/remote/home_remote_data_source.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/repo/home_repo.dart';
 import 'package:snap_shot/core/utils/result.dart';
-import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source.dart';
-import 'package:snap_shot/features/home/data/data_source/remote/home_remote_data_source.dart';
 import 'package:snap_shot/core/models/product_model.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
-import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
 
-class HomeRepoImpl implements HomeRepo {
-  final HomeRemoteDataSource _remoteDataSource;
-  final HomeLocalDataSource _localDataSource;
+class ProductsRepoImpl implements ProductsRepo {
+  final ProductsRemoteDataSource _remoteDataSource;
+  final ProductsLocalDataSource _localDataSource;
 
-  HomeRepoImpl(this._remoteDataSource, this._localDataSource);
+  ProductsRepoImpl(this._remoteDataSource, this._localDataSource);
 
   @override
   Future<Result<List<ProductEntity>>> getAllProducts() async {

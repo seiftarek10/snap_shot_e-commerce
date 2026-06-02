@@ -1,18 +1,11 @@
 import 'package:snap_shot/core/data_source/local_data_source/local_data_base_interface.dart';
-import 'package:snap_shot/core/models/user_model.dart';
-import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source.dart';
 import 'package:snap_shot/core/models/product_model.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/data/data_source/local/home_local_data_source.dart';
 
-class HomeLocalDataSourceImpl extends HomeLocalDataSource {
+class ProductsLocalDataSourceImpl extends ProductsLocalDataSource {
   final ILocalDataBaseServices<ProductModel> _productsBox;
-  final ILocalDataBaseServices<UserModel> _userBox;
-  
 
-  HomeLocalDataSourceImpl(
-    this._productsBox,
-    this._userBox,
-  
-  );
+  ProductsLocalDataSourceImpl(this._productsBox);
   @override
   Future<void> saveProductsData(List<ProductModel> products) async {
     await _productsBox.clear();
@@ -27,18 +20,7 @@ class HomeLocalDataSourceImpl extends HomeLocalDataSource {
   }
 
   @override
-  String? getUserId() {
-    final userDate = _userBox.getAllData();
-    if (userDate.isEmpty) {
-      return null;
-    }
-    return userDate.first.uid;
-  }
-
-  @override
   Future<void> clearProducsBox() async {
     await _productsBox.clear();
   }
-  
-
 }

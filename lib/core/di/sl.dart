@@ -8,6 +8,11 @@ import 'package:snap_shot/core/data_source/remote_data_source/api/api_interface.
 import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base/firebase_firestore_service.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/core/models/order_model.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/data/data_source/local/home_local_data_source_impl.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/data/data_source/remote/home_remote_impl.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/data/repo/home_repo_impl.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/repo/home_repo.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/use_case/get_all_products_use_case.dart';
 import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/authentication/data/data_source/local/auth_local_data_source_impl.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/firebase_auth_services.dart';
@@ -51,12 +56,7 @@ import 'package:snap_shot/features/favorites/domain/use_case/add_fav_product_use
 import 'package:snap_shot/features/favorites/domain/use_case/get_all_fav_products_use_case.dart';
 import 'package:snap_shot/features/favorites/domain/use_case/remove_fav_product_use_case.dart';
 import 'package:snap_shot/features/favorites/presentation/managers/get_fav_products/get_favorites_products_cubit.dart';
-import 'package:snap_shot/features/home/data/data_source/local/home_local_data_source_impl.dart';
-import 'package:snap_shot/features/home/data/data_source/remote/home_remote_impl.dart';
 import 'package:snap_shot/core/models/product_model.dart';
-import 'package:snap_shot/features/home/data/repo/home_repo_impl.dart';
-import 'package:snap_shot/features/home/domain/repo/home_repo.dart';
-import 'package:snap_shot/features/home/domain/use_case/get_all_products_use_case.dart';
 import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/initial_screen_manager/data/data_source/init_local_data_source.dart';
 import 'package:snap_shot/features/initial_screen_manager/data/data_source/init_local_data_source_impl.dart';
@@ -150,24 +150,23 @@ void _initHomeFeature() {
   );
 
   // Repo
-  sl.registerLazySingleton<HomeRepo>(
-    () => HomeRepoImpl(
-      HomeRemoteDataSourceImpl(
+  sl.registerLazySingleton<ProductsRepo>(
+    () => ProductsRepoImpl(
+      ProductsRemoteDataSourceImpl(
         sl<IApiServices>(),
-        sl<IRemoteDataBaseServices>(),
       ),
-      HomeLocalDataSourceImpl(
+      ProductsLocalDataSourceImpl(
         sl<ILocalDataBaseServices<ProductModel>>(
           instanceName: HiveBoxesNames.instance.productsBox,
         ),
 
-        sl<ILocalDataBaseServices<UserModel>>(),
+       
       ),
     ),
   );
 
   // Use Cases
-  sl.registerLazySingleton(() => GetAllProductsUseCase(sl<HomeRepo>()));
+  sl.registerLazySingleton(() => GetAllProductsUseCase(sl<ProductsRepo>()));
   sl.registerLazySingleton(() => AddFavProductUseCase(sl<FavoritesRepo>()));
   sl.registerLazySingleton(() => RemoveFavProductUseCase(sl<FavoritesRepo>()));
   sl.registerLazySingleton(() => AddToCartUseCase(sl<CartRepo>()));

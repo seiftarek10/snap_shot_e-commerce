@@ -1,7 +1,7 @@
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/use_case/general_use_case.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/cart/domain/repos/cart_repo.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 
 class AddToCartUseCase extends FutureUseCase<void, ProductEntity> {
   final CartRepo _cartRepo;

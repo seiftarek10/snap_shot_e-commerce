@@ -1,8 +1,8 @@
 import 'package:meta/meta.dart';
 import 'package:snap_shot/core/bloc/base_cubit.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/cart/domain/use_cases/get_cart_products_use_case.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 
 part 'get_cart_proudcts_state.dart';
 
