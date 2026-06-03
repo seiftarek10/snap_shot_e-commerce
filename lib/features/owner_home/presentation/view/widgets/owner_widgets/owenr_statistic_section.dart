@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/features/home/presentation/view/widgets/owner_widgets/owner_container_statistic.dart';
+import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
+import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_widgets/owner_container_statistic.dart';
 
 class OwnerStatisticContainers extends StatelessWidget {
   const OwnerStatisticContainers({super.key});
@@ -18,10 +20,10 @@ class OwnerStatisticContainers extends StatelessWidget {
               ),
             ),
             AppSpace.instance.h12,
-            const Expanded(
+            Expanded(
               child: OwnerContainerStatistic(
                 lable: 'Total Users',
-                value: '1,000',
+                value: context.read<GetAllUsersCubit>().users.length.toString(),
               ),
             ),
           ],

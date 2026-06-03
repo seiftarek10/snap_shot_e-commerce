@@ -4,9 +4,9 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/search/filter_method.dart';
+import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/search/price_range_slider.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
-import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/filter_method.dart';
-import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/price_range_slider.dart';
 
 class FilterBottomSheetBody extends StatelessWidget {
   const FilterBottomSheetBody({

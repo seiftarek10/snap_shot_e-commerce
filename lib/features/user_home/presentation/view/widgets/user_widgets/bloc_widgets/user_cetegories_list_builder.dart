@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:snap_shot/features/home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
-import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/loading_state_widgets/user_categories_loading.dart';
-import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/user_home_all_categories_list.dart';
+import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/loading_state_widgets/user_categories_loading.dart';
+import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/user_home_all_categories_list.dart';
 
 class UserCetegoriesListBuilder extends StatelessWidget {
   const UserCetegoriesListBuilder({super.key});

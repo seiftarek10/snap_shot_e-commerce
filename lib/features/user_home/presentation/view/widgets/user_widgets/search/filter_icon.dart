@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/filter_bottom_sheet_body.dart';
+import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/search/filter_bottom_sheet_body.dart';
 
 class FilterIcon extends StatefulWidget {
   const FilterIcon({

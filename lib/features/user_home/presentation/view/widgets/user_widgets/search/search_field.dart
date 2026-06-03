@@ -5,8 +5,8 @@ import 'package:snap_shot/core/constants/assets.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/utils/validator.dart';
+import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/search/filter_icon.dart';
 import 'package:snap_shot/shared/widgets/app_text_filed.dart';
-import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/filter_icon.dart';
 
 class SearchField extends StatefulWidget {
   const SearchField({

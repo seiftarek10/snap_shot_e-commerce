@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/features/home/presentation/view/widgets/user_widgets/search/filter_item.dart';
+import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/search/filter_item.dart';
 
 class FilterMethod extends StatelessWidget {
   const FilterMethod({
