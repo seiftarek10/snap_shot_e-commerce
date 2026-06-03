@@ -9,9 +9,12 @@ Future<void> userHiveSetup() async {
   Hive.registerAdapter(UserModelAdapter());
   Hive.registerAdapter(ProductModelAdapter());
   Hive.registerAdapter(OrderModelAdapter());
-
+  //warehoused data Boxes
   if (!Hive.isBoxOpen(HiveBoxesNames.instance.userBox)) {
     await Hive.openBox<UserModel>(HiveBoxesNames.instance.userBox);
+  }
+  if (!Hive.isBoxOpen(HiveBoxesNames.instance.allUsersBox)) {
+    await Hive.openBox<UserModel>(HiveBoxesNames.instance.allUsersBox);
   }
   if (!Hive.isBoxOpen(HiveBoxesNames.instance.productsBox)) {
     await Hive.openBox<ProductModel>(HiveBoxesNames.instance.productsBox);
@@ -27,5 +30,10 @@ Future<void> userHiveSetup() async {
   }
   if (!Hive.isBoxOpen(HiveBoxesNames.instance.firstTimeBox)) {
     await Hive.openBox<bool>(HiveBoxesNames.instance.firstTimeBox);
+  }
+
+  //ids Boxes
+  if (!Hive.isBoxOpen(HiveBoxesNames.instance.usersIdsBox)) {
+    await Hive.openBox<bool>(HiveBoxesNames.instance.usersIdsBox);
   }
 }

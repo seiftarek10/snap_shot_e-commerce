@@ -5,6 +5,8 @@ import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
+import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/account/presentation/view/screens/my_account_view.dart';
 import 'package:snap_shot/features/authentication/presentation/model/otp_args_model.dart';
 import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
@@ -16,8 +18,6 @@ import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart
 import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
-import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/initial_screen_manager/presentation/init_screen.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';

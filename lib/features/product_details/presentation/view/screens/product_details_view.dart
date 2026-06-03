@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/routing/app_router.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/owner_product_details_view.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/user_product_details_view.dart';
 

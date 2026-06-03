@@ -14,25 +14,27 @@ class InitScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => sl<InitAppCubit>()..checkInitState(),
-      child: BlocBuilder<InitAppCubit, InitAppState>(
-        builder: (context, state) {
-          if (state is InitAppLoading) {
-            return const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            );
-          } else if (state is IsFirstTime) {
-            return const OnBoardingView();
-          } else if (state is IsNotFirstTimeAndLoggedIn) {
-            return AppShell(pageIndex: 0, role: role);
-          } else if (state is IsNotFirstTimeAndNotLoggedIn) {
-            return const SignInView();
-          } else {
-            return const SizedBox();
-          }
-        },
-      ),
-    );
+    return role == Role.user
+        ? BlocProvider(
+            create: (context) => sl<InitAppCubit>()..checkInitState(),
+            child: BlocBuilder<InitAppCubit, InitAppState>(
+              builder: (context, state) {
+                if (state is InitAppLoading) {
+                  return const Scaffold(
+                    body: Center(child: CircularProgressIndicator()),
+                  );
+                } else if (state is IsFirstTime) {
+                  return const OnBoardingView();
+                } else if (state is IsNotFirstTimeAndLoggedIn) {
+                  return AppShell(pageIndex: 0, role: role);
+                } else if (state is IsNotFirstTimeAndNotLoggedIn) {
+                  return const SignInView();
+                } else {
+                  return const SizedBox();
+                }
+              },
+            ),
+          )
+        : AppShell(pageIndex: 0, role: role);
   }
 }

@@ -24,7 +24,8 @@ final class GetFavProuctsFailure extends GetFavoritesProductsState {
 }
 
 final class AddedToFavProducts extends GetFavoritesProductsState {
-  const AddedToFavProducts();
+  const AddedToFavProducts(this.id);
+  final String id;
 }
 
 final class FailedAddToFav extends GetFavoritesProductsState {
@@ -33,7 +34,8 @@ final class FailedAddToFav extends GetFavoritesProductsState {
 }
 
 final class RemovedFromFavProducts extends GetFavoritesProductsState {
-  const RemovedFromFavProducts();
+  const RemovedFromFavProducts(this.id);
+  final String id;
 }
 
 final class FailedRemoveFromFav extends GetFavoritesProductsState {

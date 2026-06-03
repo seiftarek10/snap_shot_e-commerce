@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
+import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_item_data.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_item_delete.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_item_image.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
-import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({super.key, required this.product});

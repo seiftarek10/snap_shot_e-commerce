@@ -1,7 +1,7 @@
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/use_case/general_use_case.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/features/favorites/domain/repos/favorites_repo.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 
 class GetAllFavProductsUseCase
     extends FutureUseCase<List<ProductEntity>, void> {

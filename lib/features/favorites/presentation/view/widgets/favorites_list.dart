@@ -3,11 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/features/favorites/presentation/managers/get_fav_products/get_favorites_products_cubit.dart';
 import 'package:snap_shot/features/favorites/presentation/view/widgets/favorite_item.dart';
 import 'package:snap_shot/features/favorites/presentation/view/widgets/favorites_loading.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_empty_widget.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_error_widget.dart';
@@ -20,7 +20,9 @@ class FavProudctsList extends StatelessWidget {
     return BlocConsumer<FavoritesProductsCubit, GetFavoritesProductsState>(
       listener: (context, state) async {
         if (state is AddedToFavProducts || state is RemovedFromFavProducts) {
-          await context.read<FavoritesProductsCubit>().getFavProudcts();
+          await context.read<FavoritesProductsCubit>().getFavProudcts(
+            loadingState: false,
+          );
         } else if (state is FailedAddToFav) {
           AppSnackBar.show(context, message: state.errMessage);
         } else if (state is FailedRemoveFromFav) {
@@ -84,7 +86,9 @@ class FavProudctsList extends StatelessWidget {
       child: AppErrorWidget(
         errMessage: errMessage,
         onTap: () async {
-          await context.read<FavoritesProductsCubit>().getFavProudcts();
+          await context.read<FavoritesProductsCubit>().getFavProudcts(
+            loadingState: true,
+          );
         },
       ),
     );

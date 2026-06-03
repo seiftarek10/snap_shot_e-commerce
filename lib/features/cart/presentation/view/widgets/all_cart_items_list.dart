@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
+import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/core/utils/show_snack_bar.dart';
 import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_item.dart';
 import 'package:snap_shot/features/cart/presentation/view/widgets/cart_loading_list.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
-import 'package:snap_shot/features/home/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_empty_widget.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_error_widget.dart';
 

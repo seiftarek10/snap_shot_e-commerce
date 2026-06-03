@@ -47,9 +47,7 @@ class HiveServices<T> extends ILocalDataBaseServices<T> {
     required dynamic data,
   }) async {
     Box<T> box = Hive.box<T>(boxName);
-    if (box.containsKey(key)) {
-      await box.delete(key);
-    }
+    
     await box.put(key, data);
   }
 
@@ -57,5 +55,17 @@ class HiveServices<T> extends ILocalDataBaseServices<T> {
   Future<void> addAllData({required List<T> data}) async {
     Box<T> box = Hive.box<T>(boxName);
     await box.addAll(data);
+  }
+  
+  @override
+  bool containsKey({required String key}) {
+   Box<T> box= Hive.box<T>(boxName);
+   return box.containsKey(key);
+  }
+  
+  @override
+  bool isEmpty() {
+    Box<T> box = Hive.box<T>(boxName);
+    return box.isEmpty;
   }
 }

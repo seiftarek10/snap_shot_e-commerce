@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/orders/presentation/view/widgets/order_details/product_details_in_order.dart';
 
 class ProductsListInOrder extends StatelessWidget {

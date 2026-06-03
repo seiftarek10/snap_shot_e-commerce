@@ -1,5 +1,5 @@
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 part 'product_model.g.dart';
 
 @HiveType(typeId: 1)

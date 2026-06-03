@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/checkout/presentation/manager/checkout/checkout_cubit.dart';
-import 'package:snap_shot/features/home/domain/entity/product_entity.dart';
 import 'package:snap_shot/shared/widgets/app_button.dart';
 
 class PlaceOrderBuilderButton extends StatelessWidget {

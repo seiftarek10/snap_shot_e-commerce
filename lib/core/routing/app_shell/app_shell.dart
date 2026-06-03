@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/routing/app_router.dart';
 import 'package:snap_shot/core/routing/routes.dart';
-import 'package:snap_shot/features/Home/presentation/view/screens/home_view.dart';
+import 'package:snap_shot/features/main_navigation_pages/presentation/home_view.dart';
 import 'package:snap_shot/core/routing/app_shell/app_bottom_bar.dart';
 import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
 import 'package:snap_shot/features/category/presentation/view/screens/owner_category_view.dart';

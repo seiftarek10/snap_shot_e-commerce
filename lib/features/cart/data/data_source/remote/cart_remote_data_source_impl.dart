@@ -19,4 +19,32 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
         .toList();
     return products;
   }
+
+  
+  @override
+  Future<void> addToCart({
+    required ProductModel product,
+    required String uid,
+  }) async {
+    await _dataBaseServices.addToSubCollectionWithId(
+      collection: CollectionPath.instance.allCart,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userCart,
+      childId: product.id ?? '0',
+      data: product.toJson(),
+    );
+  }
+
+  @override
+  Future<void> removeFromCart({
+    required String prodyctid,
+    required String uid,
+  }) async {
+    await _dataBaseServices.deleteFromSubCollection(
+      collection: CollectionPath.instance.allCart,
+      parentId: uid,
+      subCollection: CollectionPath.instance.userCart,
+      childId: prodyctid,
+    );
+  }
 }

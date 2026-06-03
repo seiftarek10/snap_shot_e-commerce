@@ -106,4 +106,10 @@ abstract class IRemoteDataBaseServices {
   });
 
   String? getUserId();
+
+  Future<List<Map<String, dynamic>>> getAllWithPagination({
+    required String collection,
+    required int limit,
+    required String? lastId,
+  });
 }
