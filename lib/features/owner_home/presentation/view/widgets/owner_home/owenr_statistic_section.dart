@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
-import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_widgets/owner_container_statistic.dart';
+import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_home/owner_container_statistic.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_loading_widget.dart';
 
 class OwnerStatisticContainers extends StatelessWidget {

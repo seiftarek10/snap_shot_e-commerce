@@ -15,6 +15,7 @@ class AllUsersRepoImpl implements AllUsersRepo {
   AllUsersRepoImpl(this._remoteDataSource, this._localDataSource);
   @override
   Future<Result<List<UserEntity>>> getAllUsers({required GetAllUserParams params}) async{
+    
    try {
      final localUsersIds = _localDataSource.getAllUsersIds(limit: params.limit, lastId: params.lastId);
      if (localUsersIds.isEmpty) {

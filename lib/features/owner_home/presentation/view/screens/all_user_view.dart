@@ -1,13 +1,63 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/style/colors.dart';
-import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
+import 'package:snap_shot/features/owner_home/presentation/view/widgets/all_users_view_widgets/all_users_sliver_list.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 
-class AllUserView extends StatelessWidget {
+class AllUserView extends StatefulWidget {
   const AllUserView({super.key});
+
+  @override
+  State<AllUserView> createState() => _AllUserViewState();
+}
+
+class _AllUserViewState extends State<AllUserView> {
+  final ScrollController _scrollController = ScrollController();
+  bool _isActionFired = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (!_scrollController.hasClients) return;
+
+    final currentScroll = _scrollController.position.pixels;
+    final maxScroll = _scrollController.position.maxScrollExtent;
+
+    if (maxScroll == 0) return;
+
+    final scrollPercentage = (currentScroll / maxScroll) * 100;
+
+    if (scrollPercentage >= 70 && !_isActionFired) {
+      final cubit = context.read<GetAllUsersCubit>();
+
+      if (cubit.state is! GetAllUsersPaginationLoading) {
+        setState(() {
+          _isActionFired = true;
+        });
+
+        cubit.getAllUsers(isPagination: true);
+      }
+    }
+
+    if (scrollPercentage < 65 && _isActionFired) {
+      setState(() {
+        _isActionFired = false;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +65,7 @@ class AllUserView extends StatelessWidget {
       body: SafeArea(
         child: PagePadding(
           child: CustomScrollView(
+            controller: _scrollController,
             slivers: [
               SliverToBoxAdapter(
                 child: Column(
@@ -25,33 +76,22 @@ class AllUserView extends StatelessWidget {
                   ],
                 ),
               ),
-              SliverList.builder(
-                itemCount: 10,
-                itemBuilder: (consext, index) {
-                  return Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    child: PhysicalModel(
-                      color: Colors.white,
-                      elevation: 3,
-                      shadowColor: AppColors.instance.grey,
-                      borderRadius: BorderRadius.circular(8.r),
-                      clipBehavior: Clip.hardEdge, //
-                      child: ListTile(
-                        title: Text(
-                          'User Name',
-                          style: AppTextStyle.instance.text16W600,
-                        ),
-                        subtitle: Text(
-                          'phone Number',
-                          style: AppTextStyle.instance.text12W500Black,
-                        ),
-                        trailing: Text(
-                          'Address',
-                          style: AppTextStyle.instance.text12W500,
+              const AllUsersSliverList(),
+              BlocBuilder<GetAllUsersCubit, GetAllUsersState>(
+                builder: (context, state) {
+                  if (state is GetAllUsersPaginationLoading) {
+                    return SliverToBoxAdapter(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            color: AppColors.instance.black,
+                          ),
                         ),
                       ),
-                    ),
-                  );
+                    );
+                  }
+                  return const SliverToBoxAdapter(child: SizedBox.shrink());
                 },
               ),
             ],

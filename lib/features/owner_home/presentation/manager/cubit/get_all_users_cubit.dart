@@ -13,18 +13,42 @@ class GetAllUsersCubit extends BaseCubit<GetAllUsersState> {
 
   String? lastId;
   List<UserEntity> users = [];
-  Future<void> getAllUsers() async {
+  bool hasMoreData = true; 
+  final int limit = 10;
+
+  Future<void> getAllUsers({bool isPagination = false}) async {
+    if (isPagination && !hasMoreData) return;
+
+    if (isPagination) {
+      safeEmit(GetAllUsersPaginationLoading(List.from(users)));
+    } else {
+      lastId = null;
+      users.clear();
+      hasMoreData = true;
+      safeEmit(const GetAllUsersLoading());
+    }
+
     final result = await _getAllUserUseCase.call(
-      GetAllUserParams(limit: 2, lastId: lastId),
+      GetAllUserParams(limit: limit, lastId: lastId),
     );
+
     if (result is Success<List<UserEntity>>) {
+      if (result.data.length < limit) {
+        hasMoreData = false;
+      }
+
       if (result.data.isNotEmpty) {
         lastId = result.data.last.uid;
+        users.addAll(result.data);
       }
-      users.addAll(result.data);
-      safeEmit(GetAllUsersSuccess(result.data));
+
+      safeEmit(GetAllUsersSuccess(List.from(users)));
     } else if (result is AppFailure<List<UserEntity>>) {
-      safeEmit(GetAllUsersFailure(errMessage: result.failure.errMessage));
+      if (isPagination) {
+        safeEmit(GetAllUsersSuccess(List.from(users)));
+      } else {
+        safeEmit(GetAllUsersFailure(errMessage: result.failure.errMessage));
+      }
     }
   }
 }

@@ -12,12 +12,20 @@ final class GetAllUsersInitial extends GetAllUsersState {
 final class GetAllUsersLoading extends GetAllUsersState {
   const GetAllUsersLoading();
 }
-final class GetAllUsersSuccess extends GetAllUsersState {
-  const GetAllUsersSuccess(this.users);
-final List<UserEntity> users;
+
+// 1. New pagination loading state that retains current users on screen
+final class GetAllUsersPaginationLoading extends GetAllUsersState {
+  const GetAllUsersPaginationLoading(this.users);
+  final List<UserEntity> users;
 }
+
+final class GetAllUsersSuccess extends GetAllUsersState {
+  // 2. This must receive the master list, not just the single batch
+  const GetAllUsersSuccess(this.users);
+  final List<UserEntity> users;
+}
+
 final class GetAllUsersFailure extends GetAllUsersState {
   const GetAllUsersFailure({required this.errMessage});
   final String errMessage;
-
 }

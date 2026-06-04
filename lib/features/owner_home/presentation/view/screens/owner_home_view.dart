@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
-import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_widgets/bar_chart/bar_chart_graph.dart';
-import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_widgets/bar_chart/bar_chart_lables.dart';
-import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_widgets/owenr_statistic_section.dart';
+import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_home/bar_chart/bar_chart_graph.dart';
+import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_home/bar_chart/bar_chart_lables.dart';
+import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_home/owenr_statistic_section.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 
 import 'package:snap_shot/shared/widgets/page_padding.dart';
