@@ -20,10 +20,8 @@ import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/rem
 import 'package:snap_shot/core/shared_domain_data/all_users/data/repos/all_users_repo_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/repos/all_users_repo.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/use_cases/get_all_user_use_case.dart';
-import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/authentication/data/data_source/local/auth_local_data_source_impl.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/firebase_auth_services.dart';
-import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/authentication/data/repos/auth_repo_impl.dart';
 import 'package:snap_shot/features/authentication/domain/repos/auth_repo.dart';
 import 'package:snap_shot/features/authentication/domain/use_case/send_otp_use_case.dart';
@@ -32,6 +30,8 @@ import 'package:snap_shot/features/authentication/domain/use_case/sing_in_use_ca
 import 'package:snap_shot/features/authentication/domain/use_case/verify_otp_use_case.dart';
 import 'package:snap_shot/features/authentication/presentation/manager/sign_in_cubit/sign_in_cubit.dart';
 import 'package:snap_shot/features/authentication/presentation/manager/sign_up_cubit/sign_up_cubit.dart';
+import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
+import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/cart/data/data_source/local/cart_local_data_source.dart';
 import 'package:snap_shot/features/cart/data/data_source/local/cart_local_data_source_impl.dart';
 import 'package:snap_shot/features/cart/data/data_source/remote/cart_remote_data_source.dart';

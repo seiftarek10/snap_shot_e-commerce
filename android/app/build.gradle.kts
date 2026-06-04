@@ -53,7 +53,7 @@ android {
 
     flavorDimensions += "default"
     productFlavors {
-        create("User") {
+        create("user") {
             dimension = "default"
             resValue(
                 type = "string",
@@ -61,7 +61,7 @@ android {
                 value = "Snap Shot")
             applicationIdSuffix = ".user"
         }
-        create("Owner") {
+        create("owner") {
             dimension = "default"
             resValue(
                 type = "string",
@@ -69,7 +69,7 @@ android {
                 value = "Snap Shot (Owner)")
             applicationIdSuffix = ".owner"
         }
-         create("Delivery") {
+         create("delivery") {
             dimension = "default"
             resValue(
                 type = "string",
@@ -77,7 +77,7 @@ android {
                 value = "Snap Shot (Delivery)")
             applicationIdSuffix = ".delivery"
         }
-         create("Staff") {
+         create("staff") {
             dimension = "default"
             resValue(
                 type = "string",
