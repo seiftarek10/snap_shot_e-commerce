@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
 import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_widgets/owner_container_statistic.dart';
+import 'package:snap_shot/shared/widgets/stete_widgets/app_loading_widget.dart';
 
 class OwnerStatisticContainers extends StatelessWidget {
   const OwnerStatisticContainers({super.key});
@@ -21,9 +22,27 @@ class OwnerStatisticContainers extends StatelessWidget {
             ),
             AppSpace.instance.h12,
             Expanded(
-              child: OwnerContainerStatistic(
-                lable: 'Total Users',
-                value: context.read<GetAllUsersCubit>().users.length.toString(),
+              child: BlocBuilder<GetAllUsersCubit, GetAllUsersState>(
+                builder: (context, state) {
+                  if (state is GetAllUsersSuccess) {
+                    return OwnerContainerStatistic(
+                      lable: 'Total Users',
+                      value: state.users.length.toString(),
+                    );
+                  } else if (state is GetAllUsersLoading) {
+                    return const AppLoadingWidget(
+                      child: OwnerContainerStatistic(
+                        lable: 'Total Users',
+                        value: '0',
+                      ),
+                    );
+                  } else {
+                    return const OwnerContainerStatistic(
+                      lable: 'Total Users',
+                      value: '0',
+                    );
+                  }
+                },
               ),
             ),
           ],

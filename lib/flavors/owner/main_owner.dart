@@ -1,8 +1,19 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_setup.dart';
+import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/routing/app_router.dart';
+import 'package:snap_shot/firebase_options.dart';
 import 'package:snap_shot/snap_shot.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
   final router = AppRouter(role: Role.owner);
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  await setupGetIt(Role.owner);
+  await hiveSetup(Role.owner);
+
   runApp(SnapShot(router: router.router));
 }

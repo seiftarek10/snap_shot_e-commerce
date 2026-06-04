@@ -22,7 +22,7 @@ class GetAllUsersCubit extends BaseCubit<GetAllUsersState> {
         lastId = result.data.last.uid;
       }
       users.addAll(result.data);
-      safeEmit(GetAllUsersSuccess(users));
+      safeEmit(GetAllUsersSuccess(result.data));
     } else if (result is AppFailure<List<UserEntity>>) {
       safeEmit(GetAllUsersFailure(errMessage: result.failure.errMessage));
     }
