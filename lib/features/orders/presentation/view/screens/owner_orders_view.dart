@@ -13,7 +13,7 @@ class OwnerOrdersView extends StatelessWidget {
       child: Column(
         children: [
           AppSpace.instance.topPageSpace,
-          const PageHeader(pageTitle: 'Orders', arrowBack: false),
+          const AppPageTitle(pageTitle: 'Orders', arrowBack: false),
           AppSpace.instance.v12,
           const OrderStatusIndicator(
             lables: ['Confirmed', 'Preparing', 'Shipped'],

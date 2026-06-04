@@ -22,7 +22,7 @@ class OrderDetailsView extends StatelessWidget {
             child: Column(
               children: [
                 AppSpace.instance.topPageSpace,
-                const PageHeader(pageTitle: 'Order Details', arrowBack: true),
+                const AppPageTitle(pageTitle: 'Order Details', arrowBack: true),
                 AppSpace.instance.v12,
                 ProductsListInOrder(products: order.products),
                 AppSpace.instance.v12,

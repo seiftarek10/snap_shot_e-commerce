@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/constants/space.dart';
+import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
 import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_widgets/owner_container_statistic.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_loading_widget.dart';
@@ -25,9 +27,14 @@ class OwnerStatisticContainers extends StatelessWidget {
               child: BlocBuilder<GetAllUsersCubit, GetAllUsersState>(
                 builder: (context, state) {
                   if (state is GetAllUsersSuccess) {
-                    return OwnerContainerStatistic(
-                      lable: 'Total Users',
-                      value: state.users.length.toString(),
+                    return GestureDetector(
+                      onTap: () {
+                        context.push(Routes.instance.allUsersView);
+                      },
+                      child: OwnerContainerStatistic(
+                        lable: 'Total Users',
+                        value: state.users.length.toString(),
+                      ),
                     );
                   } else if (state is GetAllUsersLoading) {
                     return const AppLoadingWidget(

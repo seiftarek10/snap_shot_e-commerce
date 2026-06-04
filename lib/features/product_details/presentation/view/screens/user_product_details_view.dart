@@ -25,7 +25,7 @@ class UserProductDetailsView extends StatelessWidget {
             AppSpace.instance.topPageSpace,
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.w),
-              child: const PageHeader(
+              child: const AppPageTitle(
                 pageTitle: 'Product Details',
                 arrowBack: true,
               ),

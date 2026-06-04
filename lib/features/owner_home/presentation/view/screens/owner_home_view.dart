@@ -23,7 +23,7 @@ class OwnerHomeView extends StatelessWidget {
             child: Column(
               children: [
                 AppSpace.instance.topPageSpace,
-                const PageHeader(pageTitle: 'Home Screen', arrowBack: false),
+                const AppPageTitle(pageTitle: 'Home Screen', arrowBack: false),
                 AppSpace.instance.v16,
                 const OwnerStatisticContainers(),
                 AppSpace.instance.v12,

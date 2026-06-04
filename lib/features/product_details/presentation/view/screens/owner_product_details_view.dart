@@ -17,7 +17,7 @@ class OwnerProductDetailsView extends StatelessWidget {
             child: Column(
               children: [
                 AppSpace.instance.topPageSpace,
-                const PageHeader(pageTitle: 'Product Name', arrowBack: true),
+                const AppPageTitle(pageTitle: 'Product Name', arrowBack: true),
                 AppSpace.instance.v12,
                 const OwnerProductDetailsImage(),
                 AppSpace.instance.v12,
