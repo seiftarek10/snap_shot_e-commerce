@@ -98,10 +98,7 @@ class FirebaseAuthServices implements AuthRemoteDataSource {
     String collection = CollectionPath.instance.statsData;
     const String docId = '1';
 
-    // String currentMonthKey = DateFormat('yyyy-MM').format(DateTime.now());
-    String currentMonthKey = DateFormat(
-      'yyyy-MM',
-    ).format(DateTime(2026, DateTime.april));
+    String currentMonthKey = DateFormat('yyyy-MM').format(DateTime.now());
 
     final Map<String, dynamic> currentData = await _dataBaseServices.getById(
       collection: collection,
