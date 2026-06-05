@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:snap_shot/core/bloc/bloc_observer.dart';
-import 'package:snap_shot/core/data_source/local_data_source/Hive/user_hive_setup.dart';
+import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_setup.dart';
 import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/routing/app_router.dart';
 import 'package:snap_shot/firebase_options.dart';
@@ -17,7 +17,7 @@ void main(List<String> args) async {
 
   final router = AppRouter(role: Role.user);
   await setupGetIt(Role.user);
-  await userHiveSetup();
+  await hiveSetup(Role.user);
   Bloc.observer = MyBlocObserver();
   await dotenv.load(fileName: '.env');
   String? stripeKey = dotenv.env['STRIPE_PUBLISH_KEY'];

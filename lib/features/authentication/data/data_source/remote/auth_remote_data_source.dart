@@ -12,4 +12,6 @@ abstract class AuthRemoteDataSource {
     required UserModel userData,
   });
   Future<void> deleteUser({required String id});
+
+  Future<void> incrementUserCounter();
 }

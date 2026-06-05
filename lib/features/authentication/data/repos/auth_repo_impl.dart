@@ -40,7 +40,7 @@ class AuthRepoImpl extends AuthRepo {
       data.customerId = customerId;
 
       await _authRemoteDataSource.createUserData(uid: userId, userData: data);
-
+      await _authRemoteDataSource.incrementUserCounter();
       await _authLocalDataSource.saveUserData(userData: data);
       await _authLocalDataSource.setFirstTime();
 

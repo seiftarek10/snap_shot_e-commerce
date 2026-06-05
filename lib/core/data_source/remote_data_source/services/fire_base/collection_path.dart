@@ -8,4 +8,5 @@ class CollectionPath {
   final String userCart = 'userCart';
   final String allOrders = 'allOrders';
   final String userOrders = 'userOrders';
+  final String statsData = 'statsData';
 }
