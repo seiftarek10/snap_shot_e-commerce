@@ -29,7 +29,7 @@ class CartView extends StatelessWidget {
             SliverPadding(
               padding: EdgeInsets.symmetric(vertical: 8.h),
               sliver: const SliverToBoxAdapter(
-                child: PageHeader(pageTitle: 'Cart', arrowBack: false),
+                child: AppPageTitle(pageTitle: 'Cart', arrowBack: false),
               ),
             ),
             const AllCartItemSliverList(),

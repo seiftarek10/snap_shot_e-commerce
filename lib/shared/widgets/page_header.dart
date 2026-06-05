@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/shared/widgets/arrow_back.dart';
 
-class PageHeader extends StatelessWidget {
-  const PageHeader({
+class AppPageTitle extends StatelessWidget {
+  const AppPageTitle({
     super.key,
     required this.pageTitle,
     required this.arrowBack,

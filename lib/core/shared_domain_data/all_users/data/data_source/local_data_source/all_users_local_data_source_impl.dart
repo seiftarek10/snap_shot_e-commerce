@@ -13,7 +13,6 @@ class AllUsersLocalDataSourceImpl implements AllUsersLocalDataSource {
     if (_usersIdsBox.isEmpty()) {
       return [];
     }
-
     if (lastId == null) {
       return _usersIdsBox.getAllData().take(limit).toList();
     }
@@ -29,7 +28,7 @@ class AllUsersLocalDataSourceImpl implements AllUsersLocalDataSource {
   Future<void> cacheAllUsers({required List<UserModel> users}) async {
     for (var user in users) {
       if (_usersIdsBox.containsKey(key: user.uid)) {
-        continue; 
+        continue;
       }
       await _usersIdsBox.addDataWithKey(key: user.uid, data: user.uid);
       await _usersBox.addDataWithKey(key: user.uid, data: user);

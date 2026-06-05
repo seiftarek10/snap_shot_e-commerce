@@ -21,6 +21,8 @@ import 'package:snap_shot/features/initial_screen_manager/presentation/init_scre
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';
 import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
+import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
+import 'package:snap_shot/features/owner_home/presentation/view/screens/all_user_view.dart';
 import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/product_details_view.dart';
 
@@ -108,8 +110,7 @@ class AppRouter {
         path: Routes.instance.favorite,
         builder: (context, state) => const FavoriteView(),
       ),
-  
-    
+
       GoRoute(
         path: Routes.instance.ownerCategoryProducts,
         builder: (context, state) => const OwnerCategoryProductsView(),
@@ -135,6 +136,13 @@ class AppRouter {
             child: OtpView(otpArgs: data),
           );
         },
+      ),
+      GoRoute(
+        path: Routes.instance.allUsersView,
+        builder: (context, state) => BlocProvider(
+          create: (context) => sl<GetAllUsersCubit>()..getAllUsers(),
+          child: const AllUserView(),
+        ),
       ),
     ],
   );
