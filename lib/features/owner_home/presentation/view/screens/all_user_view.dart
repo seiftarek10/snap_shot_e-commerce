@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
 import 'package:snap_shot/features/owner_home/presentation/view/widgets/all_users_view_widgets/all_users_sliver_list.dart';
+import 'package:snap_shot/features/owner_home/presentation/view/widgets/all_users_view_widgets/pagination_indicator.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 
@@ -77,23 +77,7 @@ class _AllUserViewState extends State<AllUserView> {
                 ),
               ),
               const AllUsersSliverList(),
-              BlocBuilder<GetAllUsersCubit, GetAllUsersState>(
-                builder: (context, state) {
-                  if (state is GetAllUsersPaginationLoading) {
-                    return SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Center(
-                          child: CircularProgressIndicator(
-                            color: AppColors.instance.black,
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                  return const SliverToBoxAdapter(child: SizedBox.shrink());
-                },
-              ),
+              const AllUsersPaginationCircleIndicator(),
             ],
           ),
         ),
