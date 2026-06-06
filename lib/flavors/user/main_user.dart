@@ -26,5 +26,9 @@ void main(List<String> args) async {
   }
   Stripe.publishableKey = stripeKey;
   await Stripe.instance.applySettings();
+  
   runApp(SnapShot(router: router.router));
 }
+
+
+

@@ -9,4 +9,5 @@ class CollectionPath {
   final String allOrders = 'allOrders';
   final String userOrders = 'userOrders';
   final String statsData = 'statsData';
+  final String lastUpdates = 'last_updates';
 }

@@ -7,19 +7,16 @@ class GetAllUserUseCase extends FutureUseCase<List<UserEntity>, GetAllUserParams
   final AllUsersRepo _allUsersRepo;
 
   GetAllUserUseCase(this._allUsersRepo);
+
   @override
-  Future<Result<List<UserEntity>>> call(GetAllUserParams params) async {
-    return await _allUsersRepo.getAllUsers(params: params);
+  Future< Result<List<UserEntity>>> call(GetAllUserParams param) async {
+    return await _allUsersRepo.getAllUsers(params: param);
   }
 }
-
 
 class GetAllUserParams {
   final int limit;
   final String? lastId;
 
-  GetAllUserParams({
-    required this.limit,
-    required this.lastId,
-  });
+  GetAllUserParams({required this.limit, required this.lastId});
 }

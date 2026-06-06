@@ -266,4 +266,33 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
       fieldKey: FieldValue.increment(value),
     });
   }
+  @override
+Stream<List<Map<String, dynamic>>> getAllWithPaginationStream({
+  required String collection,
+  String? lastId,
+  required int limit,
+}) async* {
+  DocumentSnapshot? lastDocument;
+
+  if (lastId != null) {
+    lastDocument = await ref.collection(collection).doc(lastId).get();
+  }
+
+  Query query = ref.collection(collection)
+                   .orderBy(FieldPath.documentId)
+                   .limit(limit);
+
+  if (lastDocument != null) {
+    query = query.startAfterDocument(lastDocument);
+  }
+
+  yield* query.snapshots().map((querySnapshot) {
+    return querySnapshot.docs
+        .map((doc) => doc.data() as Map<String, dynamic>)
+        .toList();
+  });
 }
+
+
+}
+

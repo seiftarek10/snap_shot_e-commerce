@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/di/sl.dart';
-import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
+import 'package:snap_shot/features/owner_home/presentation/manager/stats_cubit/get_stats_data_cubit.dart';
 import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_home/bar_chart/bar_chart_graph.dart';
 import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_home/bar_chart/bar_chart_lables.dart';
-import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_home/owenr_statistic_section.dart';
+import 'package:snap_shot/features/owner_home/presentation/view/widgets/owner_home/stats_section_builder.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 
 import 'package:snap_shot/shared/widgets/page_padding.dart';
@@ -16,7 +16,7 @@ class OwnerHomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => sl<GetAllUsersCubit>()..getAllUsers(),
+      create: (context) => sl<GetStatsDataCubit>()..getStatsData(),
       child: Scaffold(
         body: SafeArea(
           child: PagePadding(
@@ -25,7 +25,7 @@ class OwnerHomeView extends StatelessWidget {
                 AppSpace.instance.topPageSpace,
                 const AppPageTitle(pageTitle: 'Home Screen', arrowBack: false),
                 AppSpace.instance.v16,
-                const OwnerStatisticContainers(),
+                const StatsSectionBuilder(),
                 AppSpace.instance.v12,
                 const BarChartLables(),
                 AppSpace.instance.v12,

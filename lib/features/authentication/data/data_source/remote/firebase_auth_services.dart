@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
+import 'package:snap_shot/core/constants/app_constants.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base/collection_path.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/features/authentication/data/data_source/remote/auth_remote_data_source.dart';
@@ -60,6 +61,11 @@ class FirebaseAuthServices implements AuthRemoteDataSource {
       collection: CollectionPath.instance.users,
       id: uid,
     );
+    await _dataBaseServices.update(
+      collection: CollectionPath.instance.lastUpdates,
+      id: AppConstants.instance.lastUpdateUsersList,
+      data: {AppConstants.instance.lastUpdateKey: DateTime.now().toString()},
+    );
   }
 
   @override
@@ -111,11 +117,12 @@ class FirebaseAuthServices implements AuthRemoteDataSource {
         id: docId,
         data: {
           'totalUsers': {
-            'total': 1, //
+            'total': 1, 
             'monthlyHistory': {currentMonthKey: 1},
           },
           'totalOrders': {'total': 0, 'monthlyHistory': {}},
           'totalProducts': 0,
+          'revenue': 0,
         },
       );
       return;

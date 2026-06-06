@@ -1,4 +1,5 @@
 import 'package:hive_flutter/adapters.dart';
+import 'package:snap_shot/features/owner_home/domain/entites/stats_entity.dart';
 
 part 'stats_model.g.dart';
 
@@ -10,22 +11,27 @@ class StatsModel {
   final StatsDetails totalOrders;
   @HiveField(2)
   final int totalProducts;
+  @HiveField(3)
+  final num revenue;
 
   StatsModel({
     required this.totalUsers,
     required this.totalOrders,
     required this.totalProducts,
+    required this.revenue,
   });
 
   StatsModel copyWith({
     StatsDetails? totalUsers,
     StatsDetails? totalOrders,
     int? totalProducts,
+    num? revenue,
   }) {
     return StatsModel(
       totalUsers: totalUsers ?? this.totalUsers,
       totalOrders: totalOrders ?? this.totalOrders,
       totalProducts: totalProducts ?? 0,
+      revenue: revenue ?? this.revenue,
     );
   }
 
@@ -33,7 +39,8 @@ class StatsModel {
     return StatsModel(
       totalUsers: StatsDetails.fromJson(json['totalUsers']),
       totalOrders: StatsDetails.fromJson(json['totalOrders']),
-      totalProducts: json['totalProducts'],
+      totalProducts: json['totalProducts'] ?? 0,
+      revenue: json['revenue'] ?? 0,
     );
   }
 
@@ -42,7 +49,17 @@ class StatsModel {
       "totalUsers": totalUsers.toJson(),
       "totalOrders": totalOrders.toJson(),
       "totalProducts": totalProducts,
+      "revenue": revenue,
     };
+  }
+
+  StatsEntity toEntity() {
+    return StatsEntity(
+      totalUsers: totalUsers.toEntity(),
+      totalOrders: totalOrders.toEntity(),
+      totalProducts: totalProducts,
+      revenue: revenue,
+    );
   }
 }
 
@@ -52,12 +69,9 @@ class StatsDetails {
   final int total;
 
   @HiveField(1)
-  final Map<String, int> monthlyHistory; 
+  final Map<String, int> monthlyHistory;
 
-  StatsDetails({
-    required this.total,
-    required this.monthlyHistory,
-  });
+  StatsDetails({required this.total, required this.monthlyHistory});
 
   factory StatsDetails.fromJson(Map<String, dynamic> json) {
     return StatsDetails(
@@ -67,9 +81,10 @@ class StatsDetails {
   }
 
   Map<String, dynamic> toJson() {
-    return {
-      "total": total,
-      "monthlyHistory": monthlyHistory,
-    };
+    return {"total": total, "monthlyHistory": monthlyHistory};
+  }
+
+  StatsDetailsEntity toEntity() {
+    return StatsDetailsEntity(total: total, monthlyHistory: monthlyHistory);
   }
 }

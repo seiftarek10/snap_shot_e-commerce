@@ -4,6 +4,7 @@ import 'package:snap_shot/core/utils/result.dart';
 
 abstract class AllUsersRepo {
   Future<Result<List<UserEntity>>> getAllUsers({
-    required GetAllUserParams params
+    required GetAllUserParams params,
   });
+  Future<Result<void>> syncCacheWithRemote();
 }

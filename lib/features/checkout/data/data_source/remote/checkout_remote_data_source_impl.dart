@@ -23,7 +23,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
       subCollection: CollectionPath.instance.userOrders,
       data: order.toJson(),
     );
-    await _incrementOrdersCounter();
+    await _incrementOrdersCounter(order.productsCost);
   }
 
   @override
@@ -71,7 +71,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
     }
   }
 
-  Future<void> _incrementOrdersCounter() async {
+  Future<void> _incrementOrdersCounter(num revenue) async {
     String collection = CollectionPath.instance.statsData;
     const String docId = '1';
 
@@ -91,6 +91,7 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
           },
           'totalOrders': {'total': 0, 'monthlyHistory': {}},
           'totalProducts': 0,
+          'revenue':0
         },
       );
       return;
@@ -106,6 +107,11 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
       collection: collection,
       fieldKey: 'totalOrders.monthlyHistory.$currentMonthKey',
       value: 1,
+    );
+    await _remoteDataBaseServices.incrementField(
+      collection: collection,
+      fieldKey: 'revenue',
+      value: revenue,
     );
   }
 }

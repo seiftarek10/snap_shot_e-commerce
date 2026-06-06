@@ -20,19 +20,22 @@ class StatsModelAdapter extends TypeAdapter<StatsModel> {
       totalUsers: fields[0] as StatsDetails,
       totalOrders: fields[1] as StatsDetails,
       totalProducts: fields[2] as int,
+      revenue: fields[3] as num,
     );
   }
 
   @override
   void write(BinaryWriter writer, StatsModel obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(4)
       ..writeByte(0)
       ..write(obj.totalUsers)
       ..writeByte(1)
       ..write(obj.totalOrders)
       ..writeByte(2)
-      ..write(obj.totalProducts);
+      ..write(obj.totalProducts)
+      ..writeByte(3)
+      ..write(obj.revenue);
   }
 
   @override
