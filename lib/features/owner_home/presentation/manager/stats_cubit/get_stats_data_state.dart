@@ -24,3 +24,10 @@ final class GetStatsDataFailure extends GetStatsDataState {
 }
 
 
+final class ChangeGraphData extends GetStatsDataState {
+  const ChangeGraphData(this.data);
+  final List<MonthlyRate> data;
+}
+
+
+
