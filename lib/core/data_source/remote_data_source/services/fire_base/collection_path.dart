@@ -10,4 +10,6 @@ class CollectionPath {
   final String userOrders = 'userOrders';
   final String statsData = 'statsData';
   final String lastUpdates = 'last_updates';
+  final String confirmedOrders = 'confirmedOrders';
+  final String notConfirmedOrders = 'notConfirmedOrders';
 }

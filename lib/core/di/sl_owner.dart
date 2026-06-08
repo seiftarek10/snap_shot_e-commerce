@@ -3,6 +3,11 @@ import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_services.
 import 'package:snap_shot/core/data_source/local_data_source/local_data_base_interface.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/core/di/sl.dart';
+import 'package:snap_shot/core/shared_domain_data/all_orders/data/data_source/remote/all_orders_remote_data_source.dart';
+import 'package:snap_shot/core/shared_domain_data/all_orders/data/data_source/remote/all_orders_remote_data_source_impl.dart';
+import 'package:snap_shot/core/shared_domain_data/all_orders/data/repos/all_orders_repo_impl.dart';
+import 'package:snap_shot/core/shared_domain_data/all_orders/domain/repos/all_orders_repo.dart';
+import 'package:snap_shot/core/shared_domain_data/all_orders/domain/use_case/get_all_orders_use_case.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/local_data_source/all_users_local_data_source.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/local_data_source/all_users_local_data_source_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/remote_data_source/all_users_remote_data_source.dart';
@@ -12,6 +17,7 @@ import 'package:snap_shot/core/shared_domain_data/all_users/domain/repos/all_use
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/use_cases/check_data_consistent_use_case.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/use_cases/get_all_user_use_case.dart';
 import 'package:snap_shot/core/models/user_model.dart';
+import 'package:snap_shot/features/owenr_all_orders/presentation/manager/get_all_app_orders/get_all_app_orders_cubit.dart';
 import 'package:snap_shot/features/owner_home/data/data_source/remote_data_source/owner_home_remote.dart';
 import 'package:snap_shot/features/owner_home/data/data_source/remote_data_source/owner_home_remote_impl.dart';
 import 'package:snap_shot/features/owner_home/data/repos/owner_home_repo_impl.dart';
@@ -24,6 +30,7 @@ Future<void> setupOwnerGetIt() async {
   // Features
   _initOwenrHomeFeature();
   _initAllUsersFeature();
+  _initOwenrAllOrdersFeature();
 }
 
 void _initAllUsersFeature() {
@@ -99,4 +106,21 @@ void _initOwenrHomeFeature() {
 
   // cubits
   sl.registerFactory(() => GetStatsDataCubit(sl<GetStatsDataUseCase>()));
+}
+
+void _initOwenrAllOrdersFeature() {
+  //data source
+  sl.registerLazySingleton<AllOrdersRemoteDataSource>(
+    () => AllOrdersRemoteDataSourceImpl(sl<IRemoteDataBaseServices>()),
+  );
+
+  // repos
+  sl.registerLazySingleton<AllOrdersRepo>(
+    () => AllOrdersRepoImpl(sl<AllOrdersRemoteDataSource>()),
+  );
+  //use cases
+  sl.registerLazySingleton(() => GetAllOrdersUseCase(sl<AllOrdersRepo>()));
+
+  // cubits
+  sl.registerFactory(() => GetAllAppOrdersCubit(sl<GetAllOrdersUseCase>()));
 }

@@ -4,4 +4,6 @@ class AppConstants {
 
   String lastUpdateKey = 'last_update';
   String lastUpdateUsersList = 'last_update_users_list';
+  String confirmedOrders = 'confirmed';
+  String notConfirmed = 'not_confirmed';
 }

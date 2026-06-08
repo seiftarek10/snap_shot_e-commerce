@@ -1,4 +1,3 @@
-
 abstract class IRemoteDataBaseServices {
   Future<String> add({
     required String collection,
@@ -47,7 +46,7 @@ abstract class IRemoteDataBaseServices {
     required String id,
   });
 
-  Stream<List<Map<String, dynamic>>> streamCollection({
+  Stream<List<Map<String, dynamic>>> getStreamCollection({
     required String collection,
   });
 
