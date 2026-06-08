@@ -238,7 +238,10 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required int limit,
     required String? lastId,
   }) async {
-    Query query = ref.collection(collection).orderBy(FieldPath.documentId).limit(limit);
+    Query query = ref
+        .collection(collection)
+        .orderBy(FieldPath.documentId)
+        .limit(limit);
 
     if (lastId != null) {
       query = query.startAfter([lastId]);
@@ -246,10 +249,50 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
 
     final snapshot = await query.get();
 
-  return snapshot.docs.map((doc) {
+    return snapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
       data['id'] = doc.id;
       return data;
     }).toList();
   }
+
+  @override
+  Future<void> incrementField({
+    required String collection,
+    required String fieldKey,
+    required num value,
+  }) async {
+    ref.collection(collection).doc('1').update({
+      fieldKey: FieldValue.increment(value),
+    });
+  }
+  @override
+Stream<List<Map<String, dynamic>>> getAllWithPaginationStream({
+  required String collection,
+  String? lastId,
+  required int limit,
+}) async* {
+  DocumentSnapshot? lastDocument;
+
+  if (lastId != null) {
+    lastDocument = await ref.collection(collection).doc(lastId).get();
+  }
+
+  Query query = ref.collection(collection)
+                   .orderBy(FieldPath.documentId)
+                   .limit(limit);
+
+  if (lastDocument != null) {
+    query = query.startAfterDocument(lastDocument);
+  }
+
+  yield* query.snapshots().map((querySnapshot) {
+    return querySnapshot.docs
+        .map((doc) => doc.data() as Map<String, dynamic>)
+        .toList();
+  });
 }
+
+
+}
+

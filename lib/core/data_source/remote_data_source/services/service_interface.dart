@@ -1,3 +1,4 @@
+
 abstract class IRemoteDataBaseServices {
   Future<String> add({
     required String collection,
@@ -36,10 +37,10 @@ abstract class IRemoteDataBaseServices {
 
   Future<List<Map<String, dynamic>>> getAll({required String collection});
   Stream<List<Map<String, dynamic>>> getSubCollectionStream({
-  required String collection,
-  required String id,
-  required String subCollection,
-});
+    required String collection,
+    required String id,
+    required String subCollection,
+  });
 
   Stream<Map<String, dynamic>> streamById({
     required String collection,
@@ -108,6 +109,18 @@ abstract class IRemoteDataBaseServices {
   String? getUserId();
 
   Future<List<Map<String, dynamic>>> getAllWithPagination({
+    required String collection,
+    required int limit,
+    required String? lastId,
+  });
+
+  Future<void> incrementField({
+    required String collection,
+    required String fieldKey,
+    required num value,
+  });
+
+  Stream<List<Map<String, dynamic>>> getAllWithPaginationStream({
     required String collection,
     required int limit,
     required String? lastId,

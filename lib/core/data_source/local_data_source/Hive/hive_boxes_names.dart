@@ -10,6 +10,10 @@ class HiveBoxesNames {
   final String ordersBox = 'ordersBox';
   final String allUsersBox = 'allUsersBox';
   final String allOrdersBox = 'allOrdersBox';
+  final String statsData = 'statsData';
   //ids Boxex
   final String usersIdsBox = 'usersIdsBox';
+
+  //data_versions
+  final String dataVrsions = 'dataVersions';
 }

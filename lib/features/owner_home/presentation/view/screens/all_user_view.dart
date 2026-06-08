@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
+import 'package:snap_shot/features/owner_home/presentation/manager/get_all_users/get_all_users_cubit.dart';
 import 'package:snap_shot/features/owner_home/presentation/view/widgets/all_users_view_widgets/all_users_sliver_list.dart';
 import 'package:snap_shot/features/owner_home/presentation/view/widgets/all_users_view_widgets/pagination_indicator.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
@@ -71,7 +71,10 @@ class _AllUserViewState extends State<AllUserView> {
                 child: Column(
                   children: [
                     AppSpace.instance.topPageSpace,
-                    const AppPageTitle(pageTitle: 'All Users', arrowBack: true),
+                    const AppPageTitle(
+                      pageTitle: 'All Users',
+                      arrowBack: true,
+                    ),
                     AppSpace.instance.v24,
                   ],
                 ),

@@ -9,25 +9,33 @@ import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/rem
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/remote_data_source/all_users_remote_data_sourec_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/repos/all_users_repo_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/repos/all_users_repo.dart';
+import 'package:snap_shot/core/shared_domain_data/all_users/domain/use_cases/check_data_consistent_use_case.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/use_cases/get_all_user_use_case.dart';
 import 'package:snap_shot/core/models/user_model.dart';
-import 'package:snap_shot/features/owner_home/presentation/manager/cubit/get_all_users_cubit.dart';
+import 'package:snap_shot/features/owner_home/data/data_source/remote_data_source/owner_home_remote.dart';
+import 'package:snap_shot/features/owner_home/data/data_source/remote_data_source/owner_home_remote_impl.dart';
+import 'package:snap_shot/features/owner_home/data/repos/owner_home_repo_impl.dart';
+import 'package:snap_shot/features/owner_home/domain/repos/owner_home_repo.dart';
+import 'package:snap_shot/features/owner_home/domain/use_cases/get_stats_data_use_case.dart';
+import 'package:snap_shot/features/owner_home/presentation/manager/stats_cubit/get_stats_data_cubit.dart';
+import 'package:snap_shot/features/owner_home/presentation/manager/get_all_users/get_all_users_cubit.dart';
 
-
-
- Future<void> setupOwnerGetIt() async {
- 
-
+Future<void> setupOwnerGetIt() async {
   // Features
-  _initOwnerHomeFeaure();
+  _initOwenrHomeFeature();
+  _initAllUsersFeature();
 }
 
-void _initOwnerHomeFeaure() {
+void _initAllUsersFeature() {
   //local Serivces
 
   sl.registerLazySingleton<ILocalDataBaseServices<UserModel>>(
     () => HiveServices<UserModel>(HiveBoxesNames.instance.allUsersBox),
     instanceName: HiveBoxesNames.instance.allUsersBox,
+  );
+  sl.registerLazySingleton<ILocalDataBaseServices<String>>(
+    () => HiveServices<String>(HiveBoxesNames.instance.dataVrsions),
+    instanceName: HiveBoxesNames.instance.dataVrsions,
   );
 
   sl.registerLazySingleton<ILocalDataBaseServices<String>>(
@@ -43,6 +51,9 @@ void _initOwnerHomeFeaure() {
       ),
       sl<ILocalDataBaseServices<String>>(
         instanceName: HiveBoxesNames.instance.usersIdsBox,
+      ),
+      sl<ILocalDataBaseServices<String>>(
+        instanceName: HiveBoxesNames.instance.dataVrsions,
       ),
     ),
   );
@@ -60,12 +71,32 @@ void _initOwnerHomeFeaure() {
   );
   //use cases
   sl.registerLazySingleton(() => GetAllUserUseCase(sl<AllUsersRepo>()));
+  sl.registerLazySingleton(
+    () => SyncCacheWithRemoteUseCase(sl<AllUsersRepo>()),
+  );
 
   // cubits
-  sl.registerFactory(() => GetAllUsersCubit(sl<GetAllUserUseCase>()));
+  sl.registerFactory(
+    () => GetAllUsersCubit(
+      sl<GetAllUserUseCase>(),
+      sl<SyncCacheWithRemoteUseCase>(),
+    ),
+  );
 }
 
+void _initOwenrHomeFeature() {
+  //data source
+  sl.registerLazySingleton<OwnerHomeRemoteDataSource>(
+    () => OwnerHomeRemoteImpl(sl<IRemoteDataBaseServices>()),
+  );
 
+  // repos
+  sl.registerLazySingleton<OwnerHomeRepo>(
+    () => OwnerHomeRepoImpl(sl<OwnerHomeRemoteDataSource>()),
+  );
+  //use cases
+  sl.registerLazySingleton(() => GetStatsDataUseCase(sl<OwnerHomeRepo>()));
 
-
-
+  // cubits
+  sl.registerFactory(() => GetStatsDataCubit(sl<GetStatsDataUseCase>()));
+}

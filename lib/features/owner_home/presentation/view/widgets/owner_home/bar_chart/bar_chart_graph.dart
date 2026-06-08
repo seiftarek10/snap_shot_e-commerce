@@ -1,6 +1,7 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/style/colors.dart';
+import 'package:snap_shot/features/owner_home/presentation/model/monthly_rate.dart';
 
 class BarChartGraph extends StatelessWidget {
   final List<MonthlyRate> data;
@@ -50,7 +51,7 @@ class BarChartGraph extends StatelessWidget {
         sideTitles: SideTitles(
           showTitles: true,
           getTitlesWidget: (value, meta) {
-            final index = value.toInt();
+            final index = value.toInt()-1;
 
             if (index < 0 || index >= data.length) {
               return const SizedBox();
@@ -76,9 +77,3 @@ Color getBarColor(int index, List<MonthlyRate> data) {
   return Colors.orange;
 }
 
-class MonthlyRate {
-  final String month;
-  final double value;
-
-  MonthlyRate({required this.month, required this.value});
-}

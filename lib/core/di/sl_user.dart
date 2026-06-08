@@ -72,7 +72,6 @@ import 'package:snap_shot/features/orders/domain/use_cases/get_user_orders_use_c
 import 'package:snap_shot/features/orders/presentation/manager/cubit/get_all_orders_cubit.dart';
 import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 
-
 Future<void> setupUserGetIt() async {
   // Features
   _initAppFeature();
@@ -142,7 +141,10 @@ void _initHomeFeature() {
   // Repo
   sl.registerLazySingleton<ProductsRepo>(
     () => ProductsRepoImpl(
-      ProductsRemoteDataSourceImpl(sl<IApiServices>()),
+      ProductsRemoteDataSourceImpl(
+        sl<IApiServices>(),
+        sl<IRemoteDataBaseServices>(),
+      ),
       ProductsLocalDataSourceImpl(
         sl<ILocalDataBaseServices<ProductModel>>(
           instanceName: HiveBoxesNames.instance.productsBox,
@@ -327,4 +329,3 @@ void _initAppFeature() {
     () => InitAppCubit(sl<IsFirstTimeUseCase>(), sl<IsLoggedInUseCase>()),
   );
 }
-

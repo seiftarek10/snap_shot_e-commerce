@@ -17,4 +17,10 @@ Future<void> ownerHiveSetup() async {
   if (!Hive.isBoxOpen(HiveBoxesNames.instance.usersIdsBox)) {
     await Hive.openBox<String>(HiveBoxesNames.instance.usersIdsBox);
   }
+
+  //data_versions
+    if (!Hive.isBoxOpen(HiveBoxesNames.instance.dataVrsions)) {
+    await Hive.openBox<String>(HiveBoxesNames.instance.dataVrsions);
+  }
+
 }
