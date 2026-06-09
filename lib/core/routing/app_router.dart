@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/di/sl.dart';
-import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
 import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
@@ -14,13 +13,16 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/sign
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
 import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
-import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/initial_screen_manager/presentation/init_screen.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
-import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';
-import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
+import 'package:snap_shot/features/order_details/presentation/view/screens/order_details_view.dart';
+import 'package:snap_shot/features/owenr_all_orders/presentation/manager/order_management/order_management_cubit.dart';
+import 'package:snap_shot/features/owenr_all_orders/presentation/view/screens/owner_orders_view.dart';
+import 'package:snap_shot/features/owner_all_products/presentation/view/screens/owner_all_products_view.dart';
+import 'package:snap_shot/features/show_all_users/presentation/manager/get_all_users/get_all_users_cubit.dart';
+import 'package:snap_shot/features/show_all_users/presentation/view/screens/all_user_view.dart';
 import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/product_details_view.dart';
 
@@ -101,24 +103,35 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: Routes.instance.orders,
-        builder: (context, state) => OrdersView(role: role),
-      ),
-      GoRoute(
         path: Routes.instance.favorite,
         builder: (context, state) => const FavoriteView(),
       ),
-  
-    
+
       GoRoute(
-        path: Routes.instance.ownerCategoryProducts,
-        builder: (context, state) => const OwnerCategoryProductsView(),
+        path: Routes.instance.ownerAllProducts,
+        builder: (context, state) {
+          return const OwnerAllProductsView(fromHomeScreen: true);
+        },
       ),
+      GoRoute(
+        path: Routes.instance.ownerallOrdersView,
+        builder: (context, state) {
+          return const OwnerOrdersView(fromHomeScreen: true);
+        },
+      ),
+
       GoRoute(
         path: Routes.instance.orderDetails,
         builder: (context, state) {
-          final orderExtra = state.extra as OrderEntity;
-          return OrderDetailsView(order: orderExtra);
+          final orderExtra = state.extra as OrderDetailsExtraInputModel;
+          if (role == Role.owner) {
+            return BlocProvider(
+              create: (context) => sl<OrderManagementCubit>(),
+              child: OrderDetailsView(inputModel: orderExtra),
+            );
+          }
+
+          return OrderDetailsView(inputModel: orderExtra);
         },
       ),
       GoRoute(
@@ -133,6 +146,18 @@ class AppRouter {
           return BlocProvider.value(
             value: context.read<SignUpCubit>(),
             child: OtpView(otpArgs: data),
+          );
+        },
+      ),
+      GoRoute(
+        path: Routes.instance.allUsersView,
+        builder: (context, state) {
+        
+          return BlocProvider(
+            create: (context) => sl<GetAllUsersCubit>()..getAllUsers(),
+            child: const AllUserView(
+              fromHomeScreen: true,
+            ),
           );
         },
       ),

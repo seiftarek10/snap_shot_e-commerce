@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
-import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/user_home_category_item.dart';
+import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/shared/widgets/category_container_item.dart';
 
 class UserHomeAllCategoriesList extends StatefulWidget {
   const UserHomeAllCategoriesList({super.key, required this.categories});
@@ -19,7 +19,7 @@ class _UserHomeAllCategoriesListState extends State<UserHomeAllCategoriesList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 35.h,
+      height: 45.h,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
@@ -37,14 +37,14 @@ class _UserHomeAllCategoriesListState extends State<UserHomeAllCategoriesList> {
             onTap: () {
               setState(() {
                 currentIndex = isAllButton ? -1 : index - 1;
-                context.read<GetAllProductsCubit>().changeCategory(
+                context.read<GetAllProductsCubit>().getProductsByCategory(
                   category: isAllButton ? 'All' : categoryName,
                 );
               });
             },
             child: Padding(
               padding: EdgeInsets.only(right: 12.w),
-              child: UserHomeCategoryItem(
+              child: CategoryItemContainer(
                 isSelected: isSelected,
                 title: categoryName,
               ),

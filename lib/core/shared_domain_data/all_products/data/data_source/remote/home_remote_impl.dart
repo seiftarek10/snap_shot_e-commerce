@@ -1,11 +1,14 @@
 import 'package:snap_shot/core/data_source/remote_data_source/api/api_interface.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base/collection_path.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/core/models/product_model.dart';
 import 'package:snap_shot/core/shared_domain_data/all_products/data/data_source/remote/home_remote_data_source.dart';
 
 class ProductsRemoteDataSourceImpl extends ProductsRemoteDataSource {
   final IApiServices _apiServices;
+  final IRemoteDataBaseServices _dataBaseServices;
 
-  ProductsRemoteDataSourceImpl(this._apiServices);
+  ProductsRemoteDataSourceImpl(this._apiServices, this._dataBaseServices);
   @override
   Future<List<ProductModel>> getAllProducts() async {
     final response = await _apiServices.getAll(path: 'products');
@@ -13,6 +16,13 @@ class ProductsRemoteDataSourceImpl extends ProductsRemoteDataSource {
     for (var product in response['products']) {
       products.add(ProductModel.fromJson(product));
     }
+
+    await _dataBaseServices.update(
+      collection: CollectionPath.instance.statsData,
+      id: '1',
+      data: {"totalProducts": products.length},
+    );
+
     return products;
   }
 }

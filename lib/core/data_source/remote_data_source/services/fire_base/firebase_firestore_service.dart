@@ -122,7 +122,7 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String id,
     required String subCollection,
   }) {
-    return FirebaseFirestore.instance
+    return ref
         .collection(collection)
         .doc(id)
         .collection(subCollection)
@@ -139,10 +139,12 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
   }
 
   @override
-  Stream<List<Map<String, dynamic>>> streamCollection({
+  Stream<List<Map<String, dynamic>>> getStreamCollection({
     required String collection,
   }) {
-    throw UnimplementedError();
+    return ref.collection(collection).snapshots().map((snapshot) {
+      return snapshot.docs.map((e) => e.data()).toList();
+    });
   }
 
   @override
@@ -238,7 +240,10 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required int limit,
     required String? lastId,
   }) async {
-    Query query = ref.collection(collection).orderBy(FieldPath.documentId).limit(limit);
+    Query query = ref
+        .collection(collection)
+        .orderBy(FieldPath.documentId)
+        .limit(limit);
 
     if (lastId != null) {
       query = query.startAfter([lastId]);
@@ -246,10 +251,92 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
 
     final snapshot = await query.get();
 
-  return snapshot.docs.map((doc) {
+    return snapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
       data['id'] = doc.id;
       return data;
     }).toList();
+  }
+
+  @override
+  Future<void> incrementField({
+    required String collection,
+    required String fieldKey,
+    required num value,
+  }) async {
+    ref.collection(collection).doc('1').update({
+      fieldKey: FieldValue.increment(value),
+    });
+  }
+
+  @override
+  Stream<List<Map<String, dynamic>>> getAllWithPaginationStream({
+    required String collection,
+    String? lastId,
+    required int limit,
+  }) async* {
+    DocumentSnapshot? lastDocument;
+
+    if (lastId != null) {
+      lastDocument = await ref.collection(collection).doc(lastId).get();
+    }
+
+    Query query = ref
+        .collection(collection)
+        .orderBy(FieldPath.documentId)
+        .limit(limit);
+
+    if (lastDocument != null) {
+      query = query.startAfterDocument(lastDocument);
+    }
+
+    yield* query.snapshots().map((querySnapshot) {
+      return querySnapshot.docs
+          .map((doc) => doc.data() as Map<String, dynamic>)
+          .toList();
+    });
+  }
+
+  @override
+  Stream<List<Map<String, dynamic>>> getStreamCollectionGroup({
+    required String subCollectionId,
+  }) {
+    return ref.collectionGroup(subCollectionId).snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        data['id'] = doc.id;
+        return data;
+      }).toList();
+    });
+  }
+
+  @override
+  Future<void> moveDocumentBetweenSubCollections({
+    required String fromCollection,
+    required String toCollection,
+    required String parentId,
+    required String fromsubCollection,
+    required String tosubCollection,
+    required String childId,
+    required Map<String, dynamic> data,
+  }) async {
+    final batch = ref.batch();
+
+    final fromRef = ref
+        .collection(fromCollection)
+        .doc(parentId)
+        .collection(fromsubCollection)
+        .doc(childId);
+
+    final toRef = ref
+        .collection(toCollection)
+        .doc(parentId)
+        .collection(tosubCollection)
+        .doc(childId);
+
+    batch.set(toRef, data);
+    batch.delete(fromRef);
+
+    await batch.commit();
   }
 }

@@ -5,10 +5,16 @@ import 'package:snap_shot/features/cart/data/data_source/local/cart_local_data_s
 
 class CartLocalDataSourceImpl implements CartLocalDataSource {
   final ILocalDataBaseServices<ProductModel> _cartBox;
+  final ILocalDataBaseServices<ProductModel> _favBox;
   final ILocalDataBaseServices<ProductModel> _productsBox;
   final ILocalDataBaseServices<UserModel> _user;
 
-  CartLocalDataSourceImpl(this._cartBox, this._productsBox, this._user);
+  CartLocalDataSourceImpl(
+    this._cartBox,
+    this._productsBox,
+    this._user,
+    this._favBox,
+  );
   @override
   List<ProductModel> getLoaclCartProducts() {
     return _cartBox.getAllData();
@@ -37,11 +43,13 @@ class CartLocalDataSourceImpl implements CartLocalDataSource {
   @override
   Future<void> removeFromCart({required String id}) async {
     await _cartBox.delete(key: id);
+    await _updateInFavBox(productId: id, inCart: false);
   }
 
   @override
   Future<void> addtoCart({required ProductModel product}) async {
     await _cartBox.addDataWithKey(key: product.id!, data: product);
+    await _updateInFavBox(productId: product.id!, inCart: true);
   }
 
   @override
@@ -70,6 +78,36 @@ class CartLocalDataSourceImpl implements CartLocalDataSource {
       );
 
       await _productsBox.addDataWithKey(key: productId, data: updatedProduct);
+    }
+    if (_favBox.containsKey(key: productId)) {}
+  }
+
+  Future<void> _updateInFavBox({
+    required String productId,
+    required bool inCart,
+  }) async {
+    final ProductModel? existinginFavProduct = await _favBox.getData(
+      key: productId,
+    );
+    if (existinginFavProduct != null) {
+      final updatedProduct = ProductModel(
+        id: existinginFavProduct.id,
+        name: existinginFavProduct.name,
+        price: existinginFavProduct.price,
+        description: existinginFavProduct.description,
+        category: existinginFavProduct.category,
+        imageUrl: existinginFavProduct.imageUrl,
+        rate: existinginFavProduct.rate,
+        isFav: existinginFavProduct.isFav,
+        inCart: inCart,
+        brand: existinginFavProduct.brand,
+        stock: existinginFavProduct.stock,
+        counter: existinginFavProduct.counter,
+      );
+      await _favBox.addDataWithKey(
+        key: updatedProduct.id!,
+        data: updatedProduct,
+      );
     }
   }
 }

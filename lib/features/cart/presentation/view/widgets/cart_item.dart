@@ -15,8 +15,8 @@ class CartItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 160.h,
-      padding: const EdgeInsets.all(20),
+      height: 170.h,
+      padding: const EdgeInsets.all(15),
       decoration: BoxDecoration(
         color: AppColors.instance.white,
         boxShadow: [
@@ -28,7 +28,7 @@ class CartItem extends StatelessWidget {
         children: [
           Expanded(flex: 4, child: CartItemImage(imageUrl: product.imageUrl)),
           AppSpace.instance.h12,
-          Expanded(flex: 3, child: CartItemData(product: product)),
+          Expanded(flex: 5, child: CartItemData(product: product)),
 
           Expanded(
             flex: 3,

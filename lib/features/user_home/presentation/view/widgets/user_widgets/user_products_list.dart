@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -6,7 +7,7 @@ import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
-import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/user_home_product_item.dart';
 
 class UserHomeProductsList extends StatelessWidget {
@@ -15,7 +16,7 @@ class UserHomeProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+      return GridView.builder(
       physics: const BouncingScrollPhysics(),
       itemCount: products.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -41,7 +42,7 @@ class UserHomeProductsList extends StatelessWidget {
             );
           },
           child: UserHomeProductItem(
-            key: ValueKey(products[index].id),
+          key: ValueKey('${products[index].id}_${products[index].inCart}'),
             product: products[index],
           ),
         );

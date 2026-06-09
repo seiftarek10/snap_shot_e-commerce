@@ -25,17 +25,17 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
     return Align(
       alignment: AlignmentGeometry.bottomCenter,
       child: FractionallySizedBox(
-        heightFactor: 0.36,
+        heightFactor: 0.4,
         widthFactor: 1,
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
           decoration: _buildContainerDecoration(),
           child: Column(
             children: [
-              UserProductPriceText(price: product.price),
+              Expanded(child: UserProductPriceText(price: product.price)),
               AppSpace.instance.v12,
-              SizedBox(
-                height: 120.h,
+              Expanded(
+                flex: 4,
                 child: Row(
                   children: [
                     Expanded(
@@ -44,13 +44,18 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          UserProductDetailsBottomSheetItem(
-                            title: 'rate',
-                            subTitle: product.rate,
+                          Expanded(
+                            child: UserProductDetailsBottomSheetItem(
+                              title: 'rate',
+                              subTitle: product.rate,
+                            ),
                           ),
-                          UserProductDetailsBottomSheetItem(
-                            title: 'stock',
-                            subTitle: product.stock,
+                          AppSpace.instance.v12,
+                          Expanded(
+                            child: UserProductDetailsBottomSheetItem(
+                              title: 'stock',
+                              subTitle: product.stock,
+                            ),
                           ),
                         ],
                       ),
@@ -63,7 +68,6 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
                           Expanded(
-                            flex: 4,
                             child: UserBottomSheetCounterWidget(
                               counterListner: (counter) {
                                 _counterNotifier.value = counter;
@@ -71,9 +75,8 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
                               counter: product.counter ?? 1,
                             ),
                           ),
-                          const Expanded(child: SizedBox()),
+                          AppSpace.instance.v12,
                           Expanded(
-                            flex: 4,
                             child: UserProductDetailsBottomSheetItem(
                               title: 'Brand',
                               subTitle: product.brand,

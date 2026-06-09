@@ -20,7 +20,7 @@ class FavoriteView extends StatelessWidget {
           SliverPadding(
             padding: EdgeInsets.symmetric(vertical: 12.h),
             sliver: const SliverToBoxAdapter(
-              child: PageHeader(pageTitle: 'Favorite List', arrowBack: false),
+              child: AppPageTitle(pageTitle: 'Favorite List', arrowBack: false),
             ),
           ),
           SliverPadding(

@@ -33,7 +33,7 @@ class OtpView extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 AppSpace.instance.topPageSpace,
-                const PageHeader(
+                const AppPageTitle(
                   pageTitle: 'Verify phone number',
                   arrowBack: true,
                 ),

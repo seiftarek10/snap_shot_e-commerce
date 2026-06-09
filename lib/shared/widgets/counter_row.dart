@@ -39,7 +39,7 @@ class _CounterWithoutDecorationState extends State<CounterWithoutDecoration> {
             },
             child: Icon(Icons.add, size: 20.h),
           ),
-          Text(counter.toString(), style: AppTextStyle.instance.text20W500),
+          Text(counter.toString(), style: AppTextStyle.instance.text16W600),
           InkWell(
             onTap: () {
               if (counter > 1) {

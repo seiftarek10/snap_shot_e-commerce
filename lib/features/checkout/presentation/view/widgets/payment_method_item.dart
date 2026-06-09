@@ -23,7 +23,7 @@ class PaymentMethodItem extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        padding: const EdgeInsets.all(30),
+        padding:  EdgeInsets.all(15.h),
         decoration: BoxDecoration(
           color: AppColors.instance.black,
           borderRadius: BorderRadius.circular(12.r),

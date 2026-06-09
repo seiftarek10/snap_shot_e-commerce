@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
-import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class CheckoutAddressWidget extends StatelessWidget {
@@ -12,18 +11,7 @@ class CheckoutAddressWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text("Address Details", style: AppTextStyle.instance.text18W700),
-            Text(
-              "Change",
-              style: AppTextStyle.instance.text18W700.copyWith(
-                color: AppColors.instance.blueGrey,
-              ),
-            ),
-          ],
-        ),
+        Text("Address Details", style: AppTextStyle.instance.text18W700),
         AppSpace.instance.v16,
         Row(
           children: [

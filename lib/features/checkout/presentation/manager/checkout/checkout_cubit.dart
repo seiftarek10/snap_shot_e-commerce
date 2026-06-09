@@ -5,8 +5,8 @@ import 'package:snap_shot/core/errors/failure.dart';
 import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/utils/result.dart';
 import 'package:snap_shot/core/entites/order_entity.dart';
-import 'package:snap_shot/features/checkout/domain/use_case/get_user_data_use_case.dart';
-import 'package:snap_shot/features/checkout/domain/use_case/make_order_use_case.dart';
+import 'package:snap_shot/features/user_orders/domain/use_cases/get_user_data_use_case.dart';
+import 'package:snap_shot/features/user_orders/domain/use_cases/make_order_use_case.dart';
 import 'package:snap_shot/features/checkout/domain/use_case/make_payment_use_case.dart';
 
 part 'checkout_state.dart';

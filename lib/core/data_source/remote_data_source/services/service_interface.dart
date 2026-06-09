@@ -36,17 +36,17 @@ abstract class IRemoteDataBaseServices {
 
   Future<List<Map<String, dynamic>>> getAll({required String collection});
   Stream<List<Map<String, dynamic>>> getSubCollectionStream({
-  required String collection,
-  required String id,
-  required String subCollection,
-});
+    required String collection,
+    required String id,
+    required String subCollection,
+  });
 
   Stream<Map<String, dynamic>> streamById({
     required String collection,
     required String id,
   });
 
-  Stream<List<Map<String, dynamic>>> streamCollection({
+  Stream<List<Map<String, dynamic>>> getStreamCollection({
     required String collection,
   });
 
@@ -111,5 +111,30 @@ abstract class IRemoteDataBaseServices {
     required String collection,
     required int limit,
     required String? lastId,
+  });
+
+  Future<void> incrementField({
+    required String collection,
+    required String fieldKey,
+    required num value,
+  });
+
+  Stream<List<Map<String, dynamic>>> getAllWithPaginationStream({
+    required String collection,
+    required int limit,
+    required String? lastId,
+  });
+  Stream<List<Map<String, dynamic>>> getStreamCollectionGroup({
+    required String subCollectionId,
+  });
+
+  Future<void> moveDocumentBetweenSubCollections({
+    required String fromCollection,
+    required String toCollection,
+    required String parentId,
+    required String fromsubCollection,
+    required String tosubCollection,
+    required String childId,
+    required Map<String, dynamic> data,
   });
 }

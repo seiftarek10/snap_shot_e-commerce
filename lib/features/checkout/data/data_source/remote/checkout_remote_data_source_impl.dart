@@ -2,7 +2,6 @@ import 'package:snap_shot/core/data_source/remote_data_source/services/fire_base
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/core/models/user_model.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
-import 'package:snap_shot/core/models/order_model.dart';
 import 'package:snap_shot/features/checkout/data/models/payment_intent_input_mode.dart';
 import 'package:snap_shot/core/utils/stripe_service.dart';
 
@@ -14,24 +13,11 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
     this._remoteDataBaseServices,
     this._stripeService,
   );
-  @override
-  Future<void> makeOrder({required OrderModel order}) async {
-    await _remoteDataBaseServices.addToSubCollection(
-      collection: CollectionPath.instance.allOrders,
-      parentId: order.userData!.uid,
-      subCollection: CollectionPath.instance.userOrders,
-      data: order.toJson(),
-    );
-  }
 
-  @override
-  String? getUserId() {
-    return _remoteDataBaseServices.getUserId();
-  }
 
   @override
   Future<UserModel?> getUserData() async {
-    String? uid = getUserId();
+    String? uid = _remoteDataBaseServices.getUserId();
     if (uid != null) {
       final response = await _remoteDataBaseServices.getById(
         collection: CollectionPath.instance.users,
@@ -57,15 +43,4 @@ class CheckoutRemoteDataSourceImpl implements CheckoutRemoteDataSource {
     );
   }
 
-  @override
-  Future<void> deleteProductsCart() async {
-    String? uid = getUserId();
-    if (uid != null) {
-      await _remoteDataBaseServices.deleteSubCollection(
-        collection: CollectionPath.instance.allCart,
-        id: uid,
-        subCollection: CollectionPath.instance.userCart,
-      );
-    }
-  }
 }
