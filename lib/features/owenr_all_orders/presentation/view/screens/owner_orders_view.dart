@@ -9,23 +9,29 @@ import 'package:snap_shot/features/user_orders/presentation/view/widgets/current
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 
 class OwnerOrdersView extends StatelessWidget {
-  const OwnerOrdersView({super.key});
-
+  const OwnerOrdersView({super.key, required this.fromHomeScreen});
+  final bool fromHomeScreen;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<GetAllAppOrdersCubit>()..getOrders(index: 0),
-      child: PagePadding(
-        child: Column(
-          children: [
-            AppSpace.instance.topPageSpace,
-            const AppPageTitle(pageTitle: 'Orders', arrowBack: false),
-            AppSpace.instance.v12,
-            const OrderStatusIndicator(labels: ['Current', 'History']),
-            AppSpace.instance.v12,
-       const AllAppOrdersBuilder()
-          ],
-        ),
+      child: fromHomeScreen
+          ? Scaffold(body: SafeArea(child: _buildBody()))
+          : _buildBody(),
+    );
+  }
+
+  _buildBody() {
+    return PagePadding(
+      child: Column(
+        children: [
+          AppSpace.instance.topPageSpace,
+          AppPageTitle(pageTitle: 'Orders', arrowBack: fromHomeScreen),
+          AppSpace.instance.v12,
+          const OrderStatusIndicator(labels: ['Current', 'History']),
+          AppSpace.instance.v12,
+          const AllAppOrdersBuilder(),
+        ],
       ),
     );
   }

@@ -19,8 +19,9 @@ class Routes {
   final String addressDetails = '/addressDetails';
   final String notificationSettings = '/notificationSettings';
   final String languages = '/languages';
-  final String ownerCategoryProducts = '/ownerCategoryProducts';
+  final String ownerAllProducts = '/ownerAllProducts';
   final String orderDetails = '/orderDetails';
   final String otpView = '/otpView';
   final String allUsersView = '/allUsersView';
+  final String ownerallOrdersView = '/onwerAllOrdersView';
 }

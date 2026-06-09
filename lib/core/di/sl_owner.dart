@@ -41,7 +41,7 @@ import 'package:snap_shot/features/owner_home/data/repos/owner_home_repo_impl.da
 import 'package:snap_shot/features/owner_home/domain/repos/owner_home_repo.dart';
 import 'package:snap_shot/features/owner_home/domain/use_cases/get_stats_data_use_case.dart';
 import 'package:snap_shot/features/owner_home/presentation/manager/stats_cubit/get_stats_data_cubit.dart';
-import 'package:snap_shot/features/owner_home/presentation/manager/get_all_users/get_all_users_cubit.dart';
+import 'package:snap_shot/features/show_all_users/presentation/manager/get_all_users/get_all_users_cubit.dart';
 
 Future<void> setupOwnerGetIt() async {
   // Features

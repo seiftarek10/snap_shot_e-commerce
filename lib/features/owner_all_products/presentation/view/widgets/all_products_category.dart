@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
-import 'package:snap_shot/features/owner_categories/presentation/view/widgets/category_product_item.dart';
+import 'package:snap_shot/features/owner_all_products/presentation/view/widgets/category_product_item.dart';
 
 class OwnerAllProductsCategory extends StatelessWidget {
   const OwnerAllProductsCategory({super.key});
