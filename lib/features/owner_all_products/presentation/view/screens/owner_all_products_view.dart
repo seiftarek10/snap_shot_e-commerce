@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/features/owner_all_products/presentation/view/widgets/all_products_category.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 import 'package:snap_shot/features/owner_all_products/presentation/view/widgets/all_categories_list.dart';
+import 'package:snap_shot/shared/widgets/stete_widgets/app_error_widget.dart';
 
 class OwnerAllProductsView extends StatelessWidget {
   const OwnerAllProductsView({super.key, required this.fromHomeScreen});
@@ -16,9 +18,35 @@ class OwnerAllProductsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => sl<GetAllProductsCubit>()..getAllProducts(),
-      child: fromHomeScreen
-          ? Scaffold(body: SafeArea(child: _buildBody()))
-          : _buildBody(),
+      child: BlocBuilder<GetAllProductsCubit, GetAllProductsState>(
+        builder: (context, state) {
+          if (state is GetProductsSuccess) {
+            
+            return fromHomeScreen
+                ? Scaffold(body: SafeArea(child: _buildBody()))
+                : _buildBody();
+          } else if (state is GetProductsFailure) {
+            return Scaffold(
+              body: Center(
+                child: AppErrorWidget(
+                  errMessage: state.errMessage,
+                  onTap: () async {
+                    await context.read<GetAllProductsCubit>().getAllProducts();
+                  },
+                ),
+              ),
+            );
+          } else {
+            return Scaffold(
+              body: Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.instance.black,
+                ),
+              ),
+            );
+          }
+        },
+      ),
     );
   }
 
@@ -36,7 +64,6 @@ class OwnerAllProductsView extends StatelessWidget {
                   arrowBack: fromHomeScreen,
                 ),
                 AppSpace.instance.v8,
-
                 const Divider(),
                 AppSpace.instance.v8,
 

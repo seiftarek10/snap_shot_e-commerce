@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart'; // 💡 Required for kReleaseMode
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
@@ -17,9 +18,14 @@ class SnapShot extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp.router(
-          locale: DevicePreview.locale(context),
+          locale: kReleaseMode ? null : DevicePreview.locale(context),
           builder: (context, routerChild) {
             ScreenUtil.configure(data: MediaQuery.of(context));
+
+            if (kReleaseMode) {
+              return routerChild ?? const SizedBox.shrink();
+            }
+
             return DevicePreview.appBuilder(context, routerChild);
           },
           theme: ThemeData(scaffoldBackgroundColor: AppColors.instance.white),
