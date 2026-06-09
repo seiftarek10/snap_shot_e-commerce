@@ -15,9 +15,14 @@ class OwnerStatisticContainers extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: OwnerContainerStatistic(
-                lable: 'Total Orders',
-                value: data.totalOrders.total.toString(),
+              child: GestureDetector(
+                onTap: () {
+                  context.push(Routes.instance.ownerallOrdersView);
+                },
+                child: OwnerContainerStatistic(
+                  lable: 'Total Orders',
+                  value: data.totalOrders.total.toString(),
+                ),
               ),
             ),
             AppSpace.instance.h12,
@@ -38,9 +43,14 @@ class OwnerStatisticContainers extends StatelessWidget {
         Row(
           children: [
             Expanded(
-              child: OwnerContainerStatistic(
-                lable: 'Total Products',
-                value: data.totalProducts.toString(),
+              child: GestureDetector(
+                onTap: () {
+                  context.push(Routes.instance.ownerAllProducts);
+                },
+                child: OwnerContainerStatistic(
+                  lable: 'Total Products',
+                  value: data.totalProducts.toString(),
+                ),
               ),
             ),
             AppSpace.instance.h12,
@@ -48,7 +58,8 @@ class OwnerStatisticContainers extends StatelessWidget {
             Expanded(
               child: OwnerContainerStatistic(
                 lable: 'Revenue',
-                value: data.revenue.toString(),
+                value: double.parse(data.revenue.toString()).toStringAsFixed(2),
+                withGoArrow: false,
               ),
             ),
           ],

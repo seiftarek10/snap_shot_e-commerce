@@ -1,11 +1,12 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:snap_shot/core/constants/assets.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class OwnerCategoryProductItem extends StatelessWidget {
-  const OwnerCategoryProductItem({super.key});
-
+  const OwnerCategoryProductItem({super.key, required this.product});
+  final ProductEntity product;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -17,10 +18,7 @@ class OwnerCategoryProductItem extends StatelessWidget {
             children: [
               Expanded(
                 flex: 4,
-                child: Image.asset(
-                  Assets.imagesPngOnboardingimage3,
-                  fit: BoxFit.cover,
-                ),
+                child: CachedNetworkImage(imageUrl: product.imageUrl),
               ),
               Expanded(
                 flex: 7,
@@ -28,11 +26,13 @@ class OwnerCategoryProductItem extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Expanded(
+                      flex: 2,
                       child: Align(
                         alignment: Alignment.bottomLeft,
                         child: Text(
-                          "Product Name",
+                          product.name,
                           style: AppTextStyle.instance.text16W600,
+                          overflow: TextOverflow.ellipsis,
                         ),
                       ),
                     ),
@@ -48,7 +48,7 @@ class OwnerCategoryProductItem extends StatelessWidget {
                           Expanded(
                             flex: 2,
                             child: Text(
-                              "(4.3)",
+                              "(${product.rate})",
                               style: AppTextStyle.instance.text12W200,
                             ),
                           ),
@@ -58,7 +58,8 @@ class OwnerCategoryProductItem extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        r"$240",
+                        r"$"
+                        "${product.price}",
                         style: AppTextStyle.instance.text18W700,
                       ),
                     ),

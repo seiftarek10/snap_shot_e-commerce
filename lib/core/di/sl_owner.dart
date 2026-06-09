@@ -1,14 +1,21 @@
 import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_boxes_names.dart';
 import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_services.dart';
 import 'package:snap_shot/core/data_source/local_data_source/local_data_base_interface.dart';
+import 'package:snap_shot/core/data_source/remote_data_source/api/api_interface.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 import 'package:snap_shot/core/di/sl.dart';
+import 'package:snap_shot/core/models/product_model.dart';
 import 'package:snap_shot/core/shared_domain_data/all_orders/data/data_source/remote/all_orders_remote_data_source.dart';
 import 'package:snap_shot/core/shared_domain_data/all_orders/data/data_source/remote/all_orders_remote_data_source_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_orders/data/repos/all_orders_repo_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_orders/domain/repos/all_orders_repo.dart';
 import 'package:snap_shot/core/shared_domain_data/all_orders/domain/use_case/get_all_confirmed_orders_use_case.dart';
 import 'package:snap_shot/core/shared_domain_data/all_orders/domain/use_case/get_all_not_confirmed_orders_use_case.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/data/data_source/local/home_local_data_source_impl.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/data/data_source/remote/home_remote_impl.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/data/repo/home_repo_impl.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/repo/home_repo.dart';
+import 'package:snap_shot/core/shared_domain_data/all_products/domain/use_case/get_all_products_use_case.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/local_data_source/all_users_local_data_source.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/local_data_source/all_users_local_data_source_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/remote_data_source/all_users_remote_data_source.dart';
@@ -18,6 +25,7 @@ import 'package:snap_shot/core/shared_domain_data/all_users/domain/repos/all_use
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/use_cases/check_data_consistent_use_case.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/use_cases/get_all_user_use_case.dart';
 import 'package:snap_shot/core/models/user_model.dart';
+import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/owenr_all_orders/data/data_source/remote/owner_order_management_remote.dart';
 import 'package:snap_shot/features/owenr_all_orders/data/data_source/remote/owner_order_management_remote_impl.dart';
 import 'package:snap_shot/features/owenr_all_orders/data/repos/owner_order_management_repo_impl.dart';
@@ -33,13 +41,14 @@ import 'package:snap_shot/features/owner_home/data/repos/owner_home_repo_impl.da
 import 'package:snap_shot/features/owner_home/domain/repos/owner_home_repo.dart';
 import 'package:snap_shot/features/owner_home/domain/use_cases/get_stats_data_use_case.dart';
 import 'package:snap_shot/features/owner_home/presentation/manager/stats_cubit/get_stats_data_cubit.dart';
-import 'package:snap_shot/features/owner_home/presentation/manager/get_all_users/get_all_users_cubit.dart';
+import 'package:snap_shot/features/show_all_users/presentation/manager/get_all_users/get_all_users_cubit.dart';
 
 Future<void> setupOwnerGetIt() async {
   // Features
   _initOwenrHomeFeature();
   _initAllUsersFeature();
   _initOwenrAllOrdersFeature();
+  _initOwnerAllProductsFeature();
 }
 
 void _initAllUsersFeature() {
@@ -165,4 +174,32 @@ void _initOwenrAllOrdersFeature() {
       sl<DeleteNotConfirmedOrderUseCase>(),
     ),
   );
+}
+
+void _initOwnerAllProductsFeature() {
+  //local data source
+  sl.registerLazySingleton<ILocalDataBaseServices<ProductModel>>(
+    () => HiveServices<ProductModel>(HiveBoxesNames.instance.productsBox),
+    instanceName: HiveBoxesNames.instance.productsBox,
+  );
+  // Repo
+  sl.registerLazySingleton<ProductsRepo>(
+    () => ProductsRepoImpl(
+      ProductsRemoteDataSourceImpl(
+        sl<IApiServices>(),
+        sl<IRemoteDataBaseServices>(),
+      ),
+      ProductsLocalDataSourceImpl(
+        sl<ILocalDataBaseServices<ProductModel>>(
+          instanceName: HiveBoxesNames.instance.productsBox,
+        ),
+      ),
+    ),
+  );
+
+  // Use Cases
+  sl.registerLazySingleton(() => GetAllProductsUseCase(sl<ProductsRepo>()));
+
+  // Cubits
+  sl.registerFactory(() => GetAllProductsCubit(sl<GetAllProductsUseCase>()));
 }

@@ -14,7 +14,6 @@ class ProductDetailsView extends StatelessWidget {
   final ProductEntity productEntity;
   final bool fromHomeScreen;
 
-  //####### Todo Replace it and save it in cashe memory########//
   final Role role;
   @override
   Widget build(BuildContext context) {

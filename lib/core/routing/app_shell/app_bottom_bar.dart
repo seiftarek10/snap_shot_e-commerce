@@ -35,13 +35,13 @@ class AppBottomBar extends StatelessWidget {
           Assets.imagesPngOrder,
           Assets.imagesPngHeart,
           Assets.imagesPngShoppingBag,
-          // Assets.imagesPngUser,
         ];
       case Role.owner:
         return const [
           Assets.imagesPngHome,
           Assets.imagesPngCategory,
           Assets.imagesPngOrder,
+          Assets.imagesPngUser,
         ];
       case Role.staff:
       default:
@@ -60,7 +60,7 @@ class AppBottomBar extends StatelessWidget {
     return SizedBox(
       height: 70.h,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           ...List.generate(
             icons.length,
@@ -71,36 +71,40 @@ class AppBottomBar extends StatelessWidget {
               child: NavBarItem(icon: icons[i], isActive: index == i),
             ),
           ),
+          if (role == Role.user)
+            IconButton(
+              onPressed: () async {
+                try {
+                  await FirebaseAuth.instance.signOut();
+                  await Hive.box<ProductModel>(
+                    HiveBoxesNames.instance.productsBox,
+                  ).clear();
+                  await Hive.box<ProductModel>(
+                    HiveBoxesNames.instance.favProductsBox,
+                  ).clear();
+                  await Hive.box<ProductModel>(
+                    HiveBoxesNames.instance.cartProdcutBox,
+                  ).clear();
+                  await Hive.box<UserModel>(
+                    HiveBoxesNames.instance.userBox,
+                  ).clear();
+                  await Hive.box<OrderModel>(
+                    HiveBoxesNames.instance.ordersBox,
+                  ).clear();
 
-          IconButton(
-            onPressed: () async {
-              try {
-                await FirebaseAuth.instance.signOut();
-                await Hive.box<ProductModel>(
-                  HiveBoxesNames.instance.productsBox,
-                ).clear();
-                await Hive.box<ProductModel>(
-                  HiveBoxesNames.instance.favProductsBox,
-                ).clear();
-                await Hive.box<ProductModel>(
-                  HiveBoxesNames.instance.cartProdcutBox,
-                ).clear();
-                await Hive.box<UserModel>(
-                  HiveBoxesNames.instance.userBox,
-                ).clear();
-                await Hive.box<OrderModel>(
-                  HiveBoxesNames.instance.ordersBox,
-                ).clear();
-
-                if (!context.mounted) return;
-                context.go(Routes.instance.signIn);
-              } catch (e) {
-                log(e.toString());
-                AppSnackBar.show(context, message: e.toString(), isError: true);
-              }
-            },
-            icon: Icon(Icons.logout_outlined, size: 22.h),
-          ),
+                  if (!context.mounted) return;
+                  context.go(Routes.instance.signIn);
+                } catch (e) {
+                  log(e.toString());
+                  AppSnackBar.show(
+                    context,
+                    message: e.toString(),
+                    isError: true,
+                  );
+                }
+              },
+              icon: Icon(Icons.logout_outlined, size: 22.h),
+            ),
         ],
       ),
     );

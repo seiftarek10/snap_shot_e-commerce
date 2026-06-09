@@ -9,9 +9,11 @@ class OwnerContainerStatistic extends StatelessWidget {
     super.key,
     required this.lable,
     required this.value,
+    this.withGoArrow,
   });
 
   final String lable, value;
+  final bool? withGoArrow;
 
   @override
   Widget build(BuildContext context) {
@@ -60,16 +62,18 @@ class OwnerContainerStatistic extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: Align(
-              alignment: Alignment.topRight,
-              child: Icon(
-                Icons.arrow_outward,
-                color: AppColors.instance.white,
-                size: 16.h,
-              ),
-            ),
-          ),
+          withGoArrow == null
+              ? Expanded(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Icon(
+                      Icons.arrow_outward,
+                      color: AppColors.instance.white,
+                      size: 16.h,
+                    ),
+                  ),
+                )
+              : const SizedBox.shrink(),
         ],
       ),
     );

@@ -13,15 +13,16 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/sign
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
 import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
-import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/initial_screen_manager/presentation/init_screen.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
 import 'package:snap_shot/features/order_details/presentation/view/screens/order_details_view.dart';
 import 'package:snap_shot/features/owenr_all_orders/presentation/manager/order_management/order_management_cubit.dart';
-import 'package:snap_shot/features/owner_home/presentation/manager/get_all_users/get_all_users_cubit.dart';
-import 'package:snap_shot/features/owner_home/presentation/view/screens/all_user_view.dart';
+import 'package:snap_shot/features/owenr_all_orders/presentation/view/screens/owner_orders_view.dart';
+import 'package:snap_shot/features/owner_all_products/presentation/view/screens/owner_all_products_view.dart';
+import 'package:snap_shot/features/show_all_users/presentation/manager/get_all_users/get_all_users_cubit.dart';
+import 'package:snap_shot/features/show_all_users/presentation/view/screens/all_user_view.dart';
 import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
 import 'package:snap_shot/features/product_details/presentation/view/screens/product_details_view.dart';
 
@@ -107,9 +108,18 @@ class AppRouter {
       ),
 
       GoRoute(
-        path: Routes.instance.ownerCategoryProducts,
-        builder: (context, state) => const OwnerCategoryProductsView(),
+        path: Routes.instance.ownerAllProducts,
+        builder: (context, state) {
+          return const OwnerAllProductsView(fromHomeScreen: true);
+        },
       ),
+      GoRoute(
+        path: Routes.instance.ownerallOrdersView,
+        builder: (context, state) {
+          return const OwnerOrdersView(fromHomeScreen: true);
+        },
+      ),
+
       GoRoute(
         path: Routes.instance.orderDetails,
         builder: (context, state) {
@@ -141,10 +151,15 @@ class AppRouter {
       ),
       GoRoute(
         path: Routes.instance.allUsersView,
-        builder: (context, state) => BlocProvider(
-          create: (context) => sl<GetAllUsersCubit>()..getAllUsers(),
-          child: const AllUserView(),
-        ),
+        builder: (context, state) {
+        
+          return BlocProvider(
+            create: (context) => sl<GetAllUsersCubit>()..getAllUsers(),
+            child: const AllUserView(
+              fromHomeScreen: true,
+            ),
+          );
+        },
       ),
     ],
   );

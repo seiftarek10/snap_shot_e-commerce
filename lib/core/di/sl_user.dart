@@ -68,7 +68,7 @@ import 'package:snap_shot/features/user_orders/data/repos/orders_repo_impl.dart'
 import 'package:snap_shot/features/user_orders/domain/repos/orders_repo.dart';
 import 'package:snap_shot/features/user_orders/domain/use_cases/get_user_orders_use_case.dart';
 import 'package:snap_shot/features/user_orders/presentation/manager/cubit/get_all_user_orders_cubit.dart';
-import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
 
 Future<void> setupUserGetIt() async {
   // Features
