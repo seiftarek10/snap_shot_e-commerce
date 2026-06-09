@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -9,7 +10,7 @@ import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/routing/app_router.dart';
 import 'package:snap_shot/firebase_options.dart';
 import 'package:snap_shot/snap_shot.dart';
-
+import 'package:flutter/foundation.dart';
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -27,7 +28,9 @@ void main(List<String> args) async {
   Stripe.publishableKey = stripeKey;
   await Stripe.instance.applySettings();
   
-  runApp(SnapShot(router: router.router));
+  runApp(DevicePreview(
+    enabled: !kReleaseMode,
+    builder:(context)=> SnapShot(router: router.router)));
 }
 
 

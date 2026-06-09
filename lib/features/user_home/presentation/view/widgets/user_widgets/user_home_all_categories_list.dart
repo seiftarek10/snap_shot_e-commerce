@@ -19,7 +19,7 @@ class _UserHomeAllCategoriesListState extends State<UserHomeAllCategoriesList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 35.h,
+      height: 45.h,
       child: ListView.builder(
         physics: const BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,

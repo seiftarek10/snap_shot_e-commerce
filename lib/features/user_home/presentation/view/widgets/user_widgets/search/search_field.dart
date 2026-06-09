@@ -70,13 +70,16 @@ class _SearchFieldState extends State<SearchField> {
   Widget _buildPrefixIcon() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 8.w),
-      child: SvgPicture.asset(
-        Assets.imagesSvgSearch,
-        colorFilter: ColorFilter.mode(
-          hasFocus ? AppColors.instance.black : Colors.grey,
-          BlendMode.srcIn,
+      child: Transform.scale(
+      scale: 0.5,
+        child: SvgPicture.asset(
+          Assets.imagesSvgSearch,
+          colorFilter: ColorFilter.mode(
+            hasFocus ? AppColors.instance.black : Colors.grey,
+            BlendMode.srcIn,
+          ),
+          fit: BoxFit.fitHeight,
         ),
-        fit: BoxFit.fill,
       ),
     );
   }

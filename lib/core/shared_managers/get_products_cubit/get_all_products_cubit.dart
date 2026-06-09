@@ -25,9 +25,9 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
     final response = await _getAllProductsUseCase.call(null);
 
     if (response is Success<List<ProductEntity>>) {
-      safeEmit(GetProductsSuccess(response.data));
-      products = response.data;
-      fillterdProducts = response.data;
+      products = List.from(response.data);
+      fillterdProducts = List.from(response.data);
+      safeEmit(GetProductsSuccess([...fillterdProducts]));
       getCategories();
     }
 

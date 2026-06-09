@@ -17,7 +17,7 @@ class UserBottomSheetCounterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return IntrinsicHeight(
       child: Container(
-        padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 20.w),
+        padding: EdgeInsets.symmetric(vertical: 6.h, horizontal: 8.w),
         decoration: BoxDecoration(
           border: Border.all(color: AppColors.instance.greyLight, width: 3),
           borderRadius: BorderRadius.circular(10.r),

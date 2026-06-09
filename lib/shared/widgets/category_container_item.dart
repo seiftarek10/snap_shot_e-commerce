@@ -18,7 +18,6 @@ class CategoryItemContainer extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOutCubicEmphasized,
-      // Padding handles the spacing inside the border perfectly
       padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h), 
       decoration: BoxDecoration(
         border: Border.all(
