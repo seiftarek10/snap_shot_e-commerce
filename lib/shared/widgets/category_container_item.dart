@@ -3,8 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
-class UserHomeCategoryItem extends StatelessWidget {
-  const UserHomeCategoryItem({
+class CategoryItemContainer extends StatelessWidget {
+  const CategoryItemContainer({
     super.key,
     required this.isSelected,
     required this.title,
@@ -18,7 +18,8 @@ class UserHomeCategoryItem extends StatelessWidget {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 200),
       curve: Curves.easeInOutCubicEmphasized,
-      padding: EdgeInsets.symmetric(horizontal: 22.w),
+      // Padding handles the spacing inside the border perfectly
+      padding: EdgeInsets.symmetric(horizontal: 22.w, vertical: 10.h), 
       decoration: BoxDecoration(
         border: Border.all(
           color: isSelected
@@ -26,18 +27,25 @@ class UserHomeCategoryItem extends StatelessWidget {
               : AppColors.instance.grey,
           width: 1.5,
         ),
-        color: isSelected ? AppColors.instance.black : null,
+        color: isSelected ? AppColors.instance.black : Colors.white,
         borderRadius: BorderRadius.circular(24.r),
       ),
-      child: Center(
-        child: Text(
-          title,
-          style: AppTextStyle.instance.text14WBoldBlack.copyWith(
-            color: isSelected
-                ? AppColors.instance.white
-                : AppColors.instance.darkGrey,
+      
+      child: Row(
+        mainAxisSize: MainAxisSize.min, 
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(
+            title,
+            textAlign: TextAlign.center,
+            style: AppTextStyle.instance.text14WBoldBlack.copyWith(
+              color: isSelected
+                  ? AppColors.instance.white
+                  : AppColors.instance.darkGrey,
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

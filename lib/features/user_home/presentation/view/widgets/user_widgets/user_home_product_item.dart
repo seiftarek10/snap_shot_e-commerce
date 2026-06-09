@@ -6,7 +6,7 @@ import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/pro
 import 'package:snap_shot/core/style/fonts.dart';
 import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/favorites/presentation/managers/get_fav_products/get_favorites_products_cubit.dart';
-import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/user_shopping_bag_icon.dart';
 import 'package:snap_shot/shared/widgets/favorite_icon.dart';
 

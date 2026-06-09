@@ -5,7 +5,7 @@ import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/features/main_navigation_pages/presentation/home_view.dart';
 import 'package:snap_shot/core/routing/app_shell/app_bottom_bar.dart';
 import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
-import 'package:snap_shot/features/category/presentation/view/screens/owner_category_view.dart';
+import 'package:snap_shot/features/owner_categories/presentation/view/screens/owner_category_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/owenr_all_orders/presentation/view/screens/owner_orders_view.dart';
 import 'package:snap_shot/features/user_orders/presentation/view/screens/user_orders_view.dart';

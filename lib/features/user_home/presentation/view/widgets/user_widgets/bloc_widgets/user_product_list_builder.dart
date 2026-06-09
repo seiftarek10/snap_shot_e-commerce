@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/style/fonts.dart';
-import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/loading_state_widgets/user_products_loading_list.dart';
 import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/user_products_list.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_error_widget.dart';

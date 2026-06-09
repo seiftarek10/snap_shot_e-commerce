@@ -4,7 +4,7 @@ import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/favorites/presentation/managers/get_fav_products/get_favorites_products_cubit.dart';
-import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/bloc_widgets/user_cetegories_list_builder.dart';
 import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/bloc_widgets/user_product_list_builder.dart';
 import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/search/search_builder.dart';

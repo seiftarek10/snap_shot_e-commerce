@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/shared/widgets/page_header.dart';
-import 'package:snap_shot/features/category/presentation/view/widgets/all_products_category.dart';
+import 'package:snap_shot/features/owner_categories/presentation/view/widgets/all_products_category.dart';
 
 import 'package:snap_shot/shared/widgets/page_padding.dart';
 

@@ -13,7 +13,7 @@ import 'package:snap_shot/features/authentication/presentation/view/screens/sign
 import 'package:snap_shot/features/authentication/presentation/view/screens/sign_up_view.dart';
 import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
-import 'package:snap_shot/features/category/presentation/view/screens/category_products_view.dart';
+import 'package:snap_shot/features/owner_categories/presentation/view/screens/category_products_view.dart';
 import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/initial_screen_manager/presentation/init_screen.dart';

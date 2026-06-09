@@ -47,7 +47,7 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
     return RangeValues(prices.reduce(min), prices.reduce(max));
   }
 
-  void changeCategory({required String category}) {
+  void getProductsByCategory({required String category}) {
     if (category.toLowerCase() == 'All'.toLowerCase()) {
       fillterdProducts = products;
       safeEmit(GetProductsSuccess(fillterdProducts));

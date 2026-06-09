@@ -6,7 +6,7 @@ import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/features/cart/presentation/manager/cart_cubit/user_cart_manager_cubit.dart';
 import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
-import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
+import 'package:snap_shot/core/shared_managers/get_products_cubit/get_all_products_cubit.dart';
 import 'package:snap_shot/features/user_home/presentation/view/widgets/user_widgets/user_home_product_item.dart';
 
 class UserHomeProductsList extends StatelessWidget {
