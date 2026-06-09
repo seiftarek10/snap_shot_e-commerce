@@ -1,5 +1,7 @@
 import 'package:bloc/bloc.dart';
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:snap_shot/core/bloc/bloc_observer.dart';
 import 'package:snap_shot/core/data_source/local_data_source/Hive/hive_setup.dart';
@@ -17,7 +19,9 @@ void main(List<String> args) async {
   await setupGetIt(Role.owner);
   await hiveSetup(Role.owner);
   Bloc.observer = MyBlocObserver();
-  runApp(SnapShot(router: router.router));
+    runApp(DevicePreview(
+    enabled: !kReleaseMode,
+    builder:(context)=> SnapShot(router: router.router)));
 }
 
 

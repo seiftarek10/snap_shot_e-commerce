@@ -1,7 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
+import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
 
 class OwnerCategoryProductItem extends StatelessWidget {
@@ -39,20 +41,21 @@ class OwnerCategoryProductItem extends StatelessWidget {
                     Expanded(
                       child: Row(
                         children: [
-                          Expanded(
-                            child: Text(
-                              "Rating",
-                              style: AppTextStyle.instance.text12W500,
-                            ),
+                          Text(
+                            "Rating",
+                            style: AppTextStyle.instance.text12W500,
                           ),
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                              "(${product.rate})",
-                              style: AppTextStyle.instance.text12W200,
-                            ),
+                          AppSpace.instance.h4,
+                          Text(
+                            "(${product.rate})",
+                            style: AppTextStyle.instance.text12W200,
                           ),
-                          const Spacer(),
+                          AppSpace.instance.h4,
+                          Icon(
+                            Icons.star,
+                            size: 20,
+                            color: AppColors.instance.blueGrey,
+                          ),
                         ],
                       ),
                     ),
@@ -64,13 +67,6 @@ class OwnerCategoryProductItem extends StatelessWidget {
                       ),
                     ),
                   ],
-                ),
-              ),
-              Expanded(
-                flex: 2,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Icon(Icons.arrow_forward_ios_rounded, size: 20.h),
                 ),
               ),
             ],
