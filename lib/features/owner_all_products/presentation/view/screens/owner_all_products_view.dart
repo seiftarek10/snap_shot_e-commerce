@@ -21,30 +21,14 @@ class OwnerAllProductsView extends StatelessWidget {
       child: BlocBuilder<GetAllProductsCubit, GetAllProductsState>(
         builder: (context, state) {
           if (state is GetProductsSuccess) {
-            
+
             return fromHomeScreen
                 ? Scaffold(body: SafeArea(child: _buildBody()))
                 : _buildBody();
           } else if (state is GetProductsFailure) {
-            return Scaffold(
-              body: Center(
-                child: AppErrorWidget(
-                  errMessage: state.errMessage,
-                  onTap: () async {
-                    await context.read<GetAllProductsCubit>().getAllProducts();
-                  },
-                ),
-              ),
-            );
-          } else {
-            return Scaffold(
-              body: Center(
-                child: CircularProgressIndicator(
-                  color: AppColors.instance.black,
-                ),
-              ),
-            );
-          }
+           return  _buildFailureBody(context, state.errMessage);
+          } else {}
+         return _buildLoadingBody();
         },
       ),
     );
@@ -86,5 +70,47 @@ class OwnerAllProductsView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  _buildLoadingBody() {
+    return Scaffold(
+      body: PagePadding(
+        child: Column(
+          children: [
+            AppSpace.instance.topPageSpace,
+            AppPageTitle(pageTitle: "All Products", arrowBack: fromHomeScreen),
+            Expanded(
+              child: Center(
+                child: CircularProgressIndicator(
+                  color: AppColors.instance.black,
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _buildFailureBody(BuildContext context, String errMessage) {
+     return Scaffold(
+      body: PagePadding(
+        child: Column(
+          children: [
+            AppSpace.instance.topPageSpace,
+            AppPageTitle(pageTitle: "All Products", arrowBack: fromHomeScreen),
+            Expanded(
+              child: AppErrorWidget(
+          errMessage: errMessage,
+          onTap: () async {
+            await context.read<GetAllProductsCubit>().getAllProducts();
+          },
+        ),
+            ),
+          ],
+        ),
+      ),
+    );
+   
   }
 }
