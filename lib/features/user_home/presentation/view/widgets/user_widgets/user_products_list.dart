@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,7 +16,7 @@ class UserHomeProductsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+      return GridView.builder(
       physics: const BouncingScrollPhysics(),
       itemCount: products.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -41,7 +42,7 @@ class UserHomeProductsList extends StatelessWidget {
             );
           },
           child: UserHomeProductItem(
-            key: ValueKey(products[index].id),
+          key: ValueKey('${products[index].id}_${products[index].inCart}'),
             product: products[index],
           ),
         );

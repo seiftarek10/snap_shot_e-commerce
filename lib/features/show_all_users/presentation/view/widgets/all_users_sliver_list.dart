@@ -12,26 +12,27 @@ class AllUsersSliverList extends StatelessWidget {
   const AllUsersSliverList({super.key});
 
   @override
-Widget build(BuildContext context) {
-  return BlocBuilder<GetAllUsersCubit, GetAllUsersState>(
-    builder: (context, state) {
-      if (state is GetAllUsersSuccess || state is GetAllUsersPaginationLoading) {
-        final List<UserEntity> users = (state is GetAllUsersSuccess) 
-            ? state.users 
-            : (state as GetAllUsersPaginationLoading).users;
+  Widget build(BuildContext context) {
+    return BlocBuilder<GetAllUsersCubit, GetAllUsersState>(
+      builder: (context, state) {
+        if (state is GetAllUsersSuccess ||
+            state is GetAllUsersPaginationLoading) {
+          final List<UserEntity> users = (state is GetAllUsersSuccess)
+              ? state.users
+              : (state as GetAllUsersPaginationLoading).users;
+          if (users.isEmpty) {
+            return _buildEmptyList();
+          }
 
-        if (users.isEmpty) {
-          return _buildEmptyList();
+          return _buildSuccessList(users);
+        } else if (state is GetAllUsersFailure) {
+          return _buildErrorWidget(context, state.errMessage);
+        } else {
+          return _buildLoadingList();
         }
-        return _buildSuccessList(users);
-      } else if (state is GetAllUsersFailure) {
-        return _buildErrorWidget(context, state.errMessage);
-      } else {
-        return _buildLoadingList(); 
-      }
-    },
-  );
-}
+      },
+    );
+  }
 
   SliverList _buildLoadingList() {
     return SliverList.builder(
@@ -41,9 +42,9 @@ Widget build(BuildContext context) {
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 8.h),
             child: const AllUsersCardItem(
-              userName: '',
-              phoneNumber: '',
-              address: '',
+              userName: 'User Name',
+              phoneNumber: '0000000000000',
+              address: '******** ********',
             ),
           ),
         );
@@ -54,7 +55,7 @@ Widget build(BuildContext context) {
   SliverList _buildSuccessList(List<UserEntity> users) {
     return SliverList.builder(
       itemCount: users.length,
-    
+
       itemBuilder: (consext, index) {
         return Padding(
           padding: EdgeInsets.symmetric(vertical: 8.h),
@@ -78,7 +79,7 @@ Widget build(BuildContext context) {
   SliverFillRemaining _buildErrorWidget(
     BuildContext context,
     String errMessage,
-  )  {
+  ) {
     return SliverFillRemaining(
       hasScrollBody: false,
       child: Center(

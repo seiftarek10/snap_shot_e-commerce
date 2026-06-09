@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:skeletonizer/skeletonizer.dart';
-import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_loading_widget.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class FavoritesLoading extends StatelessWidget {
   const FavoritesLoading({super.key});
@@ -12,33 +11,51 @@ class FavoritesLoading extends StatelessWidget {
     return AppLoadingWidget(
       child: GridView(
         shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(), 
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 10.w,
           mainAxisSpacing: 10.h,
-          childAspectRatio: 1 / 1.8,
+          childAspectRatio: 1 / 1.6, 
         ),
         children: List.generate(6, (index) {
           return Card(
+            elevation: 0,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.r),
+            ),
             child: Padding(
-              padding: const EdgeInsets.all(12.0),
+              padding: EdgeInsets.all(12.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
-                  AspectRatio(aspectRatio: 0.4.h, child: const Bone()),
-                  AppSpace.instance.v12,
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Bone.text(words: 2, fontSize: 15),
-                      IconButton(onPressed: null, icon: Bone.icon(size: 30.h)),
-                    ],
+                  const Expanded(
+                    child: AspectRatio(
+                      aspectRatio: 1,
+                      child: Bone(),
+                    ),
                   ),
+                  SizedBox(height: 12.h),
 
-                  const Bone.text(words: 1),
-                  AppSpace.instance.v16,
-                  const Bone.text(words: 1, fontSize: 20),
+                  Bone(
+                    height: 14.h,
+                    width: double.infinity, 
+                    borderRadius: BorderRadius.circular(4.r),
+                  ),
+                  SizedBox(height: 8.h),
+
+                  Bone(
+                    height: 12.h,
+                    width: 75.w,
+                    borderRadius: BorderRadius.circular(4.r),
+                  ),
+                  SizedBox(height: 12.h),
+
+                  Bone(
+                    height: 18.h,
+                    width: 50.w,
+                    borderRadius: BorderRadius.circular(4.r),
+                  ),
                 ],
               ),
             ),

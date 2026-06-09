@@ -95,9 +95,9 @@ class UserHomeProductItem extends StatelessWidget {
             ),
             UserShoppingBagIcon(
               inCart: product.inCart ?? false,
+
               onTap: () async {
                 final productsCubit = context.read<GetAllProductsCubit>();
-
                 final cartCubit = context.read<UserCartManegerCubit>();
                 await cartCubit.toggleCartProdcut(
                   inCart: product.inCart ?? false,

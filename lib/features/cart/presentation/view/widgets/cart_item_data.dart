@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/constants/space.dart';
 import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
 import 'package:snap_shot/core/style/colors.dart';
@@ -18,8 +19,11 @@ class CartItemData extends StatelessWidget {
           child: Text(
             product.name,
             style: AppTextStyle.instance.text14WBoldBlack,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 2,
           ),
         ),
+        AppSpace.instance.v12,
         Expanded(
           flex: 3,
           child: Row(
@@ -31,12 +35,21 @@ class CartItemData extends StatelessWidget {
                   color: AppColors.instance.grey,
                 ),
               ),
-              Icon(Icons.star, color: AppColors.instance.blueGrey, size: 40),
+              Icon(Icons.star, color: AppColors.instance.blueGrey, size: 20.h),
             ],
           ),
         ),
         AppSpace.instance.v12,
-        Expanded(flex: 3, child: CartItemCounter(product: product)),
+        Expanded(
+          flex: 3,
+          child: Row(
+            children: [
+              Expanded(flex: 3, child: CartItemCounter(product: product)),
+              const Expanded(child: SizedBox()),
+            ],
+          ),
+        ),
+        AppSpace.instance.v8,
         Expanded(
           flex: 3,
           child: Align(
