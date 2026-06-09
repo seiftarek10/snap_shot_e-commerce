@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:snap_shot/core/style/colors.dart';
 import 'package:snap_shot/core/style/fonts.dart';
+import 'package:snap_shot/features/owenr_all_orders/presentation/manager/get_all_app_orders/get_all_app_orders_cubit.dart';
 
 class OrderStatusIndicator extends StatefulWidget {
   const OrderStatusIndicator({super.key, required this.labels});
@@ -37,6 +39,9 @@ class _PhoneOrEmailWidgetState extends State<OrderStatusIndicator> {
                 setState(() {
                   currentIndex = index;
                 });
+                context.read<GetAllAppOrdersCubit>().getOrders(
+                  index: currentIndex,
+                );
               },
 
               child: AnimatedContainer(

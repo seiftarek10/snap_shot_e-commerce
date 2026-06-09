@@ -7,10 +7,21 @@ class AllOrdersRemoteDataSourceImpl implements AllOrdersRemoteDataSource {
   final IRemoteDataBaseServices _dataBaseServices;
 
   AllOrdersRemoteDataSourceImpl(this._dataBaseServices);
+
   @override
-  Stream<List<OrderModel>> getAllOrders() {
-    final result = _dataBaseServices.getStreamCollection(
-      collection: CollectionPath.instance.allOrders,
+  Stream<List<OrderModel>> getAllConfirmedOrders() {
+     final result = _dataBaseServices.getStreamCollectionGroup(
+      subCollectionId: CollectionPath.instance.userConfirmedOrders,
+    );
+    return result.map((list) {
+      return list.map((e) => OrderModel.fromJson(e)).toList();
+    });
+  }
+  
+  @override
+  Stream<List<OrderModel>> getAllNotConfirmedOrders() {
+   final result = _dataBaseServices.getStreamCollectionGroup(
+      subCollectionId: CollectionPath.instance.userNotConfirmedOrders,
     );
     return result.map((list) {
       return list.map((e) => OrderModel.fromJson(e)).toList();

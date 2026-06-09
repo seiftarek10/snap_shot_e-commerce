@@ -124,4 +124,17 @@ abstract class IRemoteDataBaseServices {
     required int limit,
     required String? lastId,
   });
+  Stream<List<Map<String, dynamic>>> getStreamCollectionGroup({
+    required String subCollectionId,
+  });
+
+  Future<void> moveDocumentBetweenSubCollections({
+    required String fromCollection,
+    required String toCollection,
+    required String parentId,
+    required String fromsubCollection,
+    required String tosubCollection,
+    required String childId,
+    required Map<String, dynamic> data,
+  });
 }

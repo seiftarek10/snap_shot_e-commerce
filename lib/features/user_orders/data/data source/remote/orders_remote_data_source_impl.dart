@@ -20,13 +20,11 @@ class OrdersRemoteDataSourceImpl implements OrdersRemoteDataSource {
     final data = await _remoteDataBaseServices.getSubCollection(
       collection: CollectionPath.instance.notConfirmedOrders,
       parentId: uid,
-      subCollection: CollectionPath.instance.userOrders,
+      subCollection: CollectionPath.instance.userNotConfirmedOrders,
     );
 
     return data.map(((e) => OrderModel.fromJson(e))).toList();
   }
-
-
 
   @override
   Future<void> deleteProductsCart() async {
@@ -89,7 +87,7 @@ class OrdersRemoteDataSourceImpl implements OrdersRemoteDataSource {
     await _remoteDataBaseServices.addToSubCollection(
       collection: CollectionPath.instance.notConfirmedOrders,
       parentId: order.userData!.uid,
-      subCollection: CollectionPath.instance.userOrders,
+      subCollection: CollectionPath.instance.userNotConfirmedOrders,
       data: order.toJson(),
     );
     await _incrementOrdersCounter(order.productsCost);

@@ -7,7 +7,8 @@ import 'package:snap_shot/core/shared_domain_data/all_orders/data/data_source/re
 import 'package:snap_shot/core/shared_domain_data/all_orders/data/data_source/remote/all_orders_remote_data_source_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_orders/data/repos/all_orders_repo_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_orders/domain/repos/all_orders_repo.dart';
-import 'package:snap_shot/core/shared_domain_data/all_orders/domain/use_case/get_all_orders_use_case.dart';
+import 'package:snap_shot/core/shared_domain_data/all_orders/domain/use_case/get_all_confirmed_orders_use_case.dart';
+import 'package:snap_shot/core/shared_domain_data/all_orders/domain/use_case/get_all_not_confirmed_orders_use_case.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/local_data_source/all_users_local_data_source.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/local_data_source/all_users_local_data_source_impl.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/data/data_source/remote_data_source/all_users_remote_data_source.dart';
@@ -17,7 +18,15 @@ import 'package:snap_shot/core/shared_domain_data/all_users/domain/repos/all_use
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/use_cases/check_data_consistent_use_case.dart';
 import 'package:snap_shot/core/shared_domain_data/all_users/domain/use_cases/get_all_user_use_case.dart';
 import 'package:snap_shot/core/models/user_model.dart';
+import 'package:snap_shot/features/owenr_all_orders/data/data_source/remote/owner_order_management_remote.dart';
+import 'package:snap_shot/features/owenr_all_orders/data/data_source/remote/owner_order_management_remote_impl.dart';
+import 'package:snap_shot/features/owenr_all_orders/data/repos/owner_order_management_repo_impl.dart';
+import 'package:snap_shot/features/owenr_all_orders/domain/repos/owner_order_management_repo.dart';
+import 'package:snap_shot/features/owenr_all_orders/domain/use_case/confirm_order_use_case.dart';
+import 'package:snap_shot/features/owenr_all_orders/domain/use_case/delete_confirmed_order_use_case.dart';
+import 'package:snap_shot/features/owenr_all_orders/domain/use_case/delete_not_confirmed_order.dart';
 import 'package:snap_shot/features/owenr_all_orders/presentation/manager/get_all_app_orders/get_all_app_orders_cubit.dart';
+import 'package:snap_shot/features/owenr_all_orders/presentation/manager/order_management/order_management_cubit.dart';
 import 'package:snap_shot/features/owner_home/data/data_source/remote_data_source/owner_home_remote.dart';
 import 'package:snap_shot/features/owner_home/data/data_source/remote_data_source/owner_home_remote_impl.dart';
 import 'package:snap_shot/features/owner_home/data/repos/owner_home_repo_impl.dart';
@@ -114,13 +123,46 @@ void _initOwenrAllOrdersFeature() {
     () => AllOrdersRemoteDataSourceImpl(sl<IRemoteDataBaseServices>()),
   );
 
+  sl.registerLazySingleton<OwnerOrderManagementRemote>(
+    () => OwnerOrderManagementRemoteImpl(sl<IRemoteDataBaseServices>()),
+  );
+
   // repos
   sl.registerLazySingleton<AllOrdersRepo>(
     () => AllOrdersRepoImpl(sl<AllOrdersRemoteDataSource>()),
   );
+  sl.registerLazySingleton<OwnerOrderManagementRepo>(
+    () => OwnerOrderManagementRepoImpl(sl<OwnerOrderManagementRemote>()),
+  );
   //use cases
-  sl.registerLazySingleton(() => GetAllOrdersUseCase(sl<AllOrdersRepo>()));
+  sl.registerLazySingleton(
+    () => GetAllConfirmedOrdersUseCase(sl<AllOrdersRepo>()),
+  );
+  sl.registerLazySingleton(
+    () => GetAllNotConfirmedOrdersUseCase(sl<AllOrdersRepo>()),
+  );
+  sl.registerLazySingleton(
+    () => ConfirmOrderUseCase(sl<OwnerOrderManagementRepo>()),
+  );
+  sl.registerLazySingleton(
+    () => DeleteConfirmedOrderUseCase(sl<OwnerOrderManagementRepo>()),
+  );
+  sl.registerLazySingleton(
+    () => DeleteNotConfirmedOrderUseCase(sl<OwnerOrderManagementRepo>()),
+  );
 
   // cubits
-  sl.registerFactory(() => GetAllAppOrdersCubit(sl<GetAllOrdersUseCase>()));
+  sl.registerFactory(
+    () => GetAllAppOrdersCubit(
+      sl<GetAllConfirmedOrdersUseCase>(),
+      sl<GetAllNotConfirmedOrdersUseCase>(),
+    ),
+  );
+  sl.registerFactory(
+    () => OrderManagementCubit(
+      sl<ConfirmOrderUseCase>(),
+      sl<DeleteConfirmedOrderUseCase>(),
+      sl<DeleteNotConfirmedOrderUseCase>(),
+    ),
+  );
 }

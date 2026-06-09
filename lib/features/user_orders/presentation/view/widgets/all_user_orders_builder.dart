@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:snap_shot/core/entites/order_entity.dart';
+import 'package:snap_shot/core/routing/app_router.dart';
 import 'package:snap_shot/features/user_orders/presentation/manager/cubit/get_all_user_orders_cubit.dart';
 import 'package:snap_shot/shared/widgets/orders_widgets/all_orders_list.dart';
 import 'package:snap_shot/shared/widgets/stete_widgets/app_empty_widget.dart';
@@ -17,7 +18,12 @@ class AllUserOrdersBuilder extends StatelessWidget {
           if (state.orders.isEmpty) {
             return const AppEmptyWidget();
           }
-          return AllOrdersList(enableLoadingState: false, orders: state.orders);
+          return AllOrdersList(
+            enableLoadingState: false,
+            orders: state.orders,
+            role: Role.user,
+            isConfirmedList: false,
+          );
         } else if (state is FailedToLoadOrders) {
           return AppErrorWidget(
             errMessage: state.errMessage,
@@ -29,6 +35,8 @@ class AllUserOrdersBuilder extends StatelessWidget {
           return AllOrdersList(
             enableLoadingState: true,
             orders: OrderEntity.mockLoadingList,
+            role: Role.user,
+            isConfirmedList: false,
           );
         }
       },

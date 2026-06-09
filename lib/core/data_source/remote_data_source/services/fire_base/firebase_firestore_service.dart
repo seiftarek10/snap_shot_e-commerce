@@ -296,4 +296,47 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
           .toList();
     });
   }
+
+  @override
+  Stream<List<Map<String, dynamic>>> getStreamCollectionGroup({
+    required String subCollectionId,
+  }) {
+    return ref.collectionGroup(subCollectionId).snapshots().map((snapshot) {
+      return snapshot.docs.map((doc) {
+        final data = doc.data();
+        data['id'] = doc.id;
+        return data;
+      }).toList();
+    });
+  }
+
+  @override
+  Future<void> moveDocumentBetweenSubCollections({
+    required String fromCollection,
+    required String toCollection,
+    required String parentId,
+    required String fromsubCollection,
+    required String tosubCollection,
+    required String childId,
+    required Map<String, dynamic> data,
+  }) async {
+    final batch = ref.batch();
+
+    final fromRef = ref
+        .collection(fromCollection)
+        .doc(parentId)
+        .collection(fromsubCollection)
+        .doc(childId);
+
+    final toRef = ref
+        .collection(toCollection)
+        .doc(parentId)
+        .collection(tosubCollection)
+        .doc(childId);
+
+    batch.set(toRef, data);
+    batch.delete(fromRef);
+
+    await batch.commit();
+  }
 }

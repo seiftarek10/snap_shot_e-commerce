@@ -11,10 +11,41 @@ class AllOrdersRepoImpl implements AllOrdersRepo {
 
   AllOrdersRepoImpl(this._remoteDataSource);
 
+
+  
   @override
-  Stream<Result<List<OrderEntity>>> getAllOrders() async* {
-    try {
-      await for (final remoteOrders in _remoteDataSource.getAllOrders()) {
+  Stream<Result<List<OrderEntity>>> getAllConfirmedOrders() async*{
+     try {
+      await for (final remoteOrders in _remoteDataSource.getAllConfirmedOrders()) {
+        if (remoteOrders.isEmpty) {
+          yield const Success([]);
+          continue; // Move to next stream emission
+        }
+        try {
+          final List<OrderEntity> entities = remoteOrders
+              .map((e) => e.toEntity())
+              .toList();
+
+          yield Success(entities);
+        } catch (mappingError) {
+          yield AppFailure(
+            Failure("Data Mapping Error: ${mappingError.toString()}"),
+          );
+        }
+      }
+    } catch (streamError) {
+      if (streamError is FirebaseException) {
+        yield AppFailure(FirestoreError.handleFireStoreError(streamError));
+      } else {
+        yield AppFailure(Failure(streamError.toString()));
+      }
+    }
+  }
+  
+  @override
+  Stream<Result<List<OrderEntity>>> getAllNotConfirmedOrders() async*{
+   try {
+      await for (final remoteOrders in _remoteDataSource.getAllNotConfirmedOrders()) {
         if (remoteOrders.isEmpty) {
           yield const Success([]);
           continue; // Move to next stream emission
