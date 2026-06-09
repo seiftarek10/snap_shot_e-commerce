@@ -221,6 +221,9 @@ void _initCartFeature() {
       ),
 
       sl<ILocalDataBaseServices<UserModel>>(),
+      sl<ILocalDataBaseServices<ProductModel>>(
+        instanceName: HiveBoxesNames.instance.favProductsBox,
+      ),
     ),
   );
 

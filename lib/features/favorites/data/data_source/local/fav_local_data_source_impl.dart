@@ -20,7 +20,6 @@ class FavProudctsLocalDataSourceImpl implements FavProductsLocalDataSource {
 
   @override
   Future<void> saveFavProducts({required List<ProductModel> products}) async {
-    await _favProductsBox.clear();
     for (var product in products) {
       await _favProductsBox.addDataWithKey(key: product.id!, data: product);
     }
