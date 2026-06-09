@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/di/sl.dart';
-import 'package:snap_shot/core/entites/order_entity.dart';
 import 'package:snap_shot/core/routing/routes.dart';
 import 'package:snap_shot/core/routing/app_shell/app_shell.dart';
 import 'package:snap_shot/core/shared_domain_data/all_products/domain/entity/product_entity.dart';
@@ -19,8 +18,8 @@ import 'package:snap_shot/features/checkout/presentation/view/screens/checkout_v
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
 import 'package:snap_shot/features/initial_screen_manager/presentation/init_screen.dart';
 import 'package:snap_shot/features/on_boarding/presentation/view/screens/on_boarding_view.dart';
-import 'package:snap_shot/features/orders/presentation/view/screens/order_details_view.dart';
-import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
+import 'package:snap_shot/features/order_details/presentation/view/screens/order_details_view.dart';
+import 'package:snap_shot/features/owenr_all_orders/presentation/manager/order_management/order_management_cubit.dart';
 import 'package:snap_shot/features/owner_home/presentation/manager/get_all_users/get_all_users_cubit.dart';
 import 'package:snap_shot/features/owner_home/presentation/view/screens/all_user_view.dart';
 import 'package:snap_shot/features/product_details/presentation/model/product_details_extra_model.dart';
@@ -103,10 +102,6 @@ class AppRouter {
         },
       ),
       GoRoute(
-        path: Routes.instance.orders,
-        builder: (context, state) => OrdersView(role: role),
-      ),
-      GoRoute(
         path: Routes.instance.favorite,
         builder: (context, state) => const FavoriteView(),
       ),
@@ -118,8 +113,15 @@ class AppRouter {
       GoRoute(
         path: Routes.instance.orderDetails,
         builder: (context, state) {
-          final orderExtra = state.extra as OrderEntity;
-          return OrderDetailsView(order: orderExtra);
+          final orderExtra = state.extra as OrderDetailsExtraInputModel;
+          if (role == Role.owner) {
+            return BlocProvider(
+              create: (context) => sl<OrderManagementCubit>(),
+              child: OrderDetailsView(inputModel: orderExtra),
+            );
+          }
+
+          return OrderDetailsView(inputModel: orderExtra);
         },
       ),
       GoRoute(

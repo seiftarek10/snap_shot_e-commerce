@@ -7,7 +7,8 @@ import 'package:snap_shot/core/routing/app_shell/app_bottom_bar.dart';
 import 'package:snap_shot/features/cart/presentation/view/screens/cart_view.dart';
 import 'package:snap_shot/features/category/presentation/view/screens/owner_category_view.dart';
 import 'package:snap_shot/features/favorites/presentation/view/screens/favorite_view.dart';
-import 'package:snap_shot/features/orders/presentation/view/screens/orders_view.dart';
+import 'package:snap_shot/features/owenr_all_orders/presentation/view/screens/owner_orders_view.dart';
+import 'package:snap_shot/features/user_orders/presentation/view/screens/user_orders_view.dart';
 
 class AppShell extends StatefulWidget {
   const AppShell({super.key, required this.role, required this.pageIndex});
@@ -33,7 +34,7 @@ class _AppShellState extends State<AppShell> {
       case Role.user:
         return const [
           HomeView(role: Role.user),
-          OrdersView(role: Role.user),
+          UserOrdersView(),
           FavoriteView(),
           CartView(),
         ];
@@ -41,7 +42,8 @@ class _AppShellState extends State<AppShell> {
         return const [
           HomeView(role: Role.owner),
           OwnerCategoryView(),
-          OrdersView(role: Role.owner),
+          
+          OwnerOrdersView(),
         ];
       case Role.staff:
       default:

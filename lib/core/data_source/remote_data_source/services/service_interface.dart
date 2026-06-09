@@ -1,4 +1,3 @@
-
 abstract class IRemoteDataBaseServices {
   Future<String> add({
     required String collection,
@@ -47,7 +46,7 @@ abstract class IRemoteDataBaseServices {
     required String id,
   });
 
-  Stream<List<Map<String, dynamic>>> streamCollection({
+  Stream<List<Map<String, dynamic>>> getStreamCollection({
     required String collection,
   });
 
@@ -124,5 +123,18 @@ abstract class IRemoteDataBaseServices {
     required String collection,
     required int limit,
     required String? lastId,
+  });
+  Stream<List<Map<String, dynamic>>> getStreamCollectionGroup({
+    required String subCollectionId,
+  });
+
+  Future<void> moveDocumentBetweenSubCollections({
+    required String fromCollection,
+    required String toCollection,
+    required String parentId,
+    required String fromsubCollection,
+    required String tosubCollection,
+    required String childId,
+    required Map<String, dynamic> data,
   });
 }

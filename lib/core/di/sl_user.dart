@@ -33,15 +33,13 @@ import 'package:snap_shot/features/cart/domain/use_cases/add_to_cart_use_case.da
 import 'package:snap_shot/features/cart/domain/use_cases/get_cart_products_use_case.dart';
 import 'package:snap_shot/features/cart/domain/use_cases/remove_from_cart_use_case.dart';
 import 'package:snap_shot/features/cart/presentation/manager/get_cart_cubit/get_cart_proudcts_cubit.dart';
-import 'package:snap_shot/features/checkout/data/data_source/local/checkout_local_data_source.dart';
-import 'package:snap_shot/features/checkout/data/data_source/local/checkout_local_data_source_impl.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source.dart';
 import 'package:snap_shot/features/checkout/data/data_source/remote/checkout_remote_data_source_impl.dart';
 import 'package:snap_shot/features/checkout/data/repos/checkout_repo_impl.dart';
 import 'package:snap_shot/core/utils/stripe_service.dart';
 import 'package:snap_shot/features/checkout/domain/repos/checkout_repo.dart';
-import 'package:snap_shot/features/checkout/domain/use_case/get_user_data_use_case.dart';
-import 'package:snap_shot/features/checkout/domain/use_case/make_order_use_case.dart';
+import 'package:snap_shot/features/user_orders/domain/use_cases/get_user_data_use_case.dart';
+import 'package:snap_shot/features/user_orders/domain/use_cases/make_order_use_case.dart';
 import 'package:snap_shot/features/checkout/domain/use_case/make_payment_use_case.dart';
 import 'package:snap_shot/features/checkout/presentation/manager/checkout/checkout_cubit.dart';
 import 'package:snap_shot/features/favorites/data/data_source/local/fav_local_data_source.dart';
@@ -62,14 +60,14 @@ import 'package:snap_shot/features/initial_screen_manager/domain/repo/init_app_r
 import 'package:snap_shot/features/initial_screen_manager/domain/use_cases/is_first_time_use_case.dart';
 import 'package:snap_shot/features/initial_screen_manager/domain/use_cases/is_logged_in_use_case.dart';
 import 'package:snap_shot/features/initial_screen_manager/presentation/manager/cubit/init_app_cubit.dart';
-import 'package:snap_shot/features/orders/data/data%20source/local/orders_local_data_sorce.dart';
-import 'package:snap_shot/features/orders/data/data%20source/local/orders_local_data_source_impl.dart';
-import 'package:snap_shot/features/orders/data/data%20source/remote/orders_remote_data_source.dart';
-import 'package:snap_shot/features/orders/data/data%20source/remote/orders_remote_data_source_impl.dart';
-import 'package:snap_shot/features/orders/data/repos/orders_repo_impl.dart';
-import 'package:snap_shot/features/orders/domain/repos/orders_repo.dart';
-import 'package:snap_shot/features/orders/domain/use_cases/get_user_orders_use_case.dart';
-import 'package:snap_shot/features/orders/presentation/manager/cubit/get_all_orders_cubit.dart';
+import 'package:snap_shot/features/user_orders/data/data%20source/local/orders_local_data_sorce.dart';
+import 'package:snap_shot/features/user_orders/data/data%20source/local/orders_local_data_source_impl.dart';
+import 'package:snap_shot/features/user_orders/data/data%20source/remote/orders_remote_data_source.dart';
+import 'package:snap_shot/features/user_orders/data/data%20source/remote/orders_remote_data_source_impl.dart';
+import 'package:snap_shot/features/user_orders/data/repos/orders_repo_impl.dart';
+import 'package:snap_shot/features/user_orders/domain/repos/orders_repo.dart';
+import 'package:snap_shot/features/user_orders/domain/use_cases/get_user_orders_use_case.dart';
+import 'package:snap_shot/features/user_orders/presentation/manager/cubit/get_all_user_orders_cubit.dart';
 import 'package:snap_shot/features/user_home/presentation/manager/get_products_cubit/get_all_products_cubit.dart';
 
 Future<void> setupUserGetIt() async {
@@ -247,26 +245,12 @@ void _initCheckoutFeature() {
     ),
   );
 
-  sl.registerLazySingleton<CheckoutLocalDataSource>(
-    () => CheckoutLocalDataSourceImpl(
-      sl<ILocalDataBaseServices<UserModel>>(),
-      sl<ILocalDataBaseServices<OrderModel>>(),
-      sl<ILocalDataBaseServices<ProductModel>>(
-        instanceName: HiveBoxesNames.instance.cartProdcutBox,
-      ),
-    ),
-  );
   // repos
   sl.registerLazySingleton<CheckoutRepo>(
-    () => CheckoutRepoImpl(
-      sl<CheckoutRemoteDataSource>(),
-      sl<CheckoutLocalDataSource>(),
-    ),
+    () => CheckoutRepoImpl(sl<CheckoutRemoteDataSource>()),
   );
 
   //use cases
-  sl.registerLazySingleton(() => MakeOrderUseCase(sl<CheckoutRepo>()));
-  sl.registerLazySingleton(() => GetUserDataUseCase(sl<CheckoutRepo>()));
   sl.registerLazySingleton(() => MakePaymentUseCase(sl<CheckoutRepo>()));
 
   // cubits
@@ -293,18 +277,29 @@ void _initOrdersFeature() {
     () => OrdersLocalDataSourceImpl(
       sl<ILocalDataBaseServices<OrderModel>>(),
       sl<ILocalDataBaseServices<UserModel>>(),
+      sl<ILocalDataBaseServices<ProductModel>>(
+        instanceName: HiveBoxesNames.instance.cartProdcutBox,
+      ),
+      sl<ILocalDataBaseServices<ProductModel>>(
+        instanceName: HiveBoxesNames.instance.productsBox,
+      ),
     ),
   );
   // repos
-  sl.registerLazySingleton<OrdersRepo>(
-    () => OrdersRepoImpl(sl<OrdersRemoteDataSource>()),
+  sl.registerLazySingleton<UserOrdersRepo>(
+    () => OrdersRepoImpl(
+      sl<OrdersRemoteDataSource>(),
+      sl<OrdersLocalDataSorce>(),
+    ),
   );
 
   //use cases
-  sl.registerLazySingleton(() => GetUserOrdersUseCase(sl<OrdersRepo>()));
+  sl.registerLazySingleton(() => MakeOrderUseCase(sl<UserOrdersRepo>()));
+  sl.registerLazySingleton(() => GetUserDataUseCase(sl<UserOrdersRepo>()));
+  sl.registerLazySingleton(() => GetUserOrdersUseCase(sl<UserOrdersRepo>()));
 
   // cubits
-  sl.registerFactory(() => GetAllOrdersCubit(sl<GetUserOrdersUseCase>()));
+  sl.registerFactory(() => GetAllUserOrdersCubit(sl<GetUserOrdersUseCase>()));
 }
 
 void _initAppFeature() {
