@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:snap_shot/core/di/sl.dart';
 import 'package:snap_shot/core/routing/app_router.dart';
@@ -49,7 +50,7 @@ class _AppShellState extends State<AppShell> {
           const OwnerOrdersView(fromHomeScreen: false),
           BlocProvider(
             create: (context) => sl<GetAllUsersCubit>()..getAllUsers(),
-            child: const AllUserView(fromHomeScreen: false,),
+            child: const AllUserView(fromHomeScreen: false),
           ),
         ];
       case Role.staff:
@@ -60,15 +61,30 @@ class _AppShellState extends State<AppShell> {
 
   @override
   Widget build(BuildContext context) {
+    // 1. Get total screen height and current system bottom padding
+    final double screenHeight = MediaQuery.sizeOf(context).height;
+    final double systemBottomPadding = MediaQuery.viewPaddingOf(context).bottom;
+
+    final double responsiveThreshold = screenHeight * 0.025;
+
+    final bool isPhysicalButtonActive =
+        systemBottomPadding > responsiveThreshold;
+
     return Scaffold(
-      bottomNavigationBar: AppBottomBar(
-        role: widget.role,
-        index: widget.pageIndex,
-        onTap: (index) {
-          context.go(Routes.instance.appShell, extra: index);
-        },
+      bottomNavigationBar: Container(
+        color: Theme.of(context).scaffoldBackgroundColor,
+        padding: EdgeInsets.only(
+          bottom: isPhysicalButtonActive ? systemBottomPadding : 10.h,
+        ),
+        child: AppBottomBar(
+          role: widget.role,
+          index: widget.pageIndex,
+          onTap: (index) {
+            context.go(Routes.instance.appShell, extra: index);
+          },
+        ),
       ),
-      body: SafeArea(child: _pages[widget.pageIndex]),
+      body: SafeArea(bottom: false, child: _pages[widget.pageIndex]),
     );
   }
 }
