@@ -18,6 +18,8 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
   List<ProductEntity> products = [];
   List<ProductEntity> fillterdProducts = [];
 
+  String activeCategory = 'All';
+
   Future<void> getAllProducts({bool? loadingState}) async {
     if (loadingState == null) {
       safeEmit(const GettingAllProducts());
@@ -26,9 +28,19 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
 
     if (response is Success<List<ProductEntity>>) {
       products = List.from(response.data);
-      fillterdProducts = List.from(response.data);
-      safeEmit(GetProductsSuccess([...fillterdProducts]));
       getCategories();
+
+      if (activeCategory.toLowerCase() != 'All'.toLowerCase()) {
+        fillterdProducts = products
+            .where(
+              (p) => p.category.toLowerCase() == activeCategory.toLowerCase(),
+            )
+            .toList();
+      } else {
+        fillterdProducts = List.from(response.data);
+      }
+
+      safeEmit(GetProductsSuccess(fillterdProducts));
     }
 
     if (response is AppFailure<List<ProductEntity>>) {
@@ -48,8 +60,10 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
   }
 
   void getProductsByCategory({required String category}) {
+    activeCategory =
+        category; 
     if (category.toLowerCase() == 'All'.toLowerCase()) {
-      fillterdProducts = products;
+      fillterdProducts = List.from(products);
       safeEmit(GetProductsSuccess(fillterdProducts));
       return;
     }
@@ -78,6 +92,25 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
     safeEmit(GetProductsSuccess(searchResult));
   }
 
+  List<ProductEntity> filterByPrice({required RangeValues currentRange}) {
+    RangeValues allRange = getPricesRange();
+
+    // Fall back strictly to the filtered category list instead of destroying it
+    if (allRange.start == currentRange.start &&
+        allRange.end == currentRange.end) {
+      return fillterdProducts;
+    }
+
+    List<ProductEntity> filteredPricesList = fillterdProducts
+        .where(
+          (product) =>
+              double.parse(product.price) >= currentRange.start &&
+              double.parse(product.price) <= currentRange.end,
+        )
+        .toList();
+    return filteredPricesList;
+  }
+
   List<ProductEntity> filterByRate(
     List<ProductEntity> filterdPricesList,
     List<String> allRates,
@@ -89,31 +122,12 @@ class GetAllProductsCubit extends BaseCubit<GetAllProductsState> {
     List<ProductEntity> finalList = filterdPricesList
         .where(
           (product) => allRates.any(
-            (rate) => product.rate.toLowerCase().startsWith(
-              rate.toLowerCase().toString(),
-            ),
+            (rate) => product.rate.toLowerCase().startsWith(rate.toLowerCase()),
           ),
         )
         .toList();
 
     return finalList;
-  }
-
-  List<ProductEntity> filterByPrice({required RangeValues currentRange}) {
-    RangeValues allRange = getPricesRange();
-    if (allRange.start == currentRange.start &&
-        allRange.end == currentRange.end) {
-      return products;
-    }
-
-    List<ProductEntity> filteredPricesList = fillterdProducts
-        .where(
-          (product) =>
-              double.parse(product.price) >= currentRange.start &&
-              double.parse(product.price) <= currentRange.end,
-        )
-        .toList();
-    return filteredPricesList;
   }
 
   void filter(RangeValues currentRange, List<String> allRates) {
