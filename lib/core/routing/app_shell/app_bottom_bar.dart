@@ -58,7 +58,7 @@ class AppBottomBar extends StatelessWidget {
     final icons = _buildIcons(role);
 
     return SizedBox(
-      height: 70.h,
+      height: 50.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
