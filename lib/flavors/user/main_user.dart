@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:snap_shot/core/bloc/bloc_observer.dart';
@@ -27,7 +28,10 @@ void main(List<String> args) async {
   }
   Stripe.publishableKey = stripeKey;
   await Stripe.instance.applySettings();
-  
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown, 
+  ]);
   runApp(DevicePreview(
     enabled: !kReleaseMode,
     builder:(context)=> SnapShot(router: router.router)));
