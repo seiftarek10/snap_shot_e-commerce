@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Architecture-Clean-brightgreen?style=for-the-badge" alt="Clean Architecture" />
 </p>
 
-> 🚀 Elite e-commerce app built on **Clean Architecture** and **SOLID principles**. Focused on clean, reusable code and hybrid backend optimization.
+> 🚀 Elite multi-flavor e-commerce app built on **Clean Architecture** and **SOLID principles**. Supports full product lifecycle across 4 distinct native roles.
 
 ---
 
@@ -17,11 +17,11 @@
 
 * **🧩 Reusable Widgets:** Built generic, fully custom wrappers (Buttons, Fields, Cards, Shimmers) to enforce the **DRY principle** and zero UI duplication.
 * **⚡ 60fps Performance:** Optimized widget trees with strict use of `const` constructors to eliminate redundant rendering.
-* **🎭 Multi-Flavor UI:** Native Gradle/Xcode flavors configured to split workflows (User, Owner, Staff, Delivery) in a single codebase.
+* **🎭 Multi-Flavor Hierarchy (User ➔ Owner ➔ Staff ➔ Delivery):** Native Gradle/Xcode flavors configured to completely split views and actions based on the active role within a single codebase.
 
 ---
 
-### ⚡ 🔮 Core Project Functions
+### ⚡ 🔮 Core Project Functions & Multi-Role Flow
 
 #### 1️⃣ 👤 USER: Offline-First Caching (`fetchPaginatedProducts`)
 * **🧠 Logic:** Prevents lag by loading local cached data instantly.
@@ -31,13 +31,21 @@
 * **🧠 Logic:** Cuts network payload overhead by **35%** and prevents memory spikes.
 * **⚙️ Steps:** Tracks lists via a repository cursor ➔ Fetches fixed blocks (`N` records) from **Firestore/REST API** ➔ Appends rows without full view rebuilds.
 
-#### 3️⃣ 💳 PAYMENTS: Stripe Pipeline (`executeStripePayment`)
+#### 3️⃣ 💳 USER: Stripe Payment Pipeline (`executeStripePayment`)
 * **🧠 Logic:** Secure transactions across all application product flavors.
 * **⚙️ Steps:** Requests Ephemeral Key via **REST API** ➔ Caches tokens locally ➔ Triggers native **Stripe Sheet** via Cubit states.
 
-#### 4️⃣ 💼 BACKEND: Hybrid Data Layer
+---
+
+#### 4️⃣ 👑 OWNER: Live Management & Serve Engine (`manageAndServeOrders`)
+* **🧠 Logic:** Full executive control panel for the store owner to process revenue and dispatch incoming orders.
+* **⚙️ Steps:** Streams active store orders ➔ Owner reviews live revenue metrics ➔ Owner triggers approval to **Serve/Assign** the order, routing it instantly to the **Staff flavor** queue.
+
+---
+
+#### 5️⃣ 💼 BACKEND: Hybrid Data Layer
 * **🧠 Logic:** Orchestrates complex data from multiple sources without architectural leaks.
-* **⚙️ Steps:** Combines **REST APIs** (for static data) and **Firestore Streams** (for live events) under abstract contracts.
+* **⚙️ Steps:** Combines **REST APIs** (for static data and Stripe tokens) and **Firestore Streams** (for live order status updates).
 
 ---
 
@@ -45,7 +53,7 @@
 
 * **📱 Framework:** Flutter (iOS & Android)
 * **📐 Architecture:** Feature-Driven Clean Architecture & SOLID
-* **⚙️ DevOps:** Native Product Flavors (Multi-Role)
+* **⚙️ DevOps:** Native Product Flavors (User, Owner, Staff, Delivery)
 * **🔄 State Management:** Flutter BloC / Cubit
 * **🌐 Network:** REST APIs (Dio) & Firebase Cloud Firestore
 * **💾 Persistence:** Hive Local Binary DB & Secure Storage
