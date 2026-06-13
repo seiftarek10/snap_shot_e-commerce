@@ -1,24 +1,52 @@
-# 🛒 SnapShot — Advanced Multi-Role E-Commerce Infrastructure
+# 🛒 SnapShot — Multi-Role E-Commerce Infrastructure
 
-An elite, production-grade e-commerce application built on strict **Clean Architecture (Domain, Data, Presentation layers)** and **SOLID principles**, with a core focus on **Clean Code**, highly reusable widget systems, and extreme backend optimization.
+<!-- TECH BADGES -->
+<p align="left">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" />
+  <img src="https://img.shields.io/badge/REST%20APIs-Dio%20%2F%20Http-orange?style=for-the-badge" alt="REST APIs" />
+  <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
+  <img src="https://img.shields.io/badge/BLoC%20%2F%20Cubit-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="BLoC" />
+  <img src="https://img.shields.io/badge/Architecture-Clean-brightgreen?style=for-the-badge" alt="Clean Architecture" />
+</p>
 
-## 🏗️ Architectural Rigor & Reusable Presentation
-* **Separation of Concerns:** Rigid division between data mutations, core business logic (Use Cases), and presentation layout.
-* **Component-Driven Reusable Widgets:** Built an independent library of highly configurable custom widgets (adaptive buttons, generic shimmers, and modular cards) to eliminate redundant UI duplication and strictly enforce the **DRY principle**.
-* **Performance-First Rendering:** Enforced precise widget tree structures using `const` constructors to eliminate redundant element updates and secure a flawless 60fps scrolling.
-* **Multi-Flavor Environments:** Native Gradle/Xcode product flavors configured to completely segregate multi-role workflows (User, Owner, Staff, Delivery) within a single codebase.
-* **Decoupled State Control:** Driven by **BloC/Cubit** to ensure a predictable, highly responsive, and asynchronous data flow.
+> 🚀 Elite e-commerce app built on **Clean Architecture** and **SOLID principles**. Focused on clean, reusable code and hybrid backend optimization.
 
-## ⚡ High-Performance & Core Project Functions
-* **Hybrid Data Layer (Firebase Streams & REST APIs):** Designed a robust repository layer capable of orchestrating data from multiple remote sources concurrently, integrating standard REST API endpoints alongside real-time Cloud Firestore services.
-* **Smart Offline-First Caching (`fetchPaginatedProducts`):** Developed an advanced caching layer using Hive binary storage. The application queries local Hive boxes instantly for zero UI lag, while concurrently handling cursor-based **Cloud Firestore Streams / REST API pagination** in the background to fetch the next sequential blocks without any memory spikes or payload overhead.
-* **Secure Payment Pipeline (`executeStripePayment`):** Orchestrates safe client-to-server transaction mutations by generating Ephemeral Keys and Customer IDs via dynamic REST API endpoints, caching them securely in local storage, and passing clean state abstractions directly to the native **Stripe Payment Sheet**.
-* **Zero-Leak Pagination Mechanism:** Engineered a custom pagination pipeline synchronized between remote NoSQL/REST collections and local Hive indices, cutting total payload overhead by 35%.
+---
 
-## 🛠️ Tech Stack & Patterns
-* **Framework:** Flutter (iOS & Android)
-* **Architecture:** Feature-Driven Clean Architecture & SOLID
-* **State Management:** Flutter BloC / Cubit
-* **Network & Networking:** Resilient REST APIs (Dio/Http), Cloud Firestore Streams
-* **Storage & DB:** Hive Local Binary DB, Firebase Cloud Firestore NoSQL
-* **Payment Gateways:** Stripe Native SDK Integration
+### 🏗️ 📐 Presentation & Reusable Widgets
+
+* **🧩 Reusable Widgets:** Built generic, fully custom wrappers (Buttons, Fields, Cards, Shimmers) to enforce the **DRY principle** and zero UI duplication.
+* **⚡ 60fps Performance:** Optimized widget trees with strict use of `const` constructors to eliminate redundant rendering.
+* **🎭 Multi-Flavor UI:** Native Gradle/Xcode flavors configured to split workflows (User, Owner, Staff, Delivery) in a single codebase.
+
+---
+
+### ⚡ 🔮 Core Project Functions
+
+#### 1️⃣ 👤 USER: Offline-First Caching (`fetchPaginatedProducts`)
+* **🧠 Logic:** Prevents lag by loading local cached data instantly.
+* **⚙️ Steps:** Reads from **Hive DB** immediately for zero UI lag ➔ Syncs with remote database in the background.
+
+#### 2️⃣ 👤 USER: Zero-Leak Pagination
+* **🧠 Logic:** Cuts network payload overhead by **35%** and prevents memory spikes.
+* **⚙️ Steps:** Tracks lists via a repository cursor ➔ Fetches fixed blocks (`N` records) from **Firestore/REST API** ➔ Appends rows without full view rebuilds.
+
+#### 3️⃣ 💳 PAYMENTS: Stripe Pipeline (`executeStripePayment`)
+* **🧠 Logic:** Secure transactions across all application product flavors.
+* **⚙️ Steps:** Requests Ephemeral Key via **REST API** ➔ Caches tokens locally ➔ Triggers native **Stripe Sheet** via Cubit states.
+
+#### 4️⃣ 💼 BACKEND: Hybrid Data Layer
+* **🧠 Logic:** Orchestrates complex data from multiple sources without architectural leaks.
+* **⚙️ Steps:** Combines **REST APIs** (for static data) and **Firestore Streams** (for live events) under abstract contracts.
+
+---
+
+### 🛠️ 💻 Tech Stack
+
+* **📱 Framework:** Flutter (iOS & Android)
+* **📐 Architecture:** Feature-Driven Clean Architecture & SOLID
+* **⚙️ DevOps:** Native Product Flavors (Multi-Role)
+* **🔄 State Management:** Flutter BloC / Cubit
+* **🌐 Network:** REST APIs (Dio) & Firebase Cloud Firestore
+* **💾 Persistence:** Hive Local Binary DB & Secure Storage
+* **💳 Payments:** Stripe Native SDK
