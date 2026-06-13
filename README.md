@@ -9,43 +9,47 @@
   <img src="https://img.shields.io/badge/Architecture-Clean-brightgreen?style=for-the-badge" alt="Clean Architecture" />
 </p>
 
-> 🚀 Elite multi-flavor e-commerce app built on **Clean Architecture** and **SOLID principles**. Supports full product lifecycle across 3 distinct native roles.
+> 🚀 Elite multi-flavor e-commerce app built on **Clean Architecture**. Supports a streamlined **User-to-Owner** lifecycle.
 
 ---
 
 ### 🏗️ 📐 Presentation & Reusable Widgets
 
-* **🧩 Reusable Widgets:** Built generic, fully custom wrappers (Buttons, Fields, Cards, Shimmers) to enforce the **DRY principle** and zero UI duplication.
-* **⚡ 60fps Performance:** Optimized widget trees with strict use of `const` constructors to eliminate redundant rendering.
-* **🎭 Multi-Flavor Hierarchy (User ➔ Owner ➔ Delivery):** Native Gradle/Xcode flavors configured to completely split views and actions based on the active role within a single codebase.
+* **🧩 Reusable Widgets:** Generic wrappers (Buttons, Fields, Cards) to enforce the **DRY principle** and zero UI duplication.
+* **⚡ 60fps Performance:** Optimized widget trees with `const` constructors for smooth, lag-free scrolling.
+* **🎭 Multi-Flavor Hierarchy (User ➔ Owner):** Native Gradle/Xcode flavors to isolate views and permissions within a single codebase.
 
 ---
 
-### ⚡ 🔮 Core Project Functions & Multi-Role Flow
+### ⚡ 🔮 Core Project Functions
 
-#### 1️⃣ 👤 USER: Offline-First Caching (`fetchPaginatedProducts`)
-* **🧠 Logic:** Prevents lag by loading local cached data instantly.
-* **⚙️ Steps:** Reads from **Hive DB** immediately for zero UI lag ➔ Syncs with remote database in the background.
+#### 1️⃣ 👤 USER: Local-First Cart & Wishlist Logic (`manageCartAndFavorites`)
+* **🧠 Logic:** Instant UI feedback for cart mutations and product liking without network overhead.
+* **⚙️ Steps:** Intercepts toggles inside specialized **Hive Boxes** ➔ Updates cart totals and bookmark states in-memory instantly ➔ Emits Cubit state updates ➔ Syncs with backend asynchronously.
 
-#### 2️⃣ 👤 USER: Zero-Leak Pagination
-* **🧠 Logic:** Cuts network payload overhead by **35%** and prevents memory spikes.
-* **⚙️ Steps:** Tracks lists via a repository cursor ➔ Fetches fixed blocks (`N` records) from **Firestore/REST API** ➔ Appends rows without full view rebuilds.
+#### 2️⃣ 👤 USER: Offline-First Caching (`fetchPaginatedProducts`)
+* **🧠 Logic:** Instant loading via local storage.
+* **⚙️ Steps:** Reads from **Hive DB** immediately ➔ Syncs with remote data in background.
 
-#### 3️⃣ 💳 USER: Stripe Payment Pipeline (`executeStripePayment`)
-* **🧠 Logic:** Secure transactions across all application product flavors.
-* **⚙️ Steps:** Requests Ephemeral Key via **REST API** ➔ Caches tokens locally ➔ Triggers native **Stripe Sheet** via Cubit states.
+#### 3️⃣ 👤 USER: Zero-Leak Pagination
+* **🧠 Logic:** Cuts payload overhead by **35%**; prevents memory spikes.
+* **⚙️ Steps:** Tracks list via repository cursor ➔ Fetches fixed blocks from **Firestore/REST API** ➔ Appends rows lazily.
 
----
-
-#### 4️⃣ 👑 OWNER: Live Management & Serve Engine (`manageAndServeOrders`)
-* **🧠 Logic:** Executive control panel for the store owner to process revenue and dispatch orders.
-* **⚙️ Steps:** Streams active store orders ➔ Owner reviews live revenue metrics ➔ Owner triggers approval to **Serve/Assign** the order, routing it instantly to the **Delivery flavor** queue.
+#### 4️⃣ 💳 USER: Stripe Payment Pipeline (`executeStripePayment`)
+* **🧠 Logic:** Secure transaction flow.
+* **⚙️ Steps:** Requests Ephemeral Key via **REST API** ➔ Caches tokens ➔ Triggers native **Stripe Sheet** via Cubit.
 
 ---
 
-#### 5️⃣ 💼 BACKEND: Hybrid Data Layer
-* **🧠 Logic:** Orchestrates complex data from multiple sources without architectural leaks.
-* **⚙️ Steps:** Combines **REST APIs** (for static data and Stripe tokens) and **Firestore Streams** (for live order status updates).
+#### 5️⃣ 👑 OWNER: Management & Approval Engine (`manageOrders`)
+* **🧠 Logic:** Executive control panel for revenue and order lifecycle.
+* **⚙️ Steps:** Streams active store orders ➔ Reviews revenue metrics ➔ Triggers status approvals to complete order flow.
+
+---
+
+#### 6️⃣ 💼 BACKEND: Hybrid Data Layer
+* **🧠 Logic:** Orchestrates complex data from multiple sources.
+* **⚙️ Steps:** Combines **REST APIs** (static data) and **Firestore Streams** (live updates) under abstract contracts.
 
 ---
 
@@ -53,7 +57,7 @@
 
 * **📱 Framework:** Flutter (iOS & Android)
 * **📐 Architecture:** Feature-Driven Clean Architecture & SOLID
-* **⚙️ DevOps:** Native Product Flavors (User, Owner, Delivery)
+* **⚙️ DevOps:** Native Product Flavors (User, Owner)
 * **🔄 State Management:** Flutter BloC / Cubit
 * **🌐 Network:** REST APIs (Dio) & Firebase Cloud Firestore
 * **💾 Persistence:** Hive Local Binary DB & Secure Storage
