@@ -23,7 +23,7 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Align(
-      alignment: AlignmentGeometry.bottomCenter,
+      alignment: Alignment.bottomCenter,
       child: FractionallySizedBox(
         heightFactor: 0.4,
         widthFactor: 1,
@@ -32,63 +32,67 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
           decoration: _buildContainerDecoration(),
           child: Column(
             children: [
-              Expanded(child: UserProductPriceText(price: product.price)),
+              Expanded(
+                flex: 1,
+                child: UserProductPriceText(price: product.price),
+              ),
               AppSpace.instance.v12,
+
               Expanded(
                 flex: 4,
                 child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Expanded(
                       flex: 3,
                       child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(
-                            child: UserProductDetailsBottomSheetItem(
-                              title: 'rate',
-                              subTitle: product.rate,
+                          IntrinsicHeight(
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: UserProductDetailsBottomSheetItem(
+                                    title: 'rate',
+                                    subTitle: product.rate,
+                                  ),
+                                ),
+                                AppSpace.instance.h12,
+                                Expanded(
+                                  child: UserBottomSheetCounterWidget(
+                                    counterListner: (counter) {
+                                      _counterNotifier.value = counter;
+                                    },
+                                    counter: product.counter ?? 1,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           AppSpace.instance.v12,
+
                           Expanded(
-                            child: UserProductDetailsBottomSheetItem(
-                              title: 'stock',
-                              subTitle: product.stock,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Expanded(
+                                  child: UserProductDetailsBottomSheetItem(
+                                    title: 'Brand',
+                                    subTitle: product.brand,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
                       ),
                     ),
 
-                    Expanded(
-                      flex: 4,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Expanded(
-                            child: UserBottomSheetCounterWidget(
-                              counterListner: (counter) {
-                                _counterNotifier.value = counter;
-                              },
-                              counter: product.counter ?? 1,
-                            ),
-                          ),
-                          AppSpace.instance.v12,
-                          Expanded(
-                            child: UserProductDetailsBottomSheetItem(
-                              title: 'Brand',
-                              subTitle: product.brand,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
                     AppSpace.instance.h12,
 
                     Expanded(
-                      flex: 3,
+                      flex: 2,
                       child: ValueListenableBuilder<int>(
                         valueListenable: _counterNotifier,
                         builder: (context, currentCount, child) {
@@ -108,21 +112,21 @@ class UserProductDetailsBottomSheet extends StatelessWidget {
       ),
     );
   }
-}
 
-BoxDecoration _buildContainerDecoration() {
-  return BoxDecoration(
-    boxShadow: [
-      BoxShadow(
-        color: AppColors.instance.lighterGrey,
-        offset: const Offset(0, -10),
-        blurRadius: 5,
+  BoxDecoration _buildContainerDecoration() {
+    return BoxDecoration(
+      boxShadow: [
+        BoxShadow(
+          color: AppColors.instance.lighterGrey,
+          offset: const Offset(0, -10),
+          blurRadius: 5,
+        ),
+      ],
+      color: AppColors.instance.white,
+      borderRadius: BorderRadius.only(
+        topLeft: Radius.circular(30.r),
+        topRight: Radius.circular(30.r),
       ),
-    ],
-    color: AppColors.instance.white,
-    borderRadius: BorderRadius.only(
-      topLeft: Radius.circular(30.r),
-      topRight: Radius.circular(30.r),
-    ),
-  );
+    );
+  }
 }
