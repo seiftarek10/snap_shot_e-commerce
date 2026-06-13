@@ -10,13 +10,15 @@ An elite, production-grade e-commerce application built on strict **Clean Archit
 * **Decoupled State Control:** Driven by **BloC/Cubit** to ensure a predictable, highly responsive, and asynchronous data flow.
 
 ## ⚡ High-Performance & Core Project Functions
-* **Smart Offline-First Caching (`fetchPaginatedProducts`):** Developed an advanced caching layer using Hive binary storage. The application queries local Hive boxes instantly for zero UI lag, while concurrently handling cursor-based **Cloud Firestore Streams** in the background to fetch the next sequential blocks without any memory spikes or payload overhead.
-* **Secure Payment Pipeline (`executeStripePayment`):** Orchestrates safe client-to-server transaction mutations by generating Ephemeral Keys and Customer IDs, caching them in local storage, and passing secure state abstractions directly to the native **Stripe Payment Sheet**.
-* **Zero-Leak Pagination Mechanism:** Engineered a custom pagination pipeline synchronized between remote NoSQL collections and local Hive indices, cutting total payload overhead by 35%.
+* **Hybrid Data Layer (Firebase Streams & REST APIs):** Designed a robust repository layer capable of orchestrating data from multiple remote sources concurrently, integrating standard REST API endpoints alongside real-time Cloud Firestore services.
+* **Smart Offline-First Caching (`fetchPaginatedProducts`):** Developed an advanced caching layer using Hive binary storage. The application queries local Hive boxes instantly for zero UI lag, while concurrently handling cursor-based **Cloud Firestore Streams / REST API pagination** in the background to fetch the next sequential blocks without any memory spikes or payload overhead.
+* **Secure Payment Pipeline (`executeStripePayment`):** Orchestrates safe client-to-server transaction mutations by generating Ephemeral Keys and Customer IDs via dynamic REST API endpoints, caching them securely in local storage, and passing clean state abstractions directly to the native **Stripe Payment Sheet**.
+* **Zero-Leak Pagination Mechanism:** Engineered a custom pagination pipeline synchronized between remote NoSQL/REST collections and local Hive indices, cutting total payload overhead by 35%.
 
 ## 🛠️ Tech Stack & Patterns
 * **Framework:** Flutter (iOS & Android)
 * **Architecture:** Feature-Driven Clean Architecture & SOLID
 * **State Management:** Flutter BloC / Cubit
+* **Network & Networking:** Resilient REST APIs (Dio/Http), Cloud Firestore Streams
 * **Storage & DB:** Hive Local Binary DB, Firebase Cloud Firestore NoSQL
 * **Payment Gateways:** Stripe Native SDK Integration
