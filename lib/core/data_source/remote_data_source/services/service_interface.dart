@@ -41,11 +41,6 @@ abstract class IRemoteDataBaseServices {
     required String subCollection,
   });
 
-  Stream<Map<String, dynamic>> streamById({
-    required String collection,
-    required String id,
-  });
-
   Stream<List<Map<String, dynamic>>> getStreamCollection({
     required String collection,
   });
@@ -83,26 +78,6 @@ abstract class IRemoteDataBaseServices {
     required String collection,
     required String parentId,
     required String subCollection,
-  });
-
-  Stream<List<Map<String, dynamic>>> streamSubCollection({
-    required String collection,
-    required String parentId,
-    required String subCollection,
-  });
-
-  Future<List<Map<String, dynamic>>> where({
-    required String collection,
-    required String field,
-    required dynamic value,
-  });
-
-  Future<List<Map<String, dynamic>>> whereSubCollection({
-    required String collection,
-    required String parentId,
-    required String subCollection,
-    required String field,
-    required dynamic value,
   });
 
   String? getUserId();

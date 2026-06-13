@@ -1,16 +1,31 @@
+import 'dart:async';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:snap_shot/core/data_source/remote_data_source/services/service_interface.dart';
 
 class FirebaseFirestoreService extends IRemoteDataBaseServices {
   FirebaseFirestore ref = FirebaseFirestore.instance;
+  
+  // Centralized Timeout Threshold (5 Seconds)
+  static const Duration _timeoutDuration = Duration(seconds: 7);
+
+  // Helper method to wrap any Firestore Future safely with a timeout
+  Future<T> _guard<T>(Future<T> Function() operation) {
+    return operation().timeout(
+      _timeoutDuration,
+      onTimeout: () => throw TimeoutException(
+        'Please check your internet connection.',
+      ),
+    );
+  }
 
   @override
   Future<String> add({
     required String collection,
     required Map<String, dynamic> data,
   }) async {
-    final result = await ref.collection(collection).add(data);
+    final result = await _guard(() => ref.collection(collection).add(data));
     return result.id;
   }
 
@@ -21,11 +36,11 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String subCollection,
     required Map<String, dynamic> data,
   }) async {
-    final result = await ref
+    final result = await _guard(() => ref
         .collection(collection)
         .doc(parentId)
         .collection(subCollection)
-        .add(data);
+        .add(data));
     return result.id;
   }
 
@@ -37,12 +52,12 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String childId,
     required Map<String, dynamic> data,
   }) async {
-    await ref
+    await _guard(() => ref
         .collection(collection)
         .doc(parentId)
         .collection(subCollection)
         .doc(childId)
-        .set(data);
+        .set(data));
   }
 
   @override
@@ -51,12 +66,12 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String id,
     required Map<String, dynamic> data,
   }) async {
-    await ref.collection(collection).doc(id).set(data);
+    await _guard(() => ref.collection(collection).doc(id).set(data));
   }
 
   @override
   Future<void> delete({required String collection, required String id}) async {
-    await ref.collection(collection).doc(id).delete();
+    await _guard(() => ref.collection(collection).doc(id).delete());
   }
 
   @override
@@ -66,25 +81,23 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String subCollection,
     required String childId,
   }) async {
-    await ref
+    await _guard(() => ref
         .collection(collection)
         .doc(parentId)
         .collection(subCollection)
         .doc(childId)
-        .delete();
+        .delete());
   }
 
   @override
   Future<List<Map<String, dynamic>>> getAll({
     required String collection,
   }) async {
-    final result = await ref.collection(collection).get();
+    final result = await _guard(() => ref.collection(collection).get());
 
     return result.docs.map((doc) {
       final data = doc.data();
-
       data['id'] = doc.id;
-
       return data;
     }).toList();
   }
@@ -94,7 +107,7 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String collection,
     required String id,
   }) async {
-    final result = await ref.collection(collection).doc(id).get();
+    final result = await _guard(() => ref.collection(collection).doc(id).get());
     return result.data() ?? {};
   }
 
@@ -104,11 +117,11 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String parentId,
     required String subCollection,
   }) async {
-    final result = await ref
+    final result = await _guard(() => ref
         .collection(collection)
         .doc(parentId)
         .collection(subCollection)
-        .get();
+        .get());
     return result.docs.map((doc) {
       final data = doc.data();
       data['id'] = doc.id;
@@ -131,14 +144,6 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
   }
 
   @override
-  Stream<Map<String, dynamic>> streamById({
-    required String collection,
-    required String id,
-  }) {
-    throw UnimplementedError();
-  }
-
-  @override
   Stream<List<Map<String, dynamic>>> getStreamCollection({
     required String collection,
   }) {
@@ -148,21 +153,12 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
   }
 
   @override
-  Stream<List<Map<String, dynamic>>> streamSubCollection({
-    required String collection,
-    required String parentId,
-    required String subCollection,
-  }) {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<void> update({
     required String collection,
     required String id,
     required Map<String, dynamic> data,
   }) async {
-    await ref.collection(collection).doc(id).update(data);
+    await _guard(() => ref.collection(collection).doc(id).update(data));
   }
 
   @override
@@ -173,32 +169,12 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String childId,
     required Map<String, dynamic> data,
   }) async {
-    await ref
+    await _guard(() => ref
         .collection(collection)
         .doc(parentId)
         .collection(subCollection)
         .doc(childId)
-        .update(data);
-  }
-
-  @override
-  Future<List<Map<String, dynamic>>> where({
-    required String collection,
-    required String field,
-    required value,
-  }) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<List<Map<String, dynamic>>> whereSubCollection({
-    required String collection,
-    required String parentId,
-    required String subCollection,
-    required String field,
-    required value,
-  }) {
-    throw UnimplementedError();
+        .update(data));
   }
 
   @override
@@ -208,7 +184,7 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String fieldName,
     required newValue,
   }) async {
-    await ref.collection(collection).doc(id).update({fieldName: newValue});
+    await _guard(() => ref.collection(collection).doc(id).update({fieldName: newValue}));
   }
 
   @override
@@ -227,10 +203,10 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
         .doc(id)
         .collection(subCollection);
 
-    final snapshot = await ordersRef.get();
+    final snapshot = await _guard(() => ordersRef.get());
 
     for (final doc in snapshot.docs) {
-      await doc.reference.delete();
+      await _guard(() => doc.reference.delete());
     }
   }
 
@@ -249,7 +225,7 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
       query = query.startAfter([lastId]);
     }
 
-    final snapshot = await query.get();
+    final snapshot = await _guard(() => query.get());
 
     return snapshot.docs.map((doc) {
       final data = doc.data() as Map<String, dynamic>;
@@ -264,9 +240,9 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     required String fieldKey,
     required num value,
   }) async {
-    ref.collection(collection).doc('1').update({
+    await _guard(() => ref.collection(collection).doc('1').update({
       fieldKey: FieldValue.increment(value),
-    });
+    }));
   }
 
   @override
@@ -278,7 +254,7 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     DocumentSnapshot? lastDocument;
 
     if (lastId != null) {
-      lastDocument = await ref.collection(collection).doc(lastId).get();
+      lastDocument = await _guard(() => ref.collection(collection).doc(lastId).get());
     }
 
     Query query = ref
@@ -337,6 +313,6 @@ class FirebaseFirestoreService extends IRemoteDataBaseServices {
     batch.set(toRef, data);
     batch.delete(fromRef);
 
-    await batch.commit();
+    await _guard(() => batch.commit());
   }
 }
