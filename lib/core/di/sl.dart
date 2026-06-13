@@ -12,7 +12,19 @@ final sl = GetIt.instance;
 
 Future<void> setupGetIt(Role role) async {
   // Core / External
-  sl.registerLazySingleton<Dio>(() => Dio());
+  sl.registerLazySingleton<Dio>(
+    () => Dio(
+      BaseOptions(
+        connectTimeout: const Duration(seconds: 7),
+        receiveTimeout: const Duration(seconds: 7),
+        sendTimeout: const Duration(seconds: 7),
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+      ),
+    ),
+  );
   sl.registerLazySingleton<IApiServices>(() => DioServices(sl<Dio>()));
   sl.registerLazySingleton<IRemoteDataBaseServices>(
     () => FirebaseFirestoreService(),
@@ -22,6 +34,6 @@ Future<void> setupGetIt(Role role) async {
     await setupUserGetIt();
   }
   if (role == Role.owner) {
-   await setupOwnerGetIt();
+    await setupOwnerGetIt();
   }
 }
