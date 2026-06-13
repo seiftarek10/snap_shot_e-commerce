@@ -4,6 +4,7 @@
 <p align="left">
   <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter" />
   <img src="https://img.shields.io/badge/REST%20APIs-Dio%20%2F%20Http-orange?style=for-the-badge" alt="REST APIs" />
+    <img src="https://img.shields.io/badge/DevOps-Flavors--2--Roles-blueviolet?style=for-the-badge" alt="Flavors" />
   <img src="https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black" alt="Firebase" />
   <img src="https://img.shields.io/badge/BLoC%20%2F%20Cubit-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="BLoC" />
   <img src="https://img.shields.io/badge/Architecture-Clean-brightgreen?style=for-the-badge" alt="Clean Architecture" />
