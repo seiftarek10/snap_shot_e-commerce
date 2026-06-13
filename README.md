@@ -9,7 +9,7 @@
   <img src="https://img.shields.io/badge/Architecture-Clean-brightgreen?style=for-the-badge" alt="Clean Architecture" />
 </p>
 
-> 🚀 Elite multi-flavor e-commerce app built on **Clean Architecture** and **SOLID principles**. Supports full product lifecycle across 4 distinct native roles.
+> 🚀 Elite multi-flavor e-commerce app built on **Clean Architecture** and **SOLID principles**. Supports full product lifecycle across 3 distinct native roles.
 
 ---
 
@@ -17,7 +17,7 @@
 
 * **🧩 Reusable Widgets:** Built generic, fully custom wrappers (Buttons, Fields, Cards, Shimmers) to enforce the **DRY principle** and zero UI duplication.
 * **⚡ 60fps Performance:** Optimized widget trees with strict use of `const` constructors to eliminate redundant rendering.
-* **🎭 Multi-Flavor Hierarchy (User ➔ Owner ➔ Staff ➔ Delivery):** Native Gradle/Xcode flavors configured to completely split views and actions based on the active role within a single codebase.
+* **🎭 Multi-Flavor Hierarchy (User ➔ Owner ➔ Delivery):** Native Gradle/Xcode flavors configured to completely split views and actions based on the active role within a single codebase.
 
 ---
 
@@ -38,8 +38,8 @@
 ---
 
 #### 4️⃣ 👑 OWNER: Live Management & Serve Engine (`manageAndServeOrders`)
-* **🧠 Logic:** Full executive control panel for the store owner to process revenue and dispatch incoming orders.
-* **⚙️ Steps:** Streams active store orders ➔ Owner reviews live revenue metrics ➔ Owner triggers approval to **Serve/Assign** the order, routing it instantly to the **Staff flavor** queue.
+* **🧠 Logic:** Executive control panel for the store owner to process revenue and dispatch orders.
+* **⚙️ Steps:** Streams active store orders ➔ Owner reviews live revenue metrics ➔ Owner triggers approval to **Serve/Assign** the order, routing it instantly to the **Delivery flavor** queue.
 
 ---
 
@@ -53,7 +53,7 @@
 
 * **📱 Framework:** Flutter (iOS & Android)
 * **📐 Architecture:** Feature-Driven Clean Architecture & SOLID
-* **⚙️ DevOps:** Native Product Flavors (User, Owner, Staff, Delivery)
+* **⚙️ DevOps:** Native Product Flavors (User, Owner, Delivery)
 * **🔄 State Management:** Flutter BloC / Cubit
 * **🌐 Network:** REST APIs (Dio) & Firebase Cloud Firestore
 * **💾 Persistence:** Hive Local Binary DB & Secure Storage
